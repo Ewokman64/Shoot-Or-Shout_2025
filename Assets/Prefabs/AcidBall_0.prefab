@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -285931317574379381}
   - component: {fileID: -1633297147131901780}
   - component: {fileID: -7307836276898036316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AcidBall_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

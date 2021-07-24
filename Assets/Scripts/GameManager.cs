@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     public Transform[] spawnPoints;
     public TextMeshProUGUI soulEnergyText;
     public TextMeshProUGUI soulEnergyCollectedText;
-    public TextMeshProUGUI highScore;
+    public TextMeshProUGUI currentRecordText;
     int randomSpawnPoint, randomEnemies;
     private int score;
-    private int highscore;
+    private int currentRecord;
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
     public bool isShooterChased;
@@ -31,7 +31,11 @@ public class GameManager : MonoBehaviour
     {
         if (score > PlayerPrefs.GetFloat("Current Record: ", 0))
         {
-            highScore.text = "Current Record: " + score;
+            currentRecordText.text = "Current Record: " + score;
+        }
+        else
+        {
+            currentRecordText.text = "Current Record: " + currentRecord;
         }
     }
 

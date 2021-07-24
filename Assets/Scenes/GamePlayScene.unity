@@ -962,7 +962,7 @@ MonoBehaviour:
   - {fileID: 1501459614}
   soulEnergyText: {fileID: 345229048}
   soulEnergyCollectedText: {fileID: 1096413954}
-  highScore: {fileID: 1388863521}
+  currentRecordText: {fileID: 1388863521}
   isSomeoneDead: 0
   isTaunterChased: 0
   isShooterChased: 0
@@ -992,7 +992,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d035531fa190944408bf45dfa455a8cf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6938,7 +6938,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2093162655
 MonoBehaviour:
   m_ObjectHideFlags: 0
