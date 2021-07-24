@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,10 +19,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI currentRecordText;
     int randomSpawnPoint, randomEnemies;
     private int score;
-    private int currentRecord;
+    public int currentRecord;
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
     public bool isShooterChased;
+
     void Start()
     {
         StartGame();
@@ -32,10 +34,6 @@ public class GameManager : MonoBehaviour
         if (score > PlayerPrefs.GetFloat("Current Record: ", 0))
         {
             currentRecordText.text = "Current Record: " + score;
-        }
-        else
-        {
-            currentRecordText.text = "Current Record: " + currentRecord;
         }
     }
 
@@ -72,11 +70,13 @@ public class GameManager : MonoBehaviour
     }
 
     public void DestroyEnemies()
+
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
         foreach (GameObject enemy in enemies)
-            GameObject.Destroy(enemy);
+        Destroy(enemy);
     }
+
 }
 
 
