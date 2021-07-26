@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI soulEnergyCollectedText;
     public TextMeshProUGUI currentRecordText;
     int randomSpawnPoint, randomEnemies;
-    private int score;
+    public int score;
     public int currentRecord;
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
