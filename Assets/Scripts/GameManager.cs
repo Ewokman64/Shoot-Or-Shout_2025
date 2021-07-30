@@ -31,14 +31,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (score > PlayerPrefs.GetFloat("Current Record: ", 0))
-        {
-            currentRecordText.text = "Current Record: " + score;
-        }
+        if (currentRecord < score) currentRecordText.text = "Current Record: " + score.ToString();
+        else currentRecordText.text = "Current Record: " + currentRecord.ToString();
     }
 
     void StartGame()
     {
+        currentRecord = PlayerPrefs.GetInt("currentRecord", 0);
         InvokeRepeating(nameof(EnemySpawn), startDelay, spawnRate);
         isTaunterChased = false;
         isShooterChased = true;
@@ -52,6 +51,10 @@ public class GameManager : MonoBehaviour
     
     public void GameOver()
     {
+        if (currentRecord < score)
+        {
+            PlayerPrefs.SetInt("currentRecord", score);
+        }      
         restartButton.SetActive(true);
         restartMenu.SetActive(true);
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
