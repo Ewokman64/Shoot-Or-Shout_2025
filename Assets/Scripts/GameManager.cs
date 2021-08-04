@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (currentRecord < score) currentRecordText.text = "Current Record: " + score.ToString();
-        else currentRecordText.text = "Current Record: " + currentRecord.ToString();
+        ScoreManager();
     }
 
     void StartGame()
@@ -80,6 +79,11 @@ public class GameManager : MonoBehaviour
         Destroy(enemy);
     }
 
+    public void ScoreManager()
+    {
+        if (currentRecord < score) currentRecordText.text = "Current Record: " + score.ToString();
+        else currentRecordText.text = "Current Record: " + currentRecord.ToString();
+    }
 }
 
 
