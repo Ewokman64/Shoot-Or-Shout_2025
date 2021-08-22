@@ -219,3 +219,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f28fefdce5938f468ab0fecb01925d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isShooterTargeted: 0
+  isTaunterTargeted: 0

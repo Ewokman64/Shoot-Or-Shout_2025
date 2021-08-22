@@ -8,8 +8,8 @@ public class Spitter : MonoBehaviour
     private float startDelay = 1;
     private float spawnRate = 3;
     private GameManager gameManager;
-    private Transform targetShooter;
-    private Transform targetTaunter;
+    public Transform targetShooter;
+    public Transform targetTaunter;
 
     // Start is called before the first frame update
     void Start()
