@@ -7,13 +7,22 @@ public class AcidBall : MonoBehaviour
 
     private float acidBallSpeed = 10;
     private GameManager gameManager;
-    public bool isShooterTargeted;
+    public bool isShooterTargeted = true;
     public bool isTaunterTargeted;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (gameManager.isShooterChased == true)
+        {            
+            GetComponent<SpriteRenderer>().flipX = false;
+
+        }
+        if (gameManager.isTaunterChased == true)
+        {       
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
     }
 
     // Update is called once per frame
@@ -22,22 +31,22 @@ public class AcidBall : MonoBehaviour
         if (gameManager.isShooterChased == true)
         {
             isShooterTargeted = true;
+            isTaunterTargeted = false;
         }
-        else
+        if (gameManager.isTaunterChased == true)
         {
             isTaunterTargeted = true;
+            isShooterTargeted = false;
         }
-        if (isShooterTargeted == true)
-        {
-            transform.Translate(Vector3.right * Time.deltaTime * acidBallSpeed);
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else
+        if (GetComponent<SpriteRenderer>().flipX == true)
         {
             transform.Translate(Vector3.left * Time.deltaTime * acidBallSpeed);
-            GetComponent<SpriteRenderer>().flipX = true;
         }
-        
+        if (GetComponent<SpriteRenderer>().flipX == false)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * acidBallSpeed);
+        }
+
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
