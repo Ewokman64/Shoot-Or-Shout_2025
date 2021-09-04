@@ -130,6 +130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acidBall: {fileID: 5093899002677859959, guid: c408693d778184b4d880ccaf71104b57,
     type: 3}
+  targetShooter: {fileID: 0}
+  targetTaunter: {fileID: 0}
 --- !u!61 &1210151822614159614
 BoxCollider2D:
   m_ObjectHideFlags: 0
