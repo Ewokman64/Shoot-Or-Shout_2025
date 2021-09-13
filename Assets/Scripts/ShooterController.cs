@@ -10,18 +10,20 @@ public class ShooterController : MonoBehaviour
     public float bulletCoolDown = 0;
     private AudioSource gunAudio;
     private GameManager gameManager;
+    private SpawnManager spawnManager;
     public AudioClip gunShot;
     public ParticleSystem gunSmoke;
     void Start()
     {
         gunAudio = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     public void Update()
     {
         ShooterMovement();
-        Shoot();     
+        Shoot();
     }
     void ShooterMovement()
     {
@@ -45,7 +47,7 @@ public class ShooterController : MonoBehaviour
     void BulletSpawn()
     {
         Vector3 bulletPos = GameObject.FindGameObjectWithTag("BulletSpawnPoint").transform.position;
-        Instantiate(bulletPrefab, bulletPos, bulletPrefab.transform.rotation);     
+        Instantiate(bulletPrefab, bulletPos, bulletPrefab.transform.rotation);
     }
     public void Shoot()
     {
@@ -55,9 +57,9 @@ public class ShooterController : MonoBehaviour
             gameManager.isTaunterChased = false;
             bulletCoolDown = 1f;
             BulletSpawn();
-            gunAudio.PlayOneShot(gunShot, 1.0f);      
+            gunAudio.PlayOneShot(gunShot, 1.0f);
             gunSmoke.Play();
-            
+
         }
         if (bulletCoolDown > 0)
         {
@@ -70,6 +72,14 @@ public class ShooterController : MonoBehaviour
         if (gameManager.isSomeoneDead == true)
         {
             gunAudio.mute = true;
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("PowerUp"))
+        {
+            Destroy(other.gameObject);
+            spawnManager.SetPowerUpBack();
         }
     }
 }

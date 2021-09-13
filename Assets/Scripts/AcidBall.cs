@@ -17,7 +17,6 @@ public class AcidBall : MonoBehaviour
         if (gameManager.isShooterChased == true)
         {            
             GetComponent<SpriteRenderer>().flipX = false;
-
         }
         if (gameManager.isTaunterChased == true)
         {       

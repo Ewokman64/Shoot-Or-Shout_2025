@@ -15,6 +15,7 @@ TagManager:
   - Taunter
   - AcidBallSpawnPoint
   - Spitter
+  - PowerUp
   layers:
   - Default
   - TransparentFX
