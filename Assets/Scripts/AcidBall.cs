@@ -53,12 +53,7 @@ public class AcidBall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.CompareTag("Taunter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
-        if (other.gameObject.CompareTag("Shooter"))
+        if (other.gameObject.CompareTag("Shooter") || other.gameObject.CompareTag("Taunter"))
         {
             gameManager.isSomeoneDead = true;
             gameManager.GameOver();

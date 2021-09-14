@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     int randomSpawnPoint, randomEnemies;
     public static int powerUps;
     private float startDelay = 2;
-    private float spawnRate = 1;
+    private float spawnRate = 0.5f;
     [HideInInspector]
     public float p_up_startDelay = 10;
     [HideInInspector]
