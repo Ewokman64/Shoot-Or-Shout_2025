@@ -47,11 +47,6 @@ public class SpawnManager : MonoBehaviour
         randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
         Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
     }
-    /*void SpitterSpawn()
-    {
-        randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
-        Instantiate(spitterPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-    }*/
 
     public void PowerUpSpawn()
     {

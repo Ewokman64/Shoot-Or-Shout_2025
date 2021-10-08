@@ -8,11 +8,13 @@ public class Bullet : MonoBehaviour
     private int zombieSoulValue = 1;
     public bool isZombieShot = false;
     private GameManager gameManager;
+    private AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);  
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
-            gameManager.ZombieSound();
+            audioManager.PlayZombieDeath();
             gameManager.UpdateCurrency(zombieSoulValue);
         }
         if (isZombieShot == true)

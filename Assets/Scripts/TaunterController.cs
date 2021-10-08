@@ -9,6 +9,7 @@ public class TaunterController : MonoBehaviour
     public float tauntCoolDown;
     private AudioSource shoutAudio;
     private GameManager gameManager;
+    private AudioManager audioManager;
     public AudioClip shout;
     public ParticleSystem shoutEffect;
     public Animator animator;
@@ -18,6 +19,7 @@ public class TaunterController : MonoBehaviour
     {
         shoutAudio = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     // Update is called once per frame
@@ -52,8 +54,8 @@ public class TaunterController : MonoBehaviour
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;
             tauntCoolDown = 2f;
+            audioManager.PlayShout();
             animator.SetTrigger("Taunt");
-            shoutAudio.PlayOneShot(shout, 1.0f);
         }
         if (tauntCoolDown > 0)
         {

@@ -16,6 +16,7 @@ TagManager:
   - AcidBallSpawnPoint
   - Spitter
   - PowerUp
+  - BulletSpawnPoint2
   layers:
   - Default
   - TransparentFX
@@ -65,6 +66,6 @@ TagManager:
   - name: VFX
     uniqueID: 861591319
     locked: 0
-  - name: Background2
+  - name: Walls
     uniqueID: 1830545039
     locked: 0

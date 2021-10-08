@@ -34,7 +34,6 @@ public class Spitter : MonoBehaviour
     }
     void AcidBallSpawn()
     {
-        Vector3 AcidBallPos = GameObject.FindGameObjectWithTag("AcidBallSpawnPoint").transform.position;
-        Instantiate(acidBall, AcidBallPos, acidBall.transform.rotation);
+        Instantiate(acidBall, transform.position, acidBall.transform.rotation);
     }
 }
