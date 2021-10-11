@@ -5,18 +5,20 @@ using UnityEngine;
 public class ZombieControls : MonoBehaviour
 {
     public ParticleSystem bloodSplash;
-    public float speed = 6.0f;
+    public float speed;
     private Transform targetShooter;
     private Transform targetTaunter;
     private GameManager gameManager;
-
+    private DifficultyManager difficultyManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
+        DifficultyChecker();
     }
     void Update()
     {
@@ -30,12 +32,12 @@ public class ZombieControls : MonoBehaviour
         }
     }
     public void ShooterFollow()
-        {
+    {
         gameManager.isShooterChased = true;
         gameManager.isTaunterChased = false;
         transform.position = Vector3.MoveTowards(transform.position, targetShooter.position, speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
+    }
     public void TaunterFollow()
         {
         gameManager.isTaunterChased = true;
@@ -60,4 +62,19 @@ public class ZombieControls : MonoBehaviour
             bloodSplash.Play();
             }
         }
+    public void DifficultyChecker()
+    {
+        if (difficultyManager.easyMode == true)
+        {
+            speed = 3;
+        }
+        if (difficultyManager.normalMode == true)
+        {
+            speed = 5;
+        }
+        if (difficultyManager.hardMode == true)
+        {
+            speed = 10;
+        }
+    }
 }

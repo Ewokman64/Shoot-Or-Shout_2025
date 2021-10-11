@@ -6,10 +6,12 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject restartButton;
-    public GameObject restartMenu;
+    public GameObject gameOverScreen;
+    public GameObject startScreenCanvas;
+    public GameObject shooter;
+    public GameObject taunter;
     public AudioSource gmAudio;
-    //public AudioClip zombie;
+    public AudioClip bgMusic;
     public TextMeshProUGUI soulEnergyText;
     public TextMeshProUGUI soulEnergyCollectedText;
     public TextMeshProUGUI currentRecordText;
@@ -21,18 +23,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartGame();
+        
     }
 
     void Update()
     {
         ScoreManager();
     }
-    void StartGame()
+    public void StartGame()
     {
         currentRecord = PlayerPrefs.GetInt("currentRecord", 0);
         isTaunterChased = false;
         isShooterChased = true;
+        shooter.SetActive(true);
+        taunter.SetActive(true);
+        startScreenCanvas.SetActive(false);
+        gmAudio.clip = bgMusic;
+        gmAudio.Play();
     }
     public void GameOver()
     {
@@ -40,16 +47,14 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("currentRecord", score);
         }
-        restartButton.SetActive(true);
-        restartMenu.SetActive(true);
+        gameOverScreen.SetActive(true);
+        shooter.SetActive(false);
+        taunter.SetActive(false);
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
         DestroyEnemies();
         gmAudio.mute = true;
+
     }
-    /*public void ZombieSound()
-    {
-        gmAudio.PlayOneShot(zombie, 1.0f);
-    }*/
     public void UpdateCurrency(int currencyToAdd)
     {
         score += currencyToAdd;

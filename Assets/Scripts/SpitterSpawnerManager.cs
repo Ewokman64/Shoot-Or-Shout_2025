@@ -7,15 +7,21 @@ public class SpitterSpawnerManager : MonoBehaviour
 {
     public GameObject spitterPrefab;
     public EnemySpawner[] enemySpawnerArray;
-    private float spitter_StartDelay = 5;
-    private float spitter_SpawnRate = 3;
+    [HideInInspector]
+    public float spitter_StartDelay = 5;
+    [HideInInspector]
+    public float spitter_SpawnRate = 3;
     // Start is called before the first frame update
     void Start()
+    {
+
+    }
+
+    public void StartSpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
         InvokeRepeating(nameof(TrySpawnSpitter), spitter_StartDelay, spitter_SpawnRate);
     }
-
     // Update is called once per frame
     void Update()
     {
