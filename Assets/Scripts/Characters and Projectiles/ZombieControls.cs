@@ -74,7 +74,7 @@ public class ZombieControls : MonoBehaviour
         }
         if (difficultyManager.hardMode == true)
         {
-            speed = 10;
+            speed = 8;
         }
     }
 }

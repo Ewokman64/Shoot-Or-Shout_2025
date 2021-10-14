@@ -6,6 +6,7 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    private DifficultyManager difficultyManager;
     public GameObject gameOverScreen;
     public GameObject startScreenCanvas;
     public GameObject shooter;
@@ -14,25 +15,35 @@ public class GameManager : MonoBehaviour
     public AudioClip bgMusic;
     public TextMeshProUGUI soulEnergyText;
     public TextMeshProUGUI soulEnergyCollectedText;
-    public TextMeshProUGUI currentRecordText;
-    public int score;
-    public int currentRecord;
+    public TextMeshProUGUI easyRecordText;
+    public TextMeshProUGUI normalRecordText;
+    public TextMeshProUGUI hardRecordText;
+    public int easyScore;
+    public int normalScore;
+    public int hardScore;
+    public int easyCurrentRecord;
+    public int normalCurrentRecord;
+    public int hardCurrentRecord;
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
     public bool isShooterChased;
 
     void Start()
     {
-        
+        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
     }
 
     void Update()
-    {
-        ScoreManager();
+    {   
+        EasyScoreManager();
+        NormalScoreManager();
+        HardScoreManager();
     }
     public void StartGame()
     {
-        currentRecord = PlayerPrefs.GetInt("currentRecord", 0);
+        easyCurrentRecord = PlayerPrefs.GetInt("Easy Record", 0);
+        normalCurrentRecord = PlayerPrefs.GetInt("Normal Record", 0);
+        hardCurrentRecord = PlayerPrefs.GetInt("Hard Record", 0);
         isTaunterChased = false;
         isShooterChased = true;
         shooter.SetActive(true);
@@ -43,22 +54,51 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        if (currentRecord < score)
+        if (easyCurrentRecord < easyScore)
         {
-            PlayerPrefs.SetInt("currentRecord", score);
+            PlayerPrefs.SetInt("easyRecord", easyScore);
+        }
+        if (normalCurrentRecord < normalScore)
+        {
+            PlayerPrefs.SetInt("normalRecord", normalScore);
+        }
+        if (hardCurrentRecord < hardScore)
+        {
+            PlayerPrefs.SetInt("hardRecord", hardScore);
         }
         gameOverScreen.SetActive(true);
         shooter.SetActive(false);
         taunter.SetActive(false);
-        soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
+        if (difficultyManager.easyMode == true)
+        {
+            soulEnergyCollectedText.text = "Soul Energy Collected: " + easyScore;
+        }
+        if (difficultyManager.normalMode == true)
+        {
+            soulEnergyCollectedText.text = "Soul Energy Collected: " + normalScore;
+        }
+        if (difficultyManager.hardMode == true)
+        {
+            soulEnergyCollectedText.text = "Soul Energy Collected: " + hardScore;
+        }
         DestroyEnemies();
         gmAudio.mute = true;
 
     }
-    public void UpdateCurrency(int currencyToAdd)
+    public void UpdateEasyCurrency(int currencyToAdd)
     {
-        score += currencyToAdd;
-        soulEnergyText.text = "Soul Energy: " + score;
+        easyScore += currencyToAdd;
+        soulEnergyText.text = "Soul Energy: " + easyScore;
+    }
+    public void UpdateNormalCurrency(int currencyToAdd)
+    {
+        normalScore += currencyToAdd;
+        soulEnergyText.text = "Soul Energy: " + normalScore;
+    }
+    public void UpdateHardCurrency(int currencyToAdd)
+    {
+        hardScore += currencyToAdd;
+        soulEnergyText.text = "Soul Energy: " + hardScore;
     }
 
     public void DestroyEnemies()
@@ -67,10 +107,20 @@ public class GameManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
     }
-    public void ScoreManager()
+    public void EasyScoreManager()
     {
-        if (currentRecord < score) currentRecordText.text = "Current Record: " + score.ToString();
-        else currentRecordText.text = "Current Record: " + currentRecord.ToString();
+        if (easyCurrentRecord < easyScore) easyRecordText.text = "Easy Record: " + easyScore.ToString();
+        else easyRecordText.text = "Easy Record: " + easyCurrentRecord.ToString();
+    }
+    public void NormalScoreManager()
+    {
+        if (normalCurrentRecord < normalScore) normalRecordText.text = "Normal Record: " + normalScore.ToString();
+        else normalRecordText.text = "Normal: " + normalCurrentRecord.ToString();
+    }
+    public void HardScoreManager()
+    {
+        if (hardCurrentRecord < hardScore) hardRecordText.text = "Hard Record: " + hardScore.ToString();
+        else hardRecordText.text = "Hard Record: " + hardCurrentRecord.ToString();
     }
 }
 

@@ -5,16 +5,20 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 30;
-    private int zombieSoulValue = 1;
+    public int easyZombieValue = 1;
+    public int normalZombieValue = 3;
+    public int hardZombieValue = 6;
     public bool isZombieShot = false;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private DifficultyManager difficultyManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
     }
 
     // Update is called once per frame
@@ -25,13 +29,29 @@ public class Bullet : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         //This part is for the player
-        if (other.gameObject.CompareTag("Zombie"))
+        if (other.gameObject.CompareTag("Zombie") && difficultyManager.easyMode == true)
         {   
             Destroy(gameObject);  
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();
-            gameManager.UpdateCurrency(zombieSoulValue);
+            gameManager.UpdateEasyCurrency(easyZombieValue);
+        }
+        if (other.gameObject.CompareTag("Zombie") && difficultyManager.normalMode == true)
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject, 0.2f);
+            isZombieShot = true;
+            audioManager.PlayZombieDeath();
+            gameManager.UpdateNormalCurrency(normalZombieValue);
+        }
+        if (other.gameObject.CompareTag("Zombie") && difficultyManager.hardMode == true)
+        {
+            Destroy(gameObject);
+            Destroy(other.gameObject, 0.2f);
+            isZombieShot = true;
+            audioManager.PlayZombieDeath();
+            gameManager.UpdateHardCurrency(hardZombieValue);
         }
         if (isZombieShot == true)
         {
