@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public bool isShooterChased;
 
     void Start()
-    {
+    {      
         difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
     }
 
@@ -41,34 +41,40 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
-        easyCurrentRecord = PlayerPrefs.GetInt("Easy Record", 0);
-        normalCurrentRecord = PlayerPrefs.GetInt("Normal Record", 0);
-        hardCurrentRecord = PlayerPrefs.GetInt("Hard Record", 0);
+        //"previousEasyScore" key is getting loaded"
+        easyCurrentRecord = PlayerPrefs.GetInt("previousEasyScore", 0);
+        normalCurrentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
+        hardCurrentRecord = PlayerPrefs.GetInt("previousHardScore", 0);
         isTaunterChased = false;
         isShooterChased = true;
-        shooter.SetActive(true);
-        taunter.SetActive(true);
         startScreenCanvas.SetActive(false);
         gmAudio.clip = bgMusic;
         gmAudio.Play();
+        isSomeoneDead = false;
     }
     public void GameOver()
     {
-        if (easyCurrentRecord < easyScore)
+        int previousEasyScore = PlayerPrefs.GetInt("previousEasyScore");
+        int previousNormalScore = PlayerPrefs.GetInt("previousNormalScore");
+        int previousHardScore = PlayerPrefs.GetInt("previousHardScore");
+        //code for setting highscore
+        //"previousEasyScore" key is getting saved"
+        if (difficultyManager.easyMode == true)
         {
-            PlayerPrefs.SetInt("easyRecord", easyScore);
+            PlayerPrefs.SetInt("previousEasyScore", easyScore);
         }
-        if (normalCurrentRecord < normalScore)
+        else if (difficultyManager.normalMode == true)
         {
-            PlayerPrefs.SetInt("normalRecord", normalScore);
+            PlayerPrefs.SetInt("previousNormalScore", normalScore);
         }
-        if (hardCurrentRecord < hardScore)
+        else if (difficultyManager.hardMode == true)
         {
-            PlayerPrefs.SetInt("hardRecord", hardScore);
+            PlayerPrefs.SetInt("previousHardScore", hardScore);
         }
+        DestroyEnemies();
         gameOverScreen.SetActive(true);
-        shooter.SetActive(false);
-        taunter.SetActive(false);
+        Destroy(GameObject.FindWithTag("Shooter"));
+        Destroy(GameObject.FindWithTag("Taunter"));
         if (difficultyManager.easyMode == true)
         {
             soulEnergyCollectedText.text = "Soul Energy Collected: " + easyScore;
@@ -80,32 +86,34 @@ public class GameManager : MonoBehaviour
         if (difficultyManager.hardMode == true)
         {
             soulEnergyCollectedText.text = "Soul Energy Collected: " + hardScore;
-        }
-        DestroyEnemies();
+        }    
         gmAudio.mute = true;
 
     }
-    public void UpdateEasyCurrency(int currencyToAdd)
+    public void UpdateEasyCurrency(int easyCurrencyToAdd)
     {
-        easyScore += currencyToAdd;
+        easyScore += easyCurrencyToAdd;
         soulEnergyText.text = "Soul Energy: " + easyScore;
     }
-    public void UpdateNormalCurrency(int currencyToAdd)
+    public void UpdateNormalCurrency(int normalCurrencyToAdd)
     {
-        normalScore += currencyToAdd;
+        normalScore += normalCurrencyToAdd;
         soulEnergyText.text = "Soul Energy: " + normalScore;
     }
-    public void UpdateHardCurrency(int currencyToAdd)
+    public void UpdateHardCurrency(int hardCurrencyToAdd)
     {
-        hardScore += currencyToAdd;
+        hardScore += hardCurrencyToAdd;
         soulEnergyText.text = "Soul Energy: " + hardScore;
     }
 
     public void DestroyEnemies()
     {
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets)
+            Destroy(bullet);
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
         foreach (GameObject enemy in enemies)
-            Destroy(enemy);
+            Destroy(enemy);  
     }
     public void EasyScoreManager()
     {

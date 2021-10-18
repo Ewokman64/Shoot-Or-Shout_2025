@@ -5,6 +5,7 @@ using System.Linq;
 
 public class SpitterSpawnerManager : MonoBehaviour
 {
+    private GameManager gameManager;
     public GameObject spitterPrefab;
     public EnemySpawner[] enemySpawnerArray;
     [HideInInspector]
@@ -14,7 +15,7 @@ public class SpitterSpawnerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void StartSpitterSpawn()
@@ -25,7 +26,11 @@ public class SpitterSpawnerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameManager.isSomeoneDead == true)
+        {
+            gameManager.GameOver();
+            CancelInvoke("StartSpitterSpawn");
+        }
     }
     object[] Shuffle(object[] array)
     {

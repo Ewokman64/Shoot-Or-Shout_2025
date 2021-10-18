@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
-    private Difficulty difficulty;
     public GameObject[] enemyPrefab;
     public GameObject powerUpPrefab;
     public Transform[] spawnPoints;
@@ -20,12 +19,11 @@ public class SpawnManager : MonoBehaviour
     public float p_up_spawnRate = 10;
     void Start()
     {
-        difficulty = GameObject.Find("Difficulty Settings").GetComponent<Difficulty>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     public void StartSpawnManager()
-    {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    {        
         InvokeRepeating(nameof(EnemySpawn), startDelay, spawnRate);
         InvokeRepeating(nameof(PowerUpSpawn), p_up_startDelay, p_up_spawnRate);
         powerUps = 0;

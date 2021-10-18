@@ -357,10 +357,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6907046877650920973}
     m_Modifications:
+    - target: {fileID: 3536269060068834708, guid: 3e10392bb83952d4c83afafce5fb420b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 3536269060068834710, guid: 3e10392bb83952d4c83afafce5fb420b,
         type: 3}
       propertyPath: m_Name
       value: ZombieSpawnFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834711, guid: 3e10392bb83952d4c83afafce5fb420b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834711, guid: 3e10392bb83952d4c83afafce5fb420b,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3536269060068834714, guid: 3e10392bb83952d4c83afafce5fb420b,
         type: 3}

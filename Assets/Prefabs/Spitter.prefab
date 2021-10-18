@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acidBall: {fileID: 5093899002677859959, guid: c408693d778184b4d880ccaf71104b57,
     type: 3}
+  spawnRate: 3
   targetShooter: {fileID: 0}
   targetTaunter: {fileID: 0}
 --- !u!61 &1210151822614159614
@@ -212,6 +213,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpitterSpawnFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834711, guid: 322811af73de9924d88a038fa61dfb16,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834711, guid: 322811af73de9924d88a038fa61dfb16,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3536269060068834714, guid: 322811af73de9924d88a038fa61dfb16,
         type: 3}

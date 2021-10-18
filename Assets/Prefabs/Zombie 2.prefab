@@ -382,6 +382,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ZombieSpawnFX
       objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834711, guid: 3e10392bb83952d4c83afafce5fb420b,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834711, guid: 3e10392bb83952d4c83afafce5fb420b,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3536269060068834714, guid: 3e10392bb83952d4c83afafce5fb420b,
         type: 3}
       propertyPath: m_RootOrder

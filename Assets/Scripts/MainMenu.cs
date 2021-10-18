@@ -18,4 +18,12 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("GameMenu");//ints and such also work.
     }
+    public void CreditsMenu()
+    {
+        SceneManager.LoadScene("CreditsScene");//ints and such also work.
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
