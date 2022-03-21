@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
     public GameObject[] enemyPrefab;
+    public GameObject[] yetiPrefab;
     public GameObject powerUpPrefab;
     public Transform[] spawnPoints;
     public Transform[] powerUpSpawnPoints;

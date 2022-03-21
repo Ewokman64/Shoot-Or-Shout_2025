@@ -7,6 +7,7 @@ public class SpitterSpawnerManager : MonoBehaviour
 {
     private GameManager gameManager;
     public GameObject spitterPrefab;
+    public GameObject cannonYetiPrefab;
     public EnemySpawner[] enemySpawnerArray;
     [HideInInspector]
     public float spitter_StartDelay = 5;
