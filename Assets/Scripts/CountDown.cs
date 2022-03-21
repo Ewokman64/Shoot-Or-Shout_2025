@@ -5,7 +5,7 @@ using TMPro;
 
 public class CountDown : MonoBehaviour
 {
-    private int countDownTime = 5;
+    private int countDownTime = 4;
     public TextMeshProUGUI countDownDisplay;
     public GameObject powerUpCanvas;
 
@@ -23,6 +23,6 @@ public class CountDown : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         powerUpCanvas.gameObject.SetActive(false);
-        countDownTime = 5;
+        countDownTime = 4;
     }
 }
