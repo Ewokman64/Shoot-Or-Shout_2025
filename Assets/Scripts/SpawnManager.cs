@@ -6,7 +6,6 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
     public GameObject[] enemyPrefab;
-    public GameObject[] yetiPrefab;
     public GameObject powerUpPrefab;
     public Transform[] spawnPoints;
     public Transform[] powerUpSpawnPoints;
@@ -49,6 +48,7 @@ public class SpawnManager : MonoBehaviour
         randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
         Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
     }
+    
 
     public void PowerUpSpawn()
     {
