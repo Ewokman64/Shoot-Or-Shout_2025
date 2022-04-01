@@ -26,11 +26,11 @@ public class SpitterSpawnerManager : MonoBehaviour
     }
     // Update is called once per frame
     void Update()
-    {
+    {        
         if (gameManager.isSomeoneDead == true)
         {
             gameManager.GameOver();
-            CancelInvoke("StartSpitterSpawn");
+            CancelInvoke("TrySpawnSpitter");
         }
     }
     object[] Shuffle(object[] array)

@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
+    private DimensionManager dimensionManager;
+    private SpitterSpawnerManager spitterSpawnerManager;
     public GameObject[] enemyPrefab;
     public GameObject powerUpPrefab;
     public Transform[] spawnPoints;
@@ -20,10 +22,12 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+        spitterSpawnerManager = GameObject.Find("SpitterSpawnerManager").GetComponent<SpitterSpawnerManager>();
     }
 
     public void StartSpawnManager()
-    {        
+    {      
         InvokeRepeating(nameof(EnemySpawn), startDelay, spawnRate);
         InvokeRepeating(nameof(PowerUpSpawn), p_up_startDelay, p_up_spawnRate);
         powerUps = 0;
@@ -41,6 +45,12 @@ public class SpawnManager : MonoBehaviour
             CancelInvoke("EnemySpawn");
             CancelInvoke("PowerUpSpawn");
         }
+        if (dimensionManager.IceDimension.activeSelf)
+        {
+            CancelInvoke("EnemySpawn");
+            spitterSpawnerManager.CancelInvoke("TrySpawnSpitter");
+            gameManager.DestroyZombies();
+        }
     }
     void EnemySpawn()
     {
@@ -48,8 +58,6 @@ public class SpawnManager : MonoBehaviour
         randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
         Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
     }
-    
-
     public void PowerUpSpawn()
     {
         randomSpawnPoint = UnityEngine.Random.Range(0, powerUpSpawnPoints.Length);

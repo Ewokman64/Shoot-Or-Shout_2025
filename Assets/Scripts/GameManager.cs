@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("previousHardScore", hardScore);
         }
-        DestroyEnemies();
+        DestroyEverything();
         gameOverScreen.SetActive(true);
         Destroy(GameObject.FindWithTag("Shooter"));
         Destroy(GameObject.FindWithTag("Taunter"));
@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
         soulEnergyText.text = "Soul Energy: " + hardScore;
     }
 
-    public void DestroyEnemies()
+    public void DestroyEverything()
     {
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
         foreach (GameObject bullet in bullets)
@@ -114,6 +114,12 @@ public class GameManager : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
         foreach (GameObject enemy in enemies)
             Destroy(enemy);  
+    }
+    public void DestroyZombies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
+        foreach (GameObject enemy in enemies)
+            Destroy(enemy);
     }
     public void EasyScoreManager()
     {
