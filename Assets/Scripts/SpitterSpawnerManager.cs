@@ -10,9 +10,9 @@ public class SpitterSpawnerManager : MonoBehaviour
     public GameObject cannonYetiPrefab;
     public EnemySpawner[] enemySpawnerArray;
     [HideInInspector]
-    public float spitter_StartDelay = 5;
+    public float spitter_startDelay = 5;
     [HideInInspector]
-    public float spitter_SpawnRate = 3;
+    public float spitter_spawnRate = 3;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +22,8 @@ public class SpitterSpawnerManager : MonoBehaviour
     public void StartSpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
-        InvokeRepeating(nameof(TrySpawnSpitter), spitter_StartDelay, spitter_SpawnRate);
+        StartCoroutine(TrySpawnSpitter());
+        //InvokeRepeating(nameof(TrySpawnSpitter), spitter_StartDelay, spitter_SpawnRate);
     }
     // Update is called once per frame
     void Update()
@@ -30,7 +31,7 @@ public class SpitterSpawnerManager : MonoBehaviour
         if (gameManager.isSomeoneDead == true)
         {
             gameManager.GameOver();
-            CancelInvoke("TrySpawnSpitter");
+            StopCoroutine("TrySpawnSpitter");
         }
     }
     object[] Shuffle(object[] array)
@@ -45,12 +46,22 @@ public class SpitterSpawnerManager : MonoBehaviour
         }
         return array;
     }
-    public void TrySpawnSpitter()
+    /*public void TrySpawnSpitter()
     {
         EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
         if (spawner != null)
         {
             spawner.Spawn(spitterPrefab);
         }
+    }*/
+    IEnumerator TrySpawnSpitter()
+    {
+        yield return new WaitForSeconds(spitter_startDelay);
+        EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
+        if (spawner != null)
+        {
+            spawner.Spawn(spitterPrefab);
+        }
+        yield return new WaitForSeconds(spitter_spawnRate);
     }
 }

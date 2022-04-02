@@ -109,7 +109,6 @@ public class ShooterController : MonoBehaviour
             isPowerUpActive = true;
             gunAudio.PlayOneShot(powerUpSFX, 1.0f);
             Destroy(other.gameObject);
-            spawnManager.SetPowerUpBack();
             Invoke(nameof(SetBoolBack), 5.0f);
         }
     }
@@ -118,5 +117,6 @@ public class ShooterController : MonoBehaviour
         animator.SetBool("IsPowerUpActive", false);
         isPowerUpActive = false;
         powerUpLight.gameObject.SetActive(false);
+        spawnManager.powerUps = 0;
     }
 }

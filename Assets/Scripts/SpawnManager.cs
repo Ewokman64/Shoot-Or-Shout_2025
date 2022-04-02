@@ -6,13 +6,12 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
     private DimensionManager dimensionManager;
-    private SpitterSpawnerManager spitterSpawnerManager;
     public GameObject[] enemyPrefab;
     public GameObject powerUpPrefab;
     public Transform[] spawnPoints;
     public Transform[] powerUpSpawnPoints;
     int randomSpawnPoint, randomEnemies;
-    public static int powerUps;
+    public int powerUps;
     private float startDelay = 2;
     public float spawnRate;
     [HideInInspector]
@@ -23,50 +22,52 @@ public class SpawnManager : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
-        spitterSpawnerManager = GameObject.Find("SpitterSpawnerManager").GetComponent<SpitterSpawnerManager>();
     }
 
     public void StartSpawnManager()
-    {      
-        InvokeRepeating(nameof(EnemySpawn), startDelay, spawnRate);
-        InvokeRepeating(nameof(PowerUpSpawn), p_up_startDelay, p_up_spawnRate);
+    {
+        StartCoroutine(ZombieSpawn());
+        StartCoroutine(PowerUpSpawn());
         powerUps = 0;
     }
     // Update is called once per frame
     void Update()
     {
-        if (powerUps >= 1)
-        {
-            CancelInvoke("PowerUpSpawn");
-        }
         if (gameManager.isSomeoneDead == true)
         {
             gameManager.GameOver();
-            CancelInvoke("EnemySpawn");
-            CancelInvoke("PowerUpSpawn");
+            StopCoroutine("ZombieSpawn");
+            StopCoroutine("PowerUpSpawn");
         }
         if (dimensionManager.IceDimension.activeSelf)
         {
-            CancelInvoke("EnemySpawn");
-            spitterSpawnerManager.CancelInvoke("TrySpawnSpitter");
+            StopCoroutine("ZombieSpawn");
+            StopCoroutine("TrySpawnSpitter");
             gameManager.DestroyZombies();
         }
     }
-    void EnemySpawn()
+    IEnumerator ZombieSpawn()
     {
-        randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
-        randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
-        Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(startDelay);
+        while (dimensionManager.DungeonDimension.activeSelf)
+        {
+            randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+            randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
+            Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+
+            yield return new WaitForSeconds(spawnRate);
+        }       
     }
-    public void PowerUpSpawn()
-    {
-        randomSpawnPoint = UnityEngine.Random.Range(0, powerUpSpawnPoints.Length);
-        Instantiate(powerUpPrefab, powerUpSpawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-        ++powerUps;
-    }
-    public void SetPowerUpBack()
-    {
-        powerUps = 0;
-        InvokeRepeating(nameof(PowerUpSpawn), p_up_startDelay, p_up_spawnRate);
+    IEnumerator PowerUpSpawn()
+    {       
+        while (powerUps == 0)
+        {
+            yield return new WaitForSeconds(p_up_startDelay);
+
+            randomSpawnPoint = UnityEngine.Random.Range(0, powerUpSpawnPoints.Length);
+            Instantiate(powerUpPrefab, powerUpSpawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+            powerUps = 1;
+            yield return new WaitForSeconds(p_up_spawnRate);
+        }      
     }
 }

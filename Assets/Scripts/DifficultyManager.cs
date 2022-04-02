@@ -24,21 +24,21 @@ public class DifficultyManager : MonoBehaviour
     public void EasyModeSettings()
     {
         spawnManager.spawnRate = 1;
-        spitterSpawnerManager.spitter_StartDelay = 5;
-        spitterSpawnerManager.spitter_SpawnRate = 5;
+        spitterSpawnerManager.spitter_startDelay = 5;
+        spitterSpawnerManager.spitter_spawnRate = 5;
     }
 
     public void NormalModeSettings()
     {
         spawnManager.spawnRate = 0.5f;
-        spitterSpawnerManager.spitter_StartDelay = 5;
-        spitterSpawnerManager.spitter_SpawnRate = 3;
+        spitterSpawnerManager.spitter_startDelay = 5;
+        spitterSpawnerManager.spitter_spawnRate = 3;
     }
 
     public void HardModeSettings()
     {
         spawnManager.spawnRate = 0.5f;
-        spitterSpawnerManager.spitter_StartDelay = 0.5f;
-        spitterSpawnerManager.spitter_SpawnRate = 0.5f;
+        spitterSpawnerManager.spitter_startDelay = 0.5f;
+        spitterSpawnerManager.spitter_spawnRate = 0.5f;
     }
 }
