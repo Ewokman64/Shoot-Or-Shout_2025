@@ -28,15 +28,6 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        //This part is for the player
-        if (other.gameObject.CompareTag("Zombie") && difficultyManager.easyMode == true)
-        {   
-            Destroy(gameObject);  
-            Destroy(other.gameObject, 0.2f);
-            isZombieShot = true;
-            audioManager.PlayZombieDeath();
-            gameManager.UpdateEasyCurrency(easyZombieValue);
-        }
         if (other.gameObject.CompareTag("Zombie") && difficultyManager.normalMode == true)
         {
             Destroy(gameObject);
@@ -44,14 +35,6 @@ public class Bullet : MonoBehaviour
             isZombieShot = true;
             audioManager.PlayZombieDeath();
             gameManager.UpdateNormalCurrency(normalZombieValue);
-        }
-        if (other.gameObject.CompareTag("Zombie") && difficultyManager.hardMode == true)
-        {
-            Destroy(gameObject);
-            Destroy(other.gameObject, 0.2f);
-            isZombieShot = true;
-            audioManager.PlayZombieDeath();
-            gameManager.UpdateHardCurrency(hardZombieValue);
         }
         if (isZombieShot == true)
         {

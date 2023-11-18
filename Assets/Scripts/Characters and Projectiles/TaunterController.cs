@@ -6,10 +6,14 @@ public class TaunterController : MonoBehaviour
 {
     private readonly float speed = 10;
     private readonly float yRange = 5;
+
     public float tauntCoolDown;
+
     private AudioSource shoutAudio;
     private GameManager gameManager;
     private AudioManager audioManager;
+
+    //Anims, VFX & SFX
     public AudioClip shout;
     public ParticleSystem shoutEffect;
     public Animator animator;
@@ -26,7 +30,8 @@ public class TaunterController : MonoBehaviour
     void Update()
     {
         TaunterMovement();
-        Taunt();       
+        Taunt();
+        TauntCoolDown();
     }
     void TaunterMovement()
     {
@@ -49,14 +54,18 @@ public class TaunterController : MonoBehaviour
     }
     public void Taunt()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0)
+        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && gameManager.isSomeoneDead == false)
         {
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;
             tauntCoolDown = 2f;
             audioManager.PlayShout();
             animator.SetTrigger("Taunt");
-        }
+        }        
+    }
+
+    public void TauntCoolDown()
+    {
         if (tauntCoolDown > 0)
         {
             tauntCoolDown -= Time.deltaTime;
@@ -64,10 +73,6 @@ public class TaunterController : MonoBehaviour
         else
         {
             tauntCoolDown = 0;
-        }
-        if (gameManager.isSomeoneDead == true)
-        {
-            shoutAudio.mute = true;
         }
     }
 }

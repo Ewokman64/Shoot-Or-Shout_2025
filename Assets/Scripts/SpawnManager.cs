@@ -6,18 +6,23 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
     private DimensionManager dimensionManager;
+    //----------------------------------------
     public GameObject[] enemyPrefab;
     public GameObject powerUpPrefab;
     public Transform[] spawnPoints;
-    public Transform[] powerUpSpawnPoints;
-    int randomSpawnPoint, randomEnemies;
-    public int powerUps;
     private float startDelay = 2;
     public float spawnRate;
+
+    int randomSpawnPoint, randomEnemies;
+
+    public Transform[] powerUpSpawnPoints;
+
     [HideInInspector]
-    public float p_up_startDelay = 10;
+    public float powerUp_startDelay = 10;
     [HideInInspector]
-    public float p_up_spawnRate = 10;
+    public float powerUp_spawnRate = 10;
+
+    public int powerUps;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,18 +38,18 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.isSomeoneDead == true)
+        /*if (gameManager.isSomeoneDead == true)
         {
             gameManager.GameOver();
             StopCoroutine("ZombieSpawn");
             StopCoroutine("PowerUpSpawn");
+            StopCoroutine("TrySpawnSpitter");
         }
         if (dimensionManager.IceDimension.activeSelf)
         {
             StopCoroutine("ZombieSpawn");
             StopCoroutine("TrySpawnSpitter");
-            gameManager.DestroyZombies();
-        }
+        }*/
     }
     IEnumerator ZombieSpawn()
     {
@@ -62,12 +67,12 @@ public class SpawnManager : MonoBehaviour
     {       
         while (powerUps == 0)
         {
-            yield return new WaitForSeconds(p_up_startDelay);
+            yield return new WaitForSeconds(powerUp_startDelay);
 
             randomSpawnPoint = UnityEngine.Random.Range(0, powerUpSpawnPoints.Length);
             Instantiate(powerUpPrefab, powerUpSpawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
             powerUps = 1;
-            yield return new WaitForSeconds(p_up_spawnRate);
+            yield return new WaitForSeconds(powerUp_spawnRate);
         }      
     }
 }

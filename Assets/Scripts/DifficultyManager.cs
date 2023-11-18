@@ -6,9 +6,7 @@ public class DifficultyManager : MonoBehaviour
 {
     private SpawnManager spawnManager;
     private SpitterSpawnerManager spitterSpawnerManager;
-    public bool easyMode;
     public bool normalMode;
-    public bool hardMode;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,24 +19,11 @@ public class DifficultyManager : MonoBehaviour
     {
         
     }
-    public void EasyModeSettings()
-    {
-        spawnManager.spawnRate = 1;
-        spitterSpawnerManager.spitter_startDelay = 5;
-        spitterSpawnerManager.spitter_spawnRate = 5;
-    }
 
     public void NormalModeSettings()
     {
         spawnManager.spawnRate = 0.5f;
         spitterSpawnerManager.spitter_startDelay = 5;
         spitterSpawnerManager.spitter_spawnRate = 3;
-    }
-
-    public void HardModeSettings()
-    {
-        spawnManager.spawnRate = 0.5f;
-        spitterSpawnerManager.spitter_startDelay = 0.5f;
-        spitterSpawnerManager.spitter_spawnRate = 0.5f;
     }
 }

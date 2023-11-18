@@ -20,9 +20,10 @@ public class DimensionManager : MonoBehaviour
     }
     void ToIceDimension()
     {
-        if ((gameManager.easyScore >= 30) || (gameManager.normalScore >= 80) || (gameManager.hardScore >= 120))
+        if ((gameManager.score >= 80))
         {
             IceDimension.SetActive(true);
+            gameManager.ClearMap();
             DungeonDimension.SetActive(false);
         }
     }

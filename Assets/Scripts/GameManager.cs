@@ -6,24 +6,27 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-    private DifficultyManager difficultyManager;
+    private SpawnManager spawnManager;
+    //UI
     public GameObject gameOverScreen;
     public GameObject startScreenCanvas;
+
     public GameObject shooter;
     public GameObject taunter;
+    private DifficultyManager difficultyManager;
+    //Audio
     public AudioSource gmAudio;
     public AudioClip bgMusic;
+    //TEXTS
     public TextMeshProUGUI soulEnergyText;
     public TextMeshProUGUI soulEnergyCollectedText;
-    public TextMeshProUGUI easyRecordText;
-    public TextMeshProUGUI normalRecordText;
-    public TextMeshProUGUI hardRecordText;
-    public int easyScore;
-    public int normalScore;
-    public int hardScore;
-    public int easyCurrentRecord;
-    public int normalCurrentRecord;
-    public int hardCurrentRecord;
+    public TextMeshProUGUI recordText;
+    //scores
+    public int score;
+
+    public int currentRecord;
+
+    //bools
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
     public bool isShooterChased;
@@ -31,110 +34,82 @@ public class GameManager : MonoBehaviour
     void Start()
     {      
         difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        //shooter = GameObject.Find("Shooter");
+        //taunter = GameObject.Find("Taunter");
     }
 
     void Update()
     {   
-        EasyScoreManager();
-        NormalScoreManager();
-        HardScoreManager();
+        scoreManager();
     }
     public void StartGame()
     {
         //"previousEasyScore" key is getting loaded"
-        easyCurrentRecord = PlayerPrefs.GetInt("previousEasyScore", 0);
-        normalCurrentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
-        hardCurrentRecord = PlayerPrefs.GetInt("previousHardScore", 0);
+        currentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
+
         isTaunterChased = false;
         isShooterChased = true;
+
         startScreenCanvas.SetActive(false);
+
         gmAudio.clip = bgMusic;
         gmAudio.Play();
+
         isSomeoneDead = false;
     }
     public void GameOver()
     {
-        int previousEasyScore = PlayerPrefs.GetInt("previousEasyScore");
+        Debug.Log("GAME OVER!");
         int previousNormalScore = PlayerPrefs.GetInt("previousNormalScore");
-        int previousHardScore = PlayerPrefs.GetInt("previousHardScore");
         //code for setting highscore
         //"previousEasyScore" key is getting saved"
-        if (difficultyManager.easyMode == true)
-        {
-            PlayerPrefs.SetInt("previousEasyScore", easyScore);
-        }
-        else if (difficultyManager.normalMode == true)
-        {
-            PlayerPrefs.SetInt("previousNormalScore", normalScore);
-        }
-        else if (difficultyManager.hardMode == true)
-        {
-            PlayerPrefs.SetInt("previousHardScore", hardScore);
-        }
-        DestroyEverything();
+            PlayerPrefs.SetInt("previousNormalScore", score);
+        //We set up the game over, clearing all objects
+
         gameOverScreen.SetActive(true);
         Destroy(GameObject.FindWithTag("Shooter"));
         Destroy(GameObject.FindWithTag("Taunter"));
-        if (difficultyManager.easyMode == true)
-        {
-            soulEnergyCollectedText.text = "Soul Energy Collected: " + easyScore;
-        }
-        if (difficultyManager.normalMode == true)
-        {
-            soulEnergyCollectedText.text = "Soul Energy Collected: " + normalScore;
-        }
-        if (difficultyManager.hardMode == true)
-        {
-            soulEnergyCollectedText.text = "Soul Energy Collected: " + hardScore;
-        }    
-        gmAudio.mute = true;
 
-    }
-    public void UpdateEasyCurrency(int easyCurrencyToAdd)
-    {
-        easyScore += easyCurrencyToAdd;
-        soulEnergyText.text = "Soul Energy: " + easyScore;
-    }
-    public void UpdateNormalCurrency(int normalCurrencyToAdd)
-    {
-        normalScore += normalCurrencyToAdd;
-        soulEnergyText.text = "Soul Energy: " + normalScore;
-    }
-    public void UpdateHardCurrency(int hardCurrencyToAdd)
-    {
-        hardScore += hardCurrencyToAdd;
-        soulEnergyText.text = "Soul Energy: " + hardScore;
+        ClearMap();
+
+        soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
     }
 
-    public void DestroyEverything()
+    public void ClearMap()
     {
+        spawnManager.StopAllCoroutines();
+        //GET RID OF BULLETS
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+
         foreach (GameObject bullet in bullets)
             Destroy(bullet);
+
+        //GET RID OF ENEMIES
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
-        foreach (GameObject enemy in enemies)
-            Destroy(enemy);  
-    }
-    public void DestroyZombies()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
+
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
     }
-    public void EasyScoreManager()
+    public void UpdateNormalCurrency(int normalCurrencyToAdd)
     {
-        if (easyCurrentRecord < easyScore) easyRecordText.text = "Easy Record: " + easyScore.ToString();
-        else easyRecordText.text = "Easy Record: " + easyCurrentRecord.ToString();
+        score += normalCurrencyToAdd;
+        soulEnergyText.text = "Soul Energy: " + score;
     }
-    public void NormalScoreManager()
+    public void scoreManager()
     {
-        if (normalCurrentRecord < normalScore) normalRecordText.text = "Normal Record: " + normalScore.ToString();
-        else normalRecordText.text = "Normal: " + normalCurrentRecord.ToString();
+        if (currentRecord < score) recordText.text = "Normal Record: " + score.ToString();
+        else recordText.text = "Normal: " + currentRecord.ToString();
     }
-    public void HardScoreManager()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hardCurrentRecord < hardScore) hardRecordText.text = "Hard Record: " + hardScore.ToString();
-        else hardRecordText.text = "Hard Record: " + hardCurrentRecord.ToString();
+        Debug.Log("Trigger Entered!");
+        if (collision.gameObject == shooter && collision.gameObject.CompareTag("Zombie"))
+        {
+            Debug.Log("Someone died!");
+            isSomeoneDead = true;
+            GameOver();
+        }
     }
 }
 

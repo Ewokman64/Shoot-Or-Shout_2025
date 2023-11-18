@@ -4,22 +4,28 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
+    //Movement
     private float speed = 10;
     private float yRange = 5;
+    //Bullet and light
     public GameObject bulletPrefab;
     public GameObject powerUpLight;
+    private bool isPowerUpActive = false;
     public float bulletCoolDown = 0;
+
     private AudioSource gunAudio;
     private GameManager gameManager;
     private SpawnManager spawnManager;
     private CountDown countDown;
+
+    //Anim, SFX & VFX
     private AudioManager audioManager;
     public AudioClip gunShot;
     public AudioClip powerUpSFX;
     public ParticleSystem gunFlash1;
     public ParticleSystem gunFlash2;
     public Animator animator;
-    private bool isPowerUpActive = false;
+  
     void Start()
     {
         gunAudio = GetComponent<AudioSource>();
@@ -33,6 +39,8 @@ public class ShooterController : MonoBehaviour
     {
         ShooterMovement();
         Shoot();
+        DualShoot();
+        BulletCooldown();
     }
     void ShooterMovement()
     {
@@ -67,24 +75,40 @@ public class ShooterController : MonoBehaviour
     }
     public void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0)
+        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && gameManager.isSomeoneDead == false)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
+
             bulletCoolDown = 1f;
             BulletSpawn();
+
             audioManager.PlayShoot();
             gunFlash1.Play();
-        }
-        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true)
+        }      
+        /*if (gameManager.isSomeoneDead == true)
+        {
+            gunAudio.mute = true;
+        }*/
+    }
+
+    public void DualShoot()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && gameManager.isSomeoneDead == false)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
+
             DualBulletSpawn();
+
             gunAudio.PlayOneShot(gunShot, 1.0f);
             gunFlash1.Play();
             gunFlash2.Play();
         }
+    }
+
+    public void BulletCooldown()
+    {
         if (bulletCoolDown > 0)
         {
             bulletCoolDown -= Time.deltaTime;
@@ -93,10 +117,6 @@ public class ShooterController : MonoBehaviour
         {
             bulletCoolDown = 0;
         }
-        if (gameManager.isSomeoneDead == true)
-        {
-            gunAudio.mute = true;
-        }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -104,10 +124,14 @@ public class ShooterController : MonoBehaviour
         {
             countDown.powerUpCanvas.gameObject.SetActive(true);
             powerUpLight.gameObject.SetActive(true);
+
             StartCoroutine(countDown.CountDownPowerUp());
-            animator.SetBool("IsPowerUpActive", true);
+            
             isPowerUpActive = true;
+            //Effects and anims
             gunAudio.PlayOneShot(powerUpSFX, 1.0f);
+            animator.SetBool("IsPowerUpActive", true);
+            //Powerup over
             Destroy(other.gameObject);
             Invoke(nameof(SetBoolBack), 5.0f);
         }

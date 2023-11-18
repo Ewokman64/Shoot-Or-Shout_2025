@@ -23,7 +23,7 @@ public class SpitterSpawnerManager : MonoBehaviour
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
         StartCoroutine(TrySpawnSpitter());
-        //InvokeRepeating(nameof(TrySpawnSpitter), spitter_StartDelay, spitter_SpawnRate);
+        InvokeRepeating(nameof(TrySpawnSpitter), spitter_startDelay, spitter_spawnRate);
     }
     // Update is called once per frame
     void Update()

@@ -17,6 +17,7 @@ TagManager:
   - Spitter
   - PowerUp
   - BulletSpawnPoint2
+  - AudioManager
   layers:
   - Default
   - TransparentFX

@@ -23,7 +23,7 @@ void Start()
 }
 void Update()
 {
-    if (gameManager.isShooterChased)
+    if (gameManager.isShooterChased && targetShooter != null)
     {
         ShooterFollow();
     }
@@ -34,15 +34,15 @@ void Update()
 }
 public void ShooterFollow()
 {
-    gameManager.isShooterChased = true;
-    gameManager.isTaunterChased = false;
+    //gameManager.isShooterChased = true;
+    //gameManager.isTaunterChased = false;
     transform.position = Vector3.MoveTowards(transform.position, targetShooter.position, speed * Time.deltaTime);
     transform.rotation = Quaternion.Euler(0, 0, 0);
 }
 public void TaunterFollow()
 {
-    gameManager.isTaunterChased = true;
-    gameManager.isShooterChased = false;
+    //gameManager.isTaunterChased = true;
+    //gameManager.isShooterChased = false;
     transform.position = Vector3.MoveTowards(transform.position, targetTaunter.position, speed * Time.deltaTime);
     transform.rotation = Quaternion.Euler(0, 180, 0);
 }
@@ -65,17 +65,9 @@ void OnTriggerEnter2D(Collider2D other)
 }
 public void DifficultyChecker()
 {
-    if (difficultyManager.easyMode == true)
-    {
-        speed = 3;
-    }
     if (difficultyManager.normalMode == true)
     {
         speed = 5;
-    }
-    if (difficultyManager.hardMode == true)
-    {
-        speed = 8;
     }
 }
 }

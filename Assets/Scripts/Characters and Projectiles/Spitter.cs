@@ -26,7 +26,7 @@ public class Spitter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.isShooterChased == true)
+        if (gameManager.isShooterChased == true && targetShooter != null)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
@@ -41,17 +41,9 @@ public class Spitter : MonoBehaviour
     }
     public void DifficultyChecker()
     {
-        if (difficultyManager.easyMode == true)
-        {
-            spawnRate = 3;
-        }
         if (difficultyManager.normalMode == true)
         {
             spawnRate = 2;
-        }
-        if (difficultyManager.hardMode == true)
-        {
-            spawnRate = 1f;
         }
     }
 }

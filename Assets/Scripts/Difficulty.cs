@@ -17,24 +17,9 @@ public class Difficulty : MonoBehaviour
         spitterSpawnerManager = GameObject.Find("EnemySpawnerManager").GetComponent<SpitterSpawnerManager>();
         difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
     }
-
-    public void StartEasyMode()
-    {
-        difficultyManager.easyMode = true;
-        gameManager.StartGame();
-        spawnManager.StartSpawnManager();
-        spitterSpawnerManager.StartSpitterSpawn();
-    }
     public void StartNormalMode()
     {
         difficultyManager.normalMode = true;
-        gameManager.StartGame();
-        spawnManager.StartSpawnManager();
-        spitterSpawnerManager.StartSpitterSpawn();
-    }
-    public void StartHardMode()
-    {
-        difficultyManager.hardMode = true;
         gameManager.StartGame();
         spawnManager.StartSpawnManager();
         spitterSpawnerManager.StartSpitterSpawn();
