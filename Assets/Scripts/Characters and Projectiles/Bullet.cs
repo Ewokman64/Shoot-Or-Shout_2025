@@ -5,20 +5,16 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 30;
-    public int easyZombieValue = 1;
-    public int normalZombieValue = 3;
-    public int hardZombieValue = 6;
+    public int zombieValue = 3;
     public bool isZombieShot = false;
     private GameManager gameManager;
     private AudioManager audioManager;
-    private DifficultyManager difficultyManager;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
     }
 
     // Update is called once per frame
@@ -28,13 +24,13 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Zombie") && difficultyManager.normalMode == true)
+        if (other.gameObject.CompareTag("Zombie"))
         {
             Destroy(gameObject);
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();
-            gameManager.UpdateNormalCurrency(normalZombieValue);
+            gameManager.UpdateNormalCurrency(zombieValue);
         }
         if (isZombieShot == true)
         {

@@ -18,8 +18,6 @@ public class Spitter : MonoBehaviour
         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
-        DifficultyChecker();
         InvokeRepeating("AcidBallSpawn", startDelay, spawnRate);
     }
 
@@ -39,11 +37,11 @@ public class Spitter : MonoBehaviour
     {
         Instantiate(acidBall, transform.position, acidBall.transform.rotation);
     }
-    public void DifficultyChecker()
+    /*public void DifficultyChecker()
     {
         if (difficultyManager.normalMode == true)
         {
             spawnRate = 2;
         }
-    }
+    }*/
 }

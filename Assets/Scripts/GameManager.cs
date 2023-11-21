@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject shooter;
     public GameObject taunter;
-    private DifficultyManager difficultyManager;
     //Audio
     public AudioSource gmAudio;
     public AudioClip bgMusic;
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {      
-        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //shooter = GameObject.Find("Shooter");
         //taunter = GameObject.Find("Taunter");

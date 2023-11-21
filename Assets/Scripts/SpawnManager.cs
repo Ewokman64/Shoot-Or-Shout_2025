@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
@@ -23,6 +24,14 @@ public class SpawnManager : MonoBehaviour
     public float powerUp_spawnRate = 10;
 
     public int powerUps;
+
+    public GameObject spitterPrefab;
+    public GameObject cannonYetiPrefab;
+    public EnemySpawner[] enemySpawnerArray;
+    [HideInInspector]
+    public float spitter_startDelay = 5;
+    [HideInInspector]
+    public float spitter_spawnRate = 3;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,23 +42,13 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(ZombieSpawn());
         StartCoroutine(PowerUpSpawn());
+        StartSpitterSpawn();
         powerUps = 0;
     }
     // Update is called once per frame
     void Update()
     {
-        /*if (gameManager.isSomeoneDead == true)
-        {
-            gameManager.GameOver();
-            StopCoroutine("ZombieSpawn");
-            StopCoroutine("PowerUpSpawn");
-            StopCoroutine("TrySpawnSpitter");
-        }
-        if (dimensionManager.IceDimension.activeSelf)
-        {
-            StopCoroutine("ZombieSpawn");
-            StopCoroutine("TrySpawnSpitter");
-        }*/
+        
     }
     IEnumerator ZombieSpawn()
     {
@@ -62,6 +61,34 @@ public class SpawnManager : MonoBehaviour
 
             yield return new WaitForSeconds(spawnRate);
         }       
+    }
+    IEnumerator TrySpawnSpitter()
+    {
+        yield return new WaitForSeconds(spitter_startDelay);
+        EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
+        if (spawner != null)
+        {
+            spawner.Spawn(spitterPrefab);
+        }
+        yield return new WaitForSeconds(spitter_spawnRate);
+    }
+    public void StartSpitterSpawn()
+    {
+        enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
+        StartCoroutine(TrySpawnSpitter());
+        InvokeRepeating(nameof(TrySpawnSpitter), spitter_startDelay, spitter_spawnRate);
+    }
+    object[] Shuffle(object[] array)
+    {
+        System.Random random = new System.Random();
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int swapIndex = random.Next(i + 1);
+            object temp = array[i];
+            array[i] = array[swapIndex];
+            array[swapIndex] = temp;
+        }
+        return array;
     }
     IEnumerator PowerUpSpawn()
     {       

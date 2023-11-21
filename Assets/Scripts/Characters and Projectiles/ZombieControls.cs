@@ -10,7 +10,6 @@ public class ZombieControls : MonoBehaviour
     private Transform targetTaunter;
 
     private GameManager gameManager;
-    private DifficultyManager difficultyManager;
 
     public ParticleSystem bloodSplash;
 
@@ -18,19 +17,19 @@ public class ZombieControls : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
-        DifficultyChecker();
     }
     void Update()
     {
      if (gameManager.isShooterChased && targetShooter != null)
         {
+            Debug.Log("Shooter is followed");
             ShooterFollow();
         }
      else
         {
+            Debug.Log("Taunter is followed");
             TaunterFollow();
         }
     }
@@ -44,7 +43,7 @@ public class ZombieControls : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, targetTaunter.position, speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
         }
-        void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
         {
         if (other.gameObject.CompareTag("Taunter"))
             {
@@ -61,11 +60,4 @@ public class ZombieControls : MonoBehaviour
             bloodSplash.Play();
             }
         }
-    public void DifficultyChecker()
-    {
-        if (difficultyManager.normalMode == true)
-        {
-            speed = 5;
-        }
-    }
 }

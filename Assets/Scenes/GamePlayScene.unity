@@ -342,7 +342,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 287854089}
         m_TargetAssemblyTypeName: Difficulty, Assembly-CSharp
-        m_MethodName: StartNormalMode
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -614,6 +614,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawnManager
       objectReference: {fileID: 0}
+    - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
+        type: 3}
+      propertyPath: spitterPrefab
+      value: 
+      objectReference: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
+        type: 3}
+    - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
+        type: 3}
+      propertyPath: cannonYetiPrefab
+      value: 
+      objectReference: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
+        type: 3}
+    - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
+        type: 3}
+      propertyPath: enemySpawnerArray.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
+        type: 3}
+      propertyPath: enemySpawnerArray.Array.data[0]
+      value: 
+      objectReference: {fileID: 1500177959}
+    - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
+        type: 3}
+      propertyPath: enemySpawnerArray.Array.data[1]
+      value: 
+      objectReference: {fileID: 1231011203}
+    - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
+        type: 3}
+      propertyPath: enemySpawnerArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 1501459615}
     - target: {fileID: 721042276682653763, guid: 8401c900788b87d45bbc54e4d608db9f,
         type: 3}
       propertyPath: powerUpSpawnPoints.Array.data[0]
@@ -1149,77 +1181,6 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1 &337166688
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 337166689}
-  - component: {fileID: 337166690}
-  - component: {fileID: 337166691}
-  m_Layer: 0
-  m_Name: EnemySpawnerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &337166689
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337166688}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &337166690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337166688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f2313441dffa9488d19f91295b33d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spitterPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
-    type: 3}
-  cannonYetiPrefab: {fileID: 1118993143020342997, guid: 809455207f70de345a7a50fb70a7a390,
-    type: 3}
-  enemySpawnerArray:
-  - {fileID: 1500177959}
-  - {fileID: 1231011203}
-  - {fileID: 1501459615}
-  spitter_startDelay: 5
-  spitter_spawnRate: 3
---- !u!114 &337166691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 337166688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 8872333681490167307, guid: 0000000000000000d000000000000000, type: 0}
-  position: 0
-  direction: 0
-  tooltip: 
 --- !u!1 &345229046
 GameObject:
   m_ObjectHideFlags: 0
@@ -23178,68 +23139,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2011267009
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2011267011}
-  - component: {fileID: 2011267010}
-  - component: {fileID: 2011267012}
-  m_Layer: 0
-  m_Name: DifficultyManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2011267010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011267009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c86a67b799dde46af0e1a82b0930c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  normalMode: 0
---- !u!4 &2011267011
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011267009}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.7303965, y: 0.25160515, z: -0.5329738}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2011267012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011267009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  icon: {fileID: 8872333681490167307, guid: 0000000000000000d000000000000000, type: 0}
-  position: 0
-  direction: 0
-  tooltip: 
 --- !u!1 &2034265096
 GameObject:
   m_ObjectHideFlags: 0
@@ -24318,8 +24217,6 @@ SceneRoots:
   - {fileID: 17971907}
   - {fileID: 254459383}
   - {fileID: 280348850}
-  - {fileID: 337166689}
-  - {fileID: 2011267011}
   - {fileID: 1016659504}
   - {fileID: 382273588}
   - {fileID: 6357146089292057761}
