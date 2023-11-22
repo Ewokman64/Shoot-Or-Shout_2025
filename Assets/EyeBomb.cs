@@ -1,20 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieControls : MonoBehaviour
-{    
-    public float speed = 5;
+public class EyeBomb : MonoBehaviour
+{
+    public float speed = 20;
 
     private Transform targetShooter;
     private Transform targetTaunter;
     public Transform leftWall;
     public Transform rightWall;
-
     private GameManager gameManager;
-
-    public ParticleSystem bloodSplash;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -24,42 +20,27 @@ public class ZombieControls : MonoBehaviour
     }
     void Update()
     {
-     if (gameManager.isShooterChased && targetShooter != null)
+        if (gameManager.isShooterChased && targetShooter != null)
         {
             ShooterFollow();
         }
-     else
+        else
         {
             TaunterFollow();
         }
     }
-    public void ShooterFollow()
+    public IEnumerator ShooterFollow()
     {
+        yield return new WaitForSeconds(3);
         //rightWall = GameObject.Find("RightWall").GetComponent<Transform>();
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
-    public void TaunterFollow()
-        {
+    public IEnumerator TaunterFollow()
+    {
+        yield return new WaitForSeconds(3);
         //leftWall = GameObject.Find("leftWall").GetComponent<Transform>();
-        transform.Translate(Vector2.right* speed * Time.deltaTime);
+        transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-    void OnTriggerEnter2D(Collider2D other)
-        {
-        if (other.gameObject.CompareTag("Taunter"))
-            {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-            }
-        if (other.gameObject.CompareTag("Shooter"))
-            {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-            }
-        if (other.gameObject.CompareTag("Bullet"))
-            {
-            bloodSplash.Play();
-            }
-        }
+    }
 }

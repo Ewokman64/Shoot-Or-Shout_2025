@@ -10,9 +10,10 @@ public class SpawnManager : MonoBehaviour
     //----------------------------------------
     public GameObject[] enemyPrefab;
     public GameObject powerUpPrefab;
+    public GameObject eyeBombPrefab;
     public Transform[] spawnPoints;
     private float startDelay = 2;
-    public float spawnRate;
+    public float spawnRate = 10;
 
     int randomSpawnPoint, randomEnemies;
 
@@ -32,6 +33,10 @@ public class SpawnManager : MonoBehaviour
     public float spitter_startDelay = 5;
     [HideInInspector]
     public float spitter_spawnRate = 3;
+
+    private bool zombieSpawnStarted = false;
+    private bool coroutineStarted = false;
+    private bool eyeBombSpawnStarted = false;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -42,13 +47,26 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(ZombieSpawn());
         StartCoroutine(PowerUpSpawn());
-        StartSpitterSpawn();
+        
         powerUps = 0;
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameManager.score > 50 && !coroutineStarted)
+        {
+            StartSpitterSpawn();
+            coroutineStarted = true;
+        }
+        if (!zombieSpawnStarted)
+        {
+
+        }
+        if (gameManager.score > 100 && !eyeBombSpawnStarted)
+        {
+            EyeBombSpawn();
+            eyeBombSpawnStarted = true;
+        }
     }
     IEnumerator ZombieSpawn()
     {
@@ -60,24 +78,29 @@ public class SpawnManager : MonoBehaviour
             Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
 
             yield return new WaitForSeconds(spawnRate);
-        }       
-    }
-    IEnumerator TrySpawnSpitter()
-    {
-        yield return new WaitForSeconds(spitter_startDelay);
-        EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
-        if (spawner != null)
-        {
-            spawner.Spawn(spitterPrefab);
         }
-        yield return new WaitForSeconds(spitter_spawnRate);
+        
+    }
+    IEnumerator SpawnSpittersWithDelay()
+    {
+        enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
+
+        while (true)
+        {
+            yield return new WaitForSeconds(spitter_spawnRate);
+
+            EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
+            if (spawner != null)
+            {
+                spawner.Spawn(spitterPrefab);
+            }
+        }
     }
     public void StartSpitterSpawn()
     {
-        enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
-        StartCoroutine(TrySpawnSpitter());
-        InvokeRepeating(nameof(TrySpawnSpitter), spitter_startDelay, spitter_spawnRate);
+        StartCoroutine(SpawnSpittersWithDelay());
     }
+
     object[] Shuffle(object[] array)
     {
         System.Random random = new System.Random();
@@ -101,5 +124,21 @@ public class SpawnManager : MonoBehaviour
             powerUps = 1;
             yield return new WaitForSeconds(powerUp_spawnRate);
         }      
+    }
+
+    IEnumerator EyeBombSpawn()
+    {
+        enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
+
+        while (true)
+        {
+            yield return new WaitForSeconds(spitter_spawnRate);
+
+            EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
+            if (spawner != null)
+            {
+                spawner.Spawn(eyeBombPrefab);
+            }
+        }
     }
 }

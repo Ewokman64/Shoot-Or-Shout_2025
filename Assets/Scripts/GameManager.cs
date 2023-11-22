@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {      
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        //shooter = GameObject.Find("Shooter");
-        //taunter = GameObject.Find("Taunter");
     }
 
     void Update()
@@ -45,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         //"previousEasyScore" key is getting loaded"
         currentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
-
+        spawnManager.StartSpawnManager();
         isTaunterChased = false;
         isShooterChased = true;
 

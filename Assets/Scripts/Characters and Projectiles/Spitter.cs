@@ -7,10 +7,11 @@ public class Spitter : MonoBehaviour
     public GameObject acidBall;
     private float startDelay = 0.5f;
     public float spawnRate;
-    private GameManager gameManager;
-    private DifficultyManager difficultyManager;
+    
     public Transform targetShooter;
     public Transform targetTaunter;
+
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -37,11 +38,4 @@ public class Spitter : MonoBehaviour
     {
         Instantiate(acidBall, transform.position, acidBall.transform.rotation);
     }
-    /*public void DifficultyChecker()
-    {
-        if (difficultyManager.normalMode == true)
-        {
-            spawnRate = 2;
-        }
-    }*/
 }

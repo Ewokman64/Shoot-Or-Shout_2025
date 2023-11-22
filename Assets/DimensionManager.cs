@@ -16,7 +16,7 @@ public class DimensionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ToIceDimension();
+        //ToIceDimension();
     }
     void ToIceDimension()
     {
