@@ -5,8 +5,8 @@ using UnityEngine;
 public class Spitter : MonoBehaviour
 {
     public GameObject acidBall;
-    private float startDelay = 0.5f;
-    public float spawnRate;
+    //private float startDelay = 0.5f;
+    //public float spawnRate;
     
     public Transform targetShooter;
     public Transform targetTaunter;
@@ -19,7 +19,8 @@ public class Spitter : MonoBehaviour
         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        InvokeRepeating("AcidBallSpawn", startDelay, spawnRate);
+        StartCoroutine("ShootAcidBall");
+        //InvokeRepeating("AcidBallSpawn", startDelay, spawnRate);
     }
 
     // Update is called once per frame
@@ -34,8 +35,14 @@ public class Spitter : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }
-    void AcidBallSpawn()
+    public IEnumerator ShootAcidBall()
     {
-        Instantiate(acidBall, transform.position, acidBall.transform.rotation);
+        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            Instantiate(acidBall, transform.position, acidBall.transform.rotation);
+            yield return new WaitForSeconds(3);
+        }
+        
     }
 }

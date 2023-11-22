@@ -7,36 +7,40 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
     private DimensionManager dimensionManager;
-    //----------------------------------------
+    //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
-    public GameObject powerUpPrefab;
-    public GameObject eyeBombPrefab;
+    int randomSpawnPoint, randomEnemies;
     public Transform[] spawnPoints;
     private float startDelay = 2;
-    public float spawnRate = 10;
+    public float spawnRate = 0.7f;
+    private bool zombieSpawnStarted = false;
+    //SPITTERS
+    public GameObject spitterPrefab;
+    public EnemySpawner[] enemySpawnerArray;
+    public float spitter_startDelay = 5;
+    public float spitter_spawnRate = 3;
+    private bool spitterSpawnStarted = false;
+    //EYEBOMBS
+    public GameObject eyeBombPrefab;
+    int eyeSpawnPoint;
+    public Transform[] eyeSpawnPoints;
+    public bool eyeBombSpawnStarted = false;
+    //NIGHT KNIGHTS
+    
 
-    int randomSpawnPoint, randomEnemies;
 
+    //BIG LADS
+
+    //POWERUP
+    public GameObject powerUpPrefab;
     public Transform[] powerUpSpawnPoints;
-
+    [HideInInspector]
+    public int powerUps;
     [HideInInspector]
     public float powerUp_startDelay = 10;
     [HideInInspector]
     public float powerUp_spawnRate = 10;
-
-    public int powerUps;
-
-    public GameObject spitterPrefab;
-    public GameObject cannonYetiPrefab;
-    public EnemySpawner[] enemySpawnerArray;
-    [HideInInspector]
-    public float spitter_startDelay = 5;
-    [HideInInspector]
-    public float spitter_spawnRate = 3;
-
-    private bool zombieSpawnStarted = false;
-    private bool coroutineStarted = false;
-    private bool eyeBombSpawnStarted = false;
+    
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -53,25 +57,25 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.score > 50 && !coroutineStarted)
+        if (gameManager.score > 50 && !spitterSpawnStarted)
         {
             StartSpitterSpawn();
-            coroutineStarted = true;
+            spitterSpawnStarted = true;
         }
         if (!zombieSpawnStarted)
         {
 
         }
-        if (gameManager.score > 100 && !eyeBombSpawnStarted)
+        if (gameManager.score > 20 && !eyeBombSpawnStarted)
         {
-            EyeBombSpawn();
+            StartCoroutine(EyeBombSpawn());
             eyeBombSpawnStarted = true;
         }
     }
     IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (dimensionManager.DungeonDimension.activeSelf)
+        while (true)
         {
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
             randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
@@ -128,17 +132,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator EyeBombSpawn()
     {
-        enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
-
+        Debug.Log("Initiating eyebombspawn");
+        yield return new WaitForSeconds(startDelay);
         while (true)
         {
-            yield return new WaitForSeconds(spitter_spawnRate);
+            Debug.Log("EyeBomb spawn started!");
+            randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+            
+            Instantiate(eyeBombPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
 
-            EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
-            if (spawner != null)
-            {
-                spawner.Spawn(eyeBombPrefab);
-            }
+            yield return new WaitForSeconds(7);
         }
     }
 }

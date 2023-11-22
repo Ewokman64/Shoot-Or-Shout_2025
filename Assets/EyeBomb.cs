@@ -8,8 +8,6 @@ public class EyeBomb : MonoBehaviour
 
     private Transform targetShooter;
     private Transform targetTaunter;
-    public Transform leftWall;
-    public Transform rightWall;
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -22,25 +20,37 @@ public class EyeBomb : MonoBehaviour
     {
         if (gameManager.isShooterChased && targetShooter != null)
         {
-            ShooterFollow();
+            StartCoroutine(ShooterFollow());
         }
         else
         {
-            TaunterFollow();
+            StartCoroutine(TaunterFollow());
         }
     }
     public IEnumerator ShooterFollow()
     {
         yield return new WaitForSeconds(3);
-        //rightWall = GameObject.Find("RightWall").GetComponent<Transform>();
+
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public IEnumerator TaunterFollow()
     {
         yield return new WaitForSeconds(3);
-        //leftWall = GameObject.Find("leftWall").GetComponent<Transform>();
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Taunter"))
+        {
+            gameManager.isSomeoneDead = true;
+            gameManager.GameOver();
+        }
+        if (other.gameObject.CompareTag("Shooter"))
+        {
+            gameManager.isSomeoneDead = true;
+            gameManager.GameOver();
+        }
     }
 }

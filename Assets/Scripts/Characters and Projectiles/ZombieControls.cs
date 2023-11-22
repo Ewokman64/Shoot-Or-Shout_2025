@@ -8,8 +8,6 @@ public class ZombieControls : MonoBehaviour
 
     private Transform targetShooter;
     private Transform targetTaunter;
-    public Transform leftWall;
-    public Transform rightWall;
 
     private GameManager gameManager;
 
@@ -35,16 +33,14 @@ public class ZombieControls : MonoBehaviour
     }
     public void ShooterFollow()
     {
-        //rightWall = GameObject.Find("RightWall").GetComponent<Transform>();
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
-        {
-        //leftWall = GameObject.Find("leftWall").GetComponent<Transform>();
+    {
         transform.Translate(Vector2.right* speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
+    }
     void OnTriggerEnter2D(Collider2D other)
         {
         if (other.gameObject.CompareTag("Taunter"))

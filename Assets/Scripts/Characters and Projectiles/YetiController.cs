@@ -10,16 +10,13 @@ public float speed;
 private Transform targetShooter;
 private Transform targetTaunter;
 private GameManager gameManager;
-private DifficultyManager difficultyManager;
 
 // Start is called before the first frame update
 void Start()
 {
     gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-    difficultyManager = GameObject.Find("DifficultyManager").GetComponent<DifficultyManager>();
     targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
     targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
-    DifficultyChecker();
 }
 void Update()
 {
@@ -61,13 +58,6 @@ void OnTriggerEnter2D(Collider2D other)
     if (other.gameObject.CompareTag("Bullet"))
     {
         bloodSplash.Play();
-    }
-}
-public void DifficultyChecker()
-{
-    if (difficultyManager.normalMode == true)
-    {
-        speed = 5;
     }
 }
 }
