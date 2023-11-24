@@ -18,6 +18,7 @@ TagManager:
   - PowerUp
   - BulletSpawnPoint2
   - AudioManager
+  - BigZombie
   layers:
   - Default
   - TransparentFX

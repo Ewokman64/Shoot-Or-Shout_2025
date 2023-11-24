@@ -26,11 +26,14 @@ public class SpawnManager : MonoBehaviour
     public Transform[] eyeSpawnPoints;
     public bool eyeBombSpawnStarted = false;
     //NIGHT KNIGHTS
-    
+
 
 
     //BIG LADS
-
+    public GameObject bigBoiPrefab;
+    int bigSpawnPoint;
+    public Transform[] bigSpawnPoints;
+    public bool bigBombSpawnStarted = false;
     //POWERUP
     public GameObject powerUpPrefab;
     public Transform[] powerUpSpawnPoints;
@@ -69,6 +72,8 @@ public class SpawnManager : MonoBehaviour
         if (gameManager.score > 20 && !eyeBombSpawnStarted)
         {
             StartCoroutine(EyeBombSpawn());
+            StartCoroutine(BigBoiSpawn());
+            bigBombSpawnStarted = true;
             eyeBombSpawnStarted = true;
         }
     }
@@ -137,11 +142,32 @@ public class SpawnManager : MonoBehaviour
         while (true)
         {
             Debug.Log("EyeBomb spawn started!");
-            randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+            eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
             
-            Instantiate(eyeBombPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+            Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity);
 
             yield return new WaitForSeconds(7);
         }
+    }
+
+    IEnumerator BigBoiSpawn()
+    {
+        Debug.Log("Initiating eyebombspawn");
+        yield return new WaitForSeconds(startDelay);
+        while (true)
+        {
+            Debug.Log("EyeBomb spawn started!");
+            randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+
+            Instantiate(bigBoiPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+
+            yield return new WaitForSeconds(10);
+        }
+    }
+
+    IEnumerator HorseManSpawn()
+    {
+        yield return new WaitForSeconds(15);
+
     }
 }

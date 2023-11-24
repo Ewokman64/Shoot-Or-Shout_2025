@@ -21,24 +21,21 @@ public class Detector : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        //This part is for the player
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(other.gameObject);
-        }
+        Destroy(other.gameObject);
         //This part is for the player
         if (other.gameObject.CompareTag("Zombie"))
         {
+            health--;          
+        }
+        else if (other.gameObject.CompareTag("BigZombie"))
+        {
             health--;
-            Destroy(other.gameObject);
+            health--;
+            health--;
         }
     }
     public void OnTriggerExit2D(Collider2D other)
     {
-        //This part is for the player
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            Destroy(other.gameObject);
-        }
+        Destroy(other.gameObject);
     }
 }

@@ -36,10 +36,6 @@ public class Bullet : MonoBehaviour
         {
             Invoke(nameof(SetBoolBack), 1.0f);
         }
-            if (other.gameObject.CompareTag("Detector"))
-        {
-            Destroy(gameObject);
-        }
     }
     private void SetBoolBack()
     {
