@@ -19,6 +19,9 @@ TagManager:
   - BulletSpawnPoint2
   - AudioManager
   - BigZombie
+  - Projectile
+  - NightKnight
+  - Shield
   layers:
   - Default
   - TransparentFX

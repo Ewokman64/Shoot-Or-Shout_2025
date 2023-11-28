@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     public Transform[] spawnPoints;
     private float startDelay = 2;
     public float spawnRate = 0.7f;
-    private bool zombieSpawnStarted = false;
+    //private bool zombieSpawnStarted = false;
     //SPITTERS
     public GameObject spitterPrefab;
     public EnemySpawner[] enemySpawnerArray;
@@ -26,8 +26,9 @@ public class SpawnManager : MonoBehaviour
     public Transform[] eyeSpawnPoints;
     public bool eyeBombSpawnStarted = false;
     //NIGHT KNIGHTS
-
-
+    public GameObject nightKnightPrefab;
+    public GameObject nightKnightSpawnPoint;
+    public bool n_KnightSpawnStarted = false;
 
     //BIG LADS
     public GameObject bigBoiPrefab;
@@ -60,27 +61,30 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.score > 50 && !spitterSpawnStarted)
+        if (gameManager.score >= 50 && !spitterSpawnStarted)
         {
-            StartSpitterSpawn();
+            StartCoroutine(SpitterSpawn());
+            //StartSpitterSpawn();
             spitterSpawnStarted = true;
         }
-        if (!zombieSpawnStarted)
-        {
-
-        }
-        if (gameManager.score > 20 && !eyeBombSpawnStarted)
+        if (gameManager.score >= 20 && !eyeBombSpawnStarted)
         {
             StartCoroutine(EyeBombSpawn());
             StartCoroutine(BigBoiSpawn());
             bigBombSpawnStarted = true;
             eyeBombSpawnStarted = true;
         }
+        if (gameManager.score >= 70 && !n_KnightSpawnStarted)
+        {
+            Debug.Log("Condition met! Miniboss incoming!");
+            StartCoroutine(NightKnightSpawn());
+            n_KnightSpawnStarted = true;
+        }
     }
     IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (true)
+        while (true && !n_KnightSpawnStarted)
         {
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
             randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
@@ -90,11 +94,11 @@ public class SpawnManager : MonoBehaviour
         }
         
     }
-    IEnumerator SpawnSpittersWithDelay()
+    IEnumerator SpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
 
-        while (true)
+        while (true && !n_KnightSpawnStarted)
         {
             yield return new WaitForSeconds(spitter_spawnRate);
 
@@ -105,10 +109,10 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
-    public void StartSpitterSpawn()
+    /*public void StartSpitterSpawn()
     {
         StartCoroutine(SpawnSpittersWithDelay());
-    }
+    }*/
 
     object[] Shuffle(object[] array)
     {
@@ -139,7 +143,7 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Initiating eyebombspawn");
         yield return new WaitForSeconds(startDelay);
-        while (true)
+        while (true && !n_KnightSpawnStarted)
         {
             Debug.Log("EyeBomb spawn started!");
             eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
@@ -154,7 +158,7 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Initiating eyebombspawn");
         yield return new WaitForSeconds(startDelay);
-        while (true)
+        while (true && !n_KnightSpawnStarted)
         {
             Debug.Log("EyeBomb spawn started!");
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
@@ -165,9 +169,14 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator HorseManSpawn()
+    IEnumerator NightKnightSpawn()
     {
-        yield return new WaitForSeconds(15);
-
+        Debug.Log("Night Knight is coming!");
+        StopCoroutine("ZombieSpawn");
+        StopCoroutine("SpitterSpawn");        
+        StopCoroutine("EyeBombSpawn");
+        StopCoroutine("BigBoiSpawn");
+        yield return new WaitForSeconds(3);
+        Instantiate(nightKnightPrefab, nightKnightSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
     }
 }

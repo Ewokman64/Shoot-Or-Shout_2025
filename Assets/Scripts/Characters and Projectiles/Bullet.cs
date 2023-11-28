@@ -9,12 +9,14 @@ public class Bullet : MonoBehaviour
     public bool isZombieShot = false;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private NightKnight nightKnight;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        
     }
 
     // Update is called once per frame
@@ -24,18 +26,30 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.gameObject.CompareTag("Zombie"))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();
             gameManager.UpdateNormalCurrency(zombieValue);
         }
+        if (other.gameObject.CompareTag("Shield"))
+        {
+            nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
+            nightKnight.shieldHealth--;
+            //Destroy(gameObject);
+            if (nightKnight.shieldHealth <= 0)
+            {
+                Destroy(other.gameObject);
+            }
+        }
         if (isZombieShot == true)
         {
             Invoke(nameof(SetBoolBack), 1.0f);
         }
+        Destroy(gameObject);
     }
     private void SetBoolBack()
     {

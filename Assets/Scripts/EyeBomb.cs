@@ -53,8 +53,7 @@ public class EyeBomb : MonoBehaviour
         taunterChosen = false;
         yield return new WaitForSeconds(2);
         shooterChosen = true;
-        Debug.Log("Shooter is followed!");
-        
+        Debug.Log("Shooter is followed!");  
     }
     public IEnumerator TaunterFollow()
     {
@@ -63,8 +62,6 @@ public class EyeBomb : MonoBehaviour
         yield return new WaitForSeconds(2);
         taunterChosen = true;
         Debug.Log("Taunter is followed!");
-        
-
     }
     void OnTriggerEnter2D(Collider2D other)
     {

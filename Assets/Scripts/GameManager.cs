@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
     public bool isShooterChased;
-
     void Start()
     {      
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();

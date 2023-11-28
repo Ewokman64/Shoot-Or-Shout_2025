@@ -42,7 +42,6 @@ public class Spitter : MonoBehaviour
         {
             Instantiate(acidBall, transform.position, acidBall.transform.rotation);
             yield return new WaitForSeconds(3);
-        }
-        
+        }      
     }
 }
