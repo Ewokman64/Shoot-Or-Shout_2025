@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
+    public List<string> hostile;
     //Movement
     private float speed = 10;
     private float yRange = 5;
@@ -122,19 +123,29 @@ public class ShooterController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PowerUp"))
         {
-            countDown.powerUpCanvas.gameObject.SetActive(true);
-            powerUpLight.gameObject.SetActive(true);
-
-            StartCoroutine(countDown.CountDownPowerUp());
-            
-            isPowerUpActive = true;
-            //Effects and anims
-            gunAudio.PlayOneShot(powerUpSFX, 1.0f);
-            animator.SetBool("IsPowerUpActive", true);
-            //Powerup over
-            Destroy(other.gameObject);
-            Invoke(nameof(SetBoolBack), 5.0f);
+            ActivatePowerUp();
         }
+        else if (hostile.Contains(other.tag))
+        {      
+            gameManager.isSomeoneDead = true;
+            gameManager.GameOver();
+        }
+        Destroy(gameObject);
+        Destroy(other.gameObject);
+    }
+    public void ActivatePowerUp()
+    {
+        countDown.powerUpCanvas.gameObject.SetActive(true);
+        powerUpLight.gameObject.SetActive(true);
+
+        StartCoroutine(countDown.CountDownPowerUp());
+
+        isPowerUpActive = true;
+        //Effects and anims
+        gunAudio.PlayOneShot(powerUpSFX, 1.0f);
+        animator.SetBool("IsPowerUpActive", true);
+        //Powerup over
+        Invoke(nameof(SetBoolBack), 5.0f);
     }
     public void SetBoolBack()
     {

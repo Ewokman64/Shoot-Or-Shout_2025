@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5508212474743306293}
   m_Layer: 0
   m_Name: BigBoi
-  m_TagString: BigZombie
+  m_TagString: BigEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

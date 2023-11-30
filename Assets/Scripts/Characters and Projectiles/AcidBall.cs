@@ -47,7 +47,7 @@ public class AcidBall : MonoBehaviour
         }
 
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    /*public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Detector"))
         {
@@ -58,5 +58,5 @@ public class AcidBall : MonoBehaviour
             gameManager.isSomeoneDead = true;
             gameManager.GameOver();
         }
-    }
+    }*/
 }

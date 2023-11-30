@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TaunterController : MonoBehaviour
 {
+    public List<string> hostile;
     private readonly float speed = 10;
     private readonly float yRange = 5;
 
@@ -74,5 +75,16 @@ public class TaunterController : MonoBehaviour
         {
             tauntCoolDown = 0;
         }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {      
+        if (hostile.Contains(other.tag))
+        {
+            gameManager.isSomeoneDead = true;
+            gameManager.GameOver();
+        }
+        Destroy(gameObject);
+        Destroy(other.gameObject);
     }
 }

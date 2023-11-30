@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6776313842009288539}
   - component: {fileID: 6776313842009288517}
   - component: {fileID: 6776313842009288516}
+  - component: {fileID: 5767853229859520799}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -26,12 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776313842009288536}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6776313842009288539
 MonoBehaviour:
@@ -45,15 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f038eb2ba6b0e44988aa63a8d09343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  restartButton: {fileID: 0}
-  restartMenu: {fileID: 0}
-  titleMenu: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  startScreenCanvas: {fileID: 0}
   shooter: {fileID: 0}
   taunter: {fileID: 0}
   gmAudio: {fileID: 6776313842009288517}
+  bgMusic: {fileID: 8300000, guid: c7edf939fbc200c448c539cf7586e42c, type: 3}
   soulEnergyText: {fileID: 0}
   soulEnergyCollectedText: {fileID: 0}
-  currentRecordText: {fileID: 0}
+  recordText: {fileID: 0}
   score: 0
   currentRecord: 0
   isSomeoneDead: 0
@@ -69,7 +71,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c7edf939fbc200c448c539cf7586e42c, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
@@ -169,3 +171,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countDownDisplay: {fileID: 0}
   powerUpCanvas: {fileID: 0}
+--- !u!114 &5767853229859520799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6776313842009288536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 8872333681490167307, guid: 0000000000000000d000000000000000, type: 0}
+  position: 0
+  direction: 0
+  tooltip: 

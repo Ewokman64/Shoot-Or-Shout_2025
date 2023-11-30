@@ -42,31 +42,15 @@ public class Horse : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Bullet"))
-        {
-            horseHealth--;
-
-            // Check if the horseman should be destroyed
-            if (horseHealth <= 0)
+     // Check if the horseman should be destroyed
+        if (horseHealth <= 0)
             {
-                nightKnight.spearSpawnRate = 1;
-                nightKnight.StartCoroutine("EquipShield");
-                nightKnight.speed = 5;
-                Destroy(gameObject);
+            nightKnight.spearSpawnRate = 1;
+            nightKnight.StartCoroutine("EquipShield");
+            nightKnight.speed = 5;
+            Destroy(gameObject);
             }
-
             // Destroy the bullet regardless of the health status
             Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("Taunter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
-        if (other.gameObject.CompareTag("Shooter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
     }
 }

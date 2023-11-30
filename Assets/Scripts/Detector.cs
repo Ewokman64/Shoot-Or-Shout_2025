@@ -23,7 +23,7 @@ public class Detector : MonoBehaviour
     {
         Destroy(other.gameObject);
         //This part is for the player
-        if (other.gameObject.CompareTag("Zombie"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
             health--;          
         }

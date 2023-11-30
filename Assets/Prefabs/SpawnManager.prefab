@@ -104,6 +104,15 @@ MonoBehaviour:
   eyeSpawnPoints:
   - {fileID: 1291330928217458110}
   - {fileID: 5611236613431078024}
+  eyeBombSpawnStarted: 0
+  nightKnightPrefab: {fileID: 6007565604007801479, guid: be47b4426bc753a4b89e98f7d6249351,
+    type: 3}
+  nightKnightSpawnPoint: {fileID: 3759346310013003916}
+  n_KnightSpawnStarted: 0
+  bigBoiPrefab: {fileID: 3810393701880755627, guid: 291e95918a408e84cbfe73a3a011b0b5,
+    type: 3}
+  bigSpawnPoints: []
+  bigBombSpawnStarted: 0
   powerUpPrefab: {fileID: 3176338829875991302, guid: bf4758665bc9b10449e3fcd74151784a,
     type: 3}
   powerUpSpawnPoints:

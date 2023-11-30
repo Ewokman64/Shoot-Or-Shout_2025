@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             Destroy(bullet);
 
         //GET RID OF ENEMIES
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zombie");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         if (currentRecord < score) recordText.text = "Normal Record: " + score.ToString();
         else recordText.text = "Normal: " + currentRecord.ToString();
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    /*void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Trigger Entered!");
         if (collision.gameObject == shooter && collision.gameObject.CompareTag("Zombie"))
@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             isSomeoneDead = true;
             GameOver();
         }
-    }
+    }*/
 }
 
 

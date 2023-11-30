@@ -37,6 +37,7 @@ public class NightKnight : MonoBehaviour
         {
             TaunterFollow();
         }
+        EnrageHorse();
     }
     public void ShooterFollow()
     {
@@ -72,38 +73,19 @@ public class NightKnight : MonoBehaviour
         // Set the child's parent to the specified parent GameObject
         newShield.transform.parent = nightKnight.transform;
     }
-    void OnTriggerEnter2D(Collider2D other)
+
+    public void EnrageHorse()
     {
-        if (other.gameObject.CompareTag("Bullet"))
+        if (nightKnightHealth <= 0)
         {
-            nightKnightHealth--;
-            Debug.Log("Bullet hit horseman! Horseman Health: " + nightKnightHealth);
-
-            // Check if the horseman should be destroyed
-            if (nightKnightHealth <= 0)
+            // Detach all children from the parent
+            foreach (Transform child in transform)
             {
-                // Detach all children from the parent
-                foreach (Transform child in transform)
-                {
-                    child.parent = null;
-                    horse.speed = 5;
-                }
-                Destroy(gameObject);
-                Debug.Log("Horseman destroyed!");
+                child.parent = null;
+                horse.speed = 5;
             }
-
-            // Destroy the bullet regardless of the health status
-            Destroy(other.gameObject);
-        }
-        if (other.gameObject.CompareTag("Taunter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
-        if (other.gameObject.CompareTag("Shooter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
+            Destroy(gameObject);
+            Debug.Log("Horseman destroyed!");
         }
     }
 }

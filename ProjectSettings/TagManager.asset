@@ -9,7 +9,6 @@ TagManager:
   - Bullet
   - Blood
   - Shooter
-  - Zombie
   - FxTemporaire
   - BloodDetector
   - Taunter
@@ -18,10 +17,12 @@ TagManager:
   - PowerUp
   - BulletSpawnPoint2
   - AudioManager
-  - BigZombie
   - Projectile
   - NightKnight
   - Shield
+  - Enemy
+  - Horse
+  - BigEnemy
   layers:
   - Default
   - TransparentFX

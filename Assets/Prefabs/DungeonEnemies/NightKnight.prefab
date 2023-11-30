@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9118182344988515324}
   m_Layer: 0
   m_Name: Horse
-  m_TagString: Untagged
+  m_TagString: Horse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -341,5 +341,6 @@ MonoBehaviour:
   nightKnightHealth: 3
   spear: {fileID: 1529532939484370753, guid: 111a8b82d2bfe6c41a36131ebd5d5aac, type: 3}
   shield: {fileID: 7334304511801104714, guid: f42344870263512459b8cebad1221736, type: 3}
+  shieldHealth: 10
   nightKnight: {fileID: 6007565604007801479}
   spearSpawnRate: 3

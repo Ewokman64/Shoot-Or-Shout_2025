@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -10,6 +11,7 @@ public class Bullet : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private NightKnight nightKnight;
+    private Horse horse;
 
     // Start is called before the first frame update
     void Start()
@@ -27,23 +29,31 @@ public class Bullet : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         
-        if (other.gameObject.CompareTag("Zombie"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            //Destroy(gameObject);
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();
             gameManager.UpdateNormalCurrency(zombieValue);
         }
-        if (other.gameObject.CompareTag("Shield"))
+        else if (other.gameObject.CompareTag("Shield"))
         {
             nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
             nightKnight.shieldHealth--;
-            //Destroy(gameObject);
             if (nightKnight.shieldHealth <= 0)
             {
                 Destroy(other.gameObject);
             }
+        }
+        else if (other.gameObject.CompareTag("NightKnight"))
+        {
+            nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
+            nightKnight.nightKnightHealth--;
+        }
+        else if (other.gameObject.CompareTag("Horse"))
+        {
+            horse = GameObject.Find("Horse").GetComponent<Horse>();
+            horse.horseHealth--;
         }
         if (isZombieShot == true)
         {

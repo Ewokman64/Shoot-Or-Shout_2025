@@ -48,7 +48,7 @@ public class BigBoi : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Taunter"))
+        /*if (other.gameObject.CompareTag("Taunter"))
         {
             gameManager.isSomeoneDead = true;
             gameManager.GameOver();
@@ -57,7 +57,7 @@ public class BigBoi : MonoBehaviour
         {
             gameManager.isSomeoneDead = true;
             gameManager.GameOver();
-        }
+        }*/
         if (other.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("Bullet hit!");

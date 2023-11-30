@@ -29,7 +29,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject nightKnightPrefab;
     public GameObject nightKnightSpawnPoint;
     public bool n_KnightSpawnStarted = false;
-
     //BIG LADS
     public GameObject bigBoiPrefab;
     int bigSpawnPoint;
@@ -44,7 +43,12 @@ public class SpawnManager : MonoBehaviour
     public float powerUp_startDelay = 10;
     [HideInInspector]
     public float powerUp_spawnRate = 10;
-    
+    //[BOSS]
+    public GameObject brainBoss;
+    int bossSpawnPoint;
+    public float bossStartDelay = 5;
+    public bool bossSpawned;
+
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -79,6 +83,10 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Condition met! Miniboss incoming!");
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
+        }
+        if (gameManager.score >= 500 && !bossSpawned)
+        {
+            StartCoroutine(SpawnBrainBoss());
         }
     }
     IEnumerator ZombieSpawn()
@@ -178,5 +186,11 @@ public class SpawnManager : MonoBehaviour
         StopCoroutine("BigBoiSpawn");
         yield return new WaitForSeconds(3);
         Instantiate(nightKnightPrefab, nightKnightSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
+    }
+    IEnumerator SpawnBrainBoss()
+    {
+        StopAllCoroutines();
+        yield return new WaitForSeconds(5);
+        //Instantiate(brainBoss, brainSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
     }
 }
