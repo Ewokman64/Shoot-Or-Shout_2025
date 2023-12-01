@@ -86,7 +86,7 @@ public class SpawnManager : MonoBehaviour
         }
         if (gameManager.score >= 500 && !bossSpawned)
         {
-            StartCoroutine(SpawnBrainBoss());
+            //StartCoroutine(SpawnBrainBoss());
         }
     }
     IEnumerator ZombieSpawn()

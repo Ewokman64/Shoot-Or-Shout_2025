@@ -28,8 +28,8 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        
-        if (other.gameObject.CompareTag("Enemy"))
+
+        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("BigEnemy") || other.gameObject.CompareTag("Spitter"))
         {
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;

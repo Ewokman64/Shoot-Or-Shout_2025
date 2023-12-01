@@ -123,6 +123,7 @@ public class ShooterController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PowerUp"))
         {
+            Destroy(other.gameObject);
             ActivatePowerUp();
         }
         else if (hostile.Contains(other.tag))
@@ -130,8 +131,7 @@ public class ShooterController : MonoBehaviour
             gameManager.isSomeoneDead = true;
             gameManager.GameOver();
         }
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        
     }
     public void ActivatePowerUp()
     {

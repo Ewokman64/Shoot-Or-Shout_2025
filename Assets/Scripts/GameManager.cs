@@ -96,16 +96,6 @@ public class GameManager : MonoBehaviour
         if (currentRecord < score) recordText.text = "Normal Record: " + score.ToString();
         else recordText.text = "Normal: " + currentRecord.ToString();
     }
-    /*void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Trigger Entered!");
-        if (collision.gameObject == shooter && collision.gameObject.CompareTag("Zombie"))
-        {
-            Debug.Log("Someone died!");
-            isSomeoneDead = true;
-            GameOver();
-        }
-    }*/
 }
 
 

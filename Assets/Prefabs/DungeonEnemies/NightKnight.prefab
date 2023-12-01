@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9118182344988515324}
   m_Layer: 0
   m_Name: Horse
-  m_TagString: Horse
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 7081159642880313949}
   m_Layer: 0
   m_Name: NightKnight
-  m_TagString: NightKnight
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

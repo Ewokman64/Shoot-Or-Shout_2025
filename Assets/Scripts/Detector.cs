@@ -27,15 +27,15 @@ public class Detector : MonoBehaviour
         {
             health--;          
         }
-        else if (other.gameObject.CompareTag("BigZombie"))
+        else if (other.gameObject.CompareTag("BigEnemy"))
         {
             health--;
             health--;
             health--;
         }
     }
-    public void OnTriggerExit2D(Collider2D other)
+    /*public void OnTriggerExit2D(Collider2D other)
     {
         Destroy(other.gameObject);
-    }
+    }*/
 }

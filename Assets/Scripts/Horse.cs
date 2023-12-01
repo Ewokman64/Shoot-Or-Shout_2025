@@ -42,7 +42,6 @@ public class Horse : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-     // Check if the horseman should be destroyed
         if (horseHealth <= 0)
             {
             nightKnight.spearSpawnRate = 1;
@@ -50,7 +49,5 @@ public class Horse : MonoBehaviour
             nightKnight.speed = 5;
             Destroy(gameObject);
             }
-            // Destroy the bullet regardless of the health status
-            Destroy(other.gameObject);
     }
 }

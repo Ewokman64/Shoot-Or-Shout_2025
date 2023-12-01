@@ -44,18 +44,5 @@ public class Spear : MonoBehaviour
         {
             transform.Translate(Vector3.right * Time.deltaTime * spearSpeed);
         }
-
     }
-    /*public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Detector"))
-        {
-            Destroy(gameObject);
-        }
-        if (other.gameObject.CompareTag("Shooter") || other.gameObject.CompareTag("Taunter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
-    }*/
 }

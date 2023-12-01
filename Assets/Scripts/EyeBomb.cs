@@ -63,17 +63,4 @@ public class EyeBomb : MonoBehaviour
         taunterChosen = true;
         Debug.Log("Taunter is followed!");
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Taunter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
-        if (other.gameObject.CompareTag("Shooter"))
-        {
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
-        }
-    }
 }
