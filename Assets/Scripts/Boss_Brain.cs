@@ -5,61 +5,67 @@ using UnityEngine;
 public class Boss_Brain : MonoBehaviour
 {
     int health = 200;
-    //TENTACLE ATTACK
+    bool brainIsAlive;
+    //TENTACLE ATTACK//
+    public bool tentacleAttack;
+    
+    //BRAINSHOOT ATTACK//
+    public GameObject littleBrain;
+    public float littleBrainSpeed;
+    public float timeBetweenShots = 2f;
+    public Transform[] littleBrainPos;
+    //BULLETHELL//
+    public GameObject brainBullet;
+    public float brainBulletSpeed;
+    public Transform[] brainBulletPos;
 
     // Reference to the SpriteRenderer component
     private SpriteRenderer spriteRenderer;
     public Sprite wallOfBrains;
-
-    //BRAINSHOOT ATTACK
-    public GameObject littleBrain;
-    public float littleBrainSpeed;
-    public Transform[] littleBrainPos;
-    //BULLETHELL
-    public GameObject brainBullet;
-    public float brainBulletSpeed;
-    public Transform[] brainBulletPos;
     // Start is called before the first frame update
     void Start()
     {
-        
+        brainIsAlive = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(TentacleAttack());
-        }
+        
     }
     public IEnumerator TentacleAttack()
     {
-        //Moves up and down while shooting out tentacles
-        //3 spawnpoints in the middle of the boss
-        // Find all GameObjects of a specific type
-        GameObject[] tentacleSpawnPoints = GameObject.FindGameObjectsWithTag("TentacleSpawnP"); // You can use a tag or other criteria to identify your GameObjects
-
-        // Loop through each GameObject and access its script
-        foreach (GameObject tentacleSpawnPoint in tentacleSpawnPoints)
+        while (tentacleAttack)
         {
-            // Access the script attached to the GameObject
-            Tentacle tentacleScript = tentacleSpawnPoint.GetComponent<Tentacle>();
+            yield return new WaitForSeconds(3);
+            //Moves up and down while shooting out tentacles
+            //3 spawnpoints in the middle of the boss
+            // Find all GameObjects of a specific type
+            GameObject[] tentacleSpawnPoints = GameObject.FindGameObjectsWithTag("TentacleSpawnP"); // You can use a tag or other criteria to identify your GameObjects
 
-            // Check if the script component is not null
-            if (tentacleScript != null)
+            // Loop through each GameObject and access its script
+            foreach (GameObject tentacleSpawnPoint in tentacleSpawnPoints)
             {
-                Debug.Log("CallTentacles");
-                // Call the method on the script
-                StartCoroutine(tentacleScript.SpawnTentacles());
+                // Access the script attached to the GameObject
+                Tentacle tentacleScript = tentacleSpawnPoint.GetComponent<Tentacle>();
+
+                // Check if the script component is not null
+                if (tentacleScript != null)
+                {
+                    Debug.Log("CallTentacles");
+                    // Call the method on the script
+                    StartCoroutine(tentacleScript.SpawnTentacles());
+                }
             }
         }
-        yield return new WaitForSeconds(1);       
+        
+        yield return new WaitForSeconds(1);     
     }
     public IEnumerator BrainShootAttack()
     {
         yield return new WaitForSeconds(10);
         //Instantiating some brain enemies running towards our targets.
+       
     }
 
     public IEnumerator SpinningBulletHell()
@@ -67,6 +73,20 @@ public class Boss_Brain : MonoBehaviour
         yield return new WaitForSeconds(10);
         //Instantiating a bunch of bullets giving them random directions and a high spawnrate
     }
+
+    /*public IEnumerator AttackPatternRotation()
+    {
+        yield return new WaitForSeconds(10);
+        //Wait X seconds, stop every coroutine, start next coroutine
+        while (brainIsAlive)
+        {
+            StartCoroutine(TentacleAttack());
+            yield return new WaitForSeconds(5);
+            StartCoroutine(BrainShootAttack());
+            yield return new WaitForSeconds(5);
+            StartCoroutine(SpinningBulletHell());
+        }
+    }*/
 
     void Phase2()
     {
