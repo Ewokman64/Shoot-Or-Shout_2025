@@ -337,6 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c397cf9ace0ae1a48ba68671a0e5ba73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hostile: []
   bulletPrefab: {fileID: 5093899002677859959, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
   powerUpLight: {fileID: 1620083645}

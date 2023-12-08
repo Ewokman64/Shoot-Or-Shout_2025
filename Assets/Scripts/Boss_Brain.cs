@@ -6,18 +6,20 @@ public class Boss_Brain : MonoBehaviour
 {
     int health = 200;
     bool brainIsAlive;
+
     //TENTACLE ATTACK//
     public bool tentacleAttack;
-    
+    public Transform[] spawnArray;
+
     //BRAINSHOOT ATTACK//
     public GameObject littleBrain;
     public float littleBrainSpeed;
-    public float timeBetweenShots = 2f;
-    public Transform[] littleBrainPos;
+    public float timeBetweenShots = 2f;  
+    int randomBrainPos;
+
     //BULLETHELL//
     public GameObject brainBullet;
     public float brainBulletSpeed;
-    public Transform[] brainBulletPos;
 
     // Reference to the SpriteRenderer component
     private SpriteRenderer spriteRenderer;
@@ -31,7 +33,10 @@ public class Boss_Brain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Space)) 
+        {
+            StartCoroutine(BrainSpawnAttack());
+        }
     }
     public IEnumerator TentacleAttack()
     {
@@ -61,17 +66,31 @@ public class Boss_Brain : MonoBehaviour
         
         yield return new WaitForSeconds(1);     
     }
-    public IEnumerator BrainShootAttack()
+    public IEnumerator BrainSpawnAttack()
     {
-        yield return new WaitForSeconds(10);
         //Instantiating some brain enemies running towards our targets.
-       
+        yield return new WaitForSeconds(3);
+        while (true)
+        {
+            randomBrainPos = UnityEngine.Random.Range(0, spawnArray.Length);
+            Instantiate(littleBrain, spawnArray[randomBrainPos].position, UnityEngine.Quaternion.identity);
+
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 
     public IEnumerator SpinningBulletHell()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(3);
+        //Spawning deadly projectiles in a fast pace while moving up and down
         //Instantiating a bunch of bullets giving them random directions and a high spawnrate
+        while (true)
+        {
+            randomBrainPos = UnityEngine.Random.Range(0, spawnArray.Length);
+            Instantiate(brainBullet, spawnArray[randomBrainPos].position, UnityEngine.Quaternion.identity);
+
+            yield return new WaitForSeconds(0.3f);
+        }
     }
 
     /*public IEnumerator AttackPatternRotation()
