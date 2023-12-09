@@ -5,22 +5,21 @@ using UnityEngine;
 public class Boss_Brain : MonoBehaviour
 {
     int health = 200;
+    int speed = 5;
     bool brainIsAlive;
-
     //TENTACLE ATTACK//
-    public bool tentacleAttack;
     public Transform[] spawnArray;
-
+    bool tentacleAttack;
     //BRAINSHOOT ATTACK//
     public GameObject littleBrain;
     public float littleBrainSpeed;
     public float timeBetweenShots = 2f;  
     int randomBrainPos;
-
+    bool brainSpawnAttack;
     //BULLETHELL//
     public GameObject brainBullet;
     public float brainBulletSpeed;
-
+    bool bulletHell;
     // Reference to the SpriteRenderer component
     private SpriteRenderer spriteRenderer;
     public Sprite wallOfBrains;
@@ -28,19 +27,20 @@ public class Boss_Brain : MonoBehaviour
     void Start()
     {
         brainIsAlive = true;
+        StartCoroutine(AttackPatternRotation());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) 
-        {
-            StartCoroutine(BrainSpawnAttack());
-        }
+
     }
     public IEnumerator TentacleAttack()
     {
-        while (tentacleAttack)
+        tentacleAttack = true;
+        bulletHell = false;
+        brainSpawnAttack = false;
+        while (tentacleAttack == true)
         {
             yield return new WaitForSeconds(3);
             //Moves up and down while shooting out tentacles
@@ -63,14 +63,15 @@ public class Boss_Brain : MonoBehaviour
                 }
             }
         }
-        
-        yield return new WaitForSeconds(1);     
     }
     public IEnumerator BrainSpawnAttack()
     {
+        tentacleAttack = false;
+        bulletHell = false;
+        brainSpawnAttack = true;
         //Instantiating some brain enemies running towards our targets.
-        yield return new WaitForSeconds(3);
-        while (true)
+        yield return new WaitForSeconds(0);
+        while (brainSpawnAttack == true)
         {
             randomBrainPos = UnityEngine.Random.Range(0, spawnArray.Length);
             Instantiate(littleBrain, spawnArray[randomBrainPos].position, UnityEngine.Quaternion.identity);
@@ -81,10 +82,13 @@ public class Boss_Brain : MonoBehaviour
 
     public IEnumerator SpinningBulletHell()
     {
-        yield return new WaitForSeconds(3);
+        tentacleAttack = false;
+        bulletHell = true;
+        brainSpawnAttack = false;
+        yield return new WaitForSeconds(0);
         //Spawning deadly projectiles in a fast pace while moving up and down
         //Instantiating a bunch of bullets giving them random directions and a high spawnrate
-        while (true)
+        while (bulletHell == true)
         {
             randomBrainPos = UnityEngine.Random.Range(0, spawnArray.Length);
             Instantiate(brainBullet, spawnArray[randomBrainPos].position, UnityEngine.Quaternion.identity);
@@ -93,20 +97,36 @@ public class Boss_Brain : MonoBehaviour
         }
     }
 
-    /*public IEnumerator AttackPatternRotation()
+    public IEnumerator AttackPatternRotation()
     {
-        yield return new WaitForSeconds(10);
         //Wait X seconds, stop every coroutine, start next coroutine
         while (brainIsAlive)
         {
-            StartCoroutine(TentacleAttack());
-            yield return new WaitForSeconds(5);
-            StartCoroutine(BrainShootAttack());
-            yield return new WaitForSeconds(5);
-            StartCoroutine(SpinningBulletHell());
-        }
-    }*/
+            Debug.Log("Brain is alive, attack pattern rotation starts!");
 
+            // Start the next coroutine
+            StartCoroutine(TentacleAttack());
+            yield return new WaitForSeconds(20);
+
+            // Stop the current coroutine
+            StopCoroutine("TentacleAttack");
+            yield return new WaitForSeconds(5);
+            // Start the next coroutine
+            StartCoroutine(BrainSpawnAttack());
+            yield return new WaitForSeconds(20);
+
+            // Stop the current coroutine
+            StopCoroutine("BrainSpawnAttack");
+            yield return new WaitForSeconds(5);
+            // Start the next coroutine
+            StartCoroutine(SpinningBulletHell());
+            yield return new WaitForSeconds(20);
+
+            // Stop the current coroutine
+            StopCoroutine("SpinningBulletHell");
+            yield return new WaitForSeconds(5);
+        }
+    }
     void Phase2()
     {
         //Turns into a wall of brains (eg changes sprites) to fill out the width of the level

@@ -248,13 +248,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tentacleAttack: 0
+  spawnArray:
+  - {fileID: 2361152362562940659}
+  - {fileID: 3333893554074474879}
+  - {fileID: 4306974088413063623}
   littleBrain: {fileID: 604141183970494082, guid: 1cc320b8b16a62d4ea7f0f063a6f2076,
     type: 3}
-  littleBrainSpeed: 0
+  littleBrainSpeed: 10
   timeBetweenShots: 2
-  littleBrainPos: []
-  brainBullet: {fileID: 0}
-  brainBulletSpeed: 0
-  brainBulletPos: []
+  brainBullet: {fileID: 5704072395812550873, guid: 98d34da9a95d8a24c801515a3c954997,
+    type: 3}
+  brainBulletSpeed: 10
   wallOfBrains: {fileID: 7482667652216324306, guid: 2b99db7d37229b7468a42429dc3d4f95,
     type: 3}
