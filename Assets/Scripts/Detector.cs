@@ -34,8 +34,8 @@ public class Detector : MonoBehaviour
             health--;
         }
     }
-    /*public void OnTriggerExit2D(Collider2D other)
+    public void OnTriggerStay2D(Collider2D other)
     {
         Destroy(other.gameObject);
-    }*/
+    }
 }

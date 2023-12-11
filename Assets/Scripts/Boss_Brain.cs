@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Boss_Brain : MonoBehaviour
 {
-    int health = 200;
-    int speed = 5;
+    public BrainBossHealthBar healthBar;
+    int speed = 2;
     bool brainIsAlive;
     //TENTACLE ATTACK//
     public Transform[] spawnArray;
@@ -33,9 +33,23 @@ public class Boss_Brain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.Translate(Vector2.up * Time.deltaTime * speed);
     }
-    public IEnumerator TentacleAttack()
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {        
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            speed *= -1;
+        }
+        else if (other.gameObject.CompareTag("Bullet"))
+        {
+            Debug.Log("Boss hit");
+            healthBar.currentHealth--;
+            healthBar.UpdateHealthBar();
+        }
+    }
+        public IEnumerator TentacleAttack()
     {
         tentacleAttack = true;
         bulletHell = false;
@@ -106,21 +120,21 @@ public class Boss_Brain : MonoBehaviour
 
             // Start the next coroutine
             StartCoroutine(TentacleAttack());
-            yield return new WaitForSeconds(20);
+            yield return new WaitForSeconds(5);
 
             // Stop the current coroutine
             StopCoroutine("TentacleAttack");
             yield return new WaitForSeconds(5);
             // Start the next coroutine
             StartCoroutine(BrainSpawnAttack());
-            yield return new WaitForSeconds(20);
+            yield return new WaitForSeconds(5);
 
             // Stop the current coroutine
             StopCoroutine("BrainSpawnAttack");
             yield return new WaitForSeconds(5);
             // Start the next coroutine
             StartCoroutine(SpinningBulletHell());
-            yield return new WaitForSeconds(20);
+            yield return new WaitForSeconds(5);
 
             // Stop the current coroutine
             StopCoroutine("SpinningBulletHell");

@@ -24,6 +24,8 @@ TagManager:
   - Horse
   - BigEnemy
   - TentacleSpawnP
+  - Wall
+  - Boss
   layers:
   - Default
   - TransparentFX
