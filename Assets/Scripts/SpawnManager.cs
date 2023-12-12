@@ -6,14 +6,13 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
-    private DimensionManager dimensionManager;
+    public BrainBossHealthBar healthBar;
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
     int randomSpawnPoint, randomEnemies;
     public Transform[] spawnPoints;
     private float startDelay = 2;
     public float spawnRate = 0.7f;
-    //private bool zombieSpawnStarted = false;
     //SPITTERS
     public GameObject spitterPrefab;
     public EnemySpawner[] enemySpawnerArray;
@@ -45,14 +44,15 @@ public class SpawnManager : MonoBehaviour
     public float powerUp_spawnRate = 10;
     //[BOSS]
     public GameObject brainBoss;
-    int bossSpawnPoint;
+    public Transform bossSpawnPoint;
     public float bossStartDelay = 5;
-    public bool bossSpawned;
-
+    public bool bossSpawned = false;
+    //BOSS SECOND PHASE
+    public GameObject brainBoss_2nd;
+    public bool secondPhaseStarted = false;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        dimensionManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
     }
 
     public void StartSpawnManager()
@@ -86,7 +86,17 @@ public class SpawnManager : MonoBehaviour
         }
         if (gameManager.score >= 500 && !bossSpawned)
         {
-            //StartCoroutine(SpawnBrainBoss());
+            StartCoroutine(SpawnBrainBoss());
+            bossSpawned = true;
+        }
+        if (healthBar.currentHealth <= 0 && !secondPhaseStarted)
+        {
+            StartCoroutine(BossSecondPhase());
+            secondPhaseStarted = true;
+        }
+        else if (healthBar.currentHealth <= 0 && secondPhaseStarted)
+        {
+            Destroy(brainBoss_2nd);
         }
     }
     IEnumerator ZombieSpawn()
@@ -117,10 +127,6 @@ public class SpawnManager : MonoBehaviour
             }
         }
     }
-    /*public void StartSpitterSpawn()
-    {
-        StartCoroutine(SpawnSpittersWithDelay());
-    }*/
 
     object[] Shuffle(object[] array)
     {
@@ -191,6 +197,14 @@ public class SpawnManager : MonoBehaviour
     {
         StopAllCoroutines();
         yield return new WaitForSeconds(5);
-        //Instantiate(brainBoss, brainSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
+        Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
+    }
+
+    public IEnumerator BossSecondPhase()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(brainBoss);
+        yield return new WaitForSeconds(3);
+        Instantiate(brainBoss_2nd, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
     }
 }

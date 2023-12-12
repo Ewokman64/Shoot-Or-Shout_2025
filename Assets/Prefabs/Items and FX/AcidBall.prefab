@@ -66,8 +66,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0.3
@@ -92,9 +92,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5093899002677859957}
   - component: {fileID: 5093899002677859956}
-  - component: {fileID: 5093899002677859946}
   - component: {fileID: 3127820731040597008}
-  - component: {fileID: 1151378082246552868}
+  - component: {fileID: 8517148232727679672}
   m_Layer: 0
   m_Name: AcidBall
   m_TagString: Projectile
@@ -171,51 +170,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5093899002677859946
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5093899002677859959}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.011507392, y: -0.010725498}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.859375, y: 0.796875}
-    newSize: {x: 8, y: 8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4397329, y: 0.41510487}
-  m_EdgeRadius: 0
 --- !u!114 &3127820731040597008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,8 +184,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShooterTargeted: 0
   isTaunterTargeted: 0
---- !u!61 &1151378082246552868
-BoxCollider2D:
+--- !u!60 &8517148232727679672
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -262,7 +216,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.33193466, y: -0.013017178}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -272,6 +226,34 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.19550568, y: 0.32826138}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4110583, y: -0.1028986}
+      - {x: 0.43550348, y: -0.07026577}
+      - {x: 0.4304356, y: 0.00459671}
+      - {x: 0.41826588, y: 0.056028366}
+      - {x: 0.37323654, y: 0.119008064}
+      - {x: 0.33417642, y: 0.15660381}
+      - {x: 0.27639312, y: 0.16776657}
+      - {x: 0.22591352, y: 0.20259571}
+      - {x: 0.12980098, y: 0.2132225}
+      - {x: 0.055681586, y: 0.20030403}
+      - {x: 0.012218475, y: 0.18209457}
+      - {x: -0.09227955, y: 0.15630722}
+      - {x: -0.19542757, y: 0.13962555}
+      - {x: -0.20999554, y: 0.09351444}
+      - {x: -0.07330558, y: 0.09339905}
+      - {x: -0.11031157, y: 0.041355133}
+      - {x: -0.11970958, y: 0.0010004044}
+      - {x: -0.107726574, y: -0.060442924}
+      - {x: -0.18162355, y: -0.086052895}
+      - {x: -0.17328256, y: -0.118359566}
+      - {x: -0.08987251, y: -0.16523457}
+      - {x: -0.0390625, y: -0.20923138}
+      - {x: 0.06861699, y: -0.21395206}
+      - {x: 0.085155666, y: -0.23150063}
+      - {x: 0.1951164, y: -0.2310257}
+      - {x: 0.23155451, y: -0.20376825}
+      - {x: 0.31208652, y: -0.16993332}
+      - {x: 0.3714155, y: -0.13762665}
+  m_UseDelaunayMesh: 0

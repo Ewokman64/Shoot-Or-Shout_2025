@@ -20,9 +20,7 @@ public class Boss_Brain : MonoBehaviour
     public GameObject brainBullet;
     public float brainBulletSpeed;
     bool bulletHell;
-    // Reference to the SpriteRenderer component
-    private SpriteRenderer spriteRenderer;
-    public Sprite wallOfBrains;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -140,12 +138,5 @@ public class Boss_Brain : MonoBehaviour
             StopCoroutine("SpinningBulletHell");
             yield return new WaitForSeconds(5);
         }
-    }
-    void Phase2()
-    {
-        //Turns into a wall of brains (eg changes sprites) to fill out the width of the level
-        // Assign the new sprite to the SpriteRenderer component
-        spriteRenderer.sprite = wallOfBrains;
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 }

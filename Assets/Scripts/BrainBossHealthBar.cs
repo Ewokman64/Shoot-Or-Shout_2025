@@ -39,9 +39,6 @@ public class BrainBossHealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currentHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
+       
     }
 }
