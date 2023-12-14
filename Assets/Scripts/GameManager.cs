@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
     public bool isTaunterChased;
     public bool isShooterChased;
     void Start()
-    {      
+    {
+        isShooterChased = true;
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 

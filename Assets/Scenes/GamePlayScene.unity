@@ -804,20 +804,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 899896794074272073, guid: e2f5bbba85ad3864eb00594f19d069d5,
-        type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4750328639580519078, guid: e2f5bbba85ad3864eb00594f19d069d5,
         type: 3}
       propertyPath: m_Name
       value: 2ndPhase_Placeholder
-      objectReference: {fileID: 0}
-    - target: {fileID: 4750328639580519078, guid: e2f5bbba85ad3864eb00594f19d069d5,
-        type: 3}
-      propertyPath: m_TagString
-      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 4770355571114695341, guid: e2f5bbba85ad3864eb00594f19d069d5,
         type: 3}

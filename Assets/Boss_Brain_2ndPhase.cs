@@ -32,7 +32,8 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     void Start()
     {
         //StartCoroutine(SpitterHeads());
-        StartCoroutine(LasersAndZombies());
+        //StartCoroutine(LasersAndZombies());
+        //StartCoroutine(EyeBombs());
     }
 
     // Update is called once per frame
@@ -84,12 +85,22 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
                 randomSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
                 // Instantiate the object at the current spawn point's position and rotation
                 Instantiate(eyeBomb, eyeSpawnPoints[randomSpawnPoint].position, spawnPoints.rotation);
+                yield return new WaitForSeconds(2f);
             }
-            yield return new WaitForSeconds(1f);
         }
     }
     public IEnumerator FinalPush()
     {
-        yield return null;
+        //Boss turning into each enemy for a very short time
+        //turns into buffed zombie
+        yield return new WaitForSeconds(5);
+        //turns into buffed spitter
+        yield return new WaitForSeconds(5);
+        //turns into buffed eyebomb
+        yield return new WaitForSeconds(5);
+        //turns into buffed bigboi
+        yield return new WaitForSeconds(5);
+        //turns into buffed nightknight
+        //fokhen dies
     }
 }
