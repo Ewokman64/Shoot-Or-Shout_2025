@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7520840610677708970}
   - component: {fileID: 1225833497735991913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NightKnightV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

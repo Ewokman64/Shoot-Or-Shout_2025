@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5603328040251716198}
   - component: {fileID: 1770984156530687603}
   - component: {fileID: 5638871658068044682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TentaclePrefab
   m_TagString: Projectile
   m_Icon: {fileID: 0}

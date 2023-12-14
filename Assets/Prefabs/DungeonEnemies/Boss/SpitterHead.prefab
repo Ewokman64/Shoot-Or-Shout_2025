@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3385589208962042811}
   - component: {fileID: -4251384923160120058}
   - component: {fileID: 9160024001053120305}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpitterHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6575844773904659345}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AcidBallPos
   m_TagString: Untagged
   m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}

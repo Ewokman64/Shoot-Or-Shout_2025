@@ -154,12 +154,10 @@ public class SpawnManager : MonoBehaviour
     }
 
     IEnumerator EyeBombSpawn()
-    {
-        Debug.Log("Initiating eyebombspawn");
+    {   
         yield return new WaitForSeconds(startDelay);
         while (true && !n_KnightSpawnStarted)
         {
-            Debug.Log("EyeBomb spawn started!");
             eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
             
             Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity);

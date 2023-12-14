@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7866071127886724651}
   - component: {fileID: 8478040150940732946}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BigBoiV2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

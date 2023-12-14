@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 9714859997778905}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.89, y: 0.33, z: 0}
+  m_LocalPosition: {x: 3.11, y: 0.33, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6807455253910475521}
   m_Layer: 0
-  m_Name: SpiiterHeadSpawnPoint2
+  m_Name: PointRight
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 137924708106358924}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
+  m_LocalPosition: {x: 2.51, y: -1.3700004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2237224682634487483}
   m_Layer: 0
-  m_Name: SpiiterHeadSpawnPoint1
+  m_Name: PointRight
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 686523569511580569}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 3, z: 0}
+  m_LocalPosition: {x: 2.51, y: 1.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -118,11 +118,42 @@ Transform:
   m_GameObject: {fileID: 737924440351107080}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.89, y: 2.42, z: 0}
+  m_LocalPosition: {x: 3.11, y: 2.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7838245575504147479}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1073979801987878130
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4749167756638675596}
+  m_Layer: 0
+  m_Name: SpawnPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4749167756638675596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073979801987878130}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.76, y: 0.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4711370563656975299}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2553188753047944194
 GameObject:
@@ -157,6 +188,37 @@ Transform:
   - {fileID: 3238546085768141795}
   m_Father: {fileID: 4770355571114695341}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3147254535769115592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5538578511087881050}
+  m_Layer: 0
+  m_Name: SpawnPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5538578511087881050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3147254535769115592}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.79, y: -4.12, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4711370563656975299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3426112954086075545
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1635359027850240920}
   m_Layer: 0
-  m_Name: SpiiterHeadSpawnPoint2 (1)
+  m_Name: PointLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -182,7 +244,7 @@ Transform:
   m_GameObject: {fileID: 3426112954086075545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.75, y: 0, z: 0}
+  m_LocalPosition: {x: -2.24, y: -1.2900002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -213,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 3504377156794624675}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.92, y: -2.41, z: 0}
+  m_LocalPosition: {x: 3.1399999, y: -2.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -229,7 +291,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7131337996528234880}
   m_Layer: 0
-  m_Name: SpiiterHeadSpawnPoint3
+  m_Name: PointRight
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -244,7 +306,7 @@ Transform:
   m_GameObject: {fileID: 4504585738309333121}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -3, z: 0}
+  m_LocalPosition: {x: 2.51, y: -4.3700004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -286,6 +348,7 @@ Transform:
   - {fileID: 5801227226280375253}
   - {fileID: 1962799627506784451}
   - {fileID: 7838245575504147479}
+  - {fileID: 4711370563656975299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6654270932986451180
@@ -363,15 +426,19 @@ MonoBehaviour:
   - {fileID: 1635359027850240920}
   - {fileID: 7164080358314144759}
   cannon: {fileID: 8499008856928875891, guid: 69083044a3349514d85845e4183b4b13, type: 3}
-  zombies: {fileID: 6830053170042576751, guid: 67c82415d0aaffb4a8badb23b4447284, type: 3}
+  zombie: {fileID: 6830053170042576751, guid: 67c82415d0aaffb4a8badb23b4447284, type: 3}
   cannonPoints:
   - {fileID: 4034094370787194056}
   - {fileID: 3238546085768141795}
-  zombiesSpawnPoints:
+  zombieSpawnPoints:
   - {fileID: 5760345780070665490}
   - {fileID: 5501963332927406788}
   - {fileID: 8160924021522156326}
   eyeBomb: {fileID: 3183342923203008184, guid: 9e552e14f7dbb8947bc0bfaf862ab38a, type: 3}
+  eyeSpawnPoints:
+  - {fileID: 4749167756638675596}
+  - {fileID: 5538578511087881050}
+  - {fileID: 343935612962617287}
   zombieV2: {fileID: 6830053170042576751, guid: 67c82415d0aaffb4a8badb23b4447284,
     type: 3}
   spitterV2: {fileID: 4004458300494404253, guid: 422923edbd5eb7c4e93677d6317a1c25,
@@ -539,7 +606,7 @@ Transform:
   m_GameObject: {fileID: 5297340115590955817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.19, y: -4.91, z: 0}
+  m_LocalPosition: {x: 3.7, y: -4.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -555,7 +622,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8689512799161883283}
   m_Layer: 0
-  m_Name: SpiiterHeadSpawnPoint1 (1)
+  m_Name: PointLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -570,12 +637,77 @@ Transform:
   m_GameObject: {fileID: 5867613331564072048}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.75, y: 3, z: 0}
+  m_LocalPosition: {x: -2.26, y: 1.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5801227226280375253}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &6647541320469998031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4711370563656975299}
+  m_Layer: 0
+  m_Name: EyeBombSpawnPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4711370563656975299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6647541320469998031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4749167756638675596}
+  - {fileID: 5538578511087881050}
+  - {fileID: 343935612962617287}
+  m_Father: {fileID: 4770355571114695341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7725778488416559935
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343935612962617287}
+  m_Layer: 0
+  m_Name: SpawnPoint3
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &343935612962617287
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725778488416559935}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.76, y: 3.71, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4711370563656975299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8361637090469438414
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +733,7 @@ Transform:
   m_GameObject: {fileID: 8361637090469438414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.14, y: 4.87, z: 0}
+  m_LocalPosition: {x: 3.65, y: 4.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -654,7 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7164080358314144759}
   m_Layer: 0
-  m_Name: SpiiterHeadSpawnPoint3 (1)
+  m_Name: PointLeft
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -669,7 +801,7 @@ Transform:
   m_GameObject: {fileID: 9167862867971665710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.75, y: -3, z: 0}
+  m_LocalPosition: {x: -2.99, y: -4.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

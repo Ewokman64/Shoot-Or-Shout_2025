@@ -16,8 +16,10 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     public GameObject zombie;
     public Transform[] cannonPoints;
     public Transform[] zombieSpawnPoints;
+    int randomSpawnPoint;
     //SPAWNING EYEBALLS
     public GameObject eyeBomb;
+    public Transform[] eyeSpawnPoints;
     //we can use zombieSpawnPoints;
 
     //TRANSFORMING INTO STRONGER ZOMBIES - THE FINAL PUSH
@@ -61,16 +63,30 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
             // Instantiate the object at the current spawn point's position and rotation
             Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
         }
-        foreach (Transform spawnPoints in zombieSpawnPoints)
+        while (true)
         {
-            // Instantiate the object at the current spawn point's position and rotation
-            Instantiate(zombie, spawnPoints.position, spawnPoints.rotation);
+            foreach (Transform spawnPoints in zombieSpawnPoints)
+            {
+                randomSpawnPoint = UnityEngine.Random.Range(0, zombieSpawnPoints.Length);
+                // Instantiate the object at the current spawn point's position and rotation
+                Instantiate(zombie, zombieSpawnPoints[randomSpawnPoint].position, spawnPoints.rotation);
+            }
+            yield return new WaitForSeconds(1f);
         }
-        yield return null;
     }
     public IEnumerator EyeBombs()
     {
-        yield return null;
+        yield return new WaitForSeconds(2);
+        while (true)
+        {
+            foreach (Transform spawnPoints in eyeSpawnPoints)
+            {
+                randomSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
+                // Instantiate the object at the current spawn point's position and rotation
+                Instantiate(eyeBomb, eyeSpawnPoints[randomSpawnPoint].position, spawnPoints.rotation);
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
     public IEnumerator FinalPush()
     {

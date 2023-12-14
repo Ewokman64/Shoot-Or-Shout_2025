@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5596406018777866957}
   - component: {fileID: 1664271131975405254}
   - component: {fileID: -1878830141301036221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrainBullet
   m_TagString: Projectile
   m_Icon: {fileID: 0}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8202845781390573058}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AcidBallSpawnPoint
   m_TagString: AcidBallSpawnPoint
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 537979663}
   - component: {fileID: 1210151822614159614}
   - component: {fileID: 8330609989926597690}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spitter
   m_TagString: Spitter
   m_Icon: {fileID: 0}
@@ -241,6 +241,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpitterSpawnFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834710, guid: 322811af73de9924d88a038fa61dfb16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3536269060068834711, guid: 322811af73de9924d88a038fa61dfb16,
         type: 3}

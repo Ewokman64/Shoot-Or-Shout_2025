@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 66648469727601601}
   - component: {fileID: 5346307391954096041}
   - component: {fileID: -8773449702901641684}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: EyeBomb
   m_TagString: Enemy
   m_Icon: {fileID: 0}

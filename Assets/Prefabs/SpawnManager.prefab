@@ -69,6 +69,7 @@ Transform:
   - {fileID: 2507126050236503773}
   - {fileID: 1291330928217458110}
   - {fileID: 5611236613431078024}
+  - {fileID: 4802003366888403831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &721042276682653763
@@ -78,11 +79,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721042276682653762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 598733fb20861e44896150badfca5493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   enemyPrefab:
   - {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83, type: 3}
   - {fileID: 3901229786317164310, guid: 497dd49a5ea38b545817c2d2394b4b80, type: 3}
@@ -121,6 +123,13 @@ MonoBehaviour:
   powerUps: 0
   powerUp_startDelay: 10
   powerUp_spawnRate: 10
+  brainBoss: {fileID: 0}
+  bossSpawnPoint: {fileID: 4802003366888403831}
+  bossStartDelay: 5
+  bossSpawned: 0
+  brainBoss_2nd: {fileID: 4750328639580519078, guid: e2f5bbba85ad3864eb00594f19d069d5,
+    type: 3}
+  secondPhaseStarted: 0
 --- !u!95 &721042276682653766
 Animator:
   serializedVersion: 5
@@ -331,6 +340,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnedEnemy: {fileID: 0}
+--- !u!1 &5479979688160526202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4802003366888403831}
+  m_Layer: 0
+  m_Name: BossSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4802003366888403831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5479979688160526202}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 721042276682653764}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5858237085528579167
 GameObject:
   m_ObjectHideFlags: 0

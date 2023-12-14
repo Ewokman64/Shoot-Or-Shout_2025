@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7388729426323323096}
   - component: {fileID: 3359611615082047412}
   - component: {fileID: -89596298104713053}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Zombie 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 8123762005371576215}
   - component: {fileID: 3430611319616038249}
   - component: {fileID: 3978682929122934301}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BloodDetector2
   m_TagString: BloodDetector
   m_Icon: {fileID: 0}
@@ -374,7 +374,7 @@ PrefabInstance:
     - target: {fileID: 7607240569983165687, guid: b7b26de889dc3a348ae4c5874469e1fa,
         type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -410,6 +410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ZombieSpawnFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3536269060068834710, guid: 3e10392bb83952d4c83afafce5fb420b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3536269060068834711, guid: 3e10392bb83952d4c83afafce5fb420b,
         type: 3}

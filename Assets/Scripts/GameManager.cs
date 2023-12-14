@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
+
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        Destroy(boss);
     }
     public void UpdateNormalCurrency(int normalCurrencyToAdd)
     {

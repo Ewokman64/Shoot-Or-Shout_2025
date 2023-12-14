@@ -16,9 +16,9 @@ public class ZombieControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
+         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
+         targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
     }
     void Update()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4524185549314687300}
   - component: {fileID: 2909890027790311808}
   - component: {fileID: 9118182344988515324}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Horse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 3389518931284094824}
   - component: {fileID: 2654081259556986997}
   - component: {fileID: 7081159642880313949}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: NightKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
