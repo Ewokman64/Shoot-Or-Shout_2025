@@ -20,11 +20,15 @@ public class Boss_Brain : MonoBehaviour
     public GameObject brainBullet;
     public float brainBulletSpeed;
     bool bulletHell;
+    //SECOND PHASE//
+    public GameObject brainBoss_2;
+    public bool secondPhaseStarted = false;
 
     // Start is called before the first frame update
     void Start()
     {
         brainIsAlive = true;
+        
         StartCoroutine(AttackPatternRotation());
     }
 
@@ -32,6 +36,11 @@ public class Boss_Brain : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.up * Time.deltaTime * speed);
+        if (healthBar.currentHealth <= 0 && !secondPhaseStarted)
+        {
+            StartCoroutine(BossSecondPhase());
+            secondPhaseStarted = true;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -138,5 +147,11 @@ public class Boss_Brain : MonoBehaviour
             StopCoroutine("SpinningBulletHell");
             yield return new WaitForSeconds(5);
         }
+    }
+    public IEnumerator BossSecondPhase()
+    {
+        Instantiate(brainBoss_2, brainBoss_2.transform.position, UnityEngine.Quaternion.identity);
+        Destroy(gameObject);
+        yield return new WaitForSeconds(3);
     }
 }

@@ -18,7 +18,7 @@ public class BrainCannon : MonoBehaviour
     public IEnumerator SpawnLasers()
     {
         lasers = new GameObject[numberOfLasers];
-
+        yield return new WaitForSeconds(3f);
         for (int i = 0; i < lasers.Length; i++)
         {
             // Calculate the position for the laser

@@ -47,9 +47,6 @@ public class SpawnManager : MonoBehaviour
     public Transform bossSpawnPoint;
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
-    //BOSS SECOND PHASE
-    public GameObject brainBoss_2nd;
-    public bool secondPhaseStarted = false;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -88,15 +85,6 @@ public class SpawnManager : MonoBehaviour
         {
             StartCoroutine(SpawnBrainBoss());
             bossSpawned = true;
-        }
-        if (healthBar.currentHealth <= 0 && !secondPhaseStarted)
-        {
-            StartCoroutine(BossSecondPhase());
-            secondPhaseStarted = true;
-        }
-        else if (healthBar.currentHealth <= 0 && secondPhaseStarted)
-        {
-            Destroy(brainBoss_2nd);
         }
     }
     IEnumerator ZombieSpawn()
@@ -198,11 +186,5 @@ public class SpawnManager : MonoBehaviour
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
     }
 
-    public IEnumerator BossSecondPhase()
-    {
-        yield return new WaitForSeconds(2);
-        Destroy(brainBoss);
-        yield return new WaitForSeconds(3);
-        Instantiate(brainBoss_2nd, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
-    }
+    
 }

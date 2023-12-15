@@ -6,7 +6,7 @@ public class Spitter : MonoBehaviour
 {
     public GameObject acidBall;
     //private float startDelay = 0.5f;
-    //public float spawnRate;
+    public float fireRate = 3;
     
     public Transform targetShooter;
     public Transform targetTaunter;
@@ -41,7 +41,7 @@ public class Spitter : MonoBehaviour
         while (true)
         {
             Instantiate(acidBall, transform.position, acidBall.transform.rotation);
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(fireRate);
         }      
     }
 }
