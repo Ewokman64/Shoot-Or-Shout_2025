@@ -68,7 +68,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.score >= 10 && !spitterSpawnStarted)
+        /*if (gameManager.score >= 10 && !spitterSpawnStarted)
         {
             StartCoroutine(SpitterSpawn());
             //StartSpitterSpawn();
@@ -81,13 +81,13 @@ public class SpawnManager : MonoBehaviour
             bigBombSpawnStarted = true;
             eyeBombSpawnStarted = true;
         }
-        if (gameManager.score >= 30 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 50 && !n_KnightSpawnStarted)
         {
             Debug.Log("Condition met! Miniboss incoming!");
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
-        }
-        if (gameManager.score >= 100 && !bossSpawned)
+        }*/
+        if (gameManager.score >= 10 && !bossSpawned)
         {
             StartCoroutine(SpawnBrainBoss());
             bossSpawned = true;
@@ -187,10 +187,17 @@ public class SpawnManager : MonoBehaviour
     }
     IEnumerator SpawnBrainBoss()
     {
-        StopAllCoroutines();
         gameManager.ClearMap();
         yield return new WaitForSeconds(5);
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
+    }
+
+    public void StopMobSpawn()
+    {
+        StopCoroutine("ZombieSpawn");
+        StopCoroutine("SpitterSpawn");
+        StopCoroutine("EyeBombSpawn");
+        StopCoroutine("BigBoiSpawn");
     }
     public IEnumerator FinalPush()
     {

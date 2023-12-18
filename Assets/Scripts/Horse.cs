@@ -15,7 +15,7 @@ public class Horse : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
+        nightKnight = GameObject.Find("NightKnight(Clone)").GetComponent<NightKnight>();
     }
 
     // Update is called once per frame
@@ -42,12 +42,16 @@ public class Horse : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (horseHealth <= 0)
-            {
+        if (horseHealth <= 0 && nightKnight != null)
+        {
             nightKnight.spearSpawnRate = 1;
             nightKnight.StartCoroutine("EquipShield");
             nightKnight.speed = 5;
             Destroy(gameObject);
-            }
+        }
+        if (horseHealth <= 0 && nightKnight == null)
+        {
+            Destroy(gameObject);
+        }
     }
 }

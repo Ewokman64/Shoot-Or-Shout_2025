@@ -9,6 +9,7 @@ public class NightKnight : MonoBehaviour
     public float nightKnightHealth;
     private Transform targetShooter;
     private Horse horse;
+    private bool horseEnraged = false;
     public GameObject spear;
     public GameObject shield;
     public float shieldHealth = 10;
@@ -61,7 +62,7 @@ public class NightKnight : MonoBehaviour
 
     public IEnumerator EquipShield()
     {
-        yield return new WaitForSeconds(0);
+        yield return null;
 
         // Offset the position in the direction the shield should appear
         Vector2 offset = new Vector2(1.0f, 0.0f); // Adjust this offset as needed
@@ -76,7 +77,7 @@ public class NightKnight : MonoBehaviour
 
     public void EnrageHorse()
     {
-        if (nightKnightHealth <= 0)
+        if (nightKnightHealth <= 0 && horseEnraged == false)
         {
             // Detach all children from the parent
             foreach (Transform child in transform)
@@ -84,6 +85,7 @@ public class NightKnight : MonoBehaviour
                 child.parent = null;
                 horse.speed = 5;
             }
+            horseEnraged = true;
             Destroy(gameObject);
             Debug.Log("Horseman destroyed!");
         }

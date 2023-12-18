@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Shield"))
         {
-            nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
+            nightKnight = GameObject.Find("NightKnight(Clone)").GetComponent<NightKnight>();
             nightKnight.shieldHealth--;
             if (nightKnight.shieldHealth <= 0)
             {
@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("NightKnight"))
         {
-            nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
+            nightKnight = GameObject.Find("NightKnight(Clone)").GetComponent<NightKnight>();
             nightKnight.nightKnightHealth--;
         }
         else if (other.gameObject.CompareTag("Horse"))

@@ -74,7 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearMap()
     {
-        spawnManager.StopAllCoroutines();
+        //spawnManager.StopMobSpawn();
         //GET RID OF BULLETS
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 
@@ -86,9 +86,6 @@ public class GameManager : MonoBehaviour
 
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
-
-        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
-        Destroy(boss);
     }
     public void UpdateNormalCurrency(int normalCurrencyToAdd)
     {
