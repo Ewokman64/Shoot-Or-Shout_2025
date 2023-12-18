@@ -15,7 +15,7 @@ public class Horse : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
+        nightKnight = GameObject.Find("NightKnight").GetComponent<NightKnight>();
     }
 
     // Update is called once per frame

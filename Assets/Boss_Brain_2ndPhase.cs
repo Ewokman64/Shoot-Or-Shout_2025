@@ -5,6 +5,8 @@ using UnityEngine;
 public class Boss_Brain_2ndPhase : MonoBehaviour
 {
     public BrainBossHealthBar healthBar;
+    private SpawnManager spawnManager;
+    public Transform boss;
     bool phaseActive;
     //SPITTER HEADS
     [HideInInspector]
@@ -14,7 +16,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     [HideInInspector]
     public Transform[] sHeadSpawnPointsLeft;
     //LASERS AND ZOMBIES
-    public GameObject cannon;
+    public GameObject[] cannons;
     public GameObject zombie;
     public Transform[] cannonPoints;
     public Transform[] zombieSpawnPoints;
@@ -23,20 +25,20 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     public GameObject eyeBomb;
     public Transform[] eyeSpawnPoints;
     //we can use zombieSpawnPoints;
-
-    //TRANSFORMING INTO STRONGER ZOMBIES - THE FINAL PUSH
-    public GameObject finalPush_zombie;
-    public GameObject finalPush_spitter;
-    public GameObject finalPush_eyeBomb;
-    public GameObject finalPush_bigBoi;
-    public GameObject finalPush_nightKnight;
-
     public bool lasersAndZombies = false;
     public bool eyeBombs = false;
     // Start is called before the first frame update
     void Start()
     {
         phaseActive = true;
+
+        foreach (GameObject cannon in cannons)
+        {
+            // Instantiate the object at the current spawn point's position and rotation
+            cannon.SetActive(false);
+            //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
+        }
+
         StartCoroutine(AttackPatternRotation());
     }
     // Update is called once per frame
@@ -44,7 +46,9 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     {
         if (healthBar.currentHealth <= 0)
         {
-            FinalPush();
+            spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+            StartCoroutine(spawnManager.FinalPush());
+            Destroy(gameObject);
         }
     }
 
@@ -66,10 +70,11 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     public IEnumerator LasersAndZombies()
     {
         lasersAndZombies = true;
-        foreach (Transform cannonPoints in cannonPoints)
+        foreach (GameObject cannon in cannons)
         {
             // Instantiate the object at the current spawn point's position and rotation
-            Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
+            cannon.SetActive(true);
+            //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
         }
         while (lasersAndZombies == true)
         {
@@ -140,34 +145,15 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
     }
-    public IEnumerator FinalPush()
+    
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        //Boss turning into each enemy for a very short time
-        //turns into buffed zombie
-        Instantiate(finalPush_zombie, finalPush_zombie.transform.position, UnityEngine.Quaternion.identity);
-        Destroy(gameObject);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPush_zombie);
-        //turns into buffed spitter
-        Instantiate(finalPush_spitter, finalPush_spitter.transform.position, UnityEngine.Quaternion.identity);
-        Destroy(gameObject);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPush_spitter);
-        //turns into buffed eyebomb
-        Instantiate(finalPush_eyeBomb, finalPush_eyeBomb.transform.position, UnityEngine.Quaternion.identity);
-        Destroy(gameObject);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPush_eyeBomb);
-        //turns into buffed bigboi
-        Instantiate(finalPush_bigBoi, finalPush_bigBoi.transform.position, UnityEngine.Quaternion.identity);
-        Destroy(gameObject);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPush_bigBoi);
-        //turns into buffed nightknight
-        Instantiate(finalPush_nightKnight, finalPush_nightKnight.transform.position, UnityEngine.Quaternion.identity);
-        Destroy(gameObject);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPush_nightKnight);
-        //fokhen dies, fireworks and all
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            Debug.Log("Boss hit");
+            healthBar.currentHealth--;
+            healthBar.UpdateHealthBar();
+        }
     }
 }

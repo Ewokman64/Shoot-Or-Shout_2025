@@ -6,7 +6,6 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
-    public BrainBossHealthBar healthBar;
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
     int randomSpawnPoint, randomEnemies;
@@ -47,6 +46,13 @@ public class SpawnManager : MonoBehaviour
     public Transform bossSpawnPoint;
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
+    //FINAL PUSH
+    //TRANSFORMING INTO STRONGER ZOMBIES - THE FINAL PUSH
+    public GameObject finalPush_zombie;
+    public GameObject finalPush_spitter;
+    public GameObject finalPush_eyeBomb;
+    public GameObject finalPush_bigBoi;
+    public GameObject finalPush_nightKnight;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -62,26 +68,26 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.score >= 50 && !spitterSpawnStarted)
+        if (gameManager.score >= 10 && !spitterSpawnStarted)
         {
             StartCoroutine(SpitterSpawn());
             //StartSpitterSpawn();
             spitterSpawnStarted = true;
         }
-        if (gameManager.score >= 20 && !eyeBombSpawnStarted)
+        if (gameManager.score >= 15 && !eyeBombSpawnStarted)
         {
             StartCoroutine(EyeBombSpawn());
             StartCoroutine(BigBoiSpawn());
             bigBombSpawnStarted = true;
             eyeBombSpawnStarted = true;
         }
-        if (gameManager.score >= 70 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 30 && !n_KnightSpawnStarted)
         {
             Debug.Log("Condition met! Miniboss incoming!");
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
         }
-        if (gameManager.score >= 500 && !bossSpawned)
+        if (gameManager.score >= 100 && !bossSpawned)
         {
             StartCoroutine(SpawnBrainBoss());
             bossSpawned = true;
@@ -182,9 +188,34 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnBrainBoss()
     {
         StopAllCoroutines();
+        gameManager.ClearMap();
         yield return new WaitForSeconds(5);
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
     }
-
-    
+    public IEnumerator FinalPush()
+    {
+        //Boss turning into each enemy for a very short time
+        //turns into buffed zombie
+        Debug.Log("FINAL PUSH HAS BEGUN");
+        Instantiate(finalPush_zombie, transform.position, UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(5);
+        Destroy(finalPush_zombie);
+        //turns into buffed spitter
+        Instantiate(finalPush_spitter, transform.position, UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(5);
+        Destroy(finalPush_spitter);
+        //turns into buffed eyebomb
+        Instantiate(finalPush_eyeBomb, transform.position, UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(5);
+        Destroy(finalPush_eyeBomb);
+        //turns into buffed bigboi
+        Instantiate(finalPush_bigBoi, transform.position, UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(5);
+        Destroy(finalPush_bigBoi);
+        //turns into buffed nightknight
+        Instantiate(finalPush_nightKnight, transform.position, UnityEngine.Quaternion.identity);
+        yield return new WaitForSeconds(5);
+        Destroy(finalPush_nightKnight);
+        //fokhen dies, fireworks and all
+    }
 }

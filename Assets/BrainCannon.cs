@@ -7,13 +7,23 @@ public class BrainCannon : MonoBehaviour
     public GameObject laser;
     private GameObject[] lasers;
     public Transform spawnPoint;
+    public bool alreadyActive = true;
     public int numberOfLasers = 8;
     public float distanceBetweenLasers = 5;
     // Start is called before the first frame update
 
     private void Start()
     {
-        StartCoroutine(SpawnLasers());
+        alreadyActive = false;
+    }
+    private void Update()
+    {
+        //if the object is activated, start routine and set the bool
+        if (!alreadyActive)
+        {
+            StartCoroutine(SpawnLasers());
+            alreadyActive = true;
+        }
     }
     public IEnumerator SpawnLasers()
     {
