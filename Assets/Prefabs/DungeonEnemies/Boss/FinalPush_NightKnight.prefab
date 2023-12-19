@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6385505362780436757}
   m_Layer: 3
   m_Name: FinalPush_NightKnight
-  m_TagString: Untagged
+  m_TagString: NightKnight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.01, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7206145178458994883}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 208a980f729b8f741af9b1f81215a433, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.3066038, b: 0.99512476, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c776c13db0ef094484c382135355006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   nightKnightHealth: 10
   spear: {fileID: 1529532939484370753, guid: 111a8b82d2bfe6c41a36131ebd5d5aac, type: 3}
   shield: {fileID: 7334304511801104714, guid: f42344870263512459b8cebad1221736, type: 3}
@@ -250,21 +250,22 @@ PrefabInstance:
     - target: {fileID: 4759669132660245121, guid: 71f205eee918eae4f852fe13559a27b2,
         type: 3}
       propertyPath: m_Name
-      value: NightKnight_Horset
+      value: Horse
       objectReference: {fileID: 0}
     - target: {fileID: 4759669132660245121, guid: 71f205eee918eae4f852fe13559a27b2,
         type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4759669132660245121, guid: 71f205eee918eae4f852fe13559a27b2,
+        type: 3}
+      propertyPath: m_TagString
+      value: Horse
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4759669132660245121, guid: 71f205eee918eae4f852fe13559a27b2,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3774165510335331521}
     - targetCorrespondingSourceObject: {fileID: 4759669132660245121, guid: 71f205eee918eae4f852fe13559a27b2,
         type: 3}
       insertIndex: -1
@@ -276,51 +277,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4614761813757329982}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &3774165510335331521
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146174233323503807}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.17877832}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.63507104}
-  m_EdgeRadius: 0
 --- !u!114 &3775917300037317539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd273e976ad1c4a8d47186fcc3b5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 0
   horseHealth: 5
 --- !u!4 &7206145178458994883 stripped
 Transform:

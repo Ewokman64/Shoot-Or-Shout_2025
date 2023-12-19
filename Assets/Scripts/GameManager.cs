@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
 
     public void ClearMap()
     {
-        //spawnManager.StopMobSpawn();
         //GET RID OF BULLETS
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 

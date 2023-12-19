@@ -47,7 +47,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
         if (healthBar.currentHealth <= 0)
         {
             spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-            StartCoroutine(spawnManager.FinalPush());
+            //StartCoroutine(spawnManager.FinalPush());
             Destroy(gameObject);
         }
     }

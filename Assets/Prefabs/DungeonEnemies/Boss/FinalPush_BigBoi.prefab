@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5629007247015762115}
   m_Layer: 3
   m_Name: FinalPush_BigBoi
-  m_TagString: Untagged
+  m_TagString: FinalPush
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

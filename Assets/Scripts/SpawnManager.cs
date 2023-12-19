@@ -89,14 +89,16 @@ public class SpawnManager : MonoBehaviour
         }*/
         if (gameManager.score >= 10 && !bossSpawned)
         {
-            StartCoroutine(SpawnBrainBoss());
+            //StartCoroutine(SpawnBrainBoss());
+            StartCoroutine(FinalPush());
             bossSpawned = true;
         }
+        
     }
     IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (true && !n_KnightSpawnStarted)
+        while (!bossSpawned && !gameManager.isSomeoneDead)
         {
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
             randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
@@ -110,7 +112,7 @@ public class SpawnManager : MonoBehaviour
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
 
-        while (true && !n_KnightSpawnStarted)
+        while (!bossSpawned)
         {
             yield return new WaitForSeconds(spitter_spawnRate);
 
@@ -150,8 +152,8 @@ public class SpawnManager : MonoBehaviour
     IEnumerator EyeBombSpawn()
     {   
         yield return new WaitForSeconds(startDelay);
-        while (true && !n_KnightSpawnStarted)
-        {
+        while (!bossSpawned)
+            {
             eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
             
             Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity);
@@ -164,7 +166,7 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Initiating eyebombspawn");
         yield return new WaitForSeconds(startDelay);
-        while (true && !n_KnightSpawnStarted)
+        while (!bossSpawned)
         {
             Debug.Log("EyeBomb spawn started!");
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
@@ -190,39 +192,39 @@ public class SpawnManager : MonoBehaviour
         gameManager.ClearMap();
         yield return new WaitForSeconds(5);
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
-    }
-
-    public void StopMobSpawn()
-    {
-        StopCoroutine("ZombieSpawn");
-        StopCoroutine("SpitterSpawn");
-        StopCoroutine("EyeBombSpawn");
-        StopCoroutine("BigBoiSpawn");
+        
     }
     public IEnumerator FinalPush()
     {
-        //Boss turning into each enemy for a very short time
-        //turns into buffed zombie
-        Debug.Log("FINAL PUSH HAS BEGUN");
-        Instantiate(finalPush_zombie, transform.position, UnityEngine.Quaternion.identity);
+        // Boss turning into each enemy for a very short time
+        GameObject finalPushEnemy;
+        // turns into buffed zombie
+        finalPushEnemy = Instantiate(finalPush_zombie, transform.position, Quaternion.identity);
+        Debug.Log("Zombie is here");
         yield return new WaitForSeconds(5);
-        Destroy(finalPush_zombie);
-        //turns into buffed spitter
-        Instantiate(finalPush_spitter, transform.position, UnityEngine.Quaternion.identity);
+        Debug.Log("5 seconds passed");
+        Destroy(finalPushEnemy);
+
+        // turns into buffed spitter
+        finalPushEnemy = Instantiate(finalPush_spitter, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
-        Destroy(finalPush_spitter);
-        //turns into buffed eyebomb
-        Instantiate(finalPush_eyeBomb, transform.position, UnityEngine.Quaternion.identity);
+        Destroy(finalPushEnemy);
+
+        // turns into buffed eyeBomb
+        finalPushEnemy = Instantiate(finalPush_eyeBomb, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
-        Destroy(finalPush_eyeBomb);
-        //turns into buffed bigboi
-        Instantiate(finalPush_bigBoi, transform.position, UnityEngine.Quaternion.identity);
+        Destroy(finalPushEnemy);
+
+        // turns into buffed bigBoi
+        finalPushEnemy = Instantiate(finalPush_bigBoi, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
-        Destroy(finalPush_bigBoi);
-        //turns into buffed nightknight
-        Instantiate(finalPush_nightKnight, transform.position, UnityEngine.Quaternion.identity);
+        Destroy(finalPushEnemy);
+
+        // turns into buffed nightKnight
+        finalPushEnemy = Instantiate(finalPush_nightKnight, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
-        Destroy(finalPush_nightKnight);
-        //fokhen dies, fireworks and all
+        Destroy(finalPushEnemy);
+        
+        // Fokhen dies, fireworks and all
     }
 }

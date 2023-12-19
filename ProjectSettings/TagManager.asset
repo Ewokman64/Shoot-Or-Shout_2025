@@ -26,6 +26,7 @@ TagManager:
   - TentacleSpawnP
   - Wall
   - Boss
+  - FinalPush
   layers:
   - Default
   - TransparentFX
