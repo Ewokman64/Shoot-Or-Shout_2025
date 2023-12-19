@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //UI
     public GameObject gameOverScreen;
     public GameObject startScreenCanvas;
+    public GameObject demoOverScreen;
 
     public GameObject shooter;
     public GameObject taunter;
@@ -38,6 +39,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {   
         scoreManager();
+        if (spawnManager.finalPushOver)
+        {
+            demoOverScreen.SetActive(true);
+        }
     }
     public void StartGame()
     {

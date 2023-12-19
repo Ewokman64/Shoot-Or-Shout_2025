@@ -8,7 +8,6 @@ public class BigBoi : MonoBehaviour
     public float health = 5;
 
     private Transform targetShooter;
-    private Transform targetTaunter;
 
     private GameManager gameManager;
 
@@ -17,8 +16,7 @@ public class BigBoi : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
+        targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
     }
     void Update()
     {

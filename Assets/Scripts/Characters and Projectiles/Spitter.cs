@@ -5,7 +5,6 @@ using UnityEngine;
 public class Spitter : MonoBehaviour
 {
     public GameObject acidBall;
-    //private float startDelay = 0.5f;
     public float fireRate = 3;
     
     public Transform targetShooter;
@@ -20,7 +19,6 @@ public class Spitter : MonoBehaviour
         targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         StartCoroutine("ShootAcidBall");
-        //InvokeRepeating("AcidBallSpawn", startDelay, spawnRate);
     }
 
     // Update is called once per frame

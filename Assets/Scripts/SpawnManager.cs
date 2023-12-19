@@ -6,34 +6,53 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
+    public GameObject shooter;
+    public GameObject taunter;
+    private Transform shooterPos;
+    private Transform taunterPos;
+
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
-    int randomSpawnPoint, randomEnemies;
+    private int randomSpawnPoint, randomEnemies;
+    [HideInInspector]
     public Transform[] spawnPoints;
     private float startDelay = 2;
-    public float spawnRate = 0.7f;
+    private float spawnRate = 0.7f;
+
     //SPITTERS
+    [HideInInspector]
     public GameObject spitterPrefab;
+    [HideInInspector]
     public EnemySpawner[] enemySpawnerArray;
     public float spitter_startDelay = 5;
-    public float spitter_spawnRate = 3;
-    private bool spitterSpawnStarted = false;
+    private float spitter_spawnRate = 3;
+    public bool spitterSpawnStarted = false;
+
     //EYEBOMBS
+    [HideInInspector]
     public GameObject eyeBombPrefab;
-    int eyeSpawnPoint;
+    private int eyeSpawnPoint;
     public Transform[] eyeSpawnPoints;
     public bool eyeBombSpawnStarted = false;
+
     //NIGHT KNIGHTS
+    [HideInInspector]
     public GameObject nightKnightPrefab;
+    [HideInInspector]
     public GameObject nightKnightSpawnPoint;
     public bool n_KnightSpawnStarted = false;
-    //BIG LADS
+
+    //BIG BOIS
+    [HideInInspector]
     public GameObject bigBoiPrefab;
-    int bigSpawnPoint;
+    [HideInInspector]
     public Transform[] bigSpawnPoints;
-    public bool bigBombSpawnStarted = false;
+    public bool bigBoiSpawnStarted = false;
+
     //POWERUP
+    [HideInInspector]
     public GameObject powerUpPrefab;
+    [HideInInspector]
     public Transform[] powerUpSpawnPoints;
     [HideInInspector]
     public int powerUps;
@@ -41,59 +60,101 @@ public class SpawnManager : MonoBehaviour
     public float powerUp_startDelay = 10;
     [HideInInspector]
     public float powerUp_spawnRate = 10;
+
     //[BOSS]
+    private NightKnight nightKnight;
+    private Horse horse;
+    public bool nightKnightDead = false;
+    public bool horseDead = false;
+    [HideInInspector]
     public GameObject brainBoss;
+    [HideInInspector]
     public Transform bossSpawnPoint;
+    [HideInInspector]
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
+
     //FINAL PUSH
-    //TRANSFORMING INTO STRONGER ZOMBIES - THE FINAL PUSH
+    public bool finalPushCanStart = false;
+    public bool finalPushOver = false;
+    [HideInInspector]
     public GameObject finalPush_zombie;
+    [HideInInspector]
     public GameObject finalPush_spitter;
+    [HideInInspector]
     public GameObject finalPush_eyeBomb;
+    [HideInInspector]
     public GameObject finalPush_bigBoi;
+    [HideInInspector]
     public GameObject finalPush_nightKnight;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
+    void Update()
+    {
+        SpawnHandling();
+    }
     public void StartSpawnManager()
     {
         StartCoroutine(ZombieSpawn());
         StartCoroutine(PowerUpSpawn());
-        
+        SpawnPlayers();
         powerUps = 0;
     }
-    // Update is called once per frame
-    void Update()
+    public void SpawnHandling()
     {
-        /*if (gameManager.score >= 10 && !spitterSpawnStarted)
+        if (gameManager.score >= 50 && !spitterSpawnStarted)
         {
             StartCoroutine(SpitterSpawn());
             //StartSpitterSpawn();
             spitterSpawnStarted = true;
         }
-        if (gameManager.score >= 15 && !eyeBombSpawnStarted)
+        if (gameManager.score >= 100 && !eyeBombSpawnStarted)
         {
             StartCoroutine(EyeBombSpawn());
-            StartCoroutine(BigBoiSpawn());
-            bigBombSpawnStarted = true;
             eyeBombSpawnStarted = true;
         }
-        if (gameManager.score >= 50 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 150 && !bigBoiSpawnStarted)
         {
-            Debug.Log("Condition met! Miniboss incoming!");
+            StartCoroutine(BigBoiSpawn());
+            bigBoiSpawnStarted = true;
+        }
+        if (gameManager.score >= 300 && !n_KnightSpawnStarted)
+        {
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
-        }*/
-        if (gameManager.score >= 10 && !bossSpawned)
+            nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
+            horse = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
+        }
+        if (nightKnight.nightKnightHealth < 0)
         {
-            //StartCoroutine(SpawnBrainBoss());
-            StartCoroutine(FinalPush());
+            nightKnightDead = true;
+        }
+        if (horse.horseHealth < 0)
+        {
+            horseDead = true;
+        }
+        if (nightKnightDead && horseDead && !bossSpawned)
+        {
+            StartCoroutine(SpawnBrainBoss());
             bossSpawned = true;
         }
-        
+        //IF SECONDWAVEBOSS DIED, start FINALPUSH
+        if (finalPushCanStart)
+        {
+            StartCoroutine(FinalPush());
+            finalPushCanStart = false;
+        }
+    }
+
+    void SpawnPlayers()
+    {
+        shooterPos = GameObject.Find("ShooterPos").GetComponent<Transform>();
+        Instantiate(shooter, shooterPos.position, UnityEngine.Quaternion.identity);
+        taunterPos = GameObject.Find("TaunterPos").GetComponent<Transform>();
+        Instantiate(taunter, taunterPos.position, UnityEngine.Quaternion.identity);
     }
     IEnumerator ZombieSpawn()
     {
@@ -198,11 +259,10 @@ public class SpawnManager : MonoBehaviour
     {
         // Boss turning into each enemy for a very short time
         GameObject finalPushEnemy;
+
         // turns into buffed zombie
         finalPushEnemy = Instantiate(finalPush_zombie, transform.position, Quaternion.identity);
-        Debug.Log("Zombie is here");
         yield return new WaitForSeconds(5);
-        Debug.Log("5 seconds passed");
         Destroy(finalPushEnemy);
 
         // turns into buffed spitter
@@ -224,7 +284,9 @@ public class SpawnManager : MonoBehaviour
         finalPushEnemy = Instantiate(finalPush_nightKnight, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(5);
         Destroy(finalPushEnemy);
-        
+
+        yield return new WaitForSeconds(5);
+        finalPushOver = true;
         // Fokhen dies, fireworks and all
     }
 }

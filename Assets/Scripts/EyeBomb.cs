@@ -7,8 +7,6 @@ public class EyeBomb : MonoBehaviour
 {
     public float speed = 10f;
 
-    private Transform targetShooter;
-    private Transform targetTaunter;
     public bool shooterChosen;
     public bool taunterChosen;
     public bool coroutineStarted;
@@ -20,8 +18,6 @@ public class EyeBomb : MonoBehaviour
         taunterChosen = false;
         coroutineStarted = false;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
     }
     void Update()
     {

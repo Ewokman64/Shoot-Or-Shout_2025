@@ -14,7 +14,7 @@ public class Horse : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
+        targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
         nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
     }
 

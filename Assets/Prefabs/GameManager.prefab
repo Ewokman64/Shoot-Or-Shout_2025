@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 0}
   startScreenCanvas: {fileID: 0}
+  demoOverScreen: {fileID: 0}
   shooter: {fileID: 0}
   taunter: {fileID: 0}
   gmAudio: {fileID: 6776313842009288517}
