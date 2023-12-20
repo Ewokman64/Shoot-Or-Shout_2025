@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject startScreenCanvas;
     public GameObject demoOverScreen;
+    public GameObject pauseMenu;
 
     public GameObject shooter;
     public GameObject taunter;
@@ -42,6 +43,10 @@ public class GameManager : MonoBehaviour
         if (spawnManager.finalPushOver)
         {
             demoOverScreen.SetActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePauseMenu();
         }
     }
     public void StartGame()
@@ -75,6 +80,23 @@ public class GameManager : MonoBehaviour
         ClearMap();
 
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
+    }
+
+    public void TogglePauseMenu()
+    {
+        // Toggle the pause state
+        if (Time.timeScale == 0)
+        {
+            // Resume the game
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            // Pause the game
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
     }
 
     public void ClearMap()

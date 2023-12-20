@@ -76,7 +76,7 @@ public class ShooterController : MonoBehaviour
     }
     public void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && gameManager.isSomeoneDead == false)
+        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
@@ -86,16 +86,12 @@ public class ShooterController : MonoBehaviour
 
             audioManager.PlayShoot();
             gunFlash1.Play();
-        }      
-        /*if (gameManager.isSomeoneDead == true)
-        {
-            gunAudio.mute = true;
-        }*/
+        }
     }
 
     public void DualShoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && gameManager.isSomeoneDead == false)
+        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && !gameManager.isSomeoneDead && Time.timeScale != 0)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;

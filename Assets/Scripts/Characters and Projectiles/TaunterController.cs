@@ -55,7 +55,7 @@ public class TaunterController : MonoBehaviour
     }
     public void Taunt()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && gameManager.isSomeoneDead == false)
+        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0)
         {
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;

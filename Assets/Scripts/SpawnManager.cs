@@ -128,13 +128,19 @@ public class SpawnManager : MonoBehaviour
             nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
             horse = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
         }
-        if (nightKnight.nightKnightHealth < 0)
+        if (nightKnight != null)
         {
-            nightKnightDead = true;
+            if (nightKnight.nightKnightHealth < 0)
+            {
+                nightKnightDead = true;
+            }   
         }
-        if (horse.horseHealth < 0)
+        if (horse != null)
         {
-            horseDead = true;
+            if (horse.horseHealth < 0 && horse != null)
+            {
+                horseDead = true;
+            }
         }
         if (nightKnightDead && horseDead && !bossSpawned)
         {
