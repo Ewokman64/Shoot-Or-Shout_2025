@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss_Brain : MonoBehaviour
 {
-    public BrainBossHealthBar healthBar;
+    public HealthBar healthBar;
     int speed = 2;
     bool brainIsAlive;
     //TENTACLE ATTACK//

@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2214b9c96e43c840817b463d5867310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSlider: {fileID: 7780238451009642387}
+  slider: {fileID: 7780238451009642387}
   maxHealth: 10
   currentHealth: 0
 --- !u!1001 &2893986400373013402
@@ -465,6 +465,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643912723523717759, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643912723523717759, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -986736723
       objectReference: {fileID: 0}
     - target: {fileID: 7603955817081333980, guid: 6fb4ee334c149334bbfd1f4a27a43546,
         type: 3}

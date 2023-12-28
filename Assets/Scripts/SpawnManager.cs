@@ -121,8 +121,12 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(BigBoiSpawn());
             bigBoiSpawnStarted = true;
         }
-        if (gameManager.score >= 300 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 250 && !n_KnightSpawnStarted)
         {
+            Debug.Log("Night Knight is coming!");
+            StopAllCoroutines();
+            gameManager.ClearMap();
+            StartCoroutine(PowerUpSpawn());
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
             nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
@@ -246,11 +250,6 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator NightKnightSpawn()
     {
-        Debug.Log("Night Knight is coming!");
-        StopCoroutine("ZombieSpawn");
-        StopCoroutine("SpitterSpawn");        
-        StopCoroutine("EyeBombSpawn");
-        StopCoroutine("BigBoiSpawn");
         yield return new WaitForSeconds(3);
         Instantiate(nightKnightPrefab, nightKnightSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
     }

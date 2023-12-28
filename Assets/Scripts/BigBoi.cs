@@ -16,7 +16,11 @@ public class BigBoi : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
+        GameObject shooterObject = GameObject.Find("Shooter(Clone)");
+        if (shooterObject != null)
+        {
+            targetShooter = shooterObject.GetComponent<Transform>();
+        }
     }
     void Update()
     {

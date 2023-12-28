@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject startScreenCanvas;
     public GameObject demoOverScreen;
     public GameObject pauseMenu;
+    public GameObject[] enemies;
 
     public GameObject shooter;
     public GameObject taunter;
@@ -108,10 +109,21 @@ public class GameManager : MonoBehaviour
             Destroy(bullet);
 
         //GET RID OF ENEMIES
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //foreach (GameObject enemy in enemies)
+        //    Destroy(enemy);
 
-        foreach (GameObject enemy in enemies)
-            Destroy(enemy);
+        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush" /* Add more tags as needed */ };
+
+        foreach (string tag in enemyTags)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(tag);
+
+            foreach (GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+            }
+        }
     }
     public void UpdateNormalCurrency(int normalCurrencyToAdd)
     {

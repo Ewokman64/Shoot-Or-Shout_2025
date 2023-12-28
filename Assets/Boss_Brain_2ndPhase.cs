@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss_Brain_2ndPhase : MonoBehaviour
 {
-    public BrainBossHealthBar healthBar;
+    public HealthBar healthBar;
     private SpawnManager spawnManager;
     public Transform boss;
     bool phaseActive;

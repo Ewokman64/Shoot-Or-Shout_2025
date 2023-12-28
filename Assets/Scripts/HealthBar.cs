@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BrainBossHealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviour
 {
-    public Slider healthSlider; // Reference to the health slider UI element
+    public Slider slider; // Reference to the health slider UI element
 
     // Adjust the maximum health as needed
-    public float maxHealth = 10f;
+    public float maxHealth = 50f;
     public float currentHealth;
 
     // Start is called before the first frame update
@@ -15,30 +15,22 @@ public class BrainBossHealthBar : MonoBehaviour
         currentHealth = maxHealth;
 
         // Ensure the healthSlider is assigned in the Inspector or find it in the hierarchy
-        if (healthSlider == null)
+        if  (slider == null)
         {
-            healthSlider = GetComponentInChildren<Slider>();
+            slider = GetComponentInChildren<Slider>();
         }
 
         // Set the maximum value of the health slider
-        healthSlider.maxValue = maxHealth;
+        slider.maxValue = maxHealth;
         UpdateHealthBar();
     }
 
     // Method to update the health bar
     public void UpdateHealthBar()
     {
-        Debug.Log("Healthbar Updated!");
         // Calculate the health percentage
-        //float healthPercentage = currentHealth / maxHealth;
 
         // Update the fill amount of the health slider
-        healthSlider.value = currentHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-       
+        slider.value = currentHealth;
     }
 }

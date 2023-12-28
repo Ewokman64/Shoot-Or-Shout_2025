@@ -5,34 +5,38 @@ using UnityEngine;
 
 public class Detector : MonoBehaviour
 {
-
-    public int health;
-    public TextMeshProUGUI healthText;
+    public WallHealthBar wallHealthBar;
+    public GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = ("Health: " + health.ToString());
+        if (wallHealthBar.maxHealth < 0)
+        {
+            gameManager.GameOver();
+        }
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Something hit the wall!");
+        int targetLayer = LayerMask.NameToLayer("Enemies");
+        if (other.gameObject.layer == targetLayer)
+        {
+            Debug.Log("An Enemy Hit the Wall!");
+            wallHealthBar.maxHealth--;
+            wallHealthBar.UpdateHealthBar();
+        }
+        else if (other.gameObject.layer == targetLayer && other.gameObject.CompareTag("BigEnemy"))
+        {
+            wallHealthBar.maxHealth -= 3;
+        }
         Destroy(other.gameObject);
-        //This part is for the player
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            health--;          
-        }
-        else if (other.gameObject.CompareTag("BigEnemy"))
-        {
-            health--;
-            health--;
-            health--;
-        }
     }
     public void OnTriggerStay2D(Collider2D other)
     {

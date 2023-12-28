@@ -15,8 +15,16 @@ public class Spitter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
+        GameObject shooterObject = GameObject.Find("Shooter(Clone)");
+        if (shooterObject != null)
+        {
+            targetShooter = shooterObject.GetComponent<Transform>();
+        }
+        GameObject taunterObject = GameObject.Find("Taunter(Clone)");
+        if (taunterObject != null)
+        {
+            targetTaunter = taunterObject.GetComponent<Transform>();
+        }
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         StartCoroutine("ShootAcidBall");
     }

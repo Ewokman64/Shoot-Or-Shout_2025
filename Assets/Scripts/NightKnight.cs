@@ -22,7 +22,11 @@ public class NightKnight : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
+        GameObject shooterObject = GameObject.Find("Shooter(Clone)");
+        if (shooterObject != null)
+        {
+            targetShooter = shooterObject.GetComponent<Transform>();
+        }
         horse = GameObject.Find("Horse").GetComponent<Horse>();
         StartCoroutine(ThrowSpear());
     }
