@@ -50,6 +50,19 @@ MonoBehaviour:
   gameOverScreen: {fileID: 0}
   startScreenCanvas: {fileID: 0}
   demoOverScreen: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  enemies:
+  - {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83, type: 3}
+  - {fileID: 3901229786317164310, guid: 497dd49a5ea38b545817c2d2394b4b80, type: 3}
+  - {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b, type: 3}
+  - {fileID: 2664364914138761654, guid: 3732e4e986ab0ed47a07d03fae97056b, type: 3}
+  - {fileID: 3810393701880755627, guid: 291e95918a408e84cbfe73a3a011b0b5, type: 3}
+  - {fileID: 6007565604007801479, guid: be47b4426bc753a4b89e98f7d6249351, type: 3}
+  - {fileID: 6830053170042576751, guid: f011af847b0667e4aa0a3a81be796dc2, type: 3}
+  - {fileID: 4004458300494404253, guid: 21a62f254ca5c254c911817a6ee4dc37, type: 3}
+  - {fileID: 3183342923203008184, guid: 5543b3c82f62a204f90c9ac89ece0a54, type: 3}
+  - {fileID: 4585835409873048560, guid: b080dee47190d6f45b7153b96486f137, type: 3}
+  - {fileID: 8308253122255338680, guid: dcf99adf003488445ac5f32ba59ba515, type: 3}
   shooter: {fileID: 0}
   taunter: {fileID: 0}
   gmAudio: {fileID: 6776313842009288517}

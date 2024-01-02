@@ -28,13 +28,13 @@ public class ZombieControls : MonoBehaviour
     void Update()
     {
      if (gameManager.isShooterChased && targetShooter != null)
-        {
+     {
             ShooterFollow();
-        }
+     }
      else
-        {
+     {
             TaunterFollow();
-        }
+     }
     }
     public void ShooterFollow()
     {
@@ -49,8 +49,8 @@ public class ZombieControls : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
-            {
+        {
             bloodSplash.Play();
-            }
+        }
     }
 }

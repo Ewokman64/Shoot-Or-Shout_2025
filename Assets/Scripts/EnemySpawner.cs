@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject spawnedEnemy;
+    public GameObject spitter;
 
     public void Spawn(GameObject spitterPrefab)
     {
-        spawnedEnemy = Instantiate(spitterPrefab, transform.position, Quaternion.identity);
+        spitter = Instantiate(spitterPrefab, transform.position, Quaternion.identity);
     }
 }

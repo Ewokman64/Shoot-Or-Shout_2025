@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class SpawnManager : MonoBehaviour
     public GameObject taunter;
     private Transform shooterPos;
     private Transform taunterPos;
+    public int enemyCap;
+    public int enemyLimit;
+    public bool enemyLimitReached;
+    public List<GameObject> enemies = new List<GameObject>();
 
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
@@ -73,7 +78,6 @@ public class SpawnManager : MonoBehaviour
     [HideInInspector]
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
-
     //FINAL PUSH
     public bool finalPushCanStart = false;
     public bool finalPushOver = false;
@@ -90,11 +94,22 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        enemyLimit = 15;
     }
 
     void Update()
     {
         SpawnHandling();
+        UpdateEnemyList();
+        enemyCap = enemies.Count;
+        if (enemyCap >= enemyLimit)
+        {
+            enemyLimitReached = true;
+        }
+        else
+        {
+            enemyLimitReached = false;
+        }
     }
     public void StartSpawnManager()
     {
@@ -108,7 +123,6 @@ public class SpawnManager : MonoBehaviour
         if (gameManager.score >= 50 && !spitterSpawnStarted)
         {
             StartCoroutine(SpitterSpawn());
-            //StartSpitterSpawn();
             spitterSpawnStarted = true;
         }
         if (gameManager.score >= 100 && !eyeBombSpawnStarted)
@@ -169,28 +183,32 @@ public class SpawnManager : MonoBehaviour
     IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead)
+        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
         {
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
             randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
-            Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-
+            GameObject zombie = Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+            enemyCap++;
+            AddEnemyToList(zombie);
             yield return new WaitForSeconds(spawnRate);
         }
         
     }
+
     IEnumerator SpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
 
-        while (!bossSpawned)
+        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
         {
             yield return new WaitForSeconds(spitter_spawnRate);
 
-            EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
+            EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spitter == null));
             if (spawner != null)
             {
                 spawner.Spawn(spitterPrefab);
+                enemyCap++;
+                AddEnemyToList(spawner.spitter);
             }
         }
     }
@@ -215,6 +233,7 @@ public class SpawnManager : MonoBehaviour
 
             randomSpawnPoint = UnityEngine.Random.Range(0, powerUpSpawnPoints.Length);
             Instantiate(powerUpPrefab, powerUpSpawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+            
             powerUps = 1;
             yield return new WaitForSeconds(powerUp_spawnRate);
         }      
@@ -223,12 +242,13 @@ public class SpawnManager : MonoBehaviour
     IEnumerator EyeBombSpawn()
     {   
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned)
+        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
             {
             eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
-            
-            Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity);
 
+            GameObject eyeBomb = Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity);
+            enemyCap++;
+            AddEnemyToList(eyeBomb);
             yield return new WaitForSeconds(7);
         }
     }
@@ -237,13 +257,14 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Initiating eyebombspawn");
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned)
+        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
         {
             Debug.Log("EyeBomb spawn started!");
             randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
 
-            Instantiate(bigBoiPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-
+            GameObject bigBoi = Instantiate(bigBoiPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+            enemyCap++;
+            AddEnemyToList(bigBoi);
             yield return new WaitForSeconds(10);
         }
     }
@@ -293,5 +314,26 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         finalPushOver = true;
         // Fokhen dies, fireworks and all
+    }
+
+    void AddEnemyToList(GameObject enemy)
+    {
+        enemies.Add(enemy);
+    }
+    public void UpdateEnemyList()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            // Check if the enemy GameObject is null (destroyed)
+            if (enemies[i] == null)
+            {
+                // Enemy has been destroyed
+                Debug.Log("Enemy " + i + " has been destroyed.");
+
+                // Optionally, you can remove the destroyed enemy from the list
+                enemies.RemoveAt(i);
+                //Spitter is not getting removed
+            }
+        }
     }
 }

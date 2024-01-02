@@ -57,7 +57,7 @@ public class SpitterSpawnerManager : MonoBehaviour
     IEnumerator TrySpawnSpitter()
     {
         yield return new WaitForSeconds(spitter_startDelay);
-        EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spawnedEnemy == null));
+        EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spitter == null));
         if (spawner != null)
         {
             spawner.Spawn(spitterPrefab);

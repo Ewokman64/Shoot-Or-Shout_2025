@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("GAME OVER!");
+        isSomeoneDead = true;
         int previousNormalScore = PlayerPrefs.GetInt("previousNormalScore");
         //code for setting highscore
         //"previousEasyScore" key is getting saved"
@@ -102,6 +103,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearMap()
     {
+        Debug.Log("CLEAR MAP HAS RAN");
         //GET RID OF BULLETS
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 

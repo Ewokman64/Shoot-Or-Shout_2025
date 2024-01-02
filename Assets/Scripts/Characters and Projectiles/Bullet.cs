@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     public bool isZombieShot = false;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private SpawnManager spawnManager;
     private NightKnight nightKnight;
     private Horse horse;
 
@@ -18,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -28,9 +29,10 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.gameObject.CompareTag("Enemy") || other.gameObject.CompareTag("BigEnemy") || other.gameObject.CompareTag("Spitter"))
+        int targetLayer = LayerMask.NameToLayer("Enemies");
+        if (other.gameObject.layer == targetLayer)
         {
+            //double bullets screw me over
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();

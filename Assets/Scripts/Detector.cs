@@ -7,11 +7,13 @@ public class Detector : MonoBehaviour
 {
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
+    public SpawnManager spawnManager;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
     // Update is called once per frame
@@ -26,14 +28,16 @@ public class Detector : MonoBehaviour
     {
         Debug.Log("Something hit the wall!");
         int targetLayer = LayerMask.NameToLayer("Enemies");
-        if (other.gameObject.layer == targetLayer)
+        if (other.gameObject.layer == targetLayer && !other.gameObject.CompareTag("BigEnemy"))
         {
             Debug.Log("An Enemy Hit the Wall!");
+            spawnManager.enemyCap--;
             wallHealthBar.maxHealth--;
             wallHealthBar.UpdateHealthBar();
         }
         else if (other.gameObject.layer == targetLayer && other.gameObject.CompareTag("BigEnemy"))
         {
+            spawnManager.enemyCap--;
             wallHealthBar.maxHealth -= 3;
         }
         Destroy(other.gameObject);
