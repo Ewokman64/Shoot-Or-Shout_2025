@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: -6179950057737507868}
   m_Layer: 0
   m_Name: BrainCannon
-  m_TagString: Untagged
+  m_TagString: BrainCannon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,5 +131,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laser: {fileID: 4270143645022318854, guid: 0bf05f193330e134cb4490f220e66ef5, type: 3}
   spawnPoint: {fileID: 841389550024326093}
+  alreadyActive: 0
   numberOfLasers: 8
   distanceBetweenLasers: 2

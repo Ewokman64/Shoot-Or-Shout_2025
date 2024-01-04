@@ -29,8 +29,17 @@ public class Bullet : MonoBehaviour
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        int targetLayer = LayerMask.NameToLayer("Enemies");
-        if (other.gameObject.layer == targetLayer)
+        //LISTS TO COMPARE FROM MIGHT BE CLEANER
+        int normalEnemies = LayerMask.NameToLayer("Enemies");
+        int specialEnemies = LayerMask.NameToLayer("SpecialEnemies");
+
+
+        if (other.gameObject.layer == normalEnemies || other.gameObject.layer == specialEnemies || other.gameObject.CompareTag("Shield"))
+        {
+            gameManager.stallingTimer = 10;
+            //gameManager.isStallingActive = false;
+        }
+        if (other.gameObject.layer == normalEnemies)
         {
             //double bullets screw me over
             Destroy(other.gameObject, 0.2f);

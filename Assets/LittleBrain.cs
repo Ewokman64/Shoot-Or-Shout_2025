@@ -14,8 +14,8 @@ public class LittleBrain : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
+        targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
+        targetTaunter = GameObject.Find("Taunter(Clone)").GetComponent<Transform>();
 
     }
 

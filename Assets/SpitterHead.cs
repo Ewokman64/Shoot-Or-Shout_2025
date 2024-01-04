@@ -9,13 +9,13 @@ public class SpitterHead : MonoBehaviour
     public Transform acidBallSpawn;
     public Transform targetShooter;
     public Transform targetTaunter;
-    private GameManager gameManager;
+    public GameManager gameManager;
     public int speed = 1;
     // Start is called before the first frame update
     void Start()
     {
-        targetShooter = GameObject.Find("Shooter").GetComponent<Transform>();
-        targetTaunter = GameObject.Find("Taunter").GetComponent<Transform>();
+        targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
+        targetTaunter = GameObject.Find("Taunter(Clone)").GetComponent<Transform>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         StartCoroutine("ShootAcidBall");
     }

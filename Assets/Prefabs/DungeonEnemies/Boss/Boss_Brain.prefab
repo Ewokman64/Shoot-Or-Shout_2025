@@ -161,9 +161,9 @@ GameObject:
   - component: {fileID: 5485200627500997070}
   - component: {fileID: 3198963067378340736}
   - component: {fileID: 2691541196805304617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss_Brain
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 2691541196805304617}
+  brainIsAlive: 0
   spawnArray:
   - {fileID: 2361152362562940659}
   - {fileID: 3333893554074474879}

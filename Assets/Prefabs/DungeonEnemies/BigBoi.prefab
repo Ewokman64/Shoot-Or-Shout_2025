@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1724686168249955306}
   - component: {fileID: 4494247572708033392}
   - component: {fileID: 5508212474743306293}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: BigBoi
   m_TagString: BigEnemy
   m_Icon: {fileID: 0}

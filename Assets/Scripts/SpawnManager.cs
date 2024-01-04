@@ -11,7 +11,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject taunter;
     private Transform shooterPos;
     private Transform taunterPos;
-    public int enemyCap;
+    public int enemyCount;
     public int enemyLimit;
     public bool enemyLimitReached;
     public List<GameObject> enemies = new List<GameObject>();
@@ -94,6 +94,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        enemyLimitReached = false;
         enemyLimit = 15;
     }
 
@@ -101,8 +102,8 @@ public class SpawnManager : MonoBehaviour
     {
         SpawnHandling();
         UpdateEnemyList();
-        enemyCap = enemies.Count;
-        if (enemyCap >= enemyLimit)
+        enemyCount = enemies.Count;
+        if (enemyCount >= enemyLimit)
         {
             enemyLimitReached = true;
         }
@@ -143,19 +144,19 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(PowerUpSpawn());
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
-            nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
-            horse = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
+            //nightKnight = GameObject.FindGameObjectWithTag("NightKnight(Clone)").GetComponent<NightKnight>();
+            //horse = GameObject.FindGameObjectWithTag("Horse(Clone)").GetComponent<Horse>();
         }
         if (nightKnight != null)
         {
-            if (nightKnight.nightKnightHealth < 0)
+            if (nightKnight.nightKnightHealth <= 0)
             {
                 nightKnightDead = true;
             }   
         }
         if (horse != null)
         {
-            if (horse.horseHealth < 0 && horse != null)
+            if (horse.horseHealth <= 0)
             {
                 horseDead = true;
             }
@@ -166,11 +167,11 @@ public class SpawnManager : MonoBehaviour
             bossSpawned = true;
         }
         //IF SECONDWAVEBOSS DIED, start FINALPUSH
-        if (finalPushCanStart)
+        /*if (finalPushCanStart)
         {
             StartCoroutine(FinalPush());
             finalPushCanStart = false;
-        }
+        }*/
     }
 
     void SpawnPlayers()
@@ -183,31 +184,31 @@ public class SpawnManager : MonoBehaviour
     IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
+        while (!bossSpawned && !gameManager.isSomeoneDead)
         {
-            randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
-            randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
-            GameObject zombie = Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-            enemyCap++;
-            AddEnemyToList(zombie);
+            if (!enemyLimitReached)
+            {
+                randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+                randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
+                GameObject zombie = Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+                AddEnemyToList(zombie);
+            }           
             yield return new WaitForSeconds(spawnRate);
-        }
-        
+        }       
     }
 
     IEnumerator SpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
 
-        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
+        while (!bossSpawned && !gameManager.isSomeoneDead)
         {
             yield return new WaitForSeconds(spitter_spawnRate);
 
             EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spitter == null));
-            if (spawner != null)
+            if (spawner != null && !enemyLimitReached)
             {
                 spawner.Spawn(spitterPrefab);
-                enemyCap++;
                 AddEnemyToList(spawner.spitter);
             }
         }
@@ -242,30 +243,30 @@ public class SpawnManager : MonoBehaviour
     IEnumerator EyeBombSpawn()
     {   
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
+        while (!bossSpawned && !gameManager.isSomeoneDead)
+        {
+            if (!enemyLimitReached)
             {
-            eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
-
-            GameObject eyeBomb = Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity);
-            enemyCap++;
-            AddEnemyToList(eyeBomb);
+                eyeSpawnPoint = UnityEngine.Random.Range(0, eyeSpawnPoints.Length);
+                GameObject eyeBomb = Instantiate(eyeBombPrefab, eyeSpawnPoints[eyeSpawnPoint].position, UnityEngine.Quaternion.identity); 
+                AddEnemyToList(eyeBomb);
+            }
             yield return new WaitForSeconds(7);
         }
     }
 
     IEnumerator BigBoiSpawn()
     {
-        Debug.Log("Initiating eyebombspawn");
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead && enemyLimitReached == true)
+        while (!bossSpawned && !gameManager.isSomeoneDead)
         {
-            Debug.Log("EyeBomb spawn started!");
-            randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
-
-            GameObject bigBoi = Instantiate(bigBoiPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-            enemyCap++;
-            AddEnemyToList(bigBoi);
-            yield return new WaitForSeconds(10);
+            if (!enemyLimitReached)
+            {
+                randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+                GameObject bigBoi = Instantiate(bigBoiPrefab, spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+                AddEnemyToList(bigBoi);
+            }
+            yield return new WaitForSeconds(4);
         }
     }
 
@@ -273,6 +274,8 @@ public class SpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         Instantiate(nightKnightPrefab, nightKnightSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
+        nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
+        horse = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
     }
     IEnumerator SpawnBrainBoss()
     {
@@ -281,7 +284,7 @@ public class SpawnManager : MonoBehaviour
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
         
     }
-    public IEnumerator FinalPush()
+    /*public IEnumerator FinalPush()
     {
         // Boss turning into each enemy for a very short time
         GameObject finalPushEnemy;
@@ -314,7 +317,7 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         finalPushOver = true;
         // Fokhen dies, fireworks and all
-    }
+    }*/
 
     void AddEnemyToList(GameObject enemy)
     {

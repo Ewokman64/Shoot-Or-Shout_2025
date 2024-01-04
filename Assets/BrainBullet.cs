@@ -11,8 +11,8 @@ public class BrainBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shooter = GameObject.Find("Shooter");
-        taunter = GameObject.Find("Taunter");
+        shooter = GameObject.Find("Shooter(Clone)");
+        taunter = GameObject.Find("Taunter(Clone)");
         targets.Add(shooter);
         targets.Add(taunter);
 

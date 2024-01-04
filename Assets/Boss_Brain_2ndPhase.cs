@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class Boss_Brain_2ndPhase : MonoBehaviour
 {
+    //currentbugs: cannons stay for next attack. at rotation they don't shoot
     public HealthBar healthBar;
     private SpawnManager spawnManager;
+    private GameManager gameManager;
     public Transform boss;
     bool phaseActive;
     //SPITTER HEADS
@@ -31,10 +34,11 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     void Start()
     {
         phaseActive = true;
-
+        
         foreach (GameObject cannon in cannons)
         {
             // Instantiate the object at the current spawn point's position and rotation
+            
             cannon.SetActive(false);
             //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
         }
@@ -46,9 +50,28 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     {
         if (healthBar.currentHealth <= 0)
         {
-            spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-            spawnManager.finalPushCanStart = true;
+            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gameManager.bossDied = true;
             Destroy(gameObject);
+            foreach (GameObject cannon in cannons)
+            {
+                // Instantiate the object at the current spawn point's position and rotation
+
+                cannon.SetActive(false);
+                //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
+            }
+        }
+        if (lasersAndZombies == false)
+        {
+            Debug.Log("Laser and zombies is false!");
+            foreach (GameObject cannon in cannons)
+            {
+                Debug.Log("For each begun");
+                BrainCannon cannonScript = cannon.GetComponent<BrainCannon>();
+                // Instantiate the object at the current spawn point's position and rotation
+                cannon.SetActive(false);
+                //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
+            }
         }
     }
 
@@ -69,16 +92,18 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     }
     public IEnumerator LasersAndZombies()
     {
-        lasersAndZombies = true;
-        foreach (GameObject cannon in cannons)
+        //pain in the ass, use a single laser
+        if (lasersAndZombies == true)
         {
-            // Instantiate the object at the current spawn point's position and rotation
-            cannon.SetActive(true);
-            //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
-        }
-        while (lasersAndZombies == true)
-        {
-            lasersAndZombies = true;
+            foreach (GameObject cannon in cannons)
+            {
+                // Instantiate the object at the current spawn point's position and rotation
+                cannon.SetActive(true);
+                BrainCannon cannonScript = cannon.GetComponent<BrainCannon>();
+                StartCoroutine(cannonScript.SpawnLasers());
+                //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
+            }
+            //lasersAndZombies = true;
             foreach (Transform spawnPoints in zombieSpawnPoints)
             {
                 randomSpawnPoint = UnityEngine.Random.Range(0, zombieSpawnPoints.Length);
@@ -117,6 +142,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
             yield return new WaitForSeconds(2);
 
             // Start the next coroutine
+            lasersAndZombies = true;
             StartCoroutine(LasersAndZombies());
             yield return new WaitForSeconds(5);
 
@@ -141,9 +167,11 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     public void ClearMap()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
+        GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
         foreach (GameObject enemy in enemies)
             Destroy(enemy);
+        foreach (GameObject laser in lasers)
+            Destroy(laser);
     }
     
 

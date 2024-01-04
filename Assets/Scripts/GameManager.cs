@@ -7,13 +7,17 @@ using System.IO;
 public class GameManager : MonoBehaviour
 {
     private SpawnManager spawnManager;
+    public WallHealthBar wallHealthBar;
+    public GameManager gameManager;
+    public float stallingTimer;
     //UI
     public GameObject gameOverScreen;
     public GameObject startScreenCanvas;
     public GameObject demoOverScreen;
     public GameObject pauseMenu;
-    public GameObject[] enemies;
+    public GameObject stallingText;
 
+    public GameObject[] enemies;
     public GameObject shooter;
     public GameObject taunter;
     //Audio
@@ -23,25 +27,32 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI soulEnergyText;
     public TextMeshProUGUI soulEnergyCollectedText;
     public TextMeshProUGUI recordText;
-    //scores
+    //INTS
     public int score;
-
     public int currentRecord;
-
     //bools
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
     public bool isShooterChased;
+    public bool isStallingActive;
+    public bool hasGameStarted;
+    public bool bossDied;
     void Start()
     {
         isShooterChased = true;
+        isStallingActive = false;
+        hasGameStarted = false;
+        bossDied = false;
+        stallingTimer = 10;
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
     }
 
     void Update()
     {   
         scoreManager();
-        if (spawnManager.finalPushOver)
+        if (bossDied)
         {
             demoOverScreen.SetActive(true);
         }
@@ -49,21 +60,37 @@ public class GameManager : MonoBehaviour
         {
             TogglePauseMenu();
         }
+        if (wallHealthBar.maxHealth < 0)
+        {
+            gameManager.GameOver();
+        }
+        if (stallingTimer <= 0)
+        {
+            isStallingActive = true;
+        }
+        else if (stallingTimer > 0)
+        {
+            isStallingActive = false;
+            stallingText.SetActive(false);
+        }
+        if (hasGameStarted)
+        {
+            stallingTimer -= Time.deltaTime;
+        }
     }
     public void StartGame()
     {
         //"previousEasyScore" key is getting loaded"
         currentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
-        spawnManager.StartSpawnManager();
+        spawnManager.StartSpawnManager(); 
         isTaunterChased = false;
         isShooterChased = true;
-
+        hasGameStarted = true;
         startScreenCanvas.SetActive(false);
-
         gmAudio.clip = bgMusic;
         gmAudio.Play();
-
         isSomeoneDead = false;
+        StartCoroutine(StartStallingPenalty());
     }
     public void GameOver()
     {
@@ -115,7 +142,7 @@ public class GameManager : MonoBehaviour
         //foreach (GameObject enemy in enemies)
         //    Destroy(enemy);
 
-        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush" /* Add more tags as needed */ };
+        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush", "Boss" /* Add more tags as needed */ };
 
         foreach (string tag in enemyTags)
         {
@@ -136,6 +163,21 @@ public class GameManager : MonoBehaviour
     {
         if (currentRecord < score) recordText.text = "Normal Record: " + score.ToString();
         else recordText.text = "Normal: " + currentRecord.ToString();
+    }
+
+    public IEnumerator StartStallingPenalty()
+    {
+        while (true)
+        {
+            if (isStallingActive)
+            {
+                wallHealthBar.maxHealth--;
+                wallHealthBar.UpdateHealthBar();
+                stallingText.SetActive(true);
+            }
+            yield return new WaitForSeconds(2);
+        }
+        
     }
 }
 

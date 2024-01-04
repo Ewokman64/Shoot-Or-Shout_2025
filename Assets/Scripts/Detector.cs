@@ -19,10 +19,10 @@ public class Detector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (wallHealthBar.maxHealth < 0)
+        /*if (wallHealthBar.maxHealth < 0)
         {
             gameManager.GameOver();
-        }
+        }*/
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,14 +31,15 @@ public class Detector : MonoBehaviour
         if (other.gameObject.layer == targetLayer && !other.gameObject.CompareTag("BigEnemy"))
         {
             Debug.Log("An Enemy Hit the Wall!");
-            spawnManager.enemyCap--;
+            spawnManager.enemyCount--;
             wallHealthBar.maxHealth--;
             wallHealthBar.UpdateHealthBar();
         }
         else if (other.gameObject.layer == targetLayer && other.gameObject.CompareTag("BigEnemy"))
         {
-            spawnManager.enemyCap--;
+            spawnManager.enemyCount--;
             wallHealthBar.maxHealth -= 3;
+            wallHealthBar.UpdateHealthBar();
         }
         Destroy(other.gameObject);
     }

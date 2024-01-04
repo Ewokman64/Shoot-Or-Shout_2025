@@ -6,7 +6,7 @@ public class Boss_Brain : MonoBehaviour
 {
     public HealthBar healthBar;
     int speed = 2;
-    bool brainIsAlive;
+    public bool brainIsAlive;
     //TENTACLE ATTACK//
     public Transform[] spawnArray;
     bool tentacleAttack;
@@ -58,6 +58,7 @@ public class Boss_Brain : MonoBehaviour
     }
         public IEnumerator TentacleAttack()
     {
+        Debug.Log("Tentacle Attack started!");
         tentacleAttack = true;
         bulletHell = false;
         brainSpawnAttack = false;
@@ -87,6 +88,7 @@ public class Boss_Brain : MonoBehaviour
     }
     public IEnumerator BrainSpawnAttack()
     {
+        Debug.Log("Brain Spawn started!");
         tentacleAttack = false;
         bulletHell = false;
         brainSpawnAttack = true;
@@ -103,6 +105,7 @@ public class Boss_Brain : MonoBehaviour
 
     public IEnumerator SpinningBulletHell()
     {
+        Debug.Log("Bullet Hell started!");
         tentacleAttack = false;
         bulletHell = true;
         brainSpawnAttack = false;
@@ -147,6 +150,7 @@ public class Boss_Brain : MonoBehaviour
             StopCoroutine("SpinningBulletHell");
             yield return new WaitForSeconds(5);
         }
+        yield return new WaitForSeconds(3);
     }
     public IEnumerator BossSecondPhase()
     {

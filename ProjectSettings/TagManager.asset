@@ -27,6 +27,8 @@ TagManager:
   - Wall
   - Boss
   - FinalPush
+  - BrainCannon
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -35,7 +37,7 @@ TagManager:
   - Water
   - UI
   - Projectile
-  - 
+  - SpecialEnemies
   - -1
   - -2
   - 1

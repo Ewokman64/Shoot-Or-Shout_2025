@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 2369716821851797123}
   - component: {fileID: 899896794074272073}
   - component: {fileID: 4469452160014755070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 2ndPhase_Placeholder
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -981,6 +981,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4770355571114695341}
     m_Modifications:
+    - target: {fileID: -6179950057737507868, guid: 69083044a3349514d85845e4183b4b13,
+        type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 6014788996292809622, guid: f72ac5cf1c4b35c409ac624c00696f23,
+        type: 3}
+    - target: {fileID: 841389550024326093, guid: 69083044a3349514d85845e4183b4b13,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.95
+      objectReference: {fileID: 0}
     - target: {fileID: 2460638974915221689, guid: 69083044a3349514d85845e4183b4b13,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1066,6 +1077,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4770355571114695341}
     m_Modifications:
+    - target: {fileID: -6179950057737507868, guid: 69083044a3349514d85845e4183b4b13,
+        type: 3}
+      propertyPath: laser
+      value: 
+      objectReference: {fileID: 6014788996292809622, guid: f72ac5cf1c4b35c409ac624c00696f23,
+        type: 3}
+    - target: {fileID: 841389550024326093, guid: 69083044a3349514d85845e4183b4b13,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.95
+      objectReference: {fileID: 0}
     - target: {fileID: 2460638974915221689, guid: 69083044a3349514d85845e4183b4b13,
         type: 3}
       propertyPath: m_LocalPosition.x
