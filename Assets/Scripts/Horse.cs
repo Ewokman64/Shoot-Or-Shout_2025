@@ -9,11 +9,13 @@ public class Horse : MonoBehaviour
     public float horseHealth;
     private Transform targetShooter;
     private GameManager gameManager;
+    private SpawnManager spawnManager;
     private NightKnight nightKnight;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
         nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
     }
@@ -52,6 +54,10 @@ public class Horse : MonoBehaviour
         if (horseHealth <= 0 && nightKnight == null)
         {
             Destroy(gameObject);
+        }
+        if (horseHealth <= 0)
+        {
+            spawnManager.horseDead = true;
         }
     }
 }

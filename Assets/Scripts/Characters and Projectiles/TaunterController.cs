@@ -5,10 +5,11 @@ using UnityEngine;
 public class TaunterController : MonoBehaviour
 {
     public List<string> hostile;
-    private readonly float speed = 10;
+    public float speed = 10;
     private readonly float yRange = 5;
 
     public float tauntCoolDown;
+    public float tauntCDRate = 2;
 
     private AudioSource shoutAudio;
     private GameManager gameManager;
@@ -59,7 +60,7 @@ public class TaunterController : MonoBehaviour
         {
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;
-            tauntCoolDown = 2f;
+            tauntCoolDown = tauntCDRate;
             audioManager.PlayShout();
             animator.SetTrigger("Taunt");
         }        

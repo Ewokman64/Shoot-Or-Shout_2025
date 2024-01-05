@@ -6,13 +6,14 @@ public class ShooterController : MonoBehaviour
 {
     public List<string> hostile;
     //Movement
-    private float speed = 10;
+    public float speed = 10;
     private float yRange = 5;
     //Bullet and light
     public GameObject bulletPrefab;
     public GameObject powerUpLight;
     private bool isPowerUpActive = false;
     public float bulletCoolDown = 0;
+    public float bulletCDRate = 1;
 
     private AudioSource gunAudio;
     private GameManager gameManager;
@@ -81,7 +82,7 @@ public class ShooterController : MonoBehaviour
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
 
-            bulletCoolDown = 1f;
+            bulletCoolDown = bulletCDRate;
             BulletSpawn();
 
             audioManager.PlayShoot();

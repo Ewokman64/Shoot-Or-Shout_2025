@@ -121,22 +121,22 @@ public class SpawnManager : MonoBehaviour
     }
     public void SpawnHandling()
     {
-        if (gameManager.score >= 50 && !spitterSpawnStarted)
+        if (gameManager.score >= 100 && !spitterSpawnStarted)
         {
             StartCoroutine(SpitterSpawn());
             spitterSpawnStarted = true;
         }
-        if (gameManager.score >= 100 && !eyeBombSpawnStarted)
+        if (gameManager.score >= 200 && !eyeBombSpawnStarted)
         {
             StartCoroutine(EyeBombSpawn());
             eyeBombSpawnStarted = true;
         }
-        if (gameManager.score >= 150 && !bigBoiSpawnStarted)
+        if (gameManager.score >= 300 && !bigBoiSpawnStarted)
         {
             StartCoroutine(BigBoiSpawn());
             bigBoiSpawnStarted = true;
         }
-        if (gameManager.score >= 250 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 400 && !n_KnightSpawnStarted)
         {
             Debug.Log("Night Knight is coming!");
             StopAllCoroutines();
@@ -144,8 +144,6 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(PowerUpSpawn());
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
-            //nightKnight = GameObject.FindGameObjectWithTag("NightKnight(Clone)").GetComponent<NightKnight>();
-            //horse = GameObject.FindGameObjectWithTag("Horse(Clone)").GetComponent<Horse>();
         }
         if (nightKnight != null)
         {
@@ -153,14 +151,7 @@ public class SpawnManager : MonoBehaviour
             {
                 nightKnightDead = true;
             }   
-        }
-        if (horse != null)
-        {
-            if (horse.horseHealth <= 0)
-            {
-                horseDead = true;
-            }
-        }
+        }  
         if (nightKnightDead && horseDead && !bossSpawned)
         {
             StartCoroutine(SpawnBrainBoss());

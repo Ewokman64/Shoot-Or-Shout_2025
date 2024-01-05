@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private SpawnManager spawnManager;
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
+    private UpgradeList upgradeList;
+    private UpgradesManager upgradesManager;
     public float stallingTimer;
     //UI
     public GameObject gameOverScreen;
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
     public bool isTaunterChased;
     public bool isShooterChased;
     public bool isStallingActive;
+    private bool gameCanBePaused = false;
     public bool hasGameStarted;
     public bool bossDied;
     void Start()
@@ -47,6 +50,9 @@ public class GameManager : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
+        upgradeList = GameObject.Find("UpgradesManager").GetComponent<UpgradeList>();
+        upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+        upgradeList.enabled = false;
     }
 
     void Update()
@@ -55,6 +61,16 @@ public class GameManager : MonoBehaviour
         if (bossDied)
         {
             demoOverScreen.SetActive(true);
+        }
+        if (upgradesManager.upgradePanel.activeSelf)
+        {
+            // Pause the game
+            Time.timeScale = 0;
+        }
+        else
+        {
+            // Resume the game
+            Time.timeScale = 1;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -82,14 +98,20 @@ public class GameManager : MonoBehaviour
     {
         //"previousEasyScore" key is getting loaded"
         currentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
-        spawnManager.StartSpawnManager(); 
+
+        spawnManager.StartSpawnManager();
+
         isTaunterChased = false;
         isShooterChased = true;
         hasGameStarted = true;
+        isSomeoneDead = false;
+
         startScreenCanvas.SetActive(false);
+        upgradeList.enabled = true;
+
         gmAudio.clip = bgMusic;
         gmAudio.Play();
-        isSomeoneDead = false;
+        
         StartCoroutine(StartStallingPenalty());
     }
     public void GameOver()
