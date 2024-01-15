@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.755201, y: -0.81573254, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6575844773904659345}
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 1755404905
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: eb08a69ac0c08044a954a1dff5141271, type: 3}
+  m_Sprite: {fileID: -462806072, guid: d7bd7b199ab3a6b418cb54b356455b15, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,6 +105,7 @@ MonoBehaviour:
   acidBallSpawn: {fileID: 6575844773904659345}
   targetShooter: {fileID: 0}
   targetTaunter: {fileID: 0}
+  gameManager: {fileID: 0}
   speed: 2
 --- !u!58 &9160024001053120305
 CircleCollider2D:
@@ -138,9 +139,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.053817675}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.24990599
 --- !u!50 &-3207937909790164706
 Rigidbody2D:
   serializedVersion: 4

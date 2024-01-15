@@ -19,18 +19,13 @@ public class Detector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (wallHealthBar.maxHealth < 0)
-        {
-            gameManager.GameOver();
-        }*/
+
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Something hit the wall!");
         int targetLayer = LayerMask.NameToLayer("Enemies");
         if (other.gameObject.layer == targetLayer && !other.gameObject.CompareTag("BigEnemy"))
         {
-            Debug.Log("An Enemy Hit the Wall!");
             spawnManager.enemyCount--;
             wallHealthBar.maxHealth--;
             wallHealthBar.UpdateHealthBar();

@@ -8,16 +8,8 @@ public class UpgradeList : MonoBehaviour
     private TaunterController taunterController;
     private SpawnManager spawnManager;
     public GameObject upgradesPanel;
+    public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
 
-    private void Update()
-    {
-        /*if (gameObject.activeSelf)
-        {
-            Debug.Log("UpgradeList active! Getting relevant components");
-            
-            //make separate method and call them in each button?
-        }*/
-    }
     void GetReferences()
     {
         upgradesPanel = GameObject.Find("UpgradesPanel");
@@ -29,14 +21,14 @@ public class UpgradeList : MonoBehaviour
     public void ShootCoolDown()
     {
         GetReferences();
-        shooterController.bulletCDRate = 0.5f;
+        shooterController.bulletCDRate -= 0.1f;
         Debug.Log("Shooting Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
     }
     public void TauntCoolDown()
     {
         GetReferences();
-        taunterController.tauntCDRate = 1;
+        taunterController.tauntCDRate -= 0.1f;
         Debug.Log("Taunt Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
     }
@@ -45,8 +37,8 @@ public class UpgradeList : MonoBehaviour
     {
         GetReferences();
         Debug.Log("Movement Speed increased!");
-        shooterController.speed = 15;
-        taunterController.speed = 15;
+        shooterController.speed += 3;
+        taunterController.speed += 3;
         upgradesPanel.SetActive(false);
     }
 
@@ -54,15 +46,22 @@ public class UpgradeList : MonoBehaviour
     {
         GetReferences();
         Debug.Log("PRETEND your bullets pierce enemies");
-        upgradesPanel.SetActive(false);
+        // Access the Bullet script without instantiating a visible GameObject
+        Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
+        if (bulletScript != null)
+        {
+            // Set the health using the public method in Bullet script
+            bulletScript.SetHealth(2f);
+            upgradesPanel.SetActive(false);
+        }
     }
+
 
     public void PowerUpSpawnRate()
     {
         GetReferences();
         Debug.Log("PowerUp spawnrate got shorter!");
-        spawnManager.powerUp_spawnRate = 5;
+        spawnManager.powerUp_spawnRate -= 1;
         upgradesPanel.SetActive(false);
-    }
-    
+    }   
 }

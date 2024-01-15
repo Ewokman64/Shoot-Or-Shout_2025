@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameManager gameManager;
     private UpgradeList upgradeList;
     private UpgradesManager upgradesManager;
+    public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public float stallingTimer;
     //UI
     public GameObject gameOverScreen;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     private bool gameCanBePaused = false;
     public bool hasGameStarted;
     public bool bossDied;
+
     void Start()
     {
         isShooterChased = true;
@@ -53,6 +55,9 @@ public class GameManager : MonoBehaviour
         upgradeList = GameObject.Find("UpgradesManager").GetComponent<UpgradeList>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
         upgradeList.enabled = false;
+        // Access the Bullet script without instantiating a visible GameObject
+        Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
+        bulletScript.SetHealth(0f);
     }
 
     void Update()
@@ -127,7 +132,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         Destroy(GameObject.FindWithTag("Shooter"));
         Destroy(GameObject.FindWithTag("Taunter"));
-
+        _ = gmAudio.mute;
         ClearMap();
 
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;

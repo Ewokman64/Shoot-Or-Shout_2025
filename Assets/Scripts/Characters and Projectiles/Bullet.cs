@@ -6,6 +6,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 30;
+    public float bulletHealth;
+    public float maxHealth = 1;
     public int zombieValue = 3;
     public bool isZombieShot = false;
     private GameManager gameManager;
@@ -70,11 +72,23 @@ public class Bullet : MonoBehaviour
         {
             Invoke(nameof(SetBoolBack), 1.0f);
         }
-        Destroy(gameObject);
+        if (bulletHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+        bulletHealth--;
     }
     private void SetBoolBack()
     {
         isZombieShot = false;
     }
-
+    public void SetHealth(float newHealth)
+    {
+        // Additional logic (if needed)
+        bulletHealth = Mathf.Clamp(newHealth, 0f, maxHealth);
+    }
+    public float GetHealth()
+    {
+        return bulletHealth;
+    }
 }

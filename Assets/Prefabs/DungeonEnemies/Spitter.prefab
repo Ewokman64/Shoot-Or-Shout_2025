@@ -109,8 +109,7 @@ SpriteRenderer:
   m_SortingLayerID: 1755404905
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5609500302020201274, guid: 642ef575ce7623948beac0ba02d83790,
-    type: 3}
+  m_Sprite: {fileID: 1549511832, guid: de3b28f9880fd834192d0943cad5b482, type: 3}
   m_Color: {r: 0.6039216, g: 0.5921569, b: 0.5921569, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -135,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acidBall: {fileID: 5093899002677859959, guid: c408693d778184b4d880ccaf71104b57,
     type: 3}
+  fireRate: 3
   targetShooter: {fileID: 0}
   targetTaunter: {fileID: 0}
 --- !u!61 &1210151822614159614
@@ -169,18 +169,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.058116376, y: -0.025183737}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.546875, y: 0.4375}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.546875, y: 0.4375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.546875, y: 0.4375}
+  m_Size: {x: 0.43064225, y: 0.8830588}
   m_EdgeRadius: 0
 --- !u!50 &8330609989926597690
 Rigidbody2D:

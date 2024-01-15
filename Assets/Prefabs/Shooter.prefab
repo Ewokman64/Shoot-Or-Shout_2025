@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 1620083645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: -0.05, z: 0}
+  m_LocalPosition: {x: -0.087, y: 0.183, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -210,7 +210,7 @@ GameObject:
   m_Layer: 0
   m_Name: BulletSpawnPoint
   m_TagString: BulletSpawnPoint
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -223,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 6357146089138962065}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51666665, y: 0.141, z: -0.24128918}
+  m_LocalPosition: {x: -0.582, y: 0.079, z: -0.24128918}
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -313,8 +313,7 @@ SpriteRenderer:
   m_SortingLayerID: 1755404905
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7184138933616821393, guid: c2b4399fb582d6c49ada6bf1563dc30c,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 952bd02b80d341346836a832e7636de1, type: 3}
   m_Color: {r: 0.6037736, g: 0.5895336, b: 0.5895336, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -343,10 +342,12 @@ MonoBehaviour:
   - BigEnemy
   - NightKnight
   - Horse
+  speed: 10
   bulletPrefab: {fileID: 5093899002677859959, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
   powerUpLight: {fileID: 1620083645}
   bulletCoolDown: 0
+  bulletCDRate: 1
   gunShot: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   powerUpSFX: {fileID: 8300000, guid: 35cdb93c71d0ff7409506bed205fa95f, type: 3}
   gunFlash1: {fileID: 6611541323212802183}
@@ -501,7 +502,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6357146090160872977}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2be65e7239d27ef4b819d19049a40017, type: 2}
   m_CullingMode: 0
