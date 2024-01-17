@@ -126,17 +126,17 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(SpitterSpawn());
             spitterSpawnStarted = true;
         }
-        if (gameManager.score >= 200 && !eyeBombSpawnStarted)
+        if (gameManager.score >= 300 && !eyeBombSpawnStarted)
         {
             StartCoroutine(EyeBombSpawn());
             eyeBombSpawnStarted = true;
         }
-        if (gameManager.score >= 300 && !bigBoiSpawnStarted)
+        if (gameManager.score >= 500 && !bigBoiSpawnStarted)
         {
             StartCoroutine(BigBoiSpawn());
             bigBoiSpawnStarted = true;
         }
-        if (gameManager.score >= 400 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 1000 && !n_KnightSpawnStarted)
         {
             Debug.Log("Night Knight is coming!");
             StopAllCoroutines();

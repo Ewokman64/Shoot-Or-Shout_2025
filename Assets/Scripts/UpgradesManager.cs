@@ -11,6 +11,9 @@ public class UpgradesManager : MonoBehaviour
     public int scoreThresholdIncrement = 100; // Incremental score threshold to trigger powerup selection
     public List<Transform> upgradeSpawnPoints; // List of spawn points for displaying powerups
     public GameObject upgradePanel; // Reference to the UI panel containing GameObject components
+    public Button button1;
+    public Button button2;
+    public Button button3;
 
     private int lastScoreThreshold = 0; // Keep track of the last threshold to avoid repeated triggering
     // Start is called before the first frame update
@@ -41,7 +44,51 @@ public class UpgradesManager : MonoBehaviour
             DisplayPowerups(selectedPowerups, upgradePanel);
         }
     }
-
+    public void ButtonPick()
+    {
+        // Check if a specific key is pressed (e.g., the space key)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            // Check if the button is assigned
+            if (button1 != null)
+            {
+                // Simulate a button click
+                button1.onClick.Invoke();
+            }
+            else
+            {
+                Debug.LogError("Button not assigned to the script.");
+            }
+        }
+        // Check if a specific key is pressed (e.g., the space key)
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            // Check if the button is assigned
+            if (button2 != null)
+            {
+                // Simulate a button click
+                button2.onClick.Invoke();
+            }
+            else
+            {
+                Debug.LogError("Button not assigned to the script.");
+            }
+        }
+        // Check if a specific key is pressed (e.g., the space key)
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            // Check if the button is assigned
+            if (button3 != null)
+            {
+                // Simulate a button click
+                button3.onClick.Invoke();
+            }
+            else
+            {
+                Debug.LogError("Button not assigned to the script.");
+            }
+        }
+    }
     List<GameObject> GetRandomPowerups(int count)
     {
         List<GameObject> randomPowerups = new List<GameObject>();

@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 1620083645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.087, y: 0.183, z: 0}
+  m_LocalPosition: {x: 0.095, y: -0.008, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_ShadowVolumeIntensity: 0
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0.5, y: 0.5, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
@@ -178,7 +178,7 @@ GameObject:
   m_Layer: 0
   m_Name: BulletSpawnPoint2
   m_TagString: BulletSpawnPoint2
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -191,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 1764080201}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51666665, y: -0.205, z: -0.24128918}
+  m_LocalPosition: {x: -0.479, y: 0.144, z: -0.24128918}
   m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -263,7 +263,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.01, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6357146089172993676}
@@ -342,6 +342,9 @@ MonoBehaviour:
   - BigEnemy
   - NightKnight
   - Horse
+  singleShotSprite: {fileID: 21300000, guid: 952bd02b80d341346836a832e7636de1, type: 3}
+  dualShotSprite: {fileID: 21300000, guid: baadb4c372bc0c04f9b244320e97237c, type: 3}
+  shooterSpriteRenderer: {fileID: 0}
   speed: 10
   bulletPrefab: {fileID: 5093899002677859959, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
@@ -385,7 +388,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.10544869, y: -0.019949675}
+  m_Offset: {x: 0.048651695, y: 0.00049728155}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -396,7 +399,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.52690536, y: 0.41290665}
+  m_Size: {x: 0.622324, y: 1.0081407}
   m_EdgeRadius: 0
 --- !u!82 &6357146090160872976
 AudioSource:

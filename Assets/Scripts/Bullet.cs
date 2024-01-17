@@ -34,16 +34,14 @@ public class Bullet : MonoBehaviour
         //LISTS TO COMPARE FROM MIGHT BE CLEANER
         int normalEnemies = LayerMask.NameToLayer("Enemies");
         int specialEnemies = LayerMask.NameToLayer("SpecialEnemies");
-
+        int bossEnemies = LayerMask.NameToLayer("BossEnemies");
 
         if (other.gameObject.layer == normalEnemies || other.gameObject.layer == specialEnemies || other.gameObject.CompareTag("Shield"))
         {
             gameManager.stallingTimer = 10;
-            //gameManager.isStallingActive = false;
         }
-        if (other.gameObject.layer == normalEnemies)
+        if (other.gameObject.layer == normalEnemies || other.gameObject.layer == bossEnemies)
         {
-            //double bullets screw me over
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();

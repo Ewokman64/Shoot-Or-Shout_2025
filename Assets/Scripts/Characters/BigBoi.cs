@@ -10,12 +10,14 @@ public class BigBoi : MonoBehaviour
     private Transform targetShooter;
 
     private GameManager gameManager;
-
+    public SpriteRenderer spriteRenderer;
+    private Color defaultColor;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        defaultColor = spriteRenderer.material.color;
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
         if (shooterObject != null)
         {
@@ -52,9 +54,17 @@ public class BigBoi : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Bullet hit!");
             Destroy(other.gameObject);
+            StartCoroutine(DamageColor());
             health--;
         }
+    }
+
+    public IEnumerator DamageColor()
+    {
+        yield return null;
+        spriteRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.material.color = defaultColor;
     }
 }

@@ -67,19 +67,15 @@ public class GameManager : MonoBehaviour
         {
             demoOverScreen.SetActive(true);
         }
-        if (upgradesManager.upgradePanel.activeSelf)
-        {
-            // Pause the game
-            Time.timeScale = 0;
-        }
-        else
-        {
-            // Resume the game
-            Time.timeScale = 1;
-        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePauseMenu();
+        }
+        else if (upgradesManager.upgradePanel.activeSelf)
+        {
+                // Pause the game
+                Debug.Log("Game Paused");
+                Time.timeScale = 0;
         }
         if (wallHealthBar.maxHealth < 0)
         {
@@ -147,9 +143,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
         }
-        else
+        else if (Time.timeScale == 1)
         {
             // Pause the game
+            Debug.Log("Game Paused");
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
         }

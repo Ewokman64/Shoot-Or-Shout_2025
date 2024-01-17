@@ -5,6 +5,9 @@ using UnityEngine;
 public class ShooterController : MonoBehaviour
 {
     public List<string> hostile;
+    public Sprite singleShotSprite;
+    public Sprite dualShotSprite;
+    public SpriteRenderer shooterSpriteRenderer;
     //Movement
     public float speed = 10;
     private float yRange = 5;
@@ -35,6 +38,7 @@ public class ShooterController : MonoBehaviour
         countDown = GameObject.Find("GameManager").GetComponent<CountDown>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        shooterSpriteRenderer = GameObject.Find("Shooter(Clone)").GetComponent<SpriteRenderer>();
     }
 
     public void Update()
@@ -121,6 +125,8 @@ public class ShooterController : MonoBehaviour
         if (other.gameObject.CompareTag("PowerUp"))
         {
             Destroy(other.gameObject);
+            //ActivateDualShotSprite
+            shooterSpriteRenderer.sprite = dualShotSprite;
             ActivatePowerUp();
         }
         else if (hostile.Contains(other.tag))
@@ -146,6 +152,7 @@ public class ShooterController : MonoBehaviour
     }
     public void SetBoolBack()
     {
+        shooterSpriteRenderer.sprite = singleShotSprite;
         animator.SetBool("IsPowerUpActive", false);
         isPowerUpActive = false;
         powerUpLight.gameObject.SetActive(false);

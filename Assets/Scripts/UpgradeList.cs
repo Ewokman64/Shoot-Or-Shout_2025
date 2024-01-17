@@ -24,6 +24,7 @@ public class UpgradeList : MonoBehaviour
         shooterController.bulletCDRate -= 0.1f;
         Debug.Log("Shooting Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
+        Time.timeScale = 1;
     }
     public void TauntCoolDown()
     {
@@ -31,6 +32,7 @@ public class UpgradeList : MonoBehaviour
         taunterController.tauntCDRate -= 0.1f;
         Debug.Log("Taunt Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void MovementSpeed()
@@ -40,6 +42,7 @@ public class UpgradeList : MonoBehaviour
         shooterController.speed += 3;
         taunterController.speed += 3;
         upgradesPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void PiercingAmmo()
@@ -53,6 +56,7 @@ public class UpgradeList : MonoBehaviour
             // Set the health using the public method in Bullet script
             bulletScript.SetHealth(2f);
             upgradesPanel.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 
@@ -63,5 +67,6 @@ public class UpgradeList : MonoBehaviour
         Debug.Log("PowerUp spawnrate got shorter!");
         spawnManager.powerUp_spawnRate -= 1;
         upgradesPanel.SetActive(false);
+        Time.timeScale = 1;
     }   
 }
