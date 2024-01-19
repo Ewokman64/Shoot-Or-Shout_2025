@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1445153441991122361}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.38, z: 0}
+  m_LocalPosition: {x: 0, y: 0.252, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 7551230207157904646}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: -0.403, z: 0}
+  m_LocalPosition: {x: 0, y: -0.316, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,11 +260,11 @@ MonoBehaviour:
   - {fileID: 4306974088413063623}
   littleBrain: {fileID: 604141183970494082, guid: 1cc320b8b16a62d4ea7f0f063a6f2076,
     type: 3}
-  littleBrainSpeed: 10
-  timeBetweenShots: 2
+  littleBrainSpeed: 3
+  timeBetweenShots: 4
   brainBullet: {fileID: 5704072395812550873, guid: 98d34da9a95d8a24c801515a3c954997,
     type: 3}
-  brainBulletSpeed: 10
+  brainBulletSpeed: 8
   brainBoss_2: {fileID: 4750328639580519078, guid: e2f5bbba85ad3864eb00594f19d069d5,
     type: 3}
   secondPhaseStarted: 0
@@ -353,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 7780238451009642387}
-  maxHealth: 100
+  maxHealth: 50
   currentHealth: 0
 --- !u!114 &5582847000759540604
 MonoBehaviour:

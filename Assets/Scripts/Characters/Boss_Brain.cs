@@ -134,7 +134,7 @@ public class Boss_Brain : MonoBehaviour
 
             // Stop the current coroutine
             StopCoroutine("TentacleAttack");
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(8);
             // Start the next coroutine
             StartCoroutine(BrainSpawnAttack());
             yield return new WaitForSeconds(5);

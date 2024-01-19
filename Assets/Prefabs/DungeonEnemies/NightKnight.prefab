@@ -119,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01305005, y: -0.2090429}
+  m_Offset: {x: 0.007694021, y: -0.2090429}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9738999, y: 0.5819142}
+  m_Size: {x: 0.9631878, y: 0.5819142}
   m_EdgeRadius: 0
 --- !u!50 &2909890027790311808
 Rigidbody2D:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  horseHealth: 3
+  horseHealth: 15
 --- !u!1 &6007565604007801479
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  nightKnightHealth: 3
+  nightKnightHealth: 20
   spear: {fileID: 1529532939484370753, guid: 111a8b82d2bfe6c41a36131ebd5d5aac, type: 3}
   shield: {fileID: 7334304511801104714, guid: f42344870263512459b8cebad1221736, type: 3}
   shieldHealth: 10

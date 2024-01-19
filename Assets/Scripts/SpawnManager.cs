@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
+    private UpgradesManager upgradesManager;
     public GameObject shooter;
     public GameObject taunter;
     private Transform shooterPos;
@@ -15,13 +16,14 @@ public class SpawnManager : MonoBehaviour
     public int enemyLimit;
     public bool enemyLimitReached;
     public List<GameObject> enemies = new List<GameObject>();
+    public bool nextWaveReady = false;
 
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
     private int randomSpawnPoint, randomEnemies;
     [HideInInspector]
     public Transform[] spawnPoints;
-    private float startDelay = 2;
+    private float startDelay = 3;
     private float spawnRate = 0.7f;
 
     //SPITTERS
@@ -94,6 +96,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
         enemyLimitReached = false;
         enemyLimit = 15;
     }
@@ -123,16 +126,35 @@ public class SpawnManager : MonoBehaviour
     {
         if (gameManager.score >= 100 && !spitterSpawnStarted)
         {
+            StopCoroutine(ZombieSpawn());
+            gameManager.ClearMap();
+            nextWaveReady = false;
+            upgradesManager.OfferUpgrades();
             StartCoroutine(SpitterSpawn());
+            StartCoroutine(ZombieSpawn());
             spitterSpawnStarted = true;
         }
         if (gameManager.score >= 300 && !eyeBombSpawnStarted)
         {
+            StopCoroutine(ZombieSpawn());
+            StopCoroutine(SpitterSpawn());
+            gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
             StartCoroutine(EyeBombSpawn());
+            StartCoroutine(SpitterSpawn());
+            StartCoroutine(ZombieSpawn());
             eyeBombSpawnStarted = true;
         }
         if (gameManager.score >= 500 && !bigBoiSpawnStarted)
         {
+            StopCoroutine(ZombieSpawn());
+            StopCoroutine(SpitterSpawn());
+            StopCoroutine(EyeBombSpawn());
+            gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
+            StartCoroutine(EyeBombSpawn());
+            StartCoroutine(SpitterSpawn());
+            StartCoroutine(ZombieSpawn());
             StartCoroutine(BigBoiSpawn());
             bigBoiSpawnStarted = true;
         }
@@ -141,6 +163,7 @@ public class SpawnManager : MonoBehaviour
             Debug.Log("Night Knight is coming!");
             StopAllCoroutines();
             gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
             StartCoroutine(PowerUpSpawn());
             StartCoroutine(NightKnightSpawn());
             n_KnightSpawnStarted = true;
@@ -164,7 +187,6 @@ public class SpawnManager : MonoBehaviour
             finalPushCanStart = false;
         }*/
     }
-
     void SpawnPlayers()
     {
         shooterPos = GameObject.Find("ShooterPos").GetComponent<Transform>();
@@ -191,7 +213,7 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
-
+        yield return new WaitForSeconds(3);
         while (!bossSpawned && !gameManager.isSomeoneDead)
         {
             yield return new WaitForSeconds(spitter_spawnRate);

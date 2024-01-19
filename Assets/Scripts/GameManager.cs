@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         Destroy(GameObject.FindWithTag("Shooter"));
         Destroy(GameObject.FindWithTag("Taunter"));
+        Destroy(GameObject.FindWithTag("Laser"));
         gmAudio.mute = true;
         ClearMap();
 
@@ -162,10 +163,6 @@ public class GameManager : MonoBehaviour
             Destroy(bullet);
 
         //GET RID OF ENEMIES
-        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        //foreach (GameObject enemy in enemies)
-        //    Destroy(enemy);
-
         string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush", "Boss" /* Add more tags as needed */ };
 
         foreach (string tag in enemyTags)

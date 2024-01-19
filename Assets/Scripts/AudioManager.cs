@@ -12,11 +12,11 @@ public class AudioManager : MonoBehaviour
 
     public void PlayZombieDeath()
     {
-        AudioSource.PlayOneShot(zombieDeath, 1.0f);
+        AudioSource.PlayOneShot(zombieDeath, 0.3f);
     }
     public void PlayShoot()
     {
-        AudioSource.PlayOneShot(shoot, 1.0f);
+        AudioSource.PlayOneShot(shoot, 0.5f);
     }
 
     public void PlayShout()

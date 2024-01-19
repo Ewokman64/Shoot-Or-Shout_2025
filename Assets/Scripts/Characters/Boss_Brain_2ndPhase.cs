@@ -133,7 +133,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
         {
             // Start the next coroutine
             StartCoroutine(SpitterHeads());
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(15);
 
             // Stop the current coroutine
             StopCoroutine("SpitterHeads");
@@ -143,7 +143,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
             // Start the next coroutine
             lasersAndZombies = true;
             StartCoroutine(LasersAndZombies());
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(15);
 
             // Stop the current coroutine
             StopCoroutine("LasersAndZombies");
@@ -153,7 +153,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
 
             // Start the next coroutine
             StartCoroutine(EyeBombs());
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(15);
 
             // Stop the current coroutine
             StopCoroutine("EyeBombs");
