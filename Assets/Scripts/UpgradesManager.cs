@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class UpgradesManager : MonoBehaviour
     public int scoreThresholdIncrement = 100; // Incremental score threshold to trigger powerup selection
     public List<Transform> upgradeSpawnPoints; // List of spawn points for displaying powerups
     public GameObject upgradePanel; // Reference to the UI panel containing GameObject components
+    public List<Button> upgradeButtons;
     public Button button1;
     public Button button2;
     public Button button3;
@@ -35,7 +37,18 @@ public class UpgradesManager : MonoBehaviour
             lastScoreThreshold = currentScoreThreshold;
 
             // Randomly select three unique powerups
+            upgradeButtons.Clear();
             List<GameObject> selectedPowerups = GetRandomPowerups(3);
+            GameObject upgrade1 = selectedPowerups[0];
+            button1 = upgrade1.GetComponent<Button>();
+            GameObject upgrade2 = selectedPowerups[1];
+            button2 = upgrade2.GetComponent<Button>();
+            GameObject upgrade3 = selectedPowerups[2];
+            button3 = upgrade3.GetComponent<Button>();
+            upgradeButtons.Add(button1);
+            upgradeButtons.Add(button2);
+            upgradeButtons.Add(button3);
+
 
             // Set the powerup panel active
             upgradePanel.SetActive(true);
@@ -43,6 +56,7 @@ public class UpgradesManager : MonoBehaviour
             // Display the powerups to the player using the UI panel
             DisplayPowerups(selectedPowerups, upgradePanel);
         }
+        ButtonPick();
     }
     public void ButtonPick()
     {

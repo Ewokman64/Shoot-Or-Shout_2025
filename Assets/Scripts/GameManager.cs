@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(true);
         Destroy(GameObject.FindWithTag("Shooter"));
         Destroy(GameObject.FindWithTag("Taunter"));
-        _ = gmAudio.mute;
+        gmAudio.mute = true;
         ClearMap();
 
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
