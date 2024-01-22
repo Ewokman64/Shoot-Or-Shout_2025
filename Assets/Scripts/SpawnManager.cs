@@ -8,6 +8,7 @@ public class SpawnManager : MonoBehaviour
 {
     private GameManager gameManager;
     private UpgradesManager upgradesManager;
+    private Waves_Dungeon waves_Dungeon;
     public GameObject shooter;
     public GameObject taunter;
     private Transform shooterPos;
@@ -17,11 +18,12 @@ public class SpawnManager : MonoBehaviour
     public bool enemyLimitReached;
     public List<GameObject> enemies = new List<GameObject>();
     public bool nextWaveReady = false;
+    public bool coroutinesRunning = false;
 
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
     private int randomSpawnPoint, randomEnemies;
-    [HideInInspector]
+    //[HideInInspector]
     public Transform[] spawnPoints;
     private float startDelay = 3;
     private float spawnRate = 0.7f;
@@ -33,28 +35,24 @@ public class SpawnManager : MonoBehaviour
     public EnemySpawner[] enemySpawnerArray;
     public float spitter_startDelay = 5;
     private float spitter_spawnRate = 3;
-    public bool spitterSpawnStarted = false;
 
     //EYEBOMBS
     [HideInInspector]
     public GameObject eyeBombPrefab;
     private int eyeSpawnPoint;
     public Transform[] eyeSpawnPoints;
-    public bool eyeBombSpawnStarted = false;
 
     //NIGHT KNIGHTS
     [HideInInspector]
     public GameObject nightKnightPrefab;
     [HideInInspector]
     public GameObject nightKnightSpawnPoint;
-    public bool n_KnightSpawnStarted = false;
 
     //BIG BOIS
     [HideInInspector]
     public GameObject bigBoiPrefab;
     [HideInInspector]
     public Transform[] bigSpawnPoints;
-    public bool bigBoiSpawnStarted = false;
 
     //POWERUP
     [HideInInspector]
@@ -80,23 +78,11 @@ public class SpawnManager : MonoBehaviour
     [HideInInspector]
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
-    //FINAL PUSH
-    public bool finalPushCanStart = false;
-    public bool finalPushOver = false;
-    [HideInInspector]
-    public GameObject finalPush_zombie;
-    [HideInInspector]
-    public GameObject finalPush_spitter;
-    [HideInInspector]
-    public GameObject finalPush_eyeBomb;
-    [HideInInspector]
-    public GameObject finalPush_bigBoi;
-    [HideInInspector]
-    public GameObject finalPush_nightKnight;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+        waves_Dungeon = GetComponent<Waves_Dungeon>();
         enemyLimitReached = false;
         enemyLimit = 15;
     }
@@ -117,56 +103,70 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawnManager()
     {
-        StartCoroutine(ZombieSpawn());
+        //StartCoroutine(ZombieSpawn());
+        waves_Dungeon.Wave1();
         StartCoroutine(PowerUpSpawn());
         SpawnPlayers();
         powerUps = 0;
     }
+    //New Waves script and reference them from here
     public void SpawnHandling()
     {
-        if (gameManager.score >= 100 && !spitterSpawnStarted)
+        if (gameManager.score >= 100 && !coroutinesRunning)
         {
-            StopCoroutine(ZombieSpawn());
             gameManager.ClearMap();
-            nextWaveReady = false;
             upgradesManager.OfferUpgrades();
-            StartCoroutine(SpitterSpawn());
-            StartCoroutine(ZombieSpawn());
-            spitterSpawnStarted = true;
+            waves_Dungeon.Wave2();
+            coroutinesRunning = true;
         }
-        if (gameManager.score >= 300 && !eyeBombSpawnStarted)
+        if (gameManager.score >= 300 && !coroutinesRunning)
         {
-            StopCoroutine(ZombieSpawn());
-            StopCoroutine(SpitterSpawn());
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
-            StartCoroutine(EyeBombSpawn());
-            StartCoroutine(SpitterSpawn());
-            StartCoroutine(ZombieSpawn());
-            eyeBombSpawnStarted = true;
+            waves_Dungeon.Wave3();
+            coroutinesRunning = true;
         }
-        if (gameManager.score >= 500 && !bigBoiSpawnStarted)
+        if (gameManager.score >= 500 && !coroutinesRunning)
         {
-            StopCoroutine(ZombieSpawn());
-            StopCoroutine(SpitterSpawn());
-            StopCoroutine(EyeBombSpawn());
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
-            StartCoroutine(EyeBombSpawn());
-            StartCoroutine(SpitterSpawn());
-            StartCoroutine(ZombieSpawn());
-            StartCoroutine(BigBoiSpawn());
-            bigBoiSpawnStarted = true;
+            waves_Dungeon.Wave4();
+            coroutinesRunning = true;
         }
-        if (gameManager.score >= 1000 && !n_KnightSpawnStarted)
+        if (gameManager.score >= 750 && !coroutinesRunning)
         {
-            Debug.Log("Night Knight is coming!");
-            StopAllCoroutines();
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
-            StartCoroutine(PowerUpSpawn());
-            StartCoroutine(NightKnightSpawn());
-            n_KnightSpawnStarted = true;
+            waves_Dungeon.Wave5();
+            coroutinesRunning = true;
+        }
+        if (gameManager.score >= 1000 && !coroutinesRunning)
+        {
+            gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
+            waves_Dungeon.Wave6();
+            coroutinesRunning = true;
+        }
+        if (gameManager.score >= 1300 && !coroutinesRunning)
+        {
+            gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
+            waves_Dungeon.Wave7();
+            coroutinesRunning = true;
+        }
+        if (gameManager.score >= 1600 && !coroutinesRunning)
+        {
+            gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
+            waves_Dungeon.Wave8();
+            coroutinesRunning = true;
+        }
+        if (gameManager.score >= 2000 && !coroutinesRunning)
+        {
+            gameManager.ClearMap();
+            upgradesManager.OfferUpgrades();
+            waves_Dungeon.MiniBossWave();
+            coroutinesRunning = true;
         }
         if (nightKnight != null)
         {
@@ -180,12 +180,6 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(SpawnBrainBoss());
             bossSpawned = true;
         }
-        //IF SECONDWAVEBOSS DIED, start FINALPUSH
-        /*if (finalPushCanStart)
-        {
-            StartCoroutine(FinalPush());
-            finalPushCanStart = false;
-        }*/
     }
     void SpawnPlayers()
     {
@@ -194,7 +188,7 @@ public class SpawnManager : MonoBehaviour
         taunterPos = GameObject.Find("TaunterPos").GetComponent<Transform>();
         Instantiate(taunter, taunterPos.position, UnityEngine.Quaternion.identity);
     }
-    IEnumerator ZombieSpawn()
+    public IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
         while (!bossSpawned && !gameManager.isSomeoneDead)
@@ -210,21 +204,24 @@ public class SpawnManager : MonoBehaviour
         }       
     }
 
-    IEnumerator SpitterSpawn()
+    public IEnumerator SpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
-        yield return new WaitForSeconds(3);
-        while (!bossSpawned && !gameManager.isSomeoneDead)
+        if (!gameManager.gameIsPaused)
         {
-            yield return new WaitForSeconds(spitter_spawnRate);
-
-            EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spitter == null));
-            if (spawner != null && !enemyLimitReached)
+            yield return new WaitForSeconds(3);
+            while (!bossSpawned && !gameManager.isSomeoneDead)
             {
-                spawner.Spawn(spitterPrefab);
-                AddEnemyToList(spawner.spitter);
+                yield return new WaitForSeconds(spitter_spawnRate);
+
+                EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spitter == null));
+                if (spawner != null && !enemyLimitReached)
+                {
+                    spawner.Spawn(spitterPrefab);
+                    AddEnemyToList(spawner.spitter);
+                }
             }
-        }
+        }  
     }
 
     object[] Shuffle(object[] array)
@@ -253,7 +250,7 @@ public class SpawnManager : MonoBehaviour
         }      
     }
 
-    IEnumerator EyeBombSpawn()
+    public IEnumerator EyeBombSpawn()
     {   
         yield return new WaitForSeconds(startDelay);
         while (!bossSpawned && !gameManager.isSomeoneDead)
@@ -268,7 +265,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator BigBoiSpawn()
+    public IEnumerator BigBoiSpawn()
     {
         yield return new WaitForSeconds(startDelay);
         while (!bossSpawned && !gameManager.isSomeoneDead)
@@ -283,55 +280,20 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator NightKnightSpawn()
+    public IEnumerator NightKnightSpawn()
     {
         yield return new WaitForSeconds(3);
         Instantiate(nightKnightPrefab, nightKnightSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
         nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
         horse = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
     }
-    IEnumerator SpawnBrainBoss()
+    public IEnumerator SpawnBrainBoss()
     {
         gameManager.ClearMap();
         yield return new WaitForSeconds(5);
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
         
     }
-    /*public IEnumerator FinalPush()
-    {
-        // Boss turning into each enemy for a very short time
-        GameObject finalPushEnemy;
-
-        // turns into buffed zombie
-        finalPushEnemy = Instantiate(finalPush_zombie, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPushEnemy);
-
-        // turns into buffed spitter
-        finalPushEnemy = Instantiate(finalPush_spitter, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPushEnemy);
-
-        // turns into buffed eyeBomb
-        finalPushEnemy = Instantiate(finalPush_eyeBomb, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPushEnemy);
-
-        // turns into buffed bigBoi
-        finalPushEnemy = Instantiate(finalPush_bigBoi, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPushEnemy);
-
-        // turns into buffed nightKnight
-        finalPushEnemy = Instantiate(finalPush_nightKnight, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5);
-        Destroy(finalPushEnemy);
-
-        yield return new WaitForSeconds(5);
-        finalPushOver = true;
-        // Fokhen dies, fireworks and all
-    }*/
-
     void AddEnemyToList(GameObject enemy)
     {
         enemies.Add(enemy);

@@ -38,9 +38,9 @@ public class GameManager : MonoBehaviour
     public bool isTaunterChased;
     public bool isShooterChased;
     public bool isStallingActive;
-    private bool gameCanBePaused = false;
     public bool hasGameStarted;
     public bool bossDied;
+    public bool gameIsPaused = false;
 
     void Start()
     {
@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
         {
                 // Pause the game
                 Debug.Log("Game Paused");
+                gameIsPaused = true;
                 Time.timeScale = 0;
         }
         if (wallHealthBar.maxHealth < 0)
@@ -131,7 +132,7 @@ public class GameManager : MonoBehaviour
         Destroy(GameObject.FindWithTag("Laser"));
         gmAudio.mute = true;
         ClearMap();
-
+        spawnManager.StopAllCoroutines();
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
     }
 
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
         {
             // Resume the game
             Time.timeScale = 1;
+            gameIsPaused = false;
             pauseMenu.SetActive(false);
         }
         else if (Time.timeScale == 1)
@@ -149,6 +151,7 @@ public class GameManager : MonoBehaviour
             // Pause the game
             Debug.Log("Game Paused");
             Time.timeScale = 0;
+            gameIsPaused = true;
             pauseMenu.SetActive(true);
         }
     }
@@ -163,7 +166,7 @@ public class GameManager : MonoBehaviour
             Destroy(bullet);
 
         //GET RID OF ENEMIES
-        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush", "Boss" /* Add more tags as needed */ };
+        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush", "Boss", "Projectile" /* Add more tags as needed */ };
 
         foreach (string tag in enemyTags)
         {

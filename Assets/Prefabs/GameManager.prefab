@@ -47,10 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f038eb2ba6b0e44988aa63a8d09343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallHealthBar: {fileID: 0}
+  gameManager: {fileID: 0}
+  bulletPrefab: {fileID: 5093899002677859947, guid: d310716e801c20449b49fb5cf86c9375,
+    type: 3}
+  stallingTimer: 0
   gameOverScreen: {fileID: 0}
   startScreenCanvas: {fileID: 0}
   demoOverScreen: {fileID: 0}
   pauseMenu: {fileID: 0}
+  stallingText: {fileID: 0}
   enemies:
   - {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83, type: 3}
   - {fileID: 3901229786317164310, guid: 497dd49a5ea38b545817c2d2394b4b80, type: 3}
@@ -75,6 +81,10 @@ MonoBehaviour:
   isSomeoneDead: 0
   isTaunterChased: 0
   isShooterChased: 0
+  isStallingActive: 0
+  hasGameStarted: 0
+  bossDied: 0
+  gameIsPaused: 0
 --- !u!82 &6776313842009288517
 AudioSource:
   m_ObjectHideFlags: 0
