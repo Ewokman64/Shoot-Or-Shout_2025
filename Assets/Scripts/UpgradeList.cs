@@ -25,7 +25,7 @@ public class UpgradeList : MonoBehaviour
         Debug.Log("Shooting Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
-        spawnManager.nextWaveReady = true;
+        //spawnManager.nextWaveReady = true;
     }
     public void TauntCoolDown()
     {
@@ -34,7 +34,7 @@ public class UpgradeList : MonoBehaviour
         Debug.Log("Taunt Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
-        spawnManager.nextWaveReady = true;
+        //spawnManager.nextWaveReady = true;
     }
 
     public void MovementSpeed()
@@ -45,7 +45,7 @@ public class UpgradeList : MonoBehaviour
         taunterController.speed += 1;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
-        spawnManager.nextWaveReady = true;
+        //spawnManager.nextWaveReady = true;
     }
 
     public void PiercingAmmo()
@@ -60,7 +60,7 @@ public class UpgradeList : MonoBehaviour
             bulletScript.SetHealth(2f);
             upgradesPanel.SetActive(false);
             Time.timeScale = 1;
-            spawnManager.nextWaveReady = true;
+            //spawnManager.nextWaveReady = true;
         }
     }
 
@@ -72,6 +72,6 @@ public class UpgradeList : MonoBehaviour
         spawnManager.powerUp_spawnRate -= 1;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
-        spawnManager.nextWaveReady = true;
+        //spawnManager.nextWaveReady = true;
     }   
 }

@@ -17,8 +17,10 @@ public class SpawnManager : MonoBehaviour
     public int enemyLimit;
     public bool enemyLimitReached;
     public List<GameObject> enemies = new List<GameObject>();
-    public bool nextWaveReady = false;
-    public bool coroutinesRunning = false;
+    //public bool nextWaveReady = false;
+
+    //MOB CHECKS
+    public bool newWaveStarted;
 
     //NORMAL ZOMBIES
     public GameObject[] enemyPrefab;
@@ -112,61 +114,53 @@ public class SpawnManager : MonoBehaviour
     //New Waves script and reference them from here
     public void SpawnHandling()
     {
-        if (gameManager.score >= 100 && !coroutinesRunning)
+        if (gameManager.score >= 100 && !waves_Dungeon.wave2Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave2();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 300 && !coroutinesRunning)
+        if (gameManager.score >= 300 && !waves_Dungeon.wave3Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave3();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 500 && !coroutinesRunning)
+        if (gameManager.score >= 500 && !waves_Dungeon.wave4Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave4();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 750 && !coroutinesRunning)
+        if (gameManager.score >= 750 && !waves_Dungeon.wave5Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave5();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 1000 && !coroutinesRunning)
+        if (gameManager.score >= 1000 && !waves_Dungeon.wave6Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave6();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 1300 && !coroutinesRunning)
+        if (gameManager.score >= 1300 && !waves_Dungeon.wave7Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave7();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 1600 && !coroutinesRunning)
+        if (gameManager.score >= 1600 && !waves_Dungeon.wave8Started)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.Wave8();
-            coroutinesRunning = true;
         }
-        if (gameManager.score >= 2000 && !coroutinesRunning)
+        if (gameManager.score >= 2000 && !waves_Dungeon.miniBossSpawned)
         {
             gameManager.ClearMap();
             upgradesManager.OfferUpgrades();
             waves_Dungeon.MiniBossWave();
-            coroutinesRunning = true;
         }
         if (nightKnight != null)
         {
@@ -191,7 +185,7 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator ZombieSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead)
+        while (true)
         {
             if (!enemyLimitReached)
             {
@@ -201,27 +195,25 @@ public class SpawnManager : MonoBehaviour
                 AddEnemyToList(zombie);
             }           
             yield return new WaitForSeconds(spawnRate);
-        }       
+        }
+        
     }
 
     public IEnumerator SpitterSpawn()
     {
         enemySpawnerArray = GetComponentsInChildren<EnemySpawner>();
-        if (!gameManager.gameIsPaused)
-        {
-            yield return new WaitForSeconds(3);
-            while (!bossSpawned && !gameManager.isSomeoneDead)
+        
+            while (true)
             {
-                yield return new WaitForSeconds(spitter_spawnRate);
-
                 EnemySpawner spawner = (((EnemySpawner[])Shuffle(enemySpawnerArray)).FirstOrDefault(enemySpawner => enemySpawner.spitter == null));
                 if (spawner != null && !enemyLimitReached)
                 {
                     spawner.Spawn(spitterPrefab);
                     AddEnemyToList(spawner.spitter);
                 }
-            }
-        }  
+            yield return new WaitForSeconds(spitter_spawnRate);
+        }
+        
     }
 
     object[] Shuffle(object[] array)
@@ -253,7 +245,7 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator EyeBombSpawn()
     {   
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead)
+        while (true)
         {
             if (!enemyLimitReached)
             {
@@ -268,7 +260,7 @@ public class SpawnManager : MonoBehaviour
     public IEnumerator BigBoiSpawn()
     {
         yield return new WaitForSeconds(startDelay);
-        while (!bossSpawned && !gameManager.isSomeoneDead)
+        while (true)
         {
             if (!enemyLimitReached)
             {
