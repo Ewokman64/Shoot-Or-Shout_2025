@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -35,7 +36,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject spitterPrefab;
     [HideInInspector]
     public EnemySpawner[] enemySpawnerArray;
-    public float spitter_startDelay = 5;
+    public float spitter_startDelay = 3;
     private float spitter_spawnRate = 3;
 
     //EYEBOMBS
@@ -80,6 +81,8 @@ public class SpawnManager : MonoBehaviour
     [HideInInspector]
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
+
+    public bool pihiOver = false;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -117,50 +120,76 @@ public class SpawnManager : MonoBehaviour
         if (gameManager.score >= 100 && !waves_Dungeon.wave2Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave2Started = true;       
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave2();
+            waves_Dungeon.StopEnemySpawners();
+            if (!gameManager.gameIsPaused)
+            {
+                waves_Dungeon.Wave2();
+            }   
+
+            //IF STATEMENT TRUE, START A TIMER
+            //IF TIMER RAN, call wave2
         }
         if (gameManager.score >= 300 && !waves_Dungeon.wave3Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave3Started = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave3();
+                waves_Dungeon.Wave3();
         }
         if (gameManager.score >= 500 && !waves_Dungeon.wave4Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave4Started = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave4();
+                waves_Dungeon.Wave4();
+            
         }
         if (gameManager.score >= 750 && !waves_Dungeon.wave5Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave5Started = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave5();
+            
+                waves_Dungeon.Wave5();
+            
         }
         if (gameManager.score >= 1000 && !waves_Dungeon.wave6Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave6Started = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave6();
+            
+                waves_Dungeon.Wave6();
+           
         }
         if (gameManager.score >= 1300 && !waves_Dungeon.wave7Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave7Started = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave7();
+            
+                waves_Dungeon.Wave7();
+            
         }
         if (gameManager.score >= 1600 && !waves_Dungeon.wave8Started)
         {
             gameManager.ClearMap();
+            waves_Dungeon.wave8Started = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.Wave8();
+            
+                waves_Dungeon.Wave8();
+            
         }
         if (gameManager.score >= 2000 && !waves_Dungeon.miniBossSpawned)
         {
             gameManager.ClearMap();
+            waves_Dungeon.miniBossSpawned = true;
             upgradesManager.OfferUpgrades();
-            waves_Dungeon.MiniBossWave();
+            
+                waves_Dungeon.MiniBossWave();
+            
         }
         if (nightKnight != null)
         {
@@ -184,17 +213,25 @@ public class SpawnManager : MonoBehaviour
     }
     public IEnumerator ZombieSpawn()
     {
-        yield return new WaitForSeconds(startDelay);
-        while (true)
-        {
-            if (!enemyLimitReached)
+        yield return new WaitForSeconds(3f);  // Initial delay
+        
+            while (true)
             {
-                randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
-                randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
-                GameObject zombie = Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
-                AddEnemyToList(zombie);
-            }           
-            yield return new WaitForSeconds(spawnRate);
+                if (!enemyLimitReached)
+                {
+                    randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+                    randomEnemies = UnityEngine.Random.Range(0, enemyPrefab.Length);
+                    GameObject zombie = Instantiate(enemyPrefab[randomEnemies], spawnPoints[randomSpawnPoint].position, UnityEngine.Quaternion.identity);
+                    AddEnemyToList(zombie);
+                }
+            if (gameManager.gameIsPaused)
+            {
+                yield return null;  // Pause the coroutine
+            }
+            else
+            {
+                yield return new WaitForSeconds(spawnRate);  // Continue the coroutine
+            }
         }
         
     }

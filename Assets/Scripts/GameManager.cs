@@ -95,6 +95,14 @@ public class GameManager : MonoBehaviour
         {
             stallingTimer -= Time.deltaTime;
         }
+        if (Time.timeScale == 0)
+        {
+            gameIsPaused = true;
+        }
+        else
+        {
+            gameIsPaused = false;
+        }
     }
     public void StartGame()
     {

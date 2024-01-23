@@ -27,11 +27,10 @@ public class Waves_Dungeon : MonoBehaviour
         wave1Started = true;
 }
     public void Wave2() 
-    {
-        StopEnemySpawners();
+    { 
+        //StopEnemySpawners();
         StartCoroutine(spawnManager.ZombieSpawn());
         StartCoroutine(spawnManager.SpitterSpawn());
-        wave2Started = true;
     }
     public void Wave3() 
     {

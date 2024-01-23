@@ -17,7 +17,6 @@ public class UpgradesManager : MonoBehaviour
     public Button button2;
     public Button button3;
 
-    private int lastScoreThreshold = 0; // Keep track of the last threshold to avoid repeated triggering
     // Start is called before the first frame update
     void Start()
     {
@@ -27,37 +26,6 @@ public class UpgradesManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Calculate the current score threshold
-        int currentScoreThreshold = Mathf.FloorToInt(gameManager.score / scoreThresholdIncrement) * scoreThresholdIncrement;
-
-        // Check if the player's score meets a new threshold
-        if (currentScoreThreshold > lastScoreThreshold)
-        {
-            /*
-            // Update the last threshold to avoid repeated triggering
-            lastScoreThreshold = currentScoreThreshold;
-
-            // Randomly select three unique powerups
-            upgradeButtons.Clear();
-            List<GameObject> selectedPowerups = GetRandomPowerups(3);
-            GameObject upgrade1 = selectedPowerups[0];
-            button1 = upgrade1.GetComponent<Button>();
-            GameObject upgrade2 = selectedPowerups[1];
-            button2 = upgrade2.GetComponent<Button>();
-            GameObject upgrade3 = selectedPowerups[2];
-            button3 = upgrade3.GetComponent<Button>();
-            upgradeButtons.Add(button1);
-            upgradeButtons.Add(button2);
-            upgradeButtons.Add(button3);
-
-
-            // Set the powerup panel active
-            upgradePanel.SetActive(true);
-
-            // Display the powerups to the player using the UI panel
-            DisplayPowerups(selectedPowerups, upgradePanel);
-            */
-        }
         ButtonPick();
     }
 
