@@ -82,12 +82,13 @@ public class SpawnManager : MonoBehaviour
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
 
-    public bool pihiOver = false;
+    public SpawnManagerNew spawnManagerNew;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
         waves_Dungeon = GetComponent<Waves_Dungeon>();
+        spawnManagerNew = GameObject.Find("SpawnManagerNew").GetComponent<SpawnManagerNew>();
         enemyLimitReached = false;
         enemyLimit = 15;
     }
@@ -109,7 +110,9 @@ public class SpawnManager : MonoBehaviour
     public void StartSpawnManager()
     {
         //StartCoroutine(ZombieSpawn());
-        waves_Dungeon.Wave1();
+        //waves_Dungeon.Wave1();
+        //StartCoroutine(spawnManagerNew.SpawnWaves());
+        StartCoroutine(spawnManagerNew.SpawnFiller());
         StartCoroutine(PowerUpSpawn());
         SpawnPlayers();
         powerUps = 0;
@@ -117,19 +120,13 @@ public class SpawnManager : MonoBehaviour
     //New Waves script and reference them from here
     public void SpawnHandling()
     {
-        if (gameManager.score >= 100 && !waves_Dungeon.wave2Started)
+        /*if (gameManager.score >= 100 && !waves_Dungeon.wave2Started)
         {
             gameManager.ClearMap();
             waves_Dungeon.wave2Started = true;       
             upgradesManager.OfferUpgrades();
             waves_Dungeon.StopEnemySpawners();
-            if (!gameManager.gameIsPaused)
-            {
-                waves_Dungeon.Wave2();
-            }   
-
-            //IF STATEMENT TRUE, START A TIMER
-            //IF TIMER RAN, call wave2
+            waves_Dungeon.Wave2();
         }
         if (gameManager.score >= 300 && !waves_Dungeon.wave3Started)
         {
@@ -190,7 +187,7 @@ public class SpawnManager : MonoBehaviour
             
                 waves_Dungeon.MiniBossWave();
             
-        }
+        }*/
         if (nightKnight != null)
         {
             if (nightKnight.nightKnightHealth <= 0)
@@ -323,7 +320,7 @@ public class SpawnManager : MonoBehaviour
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
         
     }
-    void AddEnemyToList(GameObject enemy)
+    public void AddEnemyToList(GameObject enemy)
     {
         enemies.Add(enemy);
     }

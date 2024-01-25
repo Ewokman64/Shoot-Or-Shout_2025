@@ -975,6 +975,24 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 683001711}
   m_SourcePrefab: {fileID: 100100000, guid: 8401c900788b87d45bbc54e4d608db9f, type: 3}
+--- !u!4 &280348854 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2507126050236503773, guid: 8401c900788b87d45bbc54e4d608db9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 280348850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &280348855 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 510003807668524240, guid: 8401c900788b87d45bbc54e4d608db9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 280348850}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &280348856 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4647006192594315190, guid: 8401c900788b87d45bbc54e4d608db9f,
+    type: 3}
+  m_PrefabInstance: {fileID: 280348850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &290107019
 GameObject:
   m_ObjectHideFlags: 0
@@ -9102,7 +9120,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 7, y: 6, z: 0}
@@ -9114,7 +9132,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 13, y: 6, z: 0}
@@ -17485,6 +17503,109 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294202972}
   m_CullTransparentMesh: 1
+--- !u!1 &1296572297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296572299}
+  - component: {fileID: 1296572298}
+  m_Layer: 0
+  m_Name: SpawnManagerNew
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1296572298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296572297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efea9e211fce7074ebd8b3984064b560, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - enemies:
+    - enemyPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
+        type: 3}
+      normalEnemyPrefab: {fileID: 0}
+      spawnRate: 3
+      spawnPoints:
+      - {fileID: 280348856}
+      - {fileID: 280348855}
+      - {fileID: 280348854}
+    normalEnemies:
+    - enemyPrefab: {fileID: 0}
+      normalEnemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
+        type: 3}
+      spawnRate: 0.5
+      spawnPoints:
+      - {fileID: 280348856}
+      - {fileID: 280348855}
+      - {fileID: 280348854}
+    scoreThreshold: 100
+  - enemies: []
+    normalEnemies:
+    - enemyPrefab: {fileID: 0}
+      normalEnemyPrefab: {fileID: 3901229786317164310, guid: 497dd49a5ea38b545817c2d2394b4b80,
+        type: 3}
+      spawnRate: 0
+      spawnPoints:
+      - {fileID: 280348854}
+    scoreThreshold: 300
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  - enemies: []
+    normalEnemies: []
+    scoreThreshold: 0
+  spawnFillerRunning: 0
+  mobCap: 0
+  gameManager: {fileID: 0}
+  spawnManager: {fileID: 0}
+  upgradesManager: {fileID: 0}
+  upgradeList: {fileID: 0}
+--- !u!4 &1296572299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296572297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.54623747, y: 0.009944886, z: 17.527483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1304858351
 GameObject:
   m_ObjectHideFlags: 0
@@ -28007,3 +28128,4 @@ SceneRoots:
   - {fileID: 1597661434}
   - {fileID: 1100752371}
   - {fileID: 803062542}
+  - {fileID: 1296572299}

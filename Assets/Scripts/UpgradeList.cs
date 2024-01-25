@@ -9,7 +9,7 @@ public class UpgradeList : MonoBehaviour
     private SpawnManager spawnManager;
     public GameObject upgradesPanel;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
-
+    public bool upgradeSelected = false;
     void GetReferences()
     {
         upgradesPanel = GameObject.Find("UpgradesPanel");
@@ -25,7 +25,8 @@ public class UpgradeList : MonoBehaviour
         Debug.Log("Shooting Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
-    }
+        upgradeSelected = true;
+}
     public void TauntCoolDown()
     {
         GetReferences();
@@ -33,6 +34,7 @@ public class UpgradeList : MonoBehaviour
         Debug.Log("Taunt Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
+        upgradeSelected = true;
     }
 
     public void MovementSpeed()
@@ -43,6 +45,7 @@ public class UpgradeList : MonoBehaviour
         taunterController.speed += 1;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
+        upgradeSelected = true;
     }
 
     public void PiercingAmmo()
@@ -57,6 +60,7 @@ public class UpgradeList : MonoBehaviour
             bulletScript.SetHealth(2f);
             upgradesPanel.SetActive(false);
             Time.timeScale = 1;
+            upgradeSelected = true;
         }
     }
     public void PowerUpSpawnRate()
@@ -66,5 +70,6 @@ public class UpgradeList : MonoBehaviour
         spawnManager.powerUp_spawnRate -= 1;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
+        upgradeSelected = true;
     }   
 }
