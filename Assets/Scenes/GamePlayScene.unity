@@ -9108,7 +9108,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -1, y: 6, z: 0}
@@ -9132,7 +9132,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 13, y: 6, z: 0}
@@ -17534,59 +17534,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - enemies:
+    - enemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
+        type: 3}
+    specEnemies: []
+    scoreThreshold: 100
+  - enemies:
     - enemyPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
         type: 3}
-      normalEnemyPrefab: {fileID: 0}
-      spawnRate: 3
-      spawnPoints:
-      - {fileID: 280348856}
-      - {fileID: 280348855}
-      - {fileID: 280348854}
-    normalEnemies:
-    - enemyPrefab: {fileID: 0}
-      normalEnemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
+    - enemyPrefab: {fileID: 3810393701880755627, guid: 291e95918a408e84cbfe73a3a011b0b5,
         type: 3}
-      spawnRate: 0.5
-      spawnPoints:
-      - {fileID: 280348856}
-      - {fileID: 280348855}
-      - {fileID: 280348854}
-    scoreThreshold: 100
-  - enemies: []
-    normalEnemies:
-    - enemyPrefab: {fileID: 0}
-      normalEnemyPrefab: {fileID: 3901229786317164310, guid: 497dd49a5ea38b545817c2d2394b4b80,
-        type: 3}
-      spawnRate: 0
-      spawnPoints:
-      - {fileID: 280348854}
+    specEnemies: []
     scoreThreshold: 300
   - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
+    specEnemies: []
+    scoreThreshold: 500
   - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
+    specEnemies: []
+    scoreThreshold: 750
   - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
+    specEnemies: []
+    scoreThreshold: 1000
   - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
+    specEnemies: []
+    scoreThreshold: 1300
   - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
+    specEnemies: []
+    scoreThreshold: 1600
   - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
-  - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
-  - enemies: []
-    normalEnemies: []
-    scoreThreshold: 0
+    specEnemies: []
+    scoreThreshold: 2000
+  fillerSpawnPoints:
+  - {fileID: 280348856}
+  - {fileID: 280348855}
+  - {fileID: 280348854}
   spawnFillerRunning: 0
-  mobCap: 0
   gameManager: {fileID: 0}
   spawnManager: {fileID: 0}
   upgradesManager: {fileID: 0}

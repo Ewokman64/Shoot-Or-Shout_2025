@@ -82,13 +82,13 @@ public class SpawnManager : MonoBehaviour
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
 
-    public SpawnManagerNew spawnManagerNew;
+    public SpawnFillerEnemies spawnFillerEnemies;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
         waves_Dungeon = GetComponent<Waves_Dungeon>();
-        spawnManagerNew = GameObject.Find("SpawnManagerNew").GetComponent<SpawnManagerNew>();
+        spawnFillerEnemies = GameObject.Find("SpawnManagerNew").GetComponent<SpawnFillerEnemies>();
         enemyLimitReached = false;
         enemyLimit = 15;
     }
@@ -111,8 +111,7 @@ public class SpawnManager : MonoBehaviour
     {
         //StartCoroutine(ZombieSpawn());
         //waves_Dungeon.Wave1();
-        //StartCoroutine(spawnManagerNew.SpawnWaves());
-        StartCoroutine(spawnManagerNew.SpawnFiller());
+        StartCoroutine(spawnFillerEnemies.SpawnWaves());
         StartCoroutine(PowerUpSpawn());
         SpawnPlayers();
         powerUps = 0;
