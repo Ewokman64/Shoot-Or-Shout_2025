@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Wave
 {
     public EnemySpawnInfo[] enemies; //we made a class below, containing newly declared stuff. then we reference that class here and call it enemies
     public SpecEnemySpawnInfo[] specEnemies;
+    public RangedEnemySpawnInfo[] rangedEnemies;
     public int scoreThreshold; // Score at which the wave is considered complete
 }
 
@@ -27,24 +29,36 @@ public class EnemySpawnInfo
 public class SpecEnemySpawnInfo
 {
     public GameObject specEnemyPrefab;
-    public Transform[] specEnemySpawnPoints; // Array of spawn points for this enemy
 
-    public SpecEnemySpawnInfo(GameObject specPrefab, Transform[] specSpawnPoints)
+    public SpecEnemySpawnInfo(GameObject specPrefab)
     {
         specEnemyPrefab = specPrefab;
-        specEnemySpawnPoints = specSpawnPoints;
     }
 }
 
+[System.Serializable]
+public class RangedEnemySpawnInfo
+{
+    public GameObject rangedEnemyPrefab;
+
+    public RangedEnemySpawnInfo(GameObject rangedPrefab)
+    {
+        rangedEnemyPrefab = rangedPrefab;
+    }
+}
 public class SpawnFillerEnemies : MonoBehaviour
 {
     public Wave[] waves;
-    private int currentWaveIndex = 0;
+    public int currentWaveIndex = 0;
 
     private float spawnRate = 0.6f;
     private float specSpawnRate = 5f;
-    public Transform[] fillerSpawnPoints;
+
+    public Transform[] spawnPoints;
     public Transform[] specSpawnPoints;
+    //FILLER AND RANGED can use same spawnpoints
+    public EnemySpawner[] rangedSpawners;
+
     public bool spawnFillerRunning = false;
     private int currentScore = 0;
 
@@ -56,6 +70,7 @@ public class SpawnFillerEnemies : MonoBehaviour
 
     void Start()
     {
+        
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
@@ -78,9 +93,9 @@ public class SpawnFillerEnemies : MonoBehaviour
                   EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
 
                   // Get a random spawn point for the current enemy
-                  int randomSpawnPoint = UnityEngine.Random.Range(0, fillerSpawnPoints.Length);
+                  int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
 
-                  GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, fillerSpawnPoints[randomSpawnPoint].position, Quaternion.identity);
+                  GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
                   spawnManager.AddEnemyToList(enemy);
 
                   // Use the spawn rate of the selected enemy for the delay
@@ -118,9 +133,10 @@ public class SpawnFillerEnemies : MonoBehaviour
         {
             //declaring a Wave variable that checks for the current index we have
             Wave currentWave = waves[currentWaveIndex];
+
             // Continue spawning enemies until the score reaches the threshold
             while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
-            {
+            {  
                 // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
                 SpecEnemySpawnInfo selectedEnemy = SelectSpecialEnemy(currentWave.specEnemies);
 
@@ -158,4 +174,60 @@ public class SpawnFillerEnemies : MonoBehaviour
             return null;
         }
     }
+
+    /*public IEnumerator SpawnRanged()
+    {
+        rangedSpawners = GetComponentsInChildren<EnemySpawner>();
+
+        //looking for the first available spawnpoint that doesn't contain a spitter
+        //EnemySpawner spawner = rangedSpawners.FirstOrDefault(enemySpawner => enemySpawner.spitter == null);
+
+        
+
+        while (currentWaveIndex < waves.Length) //while the waveIndex is smaller then the lenght we set in the inspector, this repeats
+        {
+            //declaring a Wave variable that checks for the current index we have
+            Wave currentWave = waves[currentWaveIndex];
+
+            // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
+            RangedEnemySpawnInfo selectedEnemy = SelectRangedEnemy(currentWave.rangedEnemies);
+
+            Transform[] r_spawnpoints = rangedSpawners.FirstOrDefault(selectedEnemy => selectedEnemy.rangedPrefab == null);
+            // Continue spawning enemies until the score reaches the threshold
+            while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached && spawner != null)
+            {
+                // Get a random spawn point for the current enemy
+                int randomSpawnPoint = UnityEngine.Random.Range(0, rangedSpawners.Length);
+
+                GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, rangedSpawners[randomSpawnPoint].transform.position, Quaternion.identity);
+                spawnManager.AddEnemyToList(rangedEnemy);
+
+                // Use the spawn rate of the selected enemy for the delay
+                yield return new WaitForSeconds(specSpawnRate);
+            }
+            if (currentScore >= currentWave.scoreThreshold)
+            {
+                Debug.Log("Score Treshold reached!");
+                gameManager.ClearMap();
+                upgradesManager.OfferUpgrades();
+                currentWaveIndex++;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+    RangedEnemySpawnInfo SelectRangedEnemy(RangedEnemySpawnInfo[] rangedEnemies) //we grab the enemies list from our class called EnemySpawnInfo (named it SelectRandomEnemy)
+    {
+        if (rangedEnemies != null)
+        {
+            // Randomly select an enemy prefab and return its spawn rate and spawn points
+            return rangedEnemies[Random.Range(0, rangedEnemies.Length)];
+        }
+        else
+        {
+            return null;
+        }
+    }*/
 }

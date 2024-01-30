@@ -29,6 +29,7 @@ TagManager:
   - FinalPush
   - BrainCannon
   - Laser
+  - SpitterSpawn
   layers:
   - Default
   - TransparentFX

@@ -112,6 +112,8 @@ public class SpawnManager : MonoBehaviour
         //StartCoroutine(ZombieSpawn());
         //waves_Dungeon.Wave1();
         StartCoroutine(spawnFillerEnemies.SpawnWaves());
+        StartCoroutine(spawnFillerEnemies.SpawnSpecialWaves());
+        //StartCoroutine(spawnFillerEnemies.SpawnRanged());
         StartCoroutine(PowerUpSpawn());
         SpawnPlayers();
         powerUps = 0;
