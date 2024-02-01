@@ -54,10 +54,13 @@ public class SpawnFillerEnemies : MonoBehaviour
     private float spawnRate = 0.6f;
     private float specSpawnRate = 5f;
 
+    //SpawnPoints of filler and ranged enemies
     public Transform[] spawnPoints;
+    //SpawnPoints of Special enemies
     public Transform[] specSpawnPoints;
-    //FILLER AND RANGED can use same spawnpoints
-    public EnemySpawner[] rangedSpawners;
+
+    // Declare a List to keep track of occupied spawn points
+    public List<Transform> occupiedSpawnPoints = new List<Transform>();
 
     public bool spawnFillerRunning = false;
     private int currentScore = 0;
@@ -66,6 +69,7 @@ public class SpawnFillerEnemies : MonoBehaviour
     public SpawnManager spawnManager;
     public UpgradesManager upgradesManager;
     public UpgradeList upgradeList;
+
 
 
     void Start()
@@ -81,26 +85,40 @@ public class SpawnFillerEnemies : MonoBehaviour
         currentScore = gameManager.score;
     }
     public IEnumerator SpawnWaves()
-    { 
+    {
+        yield return new WaitForSeconds(3f);
+
+        //GAME FREEZES AFTER THIS 3 SECONDS. THIS COROUTINE IS FIXED
+
         while (currentWaveIndex < waves.Length) //while the waveIndex is smaller then the lenght we set in the inspector, this repeats
         {
             //declaring a Wave variable that checks for the current index we have
             Wave currentWave = waves[currentWaveIndex];
-            // Continue spawning enemies until the score reaches the threshold
-            while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
+
+            if (currentWave.enemies != null && currentWave.enemies.Length > 0)
             {
-                  // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
-                  EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
+                Debug.Log("There are filler enemies in the list.");
+                // Continue spawning enemies until the score reaches the threshold
+                while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
+                {
+                    // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
+                    EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
 
-                  // Get a random spawn point for the current enemy
-                  int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+                    // Get a random spawn point for the current enemy
+                    int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
 
-                  GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
-                  spawnManager.AddEnemyToList(enemy);
+                    GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+                    spawnManager.AddEnemyToList(enemy);
 
-                  // Use the spawn rate of the selected enemy for the delay
-                  yield return new WaitForSeconds(spawnRate);
+                    // Use the spawn rate of the selected enemy for the delay
+                    yield return new WaitForSeconds(spawnRate);
+                }
             }
+            else
+            {
+                // If there are no ranged enemies in the current wave, simply yield null to wait until the wave is complete
+                yield return null;
+            } 
             if (currentScore >= currentWave.scoreThreshold)
             {
                 Debug.Log("Score Treshold reached!");
@@ -113,6 +131,7 @@ public class SpawnFillerEnemies : MonoBehaviour
                 yield return null;
             }
         }
+        
     }
     EnemySpawnInfo SelectFillerEnemy(EnemySpawnInfo[] enemies) //we grab the enemies list from our class called EnemySpawnInfo (named it SelectRandomEnemy)
     {
@@ -134,21 +153,26 @@ public class SpawnFillerEnemies : MonoBehaviour
             //declaring a Wave variable that checks for the current index we have
             Wave currentWave = waves[currentWaveIndex];
 
-            // Continue spawning enemies until the score reaches the threshold
-            while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
-            {  
-                // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
-                SpecEnemySpawnInfo selectedEnemy = SelectSpecialEnemy(currentWave.specEnemies);
+            if (currentWave.specEnemies != null && currentWave.specEnemies.Length > 0)
+            {
+                Debug.Log("There are special enemies in the list.");
+                // Continue spawning enemies until the score reaches the threshold
+                while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
+                {
+                    // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
+                    SpecEnemySpawnInfo selectedEnemy = SelectSpecialEnemy(currentWave.specEnemies);
 
-                // Get a random spawn point for the current enemy
-                int randomSpawnPoint = UnityEngine.Random.Range(0, specSpawnPoints.Length);
+                    // Get a random spawn point for the current enemy
+                    int randomSpawnPoint = UnityEngine.Random.Range(0, specSpawnPoints.Length);
 
-                GameObject specialEnemy = Instantiate(selectedEnemy.specEnemyPrefab, specSpawnPoints[randomSpawnPoint].position, Quaternion.identity);
-                spawnManager.AddEnemyToList(specialEnemy);
-
-                // Use the spawn rate of the selected enemy for the delay
-                yield return new WaitForSeconds(specSpawnRate);
+                    GameObject specialEnemy = Instantiate(selectedEnemy.specEnemyPrefab, specSpawnPoints[randomSpawnPoint].position, Quaternion.identity);
+                    spawnManager.AddEnemyToList(specialEnemy);    
+                }
             }
+            else
+            {
+                yield return null;
+            }    
             if (currentScore >= currentWave.scoreThreshold)
             {
                 Debug.Log("Score Treshold reached!");
@@ -161,6 +185,7 @@ public class SpawnFillerEnemies : MonoBehaviour
                 yield return null;
             }
         }
+        
     }
     SpecEnemySpawnInfo SelectSpecialEnemy(SpecEnemySpawnInfo[] specEnemies) //we grab the enemies list from our class called EnemySpawnInfo (named it SelectRandomEnemy)
     {
@@ -175,39 +200,62 @@ public class SpawnFillerEnemies : MonoBehaviour
         }
     }
 
-    /*public IEnumerator SpawnRanged()
+    // Inside your IsSpawnPointOccupied function
+    bool IsSpawnPointOccupied(Transform spawnPoint)
     {
-        rangedSpawners = GetComponentsInChildren<EnemySpawner>();
-
-        //looking for the first available spawnpoint that doesn't contain a spitter
-        //EnemySpawner spawner = rangedSpawners.FirstOrDefault(enemySpawner => enemySpawner.spitter == null);
-
-        
-
-        while (currentWaveIndex < waves.Length) //while the waveIndex is smaller then the lenght we set in the inspector, this repeats
+        // Check if the spawn point is in the list of occupied spawn points
+        //A.K.A. checks if the occupiedSpawnPoints array returns the randomly picked spawnpint found in the SpawnRanged Coroutine
+        return occupiedSpawnPoints.Contains(spawnPoint);
+    }
+    public IEnumerator SpawnRanged()
+    {
+        while (currentWaveIndex < waves.Length)
         {
-            //declaring a Wave variable that checks for the current index we have
             Wave currentWave = waves[currentWaveIndex];
 
-            // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
-            RangedEnemySpawnInfo selectedEnemy = SelectRangedEnemy(currentWave.rangedEnemies);
-
-            Transform[] r_spawnpoints = rangedSpawners.FirstOrDefault(selectedEnemy => selectedEnemy.rangedPrefab == null);
-            // Continue spawning enemies until the score reaches the threshold
-            while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached && spawner != null)
+            // Check if there are ranged enemies in the current wave
+            if (currentWave.rangedEnemies != null && currentWave.rangedEnemies.Length > 0)
             {
-                // Get a random spawn point for the current enemy
-                int randomSpawnPoint = UnityEngine.Random.Range(0, rangedSpawners.Length);
+                Debug.Log("There are ranged enemies in the list.");
+                while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
+                {
+                    Debug.Log("Getting infos for spawning ranged enemies");
 
-                GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, rangedSpawners[randomSpawnPoint].transform.position, Quaternion.identity);
-                spawnManager.AddEnemyToList(rangedEnemy);
+                    RangedEnemySpawnInfo selectedEnemy = SelectRangedEnemy(currentWave.rangedEnemies);
 
-                // Use the spawn rate of the selected enemy for the delay
-                yield return new WaitForSeconds(specSpawnRate);
+                    int randomSpawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
+
+                    // Check if the spawn point is occupied
+                    bool isSpawnPointOccupied = IsSpawnPointOccupied(spawnPoints[randomSpawnPointIndex]);
+
+                    if (!isSpawnPointOccupied)
+                    {
+                        Debug.Log("Spawn point available! Time to spawn");
+                        GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
+                        spawnManager.AddEnemyToList(rangedEnemy);
+
+                        // Add the spawn point to the list of occupied spawn points
+                        occupiedSpawnPoints.Add(spawnPoints[randomSpawnPointIndex]);
+
+                        // Use the spawn rate of the selected enemy for the delay 
+                    }
+                    else
+                    {
+                        Debug.Log("Point occupied, looking for a new spawn point");
+                        // If the spawn point is occupied, no need to choose another random spawn point here
+                    }
+                }
             }
+            else
+            {
+                // If there are no ranged enemies in the current wave, simply yield null to wait until the wave is complete
+                yield return null;
+            }
+
             if (currentScore >= currentWave.scoreThreshold)
             {
-                Debug.Log("Score Treshold reached!");
+                Debug.Log("Score Threshold reached!");
+                occupiedSpawnPoints.Clear();
                 gameManager.ClearMap();
                 upgradesManager.OfferUpgrades();
                 currentWaveIndex++;
@@ -217,11 +265,13 @@ public class SpawnFillerEnemies : MonoBehaviour
                 yield return null;
             }
         }
+        
     }
     RangedEnemySpawnInfo SelectRangedEnemy(RangedEnemySpawnInfo[] rangedEnemies) //we grab the enemies list from our class called EnemySpawnInfo (named it SelectRandomEnemy)
     {
         if (rangedEnemies != null)
         {
+            Debug.Log("Ranged Enemy Prefab Selected");
             // Randomly select an enemy prefab and return its spawn rate and spawn points
             return rangedEnemies[Random.Range(0, rangedEnemies.Length)];
         }
@@ -229,5 +279,5 @@ public class SpawnFillerEnemies : MonoBehaviour
         {
             return null;
         }
-    }*/
+    }
 }
