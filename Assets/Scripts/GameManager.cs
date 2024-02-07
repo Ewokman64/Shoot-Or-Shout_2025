@@ -6,6 +6,8 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    public List<GameObject> spawnedEnemies = new List<GameObject>();
+
     private SpawnManager spawnManager;
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
@@ -61,7 +63,8 @@ public class GameManager : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
+        UpdateEnemyList();
         scoreManager();
         if (bossDied)
         {
@@ -103,6 +106,30 @@ public class GameManager : MonoBehaviour
         {
             gameIsPaused = false;
         }
+    }
+    public void AddEnemyToList(GameObject enemy)
+    {
+        spawnedEnemies.Add(enemy);
+    }
+    public void UpdateEnemyList()
+    {
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            // Check if the enemy GameObject is null (destroyed)
+            if (spawnedEnemies[i] == null)
+            {
+                // Enemy has been destroyed
+                Debug.Log("Enemy " + i + " has been destroyed.");
+
+                // Optionally, you can remove the destroyed enemy from the list
+                spawnedEnemies.RemoveAt(i);
+                //Spitter is not getting removed
+            }
+        }
+    }
+    public void RemovePointFromOccupied()
+    {
+        //IF the removed enemy is ranged, remove one transform from the occupied spawnlist
     }
     public void StartGame()
     {

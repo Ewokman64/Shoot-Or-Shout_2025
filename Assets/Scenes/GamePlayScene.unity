@@ -1454,18 +1454,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 338807900}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &347095189 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1492141964456634724, guid: 8401c900788b87d45bbc54e4d608db9f,
-    type: 3}
-  m_PrefabInstance: {fileID: 280348850}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a500c3ef9dc46742a35dca6d10e24fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &347095190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2507126050236503773, guid: 8401c900788b87d45bbc54e4d608db9f,
@@ -9138,7 +9126,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 13, y: 6, z: 0}
@@ -17604,17 +17592,29 @@ MonoBehaviour:
     - rangedEnemyPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
         type: 3}
     scoreThreshold: 300
-  - enemies: []
-    specEnemies: []
+  - enemies:
+    - enemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
+        type: 3}
+    specEnemies:
+    - specEnemyPrefab: {fileID: 2664364914138761654, guid: 3732e4e986ab0ed47a07d03fae97056b,
+        type: 3}
     rangedEnemies: []
     scoreThreshold: 500
   - enemies: []
-    specEnemies: []
+    specEnemies:
+    - specEnemyPrefab: {fileID: 3810393701880755627, guid: 291e95918a408e84cbfe73a3a011b0b5,
+        type: 3}
     rangedEnemies: []
     scoreThreshold: 750
-  - enemies: []
-    specEnemies: []
-    rangedEnemies: []
+  - enemies:
+    - enemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
+        type: 3}
+    specEnemies:
+    - specEnemyPrefab: {fileID: 2664364914138761654, guid: 3732e4e986ab0ed47a07d03fae97056b,
+        type: 3}
+    rangedEnemies:
+    - rangedEnemyPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
+        type: 3}
     scoreThreshold: 1000
   - enemies: []
     specEnemies: []
@@ -17636,15 +17636,17 @@ MonoBehaviour:
   specSpawnPoints:
   - {fileID: 836658801}
   - {fileID: 423373834}
-  rangedSpawners:
-  - {fileID: 1917643233}
-  - {fileID: 1693364490}
-  - {fileID: 347095189}
+  occupiedSpawnPoints: []
   spawnFillerRunning: 0
   gameManager: {fileID: 0}
   spawnManager: {fileID: 0}
   upgradesManager: {fileID: 0}
   upgradeList: {fileID: 0}
+  currentWave:
+    enemies: []
+    specEnemies: []
+    rangedEnemies: []
+    scoreThreshold: 0
 --- !u!4 &1296572299
 Transform:
   m_ObjectHideFlags: 0
@@ -24609,18 +24611,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 8, y: 8}
   m_UseGraphicAlpha: 1
---- !u!114 &1693364490 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8811722138362719275, guid: 8401c900788b87d45bbc54e4d608db9f,
-    type: 3}
-  m_PrefabInstance: {fileID: 280348850}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a500c3ef9dc46742a35dca6d10e24fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1693364491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 510003807668524240, guid: 8401c900788b87d45bbc54e4d608db9f,
@@ -26823,18 +26813,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1896662794}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1917643233 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6157506015870219830, guid: 8401c900788b87d45bbc54e4d608db9f,
-    type: 3}
-  m_PrefabInstance: {fileID: 280348850}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a500c3ef9dc46742a35dca6d10e24fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1917643234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4647006192594315190, guid: 8401c900788b87d45bbc54e4d608db9f,
