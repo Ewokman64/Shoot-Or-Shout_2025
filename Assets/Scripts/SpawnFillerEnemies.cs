@@ -98,7 +98,7 @@ public class SpawnFillerEnemies : MonoBehaviour
     }
     private void Update()
     {
-        currentScore = gameManager.score; 
+        currentScore = gameManager.score;
     }
     public IEnumerator SpawnWaves()
     {
@@ -125,13 +125,11 @@ public class SpawnFillerEnemies : MonoBehaviour
 
                         GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
                         gameManager.AddEnemyToList(enemy);
-
                         yield return new WaitForSeconds(spawnRate);
                     }
                 }
                 else
-                {
-                    
+                {   
                     yield return null;
                 }
             }
@@ -226,29 +224,41 @@ public class SpawnFillerEnemies : MonoBehaviour
                         Debug.Log("Getting infos for spawning ranged enemies");
 
                         RangedEnemySpawnInfo selectedEnemy = SelectRangedEnemy(currentWave.rangedEnemies);
+                        bool spawned = false;
+                        bool isThereSpace = true;
 
-                        int randomSpawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
-                        // Check if the spawn point is occupied
-                        bool isSpawnPointOccupied = IsSpawnPointOccupied(spawnPoints[randomSpawnPointIndex]);
-
-                        if (!isSpawnPointOccupied)
+                        if (occupiedSpawnPoints.Count == 3)
                         {
-                            Debug.Log("Spawn point available! Time to spawn");
-                            GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, spawnPoints[randomSpawnPointIndex].position, Quaternion.identity);
-                            gameManager.AddEnemyToList(rangedEnemy);
-
-                            // Add the spawn point to the list of occupied spawn points
-                            occupiedSpawnPoints.Add(spawnPoints[randomSpawnPointIndex]);
-
-                            //NEED TO REMOVE FROM LIST IF A BULLET KILLS A RANGED ENEMY
-                            //NEEDS A GAMEOBJECT LIST WITH THE RANGED ENEMIES.
-                            //IF RANGED ENEMY GETS REMOVED FROM LIST, REMOVE OCCUPIED SPAWNPOINT
+                            isThereSpace = false;
                         }
-                        else
+                        
+                        while (!spawned && isThereSpace)
                         {
-                            Debug.Log("Point occupied, looking for a new spawn point");
-                            // If the spawn point is occupied, no need to choose another random spawn point here
-                            yield return new WaitForSeconds(0.1f);
+                            int randomSpawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
+                            Transform selectedSpawnPoint = spawnPoints[randomSpawnPointIndex];
+
+                            // Check if the spawn point is occupied
+                            bool isSpawnPointOccupied = IsSpawnPointOccupied(selectedSpawnPoint);
+
+                            if (!isSpawnPointOccupied)
+                            {
+                                Debug.Log("Spawn point available! Time to spawn");
+                                GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, selectedSpawnPoint.position, Quaternion.identity);
+                                gameManager.AddEnemyToList(rangedEnemy);
+
+                                // Associate the spawned enemy with its spawn point
+                                rangedEnemy.GetComponent<RangedEnemy>().associatedSpawnPoint = selectedSpawnPoint;
+
+                                // Add the spawn point to the list of occupied spawn points
+                                occupiedSpawnPoints.Add(selectedSpawnPoint);
+
+                                spawned = true; // Set spawned to true to break out of the loop
+                            }
+                            else
+                            {
+                                Debug.Log("Point occupied, looking for a new spawn point");
+                                yield return new WaitForSeconds(0.1f);
+                            }
                         }
                         yield return new WaitForSeconds(rangedSpawnRate);
                     }
@@ -264,24 +274,18 @@ public class SpawnFillerEnemies : MonoBehaviour
                 yield return null;
             }
         }
-
     }
-
     bool IsSpawnPointOccupied(Transform spawnPoint)
     {
         return occupiedSpawnPoints.Contains(spawnPoint);
     }
 
-    void OnEnemyDestroyed(GameObject enemy)
+    public void OnEnemyDestroyed(GameObject enemy)
     {
-        // Remove the spawn point associated with the destroyed enemy from the list of occupied spawn points
-        foreach (Transform spawnPoint in spawnPoints)
+        RangedEnemy rangedEnemy = enemy.GetComponent<RangedEnemy>();
+        if (rangedEnemy != null && rangedEnemy.associatedSpawnPoint != null)
         {
-            if (spawnPoint.position == enemy.transform.position)
-            {
-                occupiedSpawnPoints.Remove(spawnPoint);
-                break;
-            }
+            occupiedSpawnPoints.Remove(rangedEnemy.associatedSpawnPoint);
         }
     }
     RangedEnemySpawnInfo SelectRangedEnemy(RangedEnemySpawnInfo[] rangedEnemies) //we grab the enemies list from our class called EnemySpawnInfo (named it SelectRandomEnemy)

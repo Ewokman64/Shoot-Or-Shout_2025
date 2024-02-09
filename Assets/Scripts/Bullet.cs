@@ -36,6 +36,12 @@ public class Bullet : MonoBehaviour
         int specialEnemies = LayerMask.NameToLayer("SpecialEnemies");
         int bossEnemies = LayerMask.NameToLayer("BossEnemies");
 
+        if (other.gameObject.CompareTag("Spitter"))
+        {
+            SpawnFillerEnemies spawnfillerenemies;
+            spawnfillerenemies = GameObject.Find("SpawnManagerNew").GetComponent<SpawnFillerEnemies>();
+            spawnfillerenemies.OnEnemyDestroyed(other.gameObject);
+        }
         if (other.gameObject.layer == normalEnemies || other.gameObject.layer == specialEnemies || other.gameObject.CompareTag("Shield"))
         {
             gameManager.stallingTimer = 10;

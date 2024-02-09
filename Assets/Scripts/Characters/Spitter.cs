@@ -12,6 +12,7 @@ public class Spitter : MonoBehaviour
 
     private GameManager gameManager;
 
+
     // Start is called before the first frame update
     void Start()
     {
