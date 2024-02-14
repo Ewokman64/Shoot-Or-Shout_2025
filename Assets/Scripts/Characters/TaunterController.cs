@@ -14,6 +14,7 @@ public class TaunterController : MonoBehaviour
     private AudioSource shoutAudio;
     private GameManager gameManager;
     private AudioManager audioManager;
+    private CountDown countDown;
 
     //Anims, VFX & SFX
     public AudioClip shout;
@@ -25,6 +26,7 @@ public class TaunterController : MonoBehaviour
     {
         shoutAudio = GetComponent<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        countDown = gameManager.GetComponent<CountDown>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 

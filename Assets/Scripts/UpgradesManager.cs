@@ -16,10 +16,13 @@ public class UpgradesManager : MonoBehaviour
     public Button button1;
     public Button button2;
     public Button button3;
+    public bool wasUpgradeChosen = false;
+    SpawnEnemies waveManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -31,6 +34,9 @@ public class UpgradesManager : MonoBehaviour
 
     public void OfferUpgrades()
     {
+        
+        waveManager.StopAllCoroutines();
+        wasUpgradeChosen = false;
         // Update the last threshold to avoid repeated triggering
         //lastScoreThreshold = currentScoreThreshold;
 
@@ -64,6 +70,8 @@ public class UpgradesManager : MonoBehaviour
             {
                 // Simulate a button click
                 button1.onClick.Invoke();
+                waveManager.StartWaves();
+                wasUpgradeChosen = true;
             }
             else
             {
@@ -78,6 +86,8 @@ public class UpgradesManager : MonoBehaviour
             {
                 // Simulate a button click
                 button2.onClick.Invoke();
+                waveManager.StartWaves();
+                wasUpgradeChosen = true;
             }
             else
             {
@@ -92,6 +102,8 @@ public class UpgradesManager : MonoBehaviour
             {
                 // Simulate a button click
                 button3.onClick.Invoke();
+                waveManager.StartWaves();
+                wasUpgradeChosen = true;
             }
             else
             {

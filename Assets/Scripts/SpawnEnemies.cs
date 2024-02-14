@@ -46,7 +46,7 @@ public class RangedEnemySpawnInfo
         rangedEnemyPrefab = rangedPrefab;
     }
 }
-public class SpawnFillerEnemies : MonoBehaviour
+public class SpawnEnemies : MonoBehaviour
 {
     public Wave[] waves;
     public int currentWaveIndex = 0;
@@ -71,13 +71,18 @@ public class SpawnFillerEnemies : MonoBehaviour
     public UpgradesManager upgradesManager;
     public UpgradeList upgradeList;
 
+    public bool areCoroutinesActive = false;
+    public bool enemyLimitReached;
+    public int enemyCount;
+    public int enemyLimit;
+    public List<GameObject> enemies = new List<GameObject>();
     //declaring a Wave variable that checks for the current index we have
     public Wave currentWave;
 
 
     public void Start()
     {
-        
+        enemyLimit = 15;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
@@ -99,12 +104,33 @@ public class SpawnFillerEnemies : MonoBehaviour
     private void Update()
     {
         currentScore = gameManager.score;
+        //IF THE UPGRADE WINDOW POPS UP, STOP ALL COROUTINES
+        /*if (upgradesManager.upgradePanel.activeSelf && areCoroutinesActive)
+        {
+            StopCoroutine(SpawnFiller());
+            StopCoroutine(SpawnSpecials());
+            StopCoroutine(SpawnRanged());
+            areCoroutinesActive = false;
+        }*/
+        //else if game resumes after power pickup, start the coroutines again
+        /*else if (upgradesManager.wasUpgradeChosen)
+        {
+            StartWaves();
+            upgradesManager.wasUpgradeChosen = false;
+        }*/
     }
-    public IEnumerator SpawnWaves()
-    {
-        yield return new WaitForSeconds(3f);
 
-        //GAME FREEZES fairly randomly maybe once spawn limit reached again?
+    public void StartWaves()
+    {
+        StartCoroutine(SpawnFiller());
+        StartCoroutine(SpawnSpecials());
+        StartCoroutine(SpawnRanged());
+        areCoroutinesActive = true;
+    }
+    public IEnumerator SpawnFiller()
+    {
+        Debug.Log("Spawn Started");
+        yield return new WaitForSeconds(3f);
 
         while (currentWaveIndex < waves.Length) //while the waveIndex is smaller then the lenght we set in the inspector, this repeats
         {
@@ -115,8 +141,10 @@ public class SpawnFillerEnemies : MonoBehaviour
                 Debug.Log("There are filler enemies in the list.");
                 if (!spawnManager.enemyLimitReached)
                 {
+                    Debug.Log("Enemy limit is not reached, we can spawn");
                     while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
                     {
+                        Debug.Log("Getting infos ready for filler spawn");
                         // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
                         EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
 
@@ -153,7 +181,7 @@ public class SpawnFillerEnemies : MonoBehaviour
         }    
     }
 
-    public IEnumerator SpawnSpecialWaves()
+    public IEnumerator SpawnSpecials()
     {
         yield return new WaitForSeconds(3f);
 
@@ -208,6 +236,7 @@ public class SpawnFillerEnemies : MonoBehaviour
     }
     public IEnumerator SpawnRanged()
     {
+        Debug.Log("Ranged Spawn Started");
         yield return new WaitForSeconds(3f);
 
         while (currentWaveIndex < waves.Length)

@@ -7,13 +7,13 @@ public class Detector : MonoBehaviour
 {
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
-    public SpawnManager spawnManager;
+    public SpawnEnemies waveManager;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
-        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
     }
 
     // Update is called once per frame
@@ -26,13 +26,13 @@ public class Detector : MonoBehaviour
         int targetLayer = LayerMask.NameToLayer("Enemies");
         if (other.gameObject.layer == targetLayer && !other.gameObject.CompareTag("BigEnemy"))
         {
-            spawnManager.enemyCount--;
+            waveManager.enemyCount--;
             wallHealthBar.maxHealth--;
             wallHealthBar.UpdateHealthBar();
         }
         else if (other.gameObject.layer == targetLayer && other.gameObject.CompareTag("BigEnemy"))
         {
-            spawnManager.enemyCount--;
+            waveManager.enemyCount--;
             wallHealthBar.maxHealth -= 3;
             wallHealthBar.UpdateHealthBar();
         }

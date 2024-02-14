@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameManager gameManager;
     private UpgradeList upgradeList;
     private UpgradesManager upgradesManager;
+    private CountDown countDown;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public float stallingTimer;
     //UI
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 0;
         isShooterChased = true;
         isStallingActive = false;
         hasGameStarted = false;
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
         upgradeList = GameObject.Find("UpgradesManager").GetComponent<UpgradeList>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+        countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;
         // Access the Bullet script without instantiating a visible GameObject
         Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
@@ -134,10 +137,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         //"previousEasyScore" key is getting loaded"
+        SpawnEnemies waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();  
         currentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
-
+        waveManager.StartWaves();
         spawnManager.StartSpawnManager();
-
+        Time.timeScale = 1;
         isTaunterChased = false;
         isShooterChased = true;
         hasGameStarted = true;
@@ -150,6 +154,7 @@ public class GameManager : MonoBehaviour
         gmAudio.Play();
         
         StartCoroutine(StartStallingPenalty());
+        countDown.GetPlayerCD();
     }
     public void GameOver()
     {

@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour
     public int enemyLimit;
     public bool enemyLimitReached;
     public List<GameObject> enemies = new List<GameObject>();
-    //public bool nextWaveReady = false;
+    public bool nextWaveReady = false;
 
     //MOB CHECKS
     public bool newWaveStarted;
@@ -53,12 +53,12 @@ public class SpawnManager : MonoBehaviour
     public float bossStartDelay = 5;
     public bool bossSpawned = false;
 
-    public SpawnFillerEnemies spawnFillerEnemies;
+    public SpawnEnemies spawnFillerEnemies;
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
-        spawnFillerEnemies = GameObject.Find("SpawnManagerNew").GetComponent<SpawnFillerEnemies>();
+        spawnFillerEnemies = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         enemyLimitReached = false;
         enemyLimit = 15;
     }
@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviour
     void Update()
     {
         SpawnHandling();
-        //UpdateEnemyList();
+        UpdateEnemyList();
         enemyCount = enemies.Count;
         if (enemyCount >= enemyLimit)
         {
@@ -79,9 +79,9 @@ public class SpawnManager : MonoBehaviour
     }
     public void StartSpawnManager()
     {
-        StartCoroutine(spawnFillerEnemies.SpawnWaves());
-        StartCoroutine(spawnFillerEnemies.SpawnSpecialWaves());
-        StartCoroutine(spawnFillerEnemies.SpawnRanged());
+        //StartCoroutine(spawnFillerEnemies.SpawnWaves());
+        //StartCoroutine(spawnFillerEnemies.SpawnSpecialWaves());
+        //StartCoroutine(spawnFillerEnemies.SpawnRanged());
         StartCoroutine(PowerUpSpawn());
         SpawnPlayers();
         powerUps = 0;
@@ -140,7 +140,7 @@ public class SpawnManager : MonoBehaviour
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
         
     }
-    /*public void AddEnemyToList(GameObject enemy)
+    public void AddEnemyToList(GameObject enemy)
     {
         enemies.Add(enemy);
     }
@@ -159,5 +159,5 @@ public class SpawnManager : MonoBehaviour
                 //Spitter is not getting removed
             }
         }
-    }*/
+    }
 }

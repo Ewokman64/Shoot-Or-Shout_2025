@@ -38,8 +38,8 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("Spitter"))
         {
-            SpawnFillerEnemies spawnfillerenemies;
-            spawnfillerenemies = GameObject.Find("SpawnManagerNew").GetComponent<SpawnFillerEnemies>();
+            SpawnEnemies spawnfillerenemies;
+            spawnfillerenemies = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
             spawnfillerenemies.OnEnemyDestroyed(other.gameObject);
         }
         if (other.gameObject.layer == normalEnemies || other.gameObject.layer == specialEnemies || other.gameObject.CompareTag("Shield"))
