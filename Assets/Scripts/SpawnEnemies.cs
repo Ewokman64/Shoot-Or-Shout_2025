@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [System.Serializable]
@@ -56,30 +54,43 @@ public class SpawnEnemies : MonoBehaviour
     private float rangedSpawnRate = 3;
 
     //SpawnPoints of filler and ranged enemies
+    [HideInInspector]
     public Transform[] spawnPoints;
     //SpawnPoints of Special enemies
+    [HideInInspector]
     public Transform[] specSpawnPoints;
 
     // Declare a List to keep track of occupied spawn points
+    [HideInInspector]
     public List<Transform> occupiedSpawnPoints = new List<Transform>();
 
-    public bool spawnFillerRunning = false;
+    //public bool spawnFillerRunning = false;
     private int currentScore = 0;
 
-    public GameManager gameManager;
-    public SpawnManager spawnManager;
-    public UpgradesManager upgradesManager;
-    public UpgradeList upgradeList;
+    private GameManager gameManager;
+    private SpawnManager spawnManager;
+    private UpgradesManager upgradesManager;
+    private UpgradeList upgradeList;
 
-    public bool areCoroutinesActive = false;
-    public bool enemyLimitReached;
+    private bool areCoroutinesActive = false;
+    private bool enemyLimitReached = false;
     public int enemyCount;
     public int enemyLimit;
     public List<GameObject> enemies = new List<GameObject>();
     //declaring a Wave variable that checks for the current index we have
     public Wave currentWave;
 
-
+    public bool wavesDefeated = false;
+    public GameObject miniBoss;
+    public GameObject boss;
+    public Transform bossSpawnPoint;
+    public int scoreTreshold;
+    public bool miniBossSpawned = false;
+    public bool bossSpawned = false;
+    NightKnight nightKnightScript;
+    Horse horseScript;
+    public bool nightKnightDead = false;
+    public bool horseDead = false;
     public void Start()
     {
         enemyLimit = 15;
@@ -92,6 +103,8 @@ public class SpawnEnemies : MonoBehaviour
     {
         //assign the current index
         currentWave = waves[currentWaveIndex];
+
+        //if we reach the curent wave's score, we offe the upgrades and clear the map, then adding the next waveindex (a.k.a. next wave incoming)
         if (currentScore >= currentWave.scoreThreshold)
         {
             Debug.Log("Score Threshold reached!");
@@ -104,22 +117,56 @@ public class SpawnEnemies : MonoBehaviour
     private void Update()
     {
         currentScore = gameManager.score;
-        //IF THE UPGRADE WINDOW POPS UP, STOP ALL COROUTINES
-        /*if (upgradesManager.upgradePanel.activeSelf && areCoroutinesActive)
+        if (enemies.Count >= enemyLimit)
         {
-            StopCoroutine(SpawnFiller());
-            StopCoroutine(SpawnSpecials());
-            StopCoroutine(SpawnRanged());
-            areCoroutinesActive = false;
-        }*/
-        //else if game resumes after power pickup, start the coroutines again
-        /*else if (upgradesManager.wasUpgradeChosen)
+            enemyLimitReached = true;
+        }
+        else
         {
-            StartWaves();
-            upgradesManager.wasUpgradeChosen = false;
-        }*/
+            enemyLimitReached = false;
+        }
+
+        UpdateEnemyList();
+        StartCoroutine(SpawnMiniBoss());
+    }
+    public IEnumerator SpawnMiniBoss()
+    {
+        if (currentScore >= scoreTreshold)
+        {
+            wavesDefeated = true;
+            if (wavesDefeated && !miniBossSpawned)
+            {
+                yield return new WaitForSeconds(3);
+                Instantiate(miniBoss, bossSpawnPoint.transform.position, Quaternion.identity);
+                miniBossSpawned = true;
+                nightKnightScript = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
+                horseScript = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
+            }  
+        }
     }
 
+    public void SpawnBoss()
+    {
+        if (nightKnightScript != null)
+        {
+            if (nightKnightScript.nightKnightHealth <= 0)
+            {
+                nightKnightDead = true;
+            }
+        }
+        if (horseScript != null)
+        {
+            if (horseScript.horseHealth <= 0)
+            {
+                horseDead = true;
+            }
+        }
+        if (nightKnightDead && horseDead && !bossSpawned)
+        {
+            Instantiate(boss, bossSpawnPoint.transform.position, Quaternion.identity);
+            bossSpawned = true;
+        }
+    }
     public void StartWaves()
     {
         StartCoroutine(SpawnFiller());
@@ -132,27 +179,32 @@ public class SpawnEnemies : MonoBehaviour
         Debug.Log("Spawn Started");
         yield return new WaitForSeconds(3f);
 
-        while (currentWaveIndex < waves.Length) //while the waveIndex is smaller then the lenght we set in the inspector, this repeats
+        while (currentWaveIndex < waves.Length) //while the waveIndex is smaller than the lenght we set in the inspector, this repeats
         {
             CheckCurrentWave();
 
+            //checks if there are enemies in the list, a.k.a if the current wave contains filler enemies or not
             if (currentWave.enemies != null && currentWave.enemies.Length > 0)
             {
                 Debug.Log("There are filler enemies in the list.");
-                if (!spawnManager.enemyLimitReached)
+                if (!enemyLimitReached)
                 {
                     Debug.Log("Enemy limit is not reached, we can spawn");
-                    while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
+                    while (currentScore < currentWave.scoreThreshold && !enemyLimitReached)
                     {
-                        Debug.Log("Getting infos ready for filler spawn");
-                        // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
-                        EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
+                        
+                            Debug.Log("Getting infos ready for filler spawn");
+                            // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
+                            EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
 
-                        // Get a random spawn point for the current enemy
-                        int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+                            // Get a random spawn point for the current enemy
+                            int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
 
-                        GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
-                        gameManager.AddEnemyToList(enemy);
+                            GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+                            //gameManager.AddEnemyToList(enemy);
+                            enemies.Add(enemy);
+                        
+                        
                         yield return new WaitForSeconds(spawnRate);
                     }
                 }
@@ -163,7 +215,7 @@ public class SpawnEnemies : MonoBehaviour
             }
             else
             {
-                // If there are no ranged enemies in the current wave, simply yield null to wait until the wave is complete
+                // If there are no filler enemies in the current wave, simply yield null to wait until the wave is complete
                 yield return null;
             }
         }
@@ -194,7 +246,7 @@ public class SpawnEnemies : MonoBehaviour
             {
                 Debug.Log("There are special enemies in the list.");
                 // Continue spawning enemies until the score reaches the threshold
-                if (!spawnManager.enemyLimitReached)
+                if (!enemyLimitReached)
                 {
                     while (currentScore < currentWave.scoreThreshold)
                     {
@@ -205,8 +257,8 @@ public class SpawnEnemies : MonoBehaviour
                         int randomSpawnPoint = UnityEngine.Random.Range(0, specSpawnPoints.Length);
 
                         GameObject specialEnemy = Instantiate(selectedEnemy.specEnemyPrefab, specSpawnPoints[randomSpawnPoint].position, Quaternion.identity);
-                        gameManager.AddEnemyToList(specialEnemy);
-
+                        //gameManager.AddEnemyToList(specialEnemy);
+                        enemies.Add(specialEnemy);
                         yield return new WaitForSeconds(specSpawnRate);
                     }
                 }
@@ -246,9 +298,9 @@ public class SpawnEnemies : MonoBehaviour
             // Check if there are ranged enemies in the current wave
             if (currentWave.rangedEnemies != null && currentWave.rangedEnemies.Length > 0)
             {
-                if (!spawnManager.enemyLimitReached)
+                if (!enemyLimitReached)
                 {
-                    while (currentScore < currentWave.scoreThreshold && !spawnManager.enemyLimitReached)
+                    while (currentScore < currentWave.scoreThreshold && !enemyLimitReached)
                     {
                         Debug.Log("Getting infos for spawning ranged enemies");
 
@@ -273,8 +325,8 @@ public class SpawnEnemies : MonoBehaviour
                             {
                                 Debug.Log("Spawn point available! Time to spawn");
                                 GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, selectedSpawnPoint.position, Quaternion.identity);
-                                gameManager.AddEnemyToList(rangedEnemy);
-
+                                //gameManager.AddEnemyToList(rangedEnemy);
+                                enemies.Add(rangedEnemy);
                                 // Associate the spawned enemy with its spawn point
                                 rangedEnemy.GetComponent<RangedEnemy>().associatedSpawnPoint = selectedSpawnPoint;
 
@@ -328,6 +380,23 @@ public class SpawnEnemies : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    public void UpdateEnemyList()
+    {
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            // Check if the enemy GameObject is null (destroyed)
+            if (enemies[i] == null)
+            {
+                // Enemy has been destroyed
+                Debug.Log("Enemy " + i + " has been destroyed.");
+
+                // Optionally, you can remove the destroyed enemy from the list
+                enemies.RemoveAt(i);
+                //Spitter is not getting removed
+            }
         }
     }
 }

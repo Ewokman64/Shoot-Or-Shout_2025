@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BigBoi : MonoBehaviour
 {
-    public float speed = 2;
+    public float speed = 3.5f;
     public float health = 5;
+    private int specEnemyValue = 15;
 
     private Transform targetShooter;
 
@@ -37,6 +38,7 @@ public class BigBoi : MonoBehaviour
 
         if (health <= 0)
         {
+            gameManager.UpdateNormalCurrency(specEnemyValue);
             Destroy(gameObject);
         }
     }

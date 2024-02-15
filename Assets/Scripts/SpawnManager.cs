@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -65,8 +62,8 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        SpawnHandling();
-        UpdateEnemyList();
+        //SpawnHandling();
+        //UpdateEnemyList();
         enemyCount = enemies.Count;
         if (enemyCount >= enemyLimit)
         {
@@ -87,7 +84,7 @@ public class SpawnManager : MonoBehaviour
         powerUps = 0;
     }
     //New Waves script and reference them from here
-    public void SpawnHandling()
+    /*public void SpawnHandling()
     {
         
         if (nightKnight != null)
@@ -102,7 +99,7 @@ public class SpawnManager : MonoBehaviour
             StartCoroutine(SpawnBrainBoss());
             bossSpawned = true;
         }
-    }
+    }*/
     void SpawnPlayers()
     {
         shooterPos = GameObject.Find("ShooterPos").GetComponent<Transform>();
@@ -139,25 +136,5 @@ public class SpawnManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         Instantiate(brainBoss, bossSpawnPoint.transform.position, UnityEngine.Quaternion.identity);
         
-    }
-    public void AddEnemyToList(GameObject enemy)
-    {
-        enemies.Add(enemy);
-    }
-    public void UpdateEnemyList()
-    {
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            // Check if the enemy GameObject is null (destroyed)
-            if (enemies[i] == null)
-            {
-                // Enemy has been destroyed
-                Debug.Log("Enemy " + i + " has been destroyed.");
-
-                // Optionally, you can remove the destroyed enemy from the list
-                enemies.RemoveAt(i);
-                //Spitter is not getting removed
-            }
-        }
     }
 }

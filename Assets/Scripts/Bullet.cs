@@ -52,6 +52,10 @@ public class Bullet : MonoBehaviour
             isZombieShot = true;
             audioManager.PlayZombieDeath();
             gameManager.UpdateNormalCurrency(zombieValue);
+            if (other.gameObject == null)
+            {
+                gameManager.UpdateNormalCurrency(zombieValue);
+            }
         }
         else if (other.gameObject.CompareTag("Shield"))
         {

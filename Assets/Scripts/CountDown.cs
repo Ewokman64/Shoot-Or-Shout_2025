@@ -24,13 +24,14 @@ public class CountDown : MonoBehaviour
     }
     private void Update()
     {
+        //IF PLAYER SHOOTS DARKEN THE SHOOTUI FOR 1 SECOND
         if (gameManager.shooter != null)
         {
-            shootCDText.text = shooterController.bulletCDRate.ToString();
+            shootCDText.text = shooterController.bulletCoolDown.ToString();
         }
         if (gameManager.taunter != null)
         {
-            shoutCDText.text = taunterController.tauntCDRate.ToString();
+            shoutCDText.text = taunterController.tauntCoolDown.ToString();
         }  
     }
     public IEnumerator CountDownPowerUp()

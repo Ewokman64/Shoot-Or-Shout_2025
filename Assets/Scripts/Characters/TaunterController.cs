@@ -11,6 +11,10 @@ public class TaunterController : MonoBehaviour
     public float tauntCoolDown;
     public float tauntCDRate = 2;
 
+    public SpriteRenderer shouterCDRenderer;
+    public float darkenAmount = 0.5f; // Value between 0 and 1
+    private Color originalColor;
+
     private AudioSource shoutAudio;
     private GameManager gameManager;
     private AudioManager audioManager;
@@ -28,6 +32,9 @@ public class TaunterController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         countDown = gameManager.GetComponent<CountDown>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+        shouterCDRenderer = GameObject.Find("ShoutCDSprite").GetComponent<SpriteRenderer>();
+        // Get the current color of the sprite
+        originalColor = shouterCDRenderer.color;
     }
 
     // Update is called once per frame
@@ -63,6 +70,7 @@ public class TaunterController : MonoBehaviour
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;
             tauntCoolDown = tauntCDRate;
+            
             audioManager.PlayShout();
             animator.SetTrigger("Taunt");
         }        
@@ -73,10 +81,16 @@ public class TaunterController : MonoBehaviour
         if (tauntCoolDown > 0)
         {
             tauntCoolDown -= Time.deltaTime;
+            // Darken the color by multiplying it with a darker shade
+            Color darkenedColor = originalColor * darkenAmount;
+
+            // Set the darkened color to the sprite
+            shouterCDRenderer.color = darkenedColor;
         }
         else
         {
             tauntCoolDown = 0;
+            shouterCDRenderer.color = originalColor;
         }
     }
 

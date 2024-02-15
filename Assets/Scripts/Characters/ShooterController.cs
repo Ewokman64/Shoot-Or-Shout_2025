@@ -8,6 +8,9 @@ public class ShooterController : MonoBehaviour
     public Sprite singleShotSprite;
     public Sprite dualShotSprite;
     public SpriteRenderer shooterSpriteRenderer;
+    public SpriteRenderer shooterCDRenderer;
+    public float darkenAmount = 0.5f; // Value between 0 and 1
+    private Color originalColor;
     //Movement
     public float speed = 10;
     private float yRange = 5;
@@ -39,6 +42,10 @@ public class ShooterController : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         shooterSpriteRenderer = GameObject.Find("Shooter(Clone)").GetComponent<SpriteRenderer>();
+        shooterCDRenderer = GameObject.Find("ShootCDSprite").GetComponent<SpriteRenderer>();
+        // Get the current color of the sprite
+        originalColor = shooterCDRenderer.color;
+
     }
 
     public void Update()
@@ -81,19 +88,17 @@ public class ShooterController : MonoBehaviour
     }
     public void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0)
+        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0 && !isPowerUpActive)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
 
             bulletCoolDown = bulletCDRate;
             BulletSpawn();
-
             audioManager.PlayShoot();
             gunFlash1.Play();
         }
     }
-
     public void DualShoot()
     {
         if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && !gameManager.isSomeoneDead && Time.timeScale != 0)
@@ -114,10 +119,16 @@ public class ShooterController : MonoBehaviour
         if (bulletCoolDown > 0)
         {
             bulletCoolDown -= Time.deltaTime;
+            // Darken the color by multiplying it with a darker shade
+            Color darkenedColor = originalColor * darkenAmount;
+
+            // Set the darkened color to the sprite
+            shooterCDRenderer.color = darkenedColor;
         }
         else
         {
             bulletCoolDown = 0;
+            shooterCDRenderer.color = originalColor;
         }
     }
     public void OnTriggerEnter2D(Collider2D other)

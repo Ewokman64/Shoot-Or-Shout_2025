@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private UpgradeList upgradeList;
     private UpgradesManager upgradesManager;
     private CountDown countDown;
+    private SpawnEnemies waveManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public float stallingTimer;
     //UI
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         Time.timeScale = 0;
         isShooterChased = true;
         isStallingActive = false;
@@ -136,8 +138,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
-        //"previousEasyScore" key is getting loaded"
-        SpawnEnemies waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();  
+        //"previousEasyScore" key is getting loaded" 
         currentRecord = PlayerPrefs.GetInt("previousNormalScore", 0);
         waveManager.StartWaves();
         spawnManager.StartSpawnManager();
@@ -173,6 +174,7 @@ public class GameManager : MonoBehaviour
         gmAudio.mute = true;
         ClearMap();
         spawnManager.StopAllCoroutines();
+        waveManager.StopAllCoroutines();
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
     }
 
