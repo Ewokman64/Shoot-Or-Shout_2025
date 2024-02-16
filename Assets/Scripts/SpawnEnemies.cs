@@ -84,8 +84,9 @@ public class SpawnEnemies : MonoBehaviour
     public GameObject miniBoss;
     public GameObject boss;
     public Transform bossSpawnPoint;
-    public int scoreTreshold;
+    public int miniBossScoreThreshold = 350;
     public bool miniBossSpawned = false;
+    bool miniBossReady = false;
     public bool bossSpawned = false;
     NightKnight nightKnightScript;
     Horse horseScript;
@@ -125,26 +126,28 @@ public class SpawnEnemies : MonoBehaviour
         {
             enemyLimitReached = false;
         }
-
+        // Check if the score has reached the threshold
+        if (currentScore >= miniBossScoreThreshold && miniBossSpawned == false)
+        {
+            // Spawn the miniboss
+            StartCoroutine(SpawnMiniBoss());
+            if (miniBossReady)
+            {
+                Instantiate(miniBoss, bossSpawnPoint.transform.position, Quaternion.identity);
+                nightKnightScript = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
+                horseScript = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
+                miniBossSpawned = true;
+            }
+        }
+        SpawnBoss();
         UpdateEnemyList();
-        StartCoroutine(SpawnMiniBoss());
     }
     public IEnumerator SpawnMiniBoss()
     {
-        if (currentScore >= scoreTreshold)
-        {
-            wavesDefeated = true;
-            if (wavesDefeated && !miniBossSpawned)
-            {
-                yield return new WaitForSeconds(3);
-                Instantiate(miniBoss, bossSpawnPoint.transform.position, Quaternion.identity);
-                miniBossSpawned = true;
-                nightKnightScript = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
-                horseScript = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
-            }  
-        }
+        //THEORY: miniboss is getting clear mapped cause upgrades run first
+        yield return new WaitForSeconds(3);
+        miniBossReady = true;   
     }
-
     public void SpawnBoss()
     {
         if (nightKnightScript != null)
@@ -172,6 +175,7 @@ public class SpawnEnemies : MonoBehaviour
         StartCoroutine(SpawnFiller());
         StartCoroutine(SpawnSpecials());
         StartCoroutine(SpawnRanged());
+
         areCoroutinesActive = true;
     }
     public IEnumerator SpawnFiller()

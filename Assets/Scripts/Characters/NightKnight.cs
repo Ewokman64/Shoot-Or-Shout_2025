@@ -14,6 +14,7 @@ public class NightKnight : MonoBehaviour
     public float shieldHealth = 10;
     public GameObject nightKnight;
     public float spearSpawnRate = 3.0f; // Default spawn rate
+    public bool shieldEquipped = false;
     //private Transform targetTaunter;
 
     private GameManager gameManager;
@@ -76,6 +77,7 @@ public class NightKnight : MonoBehaviour
 
         // Set the child's parent to the specified parent GameObject
         newShield.transform.parent = nightKnight.transform;
+        shieldEquipped = true;
     }
 
     public void EnrageHorse()
@@ -89,7 +91,7 @@ public class NightKnight : MonoBehaviour
                 horse.speed = 5;
             }
             horseEnraged = true;
-            Destroy(gameObject);
+            //Destroy(gameObject);
             Debug.Log("Horseman destroyed!");
         }
     }

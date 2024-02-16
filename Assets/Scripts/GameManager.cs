@@ -173,6 +173,7 @@ public class GameManager : MonoBehaviour
         Destroy(GameObject.FindWithTag("Laser"));
         gmAudio.mute = true;
         ClearMap();
+        ClearBosses();
         spawnManager.StopAllCoroutines();
         waveManager.StopAllCoroutines();
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
@@ -208,7 +209,23 @@ public class GameManager : MonoBehaviour
             Destroy(bullet);
 
         //GET RID OF ENEMIES
-        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "NightKnight", "Horse", "FinalPush", "Boss", "Projectile" /* Add more tags as needed */ };
+        string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "Projectile" /* Add more tags as needed */ };
+
+        foreach (string tag in enemyTags)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag(tag);
+
+            foreach (GameObject enemy in enemies)
+            {
+                Destroy(enemy);
+            }
+        }
+    }
+
+    public void ClearBosses()
+    {
+        //GET RID OF ENEMIES
+        string[] enemyTags = { "FinalPush", "NightKnight", "Horse", "Boss" /* Add more tags as needed */ };
 
         foreach (string tag in enemyTags)
         {

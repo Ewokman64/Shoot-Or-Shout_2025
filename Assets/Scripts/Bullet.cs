@@ -70,6 +70,15 @@ public class Bullet : MonoBehaviour
         {
             nightKnight = GameObject.FindWithTag("NightKnight").GetComponent<NightKnight>();
             nightKnight.nightKnightHealth--;
+            if (nightKnight.nightKnightHealth <= 0)
+            {
+                Destroy(other.gameObject);
+                if (nightKnight.shieldEquipped)
+                {
+                    GameObject shield = GameObject.FindGameObjectWithTag("Shield");
+                    Destroy(shield);
+                }
+            }
         }
         else if (other.gameObject.CompareTag("Horse"))
         {

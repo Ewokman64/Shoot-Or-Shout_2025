@@ -16930,7 +16930,7 @@ MonoBehaviour:
     type: 3}
   boss: {fileID: 9033239209019529460, guid: 7270a60ed8c745645b0e0e523ce89d97, type: 3}
   bossSpawnPoint: {fileID: 1407290243}
-  scoreTreshold: 350
+  miniBossScoreThreshold: 350
   miniBossSpawned: 0
   bossSpawned: 0
   nightKnightDead: 0
