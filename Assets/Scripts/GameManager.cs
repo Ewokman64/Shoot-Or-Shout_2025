@@ -81,8 +81,6 @@ public class GameManager : MonoBehaviour
         }
         else if (upgradesManager.upgradePanel.activeSelf)
         {
-                // Pause the game
-                Debug.Log("Game Paused");
                 gameIsPaused = true;
                 Time.timeScale = 0;
         }
@@ -123,18 +121,10 @@ public class GameManager : MonoBehaviour
             // Check if the enemy GameObject is null (destroyed)
             if (spawnedEnemies[i] == null)
             {
-                // Enemy has been destroyed
-                Debug.Log("Enemy " + i + " has been destroyed.");
-
                 // Optionally, you can remove the destroyed enemy from the list
                 spawnedEnemies.RemoveAt(i);
-                //Spitter is not getting removed
             }
         }
-    }
-    public void RemovePointFromOccupied()
-    {
-        //IF the removed enemy is ranged, remove one transform from the occupied spawnlist
     }
     public void StartGame()
     {
@@ -159,7 +149,6 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
-        Debug.Log("GAME OVER!");
         isSomeoneDead = true;
         int previousNormalScore = PlayerPrefs.GetInt("previousNormalScore");
         //code for setting highscore
@@ -191,8 +180,6 @@ public class GameManager : MonoBehaviour
         }
         else if (Time.timeScale == 1)
         {
-            // Pause the game
-            Debug.Log("Game Paused");
             Time.timeScale = 0;
             gameIsPaused = true;
             pauseMenu.SetActive(true);
@@ -201,14 +188,13 @@ public class GameManager : MonoBehaviour
 
     public void ClearMap()
     {
-        Debug.Log("CLEAR MAP HAS RAN");
         //GET RID OF BULLETS
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 
         foreach (GameObject bullet in bullets)
             Destroy(bullet);
 
-        //GET RID OF ENEMIES
+        //GET RID OF ENEMIES AND PROJECTILES
         string[] enemyTags = { "Enemy", "BigEnemy", "Spitter", "Projectile" /* Add more tags as needed */ };
 
         foreach (string tag in enemyTags)
@@ -224,7 +210,7 @@ public class GameManager : MonoBehaviour
 
     public void ClearBosses()
     {
-        //GET RID OF ENEMIES
+        //GET RID OF BOSSES
         string[] enemyTags = { "FinalPush", "NightKnight", "Horse", "Boss" /* Add more tags as needed */ };
 
         foreach (string tag in enemyTags)

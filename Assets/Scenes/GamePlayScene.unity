@@ -16880,34 +16880,6 @@ MonoBehaviour:
         type: 3}
     rangedEnemies: []
     scoreThreshold: 200
-  - enemies: []
-    specEnemies:
-    - specEnemyPrefab: {fileID: 3810393701880755627, guid: 291e95918a408e84cbfe73a3a011b0b5,
-        type: 3}
-    rangedEnemies: []
-    scoreThreshold: 250
-  - enemies:
-    - enemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
-        type: 3}
-    specEnemies:
-    - specEnemyPrefab: {fileID: 2664364914138761654, guid: 3732e4e986ab0ed47a07d03fae97056b,
-        type: 3}
-    rangedEnemies:
-    - rangedEnemyPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
-        type: 3}
-    scoreThreshold: 300
-  - enemies:
-    - enemyPrefab: {fileID: 8441980076655290751, guid: a05b9d02c100ae84d8f2a7c0ffc90e83,
-        type: 3}
-    specEnemies:
-    - specEnemyPrefab: {fileID: 2664364914138761654, guid: 3732e4e986ab0ed47a07d03fae97056b,
-        type: 3}
-    - specEnemyPrefab: {fileID: 3810393701880755627, guid: 291e95918a408e84cbfe73a3a011b0b5,
-        type: 3}
-    rangedEnemies:
-    - rangedEnemyPrefab: {fileID: 8358766021508027797, guid: 6d05417109ff11540942afd80d80614b,
-        type: 3}
-    scoreThreshold: 350
   currentWaveIndex: 0
   spawnPoints:
   - {fileID: 269795478}
@@ -16930,7 +16902,7 @@ MonoBehaviour:
     type: 3}
   boss: {fileID: 9033239209019529460, guid: 7270a60ed8c745645b0e0e523ce89d97, type: 3}
   bossSpawnPoint: {fileID: 1407290243}
-  miniBossScoreThreshold: 350
+  miniBossScoreThreshold: 200
   miniBossSpawned: 0
   bossSpawned: 0
   nightKnightDead: 0

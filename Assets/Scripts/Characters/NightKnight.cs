@@ -15,13 +15,15 @@ public class NightKnight : MonoBehaviour
     public GameObject nightKnight;
     public float spearSpawnRate = 3.0f; // Default spawn rate
     public bool shieldEquipped = false;
-    //private Transform targetTaunter;
+    
 
     private GameManager gameManager;
+    private SpawnEnemies waveManager;
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
         if (shooterObject != null)
         {
@@ -84,6 +86,7 @@ public class NightKnight : MonoBehaviour
     {
         if (nightKnightHealth <= 0 && horseEnraged == false)
         {
+            waveManager.nightKnightDead = true;
             // Detach all children from the parent
             foreach (Transform child in transform)
             {
@@ -91,8 +94,10 @@ public class NightKnight : MonoBehaviour
                 horse.speed = 5;
             }
             horseEnraged = true;
-            //Destroy(gameObject);
-            Debug.Log("Horseman destroyed!");
+        }
+        if (nightKnightHealth <= 0)
+        {
+            waveManager.nightKnightDead = true;
         }
     }
 }

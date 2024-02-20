@@ -72,7 +72,6 @@ public class SpawnEnemies : MonoBehaviour
     private UpgradesManager upgradesManager;
     private UpgradeList upgradeList;
 
-    private bool areCoroutinesActive = false;
     private bool enemyLimitReached = false;
     public int enemyCount;
     public int enemyLimit;
@@ -87,9 +86,10 @@ public class SpawnEnemies : MonoBehaviour
     public int miniBossScoreThreshold = 350;
     public bool miniBossSpawned = false;
     bool miniBossReady = false;
+    bool bossReady;
     public bool bossSpawned = false;
-    NightKnight nightKnightScript;
-    Horse horseScript;
+    public NightKnight nightKnightScript;
+    public Horse horseScript;
     public bool nightKnightDead = false;
     public bool horseDead = false;
     public void Start()
@@ -118,14 +118,6 @@ public class SpawnEnemies : MonoBehaviour
     private void Update()
     {
         currentScore = gameManager.score;
-        if (enemies.Count >= enemyLimit)
-        {
-            enemyLimitReached = true;
-        }
-        else
-        {
-            enemyLimitReached = false;
-        }
         // Check if the score has reached the threshold
         if (currentScore >= miniBossScoreThreshold && miniBossSpawned == false)
         {
@@ -138,45 +130,33 @@ public class SpawnEnemies : MonoBehaviour
                 horseScript = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
                 miniBossSpawned = true;
             }
+        }     
+        if (nightKnightDead && horseDead && !bossSpawned)
+        {
+            StartCoroutine(SpawnBoss());
+            if (bossReady)
+            {
+                Instantiate(boss, bossSpawnPoint.transform.position, Quaternion.identity);
+                bossSpawned = true;
+            }     
         }
-        SpawnBoss();
         UpdateEnemyList();
     }
     public IEnumerator SpawnMiniBoss()
     {
-        //THEORY: miniboss is getting clear mapped cause upgrades run first
         yield return new WaitForSeconds(3);
         miniBossReady = true;   
     }
-    public void SpawnBoss()
+    public IEnumerator SpawnBoss()
     {
-        if (nightKnightScript != null)
-        {
-            if (nightKnightScript.nightKnightHealth <= 0)
-            {
-                nightKnightDead = true;
-            }
-        }
-        if (horseScript != null)
-        {
-            if (horseScript.horseHealth <= 0)
-            {
-                horseDead = true;
-            }
-        }
-        if (nightKnightDead && horseDead && !bossSpawned)
-        {
-            Instantiate(boss, bossSpawnPoint.transform.position, Quaternion.identity);
-            bossSpawned = true;
-        }
+        yield return new WaitForSeconds(3);
+        bossReady = true;
     }
     public void StartWaves()
     {
         StartCoroutine(SpawnFiller());
         StartCoroutine(SpawnSpecials());
         StartCoroutine(SpawnRanged());
-
-        areCoroutinesActive = true;
     }
     public IEnumerator SpawnFiller()
     {
@@ -185,30 +165,22 @@ public class SpawnEnemies : MonoBehaviour
 
         while (currentWaveIndex < waves.Length) //while the waveIndex is smaller than the lenght we set in the inspector, this repeats
         {
+
             CheckCurrentWave();
 
             //checks if there are enemies in the list, a.k.a if the current wave contains filler enemies or not
             if (currentWave.enemies != null && currentWave.enemies.Length > 0)
-            {
-                Debug.Log("There are filler enemies in the list.");
+            {  
                 if (!enemyLimitReached)
-                {
-                    Debug.Log("Enemy limit is not reached, we can spawn");
+                {   
                     while (currentScore < currentWave.scoreThreshold && !enemyLimitReached)
                     {
-                        
-                            Debug.Log("Getting infos ready for filler spawn");
-                            // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
-                            EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
-
-                            // Get a random spawn point for the current enemy
-                            int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
-
-                            GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
-                            //gameManager.AddEnemyToList(enemy);
-                            enemies.Add(enemy);
-                        
-                        
+                        // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
+                        EnemySpawnInfo selectedEnemy = SelectFillerEnemy(currentWave.enemies);
+                        // Get a random spawn point for the current enemy
+                        int randomSpawnPoint = UnityEngine.Random.Range(0, spawnPoints.Length);
+                        GameObject enemy = Instantiate(selectedEnemy.enemyPrefab, spawnPoints[randomSpawnPoint].position, Quaternion.identity);
+                        enemies.Add(enemy);
                         yield return new WaitForSeconds(spawnRate);
                     }
                 }
@@ -256,19 +228,15 @@ public class SpawnEnemies : MonoBehaviour
                     {
                         // Randomly select an enemy prefab -> return an enemy from the currentwave's enemies list
                         SpecEnemySpawnInfo selectedEnemy = SelectSpecialEnemy(currentWave.specEnemies);
-
                         // Get a random spawn point for the current enemy
                         int randomSpawnPoint = UnityEngine.Random.Range(0, specSpawnPoints.Length);
-
                         GameObject specialEnemy = Instantiate(selectedEnemy.specEnemyPrefab, specSpawnPoints[randomSpawnPoint].position, Quaternion.identity);
-                        //gameManager.AddEnemyToList(specialEnemy);
                         enemies.Add(specialEnemy);
                         yield return new WaitForSeconds(specSpawnRate);
                     }
                 }
                 else
-                {
-                    
+                {  
                     yield return null;
                 }
             }
@@ -292,7 +260,6 @@ public class SpawnEnemies : MonoBehaviour
     }
     public IEnumerator SpawnRanged()
     {
-        Debug.Log("Ranged Spawn Started");
         yield return new WaitForSeconds(3f);
 
         while (currentWaveIndex < waves.Length)
@@ -306,8 +273,6 @@ public class SpawnEnemies : MonoBehaviour
                 {
                     while (currentScore < currentWave.scoreThreshold && !enemyLimitReached)
                     {
-                        Debug.Log("Getting infos for spawning ranged enemies");
-
                         RangedEnemySpawnInfo selectedEnemy = SelectRangedEnemy(currentWave.rangedEnemies);
                         bool spawned = false;
                         bool isThereSpace = true;
@@ -316,7 +281,6 @@ public class SpawnEnemies : MonoBehaviour
                         {
                             isThereSpace = false;
                         }
-                        
                         while (!spawned && isThereSpace)
                         {
                             int randomSpawnPointIndex = UnityEngine.Random.Range(0, spawnPoints.Length);
@@ -327,7 +291,6 @@ public class SpawnEnemies : MonoBehaviour
 
                             if (!isSpawnPointOccupied)
                             {
-                                Debug.Log("Spawn point available! Time to spawn");
                                 GameObject rangedEnemy = Instantiate(selectedEnemy.rangedEnemyPrefab, selectedSpawnPoint.position, Quaternion.identity);
                                 //gameManager.AddEnemyToList(rangedEnemy);
                                 enemies.Add(rangedEnemy);
@@ -341,7 +304,6 @@ public class SpawnEnemies : MonoBehaviour
                             }
                             else
                             {
-                                Debug.Log("Point occupied, looking for a new spawn point");
                                 yield return new WaitForSeconds(0.1f);
                             }
                         }
@@ -377,7 +339,6 @@ public class SpawnEnemies : MonoBehaviour
     {
         if (rangedEnemies != null)
         {
-            Debug.Log("Ranged Enemy Prefab Selected");
             // Randomly select an enemy prefab and return its spawn rate and spawn points
             return rangedEnemies[Random.Range(0, rangedEnemies.Length)];
         }
@@ -389,17 +350,21 @@ public class SpawnEnemies : MonoBehaviour
 
     public void UpdateEnemyList()
     {
+        if (enemies.Count >= enemyLimit)
+        {
+            enemyLimitReached = true;
+        }
+        else
+        {
+            enemyLimitReached = false;
+        }
         for (int i = 0; i < enemies.Count; i++)
         {
             // Check if the enemy GameObject is null (destroyed)
             if (enemies[i] == null)
             {
-                // Enemy has been destroyed
-                Debug.Log("Enemy " + i + " has been destroyed.");
-
                 // Optionally, you can remove the destroyed enemy from the list
                 enemies.RemoveAt(i);
-                //Spitter is not getting removed
             }
         }
     }
