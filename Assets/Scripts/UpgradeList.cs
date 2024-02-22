@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeList : MonoBehaviour
 {
@@ -8,30 +9,36 @@ public class UpgradeList : MonoBehaviour
     private TaunterController taunterController;
     private SpawnManager spawnManager;
     public GameObject upgradesPanel;
+    private UpgradesManager upgradesManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public bool upgradeSelected = false;
+    public GameObject upgrade; // Reference to the upgrade GameObject
+
+
+    private void Update()
+    {
+        
+    }
     void GetReferences()
     {
         upgradesPanel = GameObject.Find("UpgradesPanel");
         shooterController = GameObject.Find("Shooter(Clone)").GetComponent<ShooterController>();
         taunterController = GameObject.Find("Taunter(Clone)").GetComponent<TaunterController>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        upgradesManager= GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
     }
-    // Start is called before the first frame update
     public void ShootCoolDown()
     {
         GetReferences();
         shooterController.bulletCDRate -= 0.15f;
-        Debug.Log("Shooting Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
-}
+    }
     public void TauntCoolDown()
     {
         GetReferences();
         taunterController.tauntCDRate -= 0.15f;
-        Debug.Log("Taunt Cooldown Got Shorter");
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
@@ -40,7 +47,6 @@ public class UpgradeList : MonoBehaviour
     public void MovementSpeed()
     {
         GetReferences();
-        Debug.Log("Movement Speed increased!");
         shooterController.speed += 1;
         taunterController.speed += 1;
         upgradesPanel.SetActive(false);
@@ -51,7 +57,6 @@ public class UpgradeList : MonoBehaviour
     public void PiercingAmmo()
     {
         GetReferences();
-        Debug.Log("PRETEND your bullets pierce enemies");
         // Access the Bullet script without instantiating a visible GameObject
         Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
         if (bulletScript != null)
@@ -71,5 +76,10 @@ public class UpgradeList : MonoBehaviour
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
-    }   
+    }
+
+    /*public void CallSelectUpgrade(GameObject upgrade)
+    {
+        upgradesManager.SelectUpgrade(upgrade);
+    }*/
 }

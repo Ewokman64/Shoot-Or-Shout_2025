@@ -99,6 +99,8 @@ public class SpawnEnemies : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
         upgradeList = GameObject.Find("UpgradesManager").GetComponent<UpgradeList>();
+        nightKnightScript = miniBoss.GetComponent<NightKnight>();
+        horseScript = miniBoss.GetComponentInChildren<Horse>();
     }
     public void CheckCurrentWave()
     {

@@ -9,16 +9,23 @@ public class UpgradesManager : MonoBehaviour
 {
     private GameManager gameManager;
     public List<GameObject> upgradePrefabs; // List of powerup prefabs
+    public List<GameObject> equippedUpgrades = new List<GameObject>(); // List to store equipped upgrades
     public int scoreThresholdIncrement = 100; // Incremental score threshold to trigger powerup selection
     public List<Transform> upgradeSpawnPoints; // List of spawn points for displaying powerups
+    public List<Transform> equippedUpgradeSpawnPoints; // List of spawn points for displaying powerups
     public GameObject upgradePanel; // Reference to the UI panel containing GameObject components
     public List<Button> upgradeButtons;
     public Button button1;
     public Button button2;
     public Button button3;
+    GameObject upgrade1;
+    GameObject upgrade2;
+    GameObject upgrade3;
     public bool wasUpgradeChosen = false;
     SpawnEnemies waveManager;
 
+    public GameObject selectedUpgradeGameObject; // Class-level variable to store the selected upgrade GameObject
+    bool isFreeSlotAvailable = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +37,15 @@ public class UpgradesManager : MonoBehaviour
     void Update()
     {
         ButtonPick();
+        
     }
-
+    void CheckEquipped()
+    {
+        if (equippedUpgrades.Count == 3)
+        {
+            isFreeSlotAvailable = false;
+        }
+    }
     public void OfferUpgrades()
     {
         
@@ -42,13 +56,16 @@ public class UpgradesManager : MonoBehaviour
 
         // Randomly select three unique powerups
         upgradeButtons.Clear();
-        List<GameObject> selectedPowerups = GetRandomPowerups(3);
-        GameObject upgrade1 = selectedPowerups[0];
+        List<GameObject> selectedUpgrades = GetRandomUpgrades(3);
+
+        upgrade1 = selectedUpgrades[0];
+        upgrade2 = selectedUpgrades[2];
+        upgrade3 = selectedUpgrades[1];
+
         button1 = upgrade1.GetComponent<Button>();
-        GameObject upgrade2 = selectedPowerups[1];
         button2 = upgrade2.GetComponent<Button>();
-        GameObject upgrade3 = selectedPowerups[2];
         button3 = upgrade3.GetComponent<Button>();
+
         upgradeButtons.Add(button1);
         upgradeButtons.Add(button2);
         upgradeButtons.Add(button3);
@@ -58,7 +75,8 @@ public class UpgradesManager : MonoBehaviour
         upgradePanel.SetActive(true);
 
         // Display the powerups to the player using the UI panel
-        DisplayPowerups(selectedPowerups, upgradePanel);
+        DisplayUpgrades(selectedUpgrades, upgradePanel);
+        DisplayEquippedUpgrades(equippedUpgrades, upgradePanel);
     }
     public void ButtonPick()
     {
@@ -68,10 +86,22 @@ public class UpgradesManager : MonoBehaviour
             // Check if the button is assigned
             if (button1 != null)
             {
-                // Simulate a button click
-                button1.onClick.Invoke();
-                waveManager.StartWaves();
-                wasUpgradeChosen = true;
+                CheckEquipped();
+                if (isFreeSlotAvailable)
+                {
+                    // Simulate a button click
+                    button1.onClick.Invoke(); 
+                    waveManager.StartWaves();
+                    wasUpgradeChosen = true;
+                    if (!IsUpgradeEquipped(upgrade1))
+                    {
+                        equippedUpgrades.Add(upgrade1);
+                    }
+                }
+                else if (!isFreeSlotAvailable)
+                {
+                    Debug.Log("No free slots are available");
+                }
             }
             else
             {
@@ -84,10 +114,22 @@ public class UpgradesManager : MonoBehaviour
             // Check if the button is assigned
             if (button2 != null)
             {
-                // Simulate a button click
-                button2.onClick.Invoke();
-                waveManager.StartWaves();
-                wasUpgradeChosen = true;
+                CheckEquipped();
+                if (isFreeSlotAvailable)
+                {
+                    // Simulate a button click
+                    button2.onClick.Invoke();
+                    waveManager.StartWaves();
+                    wasUpgradeChosen = true;
+                    if (!IsUpgradeEquipped(upgrade2))
+                    {
+                        equippedUpgrades.Add(upgrade2);
+                    }
+                }
+                else if (!isFreeSlotAvailable)
+                {
+                    Debug.Log("No free slots are available");
+                }
             }
             else
             {
@@ -100,10 +142,22 @@ public class UpgradesManager : MonoBehaviour
             // Check if the button is assigned
             if (button3 != null)
             {
-                // Simulate a button click
-                button3.onClick.Invoke();
-                waveManager.StartWaves();
-                wasUpgradeChosen = true;
+                CheckEquipped();
+                if (isFreeSlotAvailable)
+                {
+                    // Simulate a button click
+                    button3.onClick.Invoke();
+                    waveManager.StartWaves();
+                    wasUpgradeChosen = true;
+                    if (!IsUpgradeEquipped(upgrade3))
+                    {
+                        equippedUpgrades.Add(upgrade3);
+                    }
+                }
+                else if (!isFreeSlotAvailable)
+                {
+                    Debug.Log("No free slots are available");
+                }
             }
             else
             {
@@ -111,15 +165,27 @@ public class UpgradesManager : MonoBehaviour
             }
         }
     }
-    List<GameObject> GetRandomPowerups(int count)
+    bool IsUpgradeEquipped(GameObject upgrade)
     {
-        List<GameObject> randomPowerups = new List<GameObject>();
+        foreach (GameObject equippedUpgrade in equippedUpgrades)
+        {
+            if (equippedUpgrade == upgrade)
+            {
+                return true; // Upgrade is already equipped
+            }
+        }
+
+        return false; // Upgrade is not equipped
+    }
+    List<GameObject> GetRandomUpgrades(int count)
+    {
+        List<GameObject> randomUpgrades = new List<GameObject>();
 
         // Ensure there are enough powerup prefabs
         if (upgradePrefabs.Count < count)
         {
             Debug.LogWarning("Not enough powerup prefabs for the selected count.");
-            return randomPowerups;
+            return randomUpgrades;
         }
 
         // Shuffle the powerup prefabs to get a random order
@@ -128,35 +194,66 @@ public class UpgradesManager : MonoBehaviour
         // Select the first 'count' powerups from the shuffled list
         for (int i = 0; i < count; i++)
         {
-            randomPowerups.Add(upgradePrefabs[i]);
+            randomUpgrades.Add(upgradePrefabs[i]);
         }
 
-        return randomPowerups;
+        return randomUpgrades;
     }
 
-    void DisplayPowerups(List<GameObject> powerups, GameObject upgradePanel)
+    void DisplayUpgrades(List<GameObject> upgrades, GameObject upgradePanel)
     {
         // Ensure there are enough spawn points
-        if (upgradeSpawnPoints.Count < powerups.Count)
+        if (upgradeSpawnPoints.Count < upgrades.Count)
         {
-            Debug.LogWarning("Not enough spawn points for the selected powerups.");
             return;
         }
 
         // Loop through each powerup and instantiate it at a corresponding spawn point
-        for (int i = 0; i < Mathf.Min(powerups.Count, upgradeSpawnPoints.Count); i++)
+        for (int i = 0; i < Mathf.Min(upgrades.Count, upgradeSpawnPoints.Count); i++)
         {
             // Use the corresponding spawn point for each powerup
             Transform spawnPoint = upgradeSpawnPoints[i];
 
             // Instantiate a powerup GameObject at the specified spawn point
-            GameObject powerupInstance = Instantiate(powerups[i], spawnPoint.position, Quaternion.identity);
+            GameObject upgradeInstance = Instantiate(upgrades[i], spawnPoint.position, Quaternion.identity);
 
             // Set the instantiated powerup as a child of the powerup panel
-            powerupInstance.transform.SetParent(upgradePanel.transform);
+            upgradeInstance.transform.SetParent(upgradePanel.transform);
 
             // Attach any additional scripts or logic for player interaction
         }
+    }
+    void DisplayEquippedUpgrades(List<GameObject> equippedUpgrades, GameObject upgradePanel)
+    {
+        // Ensure there are enough spawn points
+        if (equippedUpgradeSpawnPoints.Count < equippedUpgrades.Count)
+        {
+            return;
+        }
+
+        // Loop through each equipped upgrade and instantiate it at a corresponding spawn point
+        for (int i = 0; i < Mathf.Min(equippedUpgrades.Count, equippedUpgradeSpawnPoints.Count); i++)
+        {
+            // Use the corresponding spawn point for each equipped upgrade
+            Transform spawnPoint = equippedUpgradeSpawnPoints[i];
+
+            // Instantiate an equipped upgrade GameObject at the specified spawn point
+            GameObject upgradeInstance = Instantiate(equippedUpgrades[i], spawnPoint.position, Quaternion.identity);
+
+            // Set the instantiated equipped upgrade as a child of the upgrade panel
+            upgradeInstance.transform.SetParent(upgradePanel.transform);
+
+            // Attach any additional scripts or logic for player interaction
+        }
+    }
+    // Method to handle the player selecting an upgrade
+    public void SelectUpgrade(GameObject upgrade)
+    {
+        selectedUpgradeGameObject = upgrade; // Store the selected upgrade
+        equippedUpgrades.Add(upgrade);
+
+        // Once the upgrade is chosen, hide the upgrade panel
+        upgradePanel.SetActive(false);
     }
 }
 public static class ListExtensions
