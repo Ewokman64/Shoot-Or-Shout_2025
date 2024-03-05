@@ -44,7 +44,6 @@ public class NightKnight : MonoBehaviour
         {
             TaunterFollow();
         }
-        EnrageHorse();
     }
     public void ShooterFollow()
     {
@@ -66,7 +65,7 @@ public class NightKnight : MonoBehaviour
         }
     }
 
-    public IEnumerator EquipShield()
+    public IEnumerator EnrageKnight()
     {
         yield return null;
 
@@ -80,24 +79,26 @@ public class NightKnight : MonoBehaviour
         // Set the child's parent to the specified parent GameObject
         newShield.transform.parent = nightKnight.transform;
         shieldEquipped = true;
+
+        speed = 5;
+        spearSpawnRate = 1.5f;
     }
 
-    public void EnrageHorse()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (nightKnightHealth <= 0 && horseEnraged == false)
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            waveManager.nightKnightDead = true;
-            // Detach all children from the parent
-            foreach (Transform child in transform)
+            nightKnightHealth--;
+
+            if (nightKnightHealth <= 0)
             {
-                child.parent = null;
-                horse.speed = 5;
+                waveManager.nightKnightDead = true;
+                Destroy(gameObject);
+                if (!waveManager.horseDead)
+                {
+                    horse.StartCoroutine("EnrageHorse");
+                }
             }
-            horseEnraged = true;
-        }
-        if (nightKnightHealth <= 0)
-        {
-            waveManager.nightKnightDead = true;
         }
     }
 }

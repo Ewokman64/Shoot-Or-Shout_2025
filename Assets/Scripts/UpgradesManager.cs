@@ -9,7 +9,6 @@ public class UpgradesManager : MonoBehaviour
 {
     private GameManager gameManager;
     public List<GameObject> upgradePrefabs; // List of powerup prefabs
-    public List<GameObject> equippedUpgrades = new List<GameObject>(); // List to store equipped upgrades
     public int scoreThresholdIncrement = 100; // Incremental score threshold to trigger powerup selection
     public List<Transform> upgradeSpawnPoints; // List of spawn points for displaying powerups
     public List<Transform> equippedUpgradeSpawnPoints; // List of spawn points for displaying powerups
@@ -21,8 +20,16 @@ public class UpgradesManager : MonoBehaviour
     GameObject upgrade1;
     GameObject upgrade2;
     GameObject upgrade3;
+    //ASSIGN THESE THEN SET THEIR IMAGE TO THE EQUIPPED UPGRADE IMAGE
+    public GameObject equippedSlot1;
+    public GameObject equippedSlot2;
+    public GameObject equippedSlot3;
     public bool wasUpgradeChosen = false;
     SpawnEnemies waveManager;
+
+    //UPGRADE INVENTORY SYSTEM
+    public List<GameObject> equippedUpgrades;
+    public List<GameObject> equippedSlots; // List of UI slots where upgrades will be displayed
 
     public GameObject selectedUpgradeGameObject; // Class-level variable to store the selected upgrade GameObject
     bool isFreeSlotAvailable = true;
@@ -76,42 +83,57 @@ public class UpgradesManager : MonoBehaviour
 
         // Display the powerups to the player using the UI panel
         DisplayUpgrades(selectedUpgrades, upgradePanel);
-        DisplayEquippedUpgrades(equippedUpgrades, upgradePanel);
     }
     public void ButtonPick()
     {
-        // Check if a specific key is pressed (e.g., the space key)
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            // Check if the button is assigned
             if (button1 != null)
             {
                 CheckEquipped();
                 if (isFreeSlotAvailable)
                 {
                     // Simulate a button click
-                    button1.onClick.Invoke(); 
+                    button1.onClick.Invoke();
                     waveManager.StartWaves();
                     wasUpgradeChosen = true;
-                    if (!IsUpgradeEquipped(upgrade1))
+
+                    // Loop through equipped slots to find the first available slot
+                    for (int i = 0; i < equippedSlots.Count; i++)
                     {
-                        equippedUpgrades.Add(upgrade1);
+                        if (!equippedUpgrades.Contains(equippedSlots[i]))
+                        {
+                            // Add the upgrade to the list
+                            equippedUpgrades.Add(equippedSlots[i]);
+
+                            // Get the Image components
+                            Image equippedImage = equippedSlots[i].GetComponent<Image>();
+                            Image upgradeImage = upgrade1.GetComponent<Image>();
+
+                            // Set the slot's image to the upgrade's image
+                            equippedImage.sprite = upgradeImage.sprite;
+
+                            // Exit the loop after finding the first available slot
+                            return;
+                        }
                     }
+
+                    Debug.LogWarning("No available slots for the upgrade.");
+                    // Need function to update the text (upgrade's level, actual stats, etc)
                 }
-                else if (!isFreeSlotAvailable)
+                else
                 {
-                    Debug.Log("No free slots are available");
+                    Debug.LogWarning("No free slots are available");
                 }
             }
             else
             {
-                Debug.LogError("Button not assigned to the script.");
+                Debug.LogError("Button 1 not assigned to the script.");
             }
         }
         // Check if a specific key is pressed (e.g., the space key)
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            // Check if the button is assigned
             if (button2 != null)
             {
                 CheckEquipped();
@@ -121,25 +143,43 @@ public class UpgradesManager : MonoBehaviour
                     button2.onClick.Invoke();
                     waveManager.StartWaves();
                     wasUpgradeChosen = true;
-                    if (!IsUpgradeEquipped(upgrade2))
+
+                    // Loop through equipped slots to find the first available slot
+                    for (int i = 0; i < equippedSlots.Count; i++)
                     {
-                        equippedUpgrades.Add(upgrade2);
+                        if (!equippedUpgrades.Contains(equippedSlots[i]))
+                        {
+                            // Add the upgrade to the list
+                            equippedUpgrades.Add(equippedSlots[i]);
+
+                            // Get the Image components
+                            Image equippedImage = equippedSlots[i].GetComponent<Image>();
+                            Image upgradeImage = upgrade1.GetComponent<Image>();
+
+                            // Set the slot's image to the upgrade's image
+                            equippedImage.sprite = upgradeImage.sprite;
+
+                            // Exit the loop after finding the first available slot
+                            return;
+                        }
                     }
+
+                    Debug.LogWarning("No available slots for the upgrade.");
+                    // Need function to update the text (upgrade's level, actual stats, etc)
                 }
-                else if (!isFreeSlotAvailable)
+                else
                 {
-                    Debug.Log("No free slots are available");
+                    Debug.LogWarning("No free slots are available");
                 }
             }
             else
             {
-                Debug.LogError("Button not assigned to the script.");
+                Debug.LogError("Button 1 not assigned to the script.");
             }
         }
         // Check if a specific key is pressed (e.g., the space key)
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            // Check if the button is assigned
             if (button3 != null)
             {
                 CheckEquipped();
@@ -149,23 +189,42 @@ public class UpgradesManager : MonoBehaviour
                     button3.onClick.Invoke();
                     waveManager.StartWaves();
                     wasUpgradeChosen = true;
-                    if (!IsUpgradeEquipped(upgrade3))
+
+                    // Loop through equipped slots to find the first available slot
+                    for (int i = 0; i < equippedSlots.Count; i++)
                     {
-                        equippedUpgrades.Add(upgrade3);
+                        if (!equippedUpgrades.Contains(equippedSlots[i]))
+                        {
+                            // Add the upgrade to the list
+                            equippedUpgrades.Add(equippedSlots[i]);
+
+                            // Get the Image components
+                            Image equippedImage = equippedSlots[i].GetComponent<Image>();
+                            Image upgradeImage = upgrade1.GetComponent<Image>();
+
+                            // Set the slot's image to the upgrade's image
+                            equippedImage.sprite = upgradeImage.sprite;
+
+                            // Exit the loop after finding the first available slot
+                            return;
+                        }
                     }
+
+                    Debug.LogWarning("No available slots for the upgrade.");
+                    // Need function to update the text (upgrade's level, actual stats, etc)
                 }
-                else if (!isFreeSlotAvailable)
+                else
                 {
-                    Debug.Log("No free slots are available");
+                    Debug.LogWarning("No free slots are available");
                 }
             }
             else
             {
-                Debug.LogError("Button not assigned to the script.");
+                Debug.LogError("Button 1 not assigned to the script.");
             }
         }
     }
-    bool IsUpgradeEquipped(GameObject upgrade)
+    /*bool IsUpgradeEquipped(GameObject upgrade)
     {
         foreach (GameObject equippedUpgrade in equippedUpgrades)
         {
@@ -176,7 +235,7 @@ public class UpgradesManager : MonoBehaviour
         }
 
         return false; // Upgrade is not equipped
-    }
+    }*/
     List<GameObject> GetRandomUpgrades(int count)
     {
         List<GameObject> randomUpgrades = new List<GameObject>();
@@ -222,38 +281,6 @@ public class UpgradesManager : MonoBehaviour
 
             // Attach any additional scripts or logic for player interaction
         }
-    }
-    void DisplayEquippedUpgrades(List<GameObject> equippedUpgrades, GameObject upgradePanel)
-    {
-        // Ensure there are enough spawn points
-        if (equippedUpgradeSpawnPoints.Count < equippedUpgrades.Count)
-        {
-            return;
-        }
-
-        // Loop through each equipped upgrade and instantiate it at a corresponding spawn point
-        for (int i = 0; i < Mathf.Min(equippedUpgrades.Count, equippedUpgradeSpawnPoints.Count); i++)
-        {
-            // Use the corresponding spawn point for each equipped upgrade
-            Transform spawnPoint = equippedUpgradeSpawnPoints[i];
-
-            // Instantiate an equipped upgrade GameObject at the specified spawn point
-            GameObject upgradeInstance = Instantiate(equippedUpgrades[i], spawnPoint.position, Quaternion.identity);
-
-            // Set the instantiated equipped upgrade as a child of the upgrade panel
-            upgradeInstance.transform.SetParent(upgradePanel.transform);
-
-            // Attach any additional scripts or logic for player interaction
-        }
-    }
-    // Method to handle the player selecting an upgrade
-    public void SelectUpgrade(GameObject upgrade)
-    {
-        selectedUpgradeGameObject = upgrade; // Store the selected upgrade
-        equippedUpgrades.Add(upgrade);
-
-        // Once the upgrade is chosen, hide the upgrade panel
-        upgradePanel.SetActive(false);
     }
 }
 public static class ListExtensions

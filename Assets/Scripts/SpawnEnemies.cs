@@ -128,8 +128,6 @@ public class SpawnEnemies : MonoBehaviour
             if (miniBossReady)
             {
                 Instantiate(miniBoss, bossSpawnPoint.transform.position, Quaternion.identity);
-                nightKnightScript = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
-                horseScript = GameObject.FindGameObjectWithTag("Horse").GetComponent<Horse>();
                 miniBossSpawned = true;
             }
         }     

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Horse : MonoBehaviour
@@ -42,20 +43,32 @@ public class Horse : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
+
+    public void EnrageHorse()
+    {
+            // Detach all children from the parent
+            foreach (Transform child in transform)
+            {
+                child.parent = null;
+                speed = 5;
+            }
+            //horseEnraged = true;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (horseHealth <= 0 && nightKnight != null)
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            waveManager.horseDead = true;
-            nightKnight.spearSpawnRate = 1.5f;
-            nightKnight.StartCoroutine("EquipShield");
-            nightKnight.speed = 5;
-            Destroy(gameObject);
-        }
-        if (horseHealth <= 0 && nightKnight == null)
-        {
-            waveManager.horseDead = true;
-            Destroy(gameObject);
+            horseHealth--;
+
+            if (horseHealth <= 0)
+            {
+                waveManager.horseDead = true;
+                Destroy(gameObject);
+                if (!waveManager.nightKnightDead)
+                {
+                    nightKnight.StartCoroutine("EnrageKnight");
+                }
+            }
         }
     }
 }
