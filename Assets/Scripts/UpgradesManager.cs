@@ -21,9 +21,9 @@ public class UpgradesManager : MonoBehaviour
     GameObject upgrade2;
     GameObject upgrade3;
     //ASSIGN THESE THEN SET THEIR IMAGE TO THE EQUIPPED UPGRADE IMAGE
-    public GameObject equippedSlot1;
-    public GameObject equippedSlot2;
-    public GameObject equippedSlot3;
+    //public GameObject equippedSlot1;
+    //public GameObject equippedSlot2;
+    //public GameObject equippedSlot3;
     public bool wasUpgradeChosen = false;
     SpawnEnemies waveManager;
 
@@ -31,6 +31,7 @@ public class UpgradesManager : MonoBehaviour
     public List<GameObject> equippedUpgrades;
     public List<GameObject> equippedSlots; // List of UI slots where upgrades will be displayed
 
+    //public int i; //number of upgrades. made it public so I can i-- it easily from RemoveUpgrade Script
     public GameObject selectedUpgradeGameObject; // Class-level variable to store the selected upgrade GameObject
     bool isFreeSlotAvailable = true;
     // Start is called before the first frame update
@@ -119,7 +120,9 @@ public class UpgradesManager : MonoBehaviour
                     }
 
                     Debug.LogWarning("No available slots for the upgrade.");
+                    ///
                     // Need function to update the text (upgrade's level, actual stats, etc)
+                    ///
                 }
                 else
                 {

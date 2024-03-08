@@ -13,8 +13,11 @@ public class UpgradeList : MonoBehaviour
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public bool upgradeSelected = false;
     public GameObject upgrade; // Reference to the upgrade GameObject
-
-
+    float shootCDAmount = 0.15f;
+    float tauntCDAmount = 0.15f;
+    float movementIncAmount = 1;
+    float bulletHealth = 2;
+    float powerUpCDAmount = 1;
     private void Update()
     {
         
@@ -30,7 +33,7 @@ public class UpgradeList : MonoBehaviour
     public void ShootCoolDown()
     {
         GetReferences();
-        shooterController.bulletCDRate -= 0.15f;
+        shooterController.bulletCDRate -= shootCDAmount;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
@@ -38,7 +41,7 @@ public class UpgradeList : MonoBehaviour
     public void TauntCoolDown()
     {
         GetReferences();
-        taunterController.tauntCDRate -= 0.15f;
+        taunterController.tauntCDRate -= tauntCDAmount;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
@@ -47,8 +50,8 @@ public class UpgradeList : MonoBehaviour
     public void MovementSpeed()
     {
         GetReferences();
-        shooterController.speed += 1;
-        taunterController.speed += 1;
+        shooterController.speed += movementIncAmount;
+        taunterController.speed += movementIncAmount;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
@@ -62,7 +65,7 @@ public class UpgradeList : MonoBehaviour
         if (bulletScript != null)
         {
             // Set the health using the public method in Bullet script
-            bulletScript.SetHealth(2f);
+            bulletScript.SetHealth(bulletHealth);
             upgradesPanel.SetActive(false);
             Time.timeScale = 1;
             upgradeSelected = true;
@@ -72,7 +75,7 @@ public class UpgradeList : MonoBehaviour
     {
         GetReferences();
         Debug.Log("PowerUp spawnrate got shorter!");
-        spawnManager.powerUp_spawnRate -= 1;
+        spawnManager.powerUp_spawnRate -= powerUpCDAmount;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
