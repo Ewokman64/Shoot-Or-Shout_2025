@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float bulletSpeed = 30;
-    public float bulletHealth;
+    public float bulletHealth = 1;
     public float maxHealth = 1;
     public int zombieValue = 3;
     public bool isZombieShot = false;

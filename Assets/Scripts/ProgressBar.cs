@@ -35,7 +35,7 @@ public class ProgressBar : MonoBehaviour
     void UpdateProgressBar()
     {
         float width = progressBarBackground.rectTransform.rect.width;
-        float progress = Mathf.Clamp01((float)gameManager.score / 2000); // Assuming max score is 2000
+        float progress = Mathf.Clamp01((float)gameManager.score / 3500); // Assuming max score is 3500
 
         float targetPosition = progress * width;
 
@@ -45,7 +45,7 @@ public class ProgressBar : MonoBehaviour
     {
         foreach (Milestone milestone in milestones)
         {
-            float milestoneProgress = Mathf.Clamp01((float)milestone.score / 2000);
+            float milestoneProgress = Mathf.Clamp01((float)milestone.score / 3500);
             float milestonePosition = milestoneProgress * progressBarBackground.rectTransform.rect.width;
 
             milestone.icon.rectTransform.localPosition = new Vector3(milestonePosition - progressBarBackground.rectTransform.rect.width / 2, 0f, 0f);

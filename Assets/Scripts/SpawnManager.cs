@@ -18,7 +18,6 @@ public class SpawnManager : MonoBehaviour
     public int powerUps;
     [HideInInspector]
     public float powerUp_startDelay = 10;
-    [HideInInspector]
     public float powerUp_spawnRate = 10;
     public void StartSpawnManager()
     {

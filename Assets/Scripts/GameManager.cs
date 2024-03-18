@@ -146,6 +146,7 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(StartStallingPenalty());
         countDown.GetPlayerCD();
+        SetStatsBack();
     }
     public void GameOver()
     {
@@ -163,8 +164,10 @@ public class GameManager : MonoBehaviour
         gmAudio.mute = true;
         ClearMap();
         ClearBosses();
+        SetStatsBack();
         spawnManager.StopAllCoroutines();
         waveManager.StopAllCoroutines();
+        StopCoroutine(StartStallingPenalty());
         soulEnergyCollectedText.text = "Soul Energy Collected: " + score;
     }
 
@@ -247,6 +250,19 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(2);
         }
         
+    }
+
+    public void SetStatsBack()
+    {
+        Debug.Log("Stats are set back");
+        foreach(GameObject upgrade in upgradesManager.upgradePrefabs)
+        {
+            UpgradeStats upgradeStats = upgrade.GetComponent<UpgradeStats>();
+
+            upgradeStats.LVL = 1;
+            upgradeStats.currentStat = upgradeStats.upgradeAmount;
+            upgradeStats.currentStatString = upgradeStats.currentStatDescription + " " + upgradeStats.currentStat.ToString();
+        }
     }
 }
 

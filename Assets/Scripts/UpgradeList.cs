@@ -16,7 +16,7 @@ public class UpgradeList : MonoBehaviour
     float shootCDAmount = 0.15f;
     float tauntCDAmount = 0.15f;
     float movementIncAmount = 1;
-    float bulletHealth = 2;
+    float bulletpierceAmount = 1;
     float powerUpCDAmount = 1;
     private void Update()
     {
@@ -37,6 +37,7 @@ public class UpgradeList : MonoBehaviour
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
+        Debug.Log("New cooldown: " + shooterController.bulletCDRate);
     }
     public void TauntCoolDown()
     {
@@ -45,6 +46,7 @@ public class UpgradeList : MonoBehaviour
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
+        Debug.Log("New cooldown: " + taunterController.tauntCDRate);
     }
 
     public void MovementSpeed()
@@ -55,6 +57,7 @@ public class UpgradeList : MonoBehaviour
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
+        Debug.Log("New speed: " + shooterController.speed);
     }
 
     public void PiercingAmmo()
@@ -65,24 +68,20 @@ public class UpgradeList : MonoBehaviour
         if (bulletScript != null)
         {
             // Set the health using the public method in Bullet script
-            bulletScript.SetHealth(bulletHealth);
+            bulletScript.bulletHealth += bulletpierceAmount;
             upgradesPanel.SetActive(false);
             Time.timeScale = 1;
             upgradeSelected = true;
+            Debug.Log("Bullet Pierce: " + bulletpierceAmount);
         }
     }
     public void PowerUpSpawnRate()
     {
         GetReferences();
-        Debug.Log("PowerUp spawnrate got shorter!");
         spawnManager.powerUp_spawnRate -= powerUpCDAmount;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
+        Debug.Log("New cooldown: " + spawnManager.powerUp_spawnRate);
     }
-
-    /*public void CallSelectUpgrade(GameObject upgrade)
-    {
-        upgradesManager.SelectUpgrade(upgrade);
-    }*/
 }

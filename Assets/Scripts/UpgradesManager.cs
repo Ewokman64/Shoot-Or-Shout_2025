@@ -1,44 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using TMPro;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class UpgradesManager : MonoBehaviour
 {
-    private GameManager gameManager;
-    public List<GameObject> upgradePrefabs; // List of powerup prefabs
-    public int scoreThresholdIncrement = 100; // Incremental score threshold to trigger powerup selection
+    public List<GameObject> upgradePrefabs; // List of every upgrade in the game
+
+    public List<GameObject> upgradesContainer; // The 3 empty containers where upgrades are displayed
+    
+    //*GENERATING AND SPAWNING UPGRADES
+    public List<GameObject> selectedUpgrades; // We load the randomly generated upgrades into this list
+    public List<GameObject> upgradeInstances; // I need this to destroy the upgrades once we pick one
     public List<Transform> upgradeSpawnPoints; // List of spawn points for displaying powerups
-    public List<Transform> equippedUpgradeSpawnPoints; // List of spawn points for displaying powerups
-    public GameObject upgradePanel; // Reference to the UI panel containing GameObject components
-    public List<Button> upgradeButtons;
+    //the instantiated upgrades are getting assigned to these GameObjects and their Button Components to these buttons
+
+    public GameObject upgrade1;
+    public GameObject upgrade2;
+    public GameObject upgrade3;
+
     public Button button1;
     public Button button2;
     public Button button3;
-    GameObject upgrade1;
-    GameObject upgrade2;
-    GameObject upgrade3;
-    //ASSIGN THESE THEN SET THEIR IMAGE TO THE EQUIPPED UPGRADE IMAGE
-    //public GameObject equippedSlot1;
-    //public GameObject equippedSlot2;
-    //public GameObject equippedSlot3;
-    public bool wasUpgradeChosen = false;
-    SpawnEnemies waveManager;
+    
+    public List<Button> upgradeButtons; //contains the button components we get from instantiated upgrades so we can access and call them via key presses
+    public GameObject upgradePanel; // Reference to the UI panel containing GameObject components
+    SpawnEnemies waveManager; //We access the wavemanager to stop and restart wave spawning after an upgrade got picked
 
-    //UPGRADE INVENTORY SYSTEM
-    public List<GameObject> equippedUpgrades;
-    public List<GameObject> equippedSlots; // List of UI slots where upgrades will be displayed
+    public bool upgradeWasPicked = false;
 
-    //public int i; //number of upgrades. made it public so I can i-- it easily from RemoveUpgrade Script
-    public GameObject selectedUpgradeGameObject; // Class-level variable to store the selected upgrade GameObject
+    //*ADDING SELECTED UPGRADES TO OUR INVENTORY
+    public List<Transform> equippedUpgradeSpawnPoints; // List of spawn points for displaying equipped powerups
+    public List<string> equippedUpgradesNames;
+    public List<GameObject> equippedUpgrades; //checking wether we have certain upgrades equipped or not
+    public List<GameObject> equippedUpgradesContainer; // List of UI slots where EQUIPPED upgrades will be displayed. looping through them to get an available one
     bool isFreeSlotAvailable = true;
+
     // Start is called before the first frame update
     void Start()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -49,26 +55,38 @@ public class UpgradesManager : MonoBehaviour
     }
     void CheckEquipped()
     {
-        if (equippedUpgrades.Count == 3)
+        if (equippedUpgrades.Count == 5)
         {
             isFreeSlotAvailable = false;
+        }
+    }
+    public void DeleteUpgradeInstances()
+    {
+        foreach (GameObject obj in upgradeInstances)
+        {
+            // Destroy each instantiated object
+            Destroy(obj);
         }
     }
     public void OfferUpgrades()
     {
         
         waveManager.StopAllCoroutines();
-        wasUpgradeChosen = false;
+        DeleteUpgradeInstances();
+        upgradeButtons.Clear();
+        //wasUpgradeChosen = false;
         // Update the last threshold to avoid repeated triggering
         //lastScoreThreshold = currentScoreThreshold;
 
         // Randomly select three unique powerups
-        upgradeButtons.Clear();
-        List<GameObject> selectedUpgrades = GetRandomUpgrades(3);
+        selectedUpgrades = GetRandomUpgrades(3);
+        upgrade1 = null;
+        upgrade2 = null;
+        upgrade3 = null;
 
         upgrade1 = selectedUpgrades[0];
-        upgrade2 = selectedUpgrades[2];
-        upgrade3 = selectedUpgrades[1];
+        upgrade2 = selectedUpgrades[1];
+        upgrade3 = selectedUpgrades[2];
 
         button1 = upgrade1.GetComponent<Button>();
         button2 = upgrade2.GetComponent<Button>();
@@ -84,6 +102,7 @@ public class UpgradesManager : MonoBehaviour
 
         // Display the powerups to the player using the UI panel
         DisplayUpgrades(selectedUpgrades, upgradePanel);
+        UpdateUpgradeText();
     }
     public void ButtonPick()
     {
@@ -97,32 +116,71 @@ public class UpgradesManager : MonoBehaviour
                     // Simulate a button click
                     button1.onClick.Invoke();
                     waveManager.StartWaves();
-                    wasUpgradeChosen = true;
-
-                    // Loop through equipped slots to find the first available slot
-                    for (int i = 0; i < equippedSlots.Count; i++)
+                    
+                    for (int i = 0; i < equippedUpgradesContainer.Count; i++)
                     {
-                        if (!equippedUpgrades.Contains(equippedSlots[i]))
+                        //getting the availability of each
+                        Availability availabilityScript = equippedUpgradesContainer[i].GetComponent<Availability>();
+                        //getting the upgrades in them as well? so I can check later?
+
+
+                        //checking for the first one that has IsAvailable on true
+                        if (availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade1)) //and it doesn't contain a string name from the already equipped list
                         {
+                            Debug.Log("This is a new upgrade, equpping....");
                             // Add the upgrade to the list
-                            equippedUpgrades.Add(equippedSlots[i]);
-
+                            //ERROR: RIGHT NOW WE ADD THE SLOT THAT WE EQUIP TO INSTEAD OF THE PICKED POWERUP
+                            //CHECKING WORKS. IF UPGRADE IS ALREADY EQUIPPED HOWEVER, THE FIRST AVAILABLE TEXT IS REPLACED INSTEAD OF PROPER ONE
+                            equippedUpgrades.Add(upgrade1);
                             // Get the Image components
-                            Image equippedImage = equippedSlots[i].GetComponent<Image>();
+                            Image equippedImage = equippedUpgradesContainer[i].GetComponent<Image>();
                             Image upgradeImage = upgrade1.GetComponent<Image>();
-
                             // Set the slot's image to the upgrade's image
                             equippedImage.sprite = upgradeImage.sprite;
 
+                            //SETTING THE TEXT OF SLOT
+                            //accessing text of emptycontainer and string from upgrade
+                            TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
+                            //accessing the currentStat string
+                            UpgradeStats upgradeStats = upgrade1.GetComponent<UpgradeStats>();
+                            upgradeStats.SetStartingStats();
+                            //setting the emptycontainer text to the currentStat
+                            emptyContainerText.text = upgradeStats.currentStatString;
+
+                            availabilityScript.IsAvailable = false;
+                            availabilityScript.assignedUpgrade = upgrade1.name;
                             // Exit the loop after finding the first available slot
                             return;
                         }
-                    }
+                        //if it contains the string name from the already equipped list, then overwrite the stats
+                        else if (!availabilityScript.IsAvailable && equippedUpgrades.Contains(upgrade1))
+                        {
+                            //looks through all the upgrades we already have equipped
+                            for (int j = 0; j < equippedUpgrades.Count; j++)
+                            {
+                                //checks if upgrade1's name matches any of the assignedUpgrade(names) we have in this equipped list
+                                if (upgrade1.name == availabilityScript.assignedUpgrade)
+                                {
+                                    Debug.Log("Upgrade is already in equipped");
+                                    //accessing the currentStat string
+                                    UpgradeStats upgradeStats = upgrade1.GetComponent<UpgradeStats>();
+                                    upgradeStats.UpdateLVL();
+                                    //SETTING THE TEXT OF SLOT
+                                    //accessing text of emptycontainer and string from upgrade
+                                    TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
 
-                    Debug.LogWarning("No available slots for the upgrade.");
-                    ///
-                    // Need function to update the text (upgrade's level, actual stats, etc)
-                    ///
+                                    //setting the emptycontainer text to the currentStat
+                                    emptyContainerText.text = upgradeStats.currentStatString;
+
+                                    availabilityScript.IsAvailable = false;
+
+                                    // Exit the loop after finding the first available slot
+                                    return;
+                                }
+                            }  
+                        }
+                    }
+                    upgradeWasPicked = true;
                 }
                 else
                 {
@@ -145,26 +203,67 @@ public class UpgradesManager : MonoBehaviour
                     // Simulate a button click
                     button2.onClick.Invoke();
                     waveManager.StartWaves();
-                    wasUpgradeChosen = true;
 
-                    // Loop through equipped slots to find the first available slot
-                    for (int i = 0; i < equippedSlots.Count; i++)
+                    for (int i = 0; i < equippedUpgradesContainer.Count; i++)
                     {
-                        if (!equippedUpgrades.Contains(equippedSlots[i]))
+                        //getting the availability of each
+                        Availability availabilityScript = equippedUpgradesContainer[i].GetComponent<Availability>();
+
+
+                        //checking for the first one that has IsAvailable on true
+                        if (availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade2)) //and it doesn't contain a string name from the already equipped list
                         {
+                            Debug.Log("This is a new upgrade, equpping....");
                             // Add the upgrade to the list
-                            equippedUpgrades.Add(equippedSlots[i]);
-
+                            equippedUpgrades.Add(upgrade2);
                             // Get the Image components
-                            Image equippedImage = equippedSlots[i].GetComponent<Image>();
-                            Image upgradeImage = upgrade1.GetComponent<Image>();
-
+                            Image equippedImage = equippedUpgradesContainer[i].GetComponent<Image>();
+                            Image upgradeImage = upgrade2.GetComponent<Image>();
                             // Set the slot's image to the upgrade's image
                             equippedImage.sprite = upgradeImage.sprite;
+
+                            //SETTING THE TEXT OF SLOT
+                            //accessing text of emptycontainer and string from upgrade
+                            TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
+                            //accessing the currentStat string
+                            UpgradeStats upgradeStats = upgrade2.GetComponent<UpgradeStats>();
+                            upgradeStats.SetStartingStats();
+                            //setting the emptycontainer text to the currentStat
+                            emptyContainerText.text = upgradeStats.currentStatString;
+
+                            availabilityScript.IsAvailable = false;
 
                             // Exit the loop after finding the first available slot
                             return;
                         }
+                        //if it contains the string name from the already equipped list, then overwrite the stats
+                        else if (!availabilityScript.IsAvailable && equippedUpgrades.Contains(upgrade2))
+                        {
+                            //looks through all the upgrades we already have equipped
+                            for (int j = 0; j < equippedUpgrades.Count; j++)
+                            {
+                                //checks if upgrade1's name matches any of the assignedUpgrade(names) we have in this equipped list
+                                if (upgrade2.name == availabilityScript.assignedUpgrade)
+                                {
+                                    Debug.Log("Upgrade is already in equipped");
+                                    //accessing the currentStat string
+                                    UpgradeStats upgradeStats = upgrade2.GetComponent<UpgradeStats>();
+                                    upgradeStats.UpdateLVL();
+                                    //SETTING THE TEXT OF SLOT
+                                    //accessing text of emptycontainer and string from upgrade
+                                    TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
+
+                                    //setting the emptycontainer text to the currentStat
+                                    emptyContainerText.text = upgradeStats.currentStatString;
+
+                                    availabilityScript.IsAvailable = false;
+
+                                    // Exit the loop after finding the first available slot
+                                    return;
+                                }
+                            }
+                        }
+                        upgradeWasPicked = true;
                     }
 
                     Debug.LogWarning("No available slots for the upgrade.");
@@ -191,26 +290,67 @@ public class UpgradesManager : MonoBehaviour
                     // Simulate a button click
                     button3.onClick.Invoke();
                     waveManager.StartWaves();
-                    wasUpgradeChosen = true;
 
-                    // Loop through equipped slots to find the first available slot
-                    for (int i = 0; i < equippedSlots.Count; i++)
+                    for (int i = 0; i < equippedUpgradesContainer.Count; i++)
                     {
-                        if (!equippedUpgrades.Contains(equippedSlots[i]))
+                        //getting the availability of each
+                        Availability availabilityScript = equippedUpgradesContainer[i].GetComponent<Availability>();
+
+
+                        //checking for the first one that has IsAvailable on true
+                        if (availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade3)) //and it doesn't contain a string name from the already equipped list
                         {
+                            Debug.Log("This is a new upgrade, equpping....");
                             // Add the upgrade to the list
-                            equippedUpgrades.Add(equippedSlots[i]);
-
+                            equippedUpgrades.Add(upgrade3);
                             // Get the Image components
-                            Image equippedImage = equippedSlots[i].GetComponent<Image>();
-                            Image upgradeImage = upgrade1.GetComponent<Image>();
-
+                            Image equippedImage = equippedUpgradesContainer[i].GetComponent<Image>();
+                            Image upgradeImage = upgrade3.GetComponent<Image>();
                             // Set the slot's image to the upgrade's image
                             equippedImage.sprite = upgradeImage.sprite;
+
+                            //SETTING THE TEXT OF SLOT
+                            //accessing text of emptycontainer and string from upgrade
+                            TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
+                            //accessing the currentStat string
+                            UpgradeStats upgradeStats = upgrade3.GetComponent<UpgradeStats>();
+                            upgradeStats.SetStartingStats();
+                            //setting the emptycontainer text to the currentStat
+                            emptyContainerText.text = upgradeStats.currentStatString;
+
+                            availabilityScript.IsAvailable = false;
 
                             // Exit the loop after finding the first available slot
                             return;
                         }
+                        //if it contains the string name from the already equipped list, then overwrite the stats
+                        else if (!availabilityScript.IsAvailable && equippedUpgrades.Contains(upgrade3))
+                        {
+                            //looks through all the upgrades we already have equipped
+                            for (int j = 0; j < equippedUpgrades.Count; j++)
+                            {
+                                //checks if upgrade1's name matches any of the assignedUpgrade(names) we have in this equipped list
+                                if (upgrade3.name == availabilityScript.assignedUpgrade)
+                                {
+                                    Debug.Log("Upgrade is already in equipped");
+                                    //accessing the currentStat string
+                                    UpgradeStats upgradeStats = upgrade3.GetComponent<UpgradeStats>();
+                                    upgradeStats.UpdateLVL();
+                                    //SETTING THE TEXT OF SLOT
+                                    //accessing text of emptycontainer and string from upgrade
+                                    TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
+
+                                    //setting the emptycontainer text to the currentStat
+                                    emptyContainerText.text = upgradeStats.currentStatString;
+
+                                    availabilityScript.IsAvailable = false;
+
+                                    // Exit the loop after finding the first available slot
+                                    return;
+                                }
+                            }
+                        }
+                        upgradeWasPicked = true;
                     }
 
                     Debug.LogWarning("No available slots for the upgrade.");
@@ -227,18 +367,6 @@ public class UpgradesManager : MonoBehaviour
             }
         }
     }
-    /*bool IsUpgradeEquipped(GameObject upgrade)
-    {
-        foreach (GameObject equippedUpgrade in equippedUpgrades)
-        {
-            if (equippedUpgrade == upgrade)
-            {
-                return true; // Upgrade is already equipped
-            }
-        }
-
-        return false; // Upgrade is not equipped
-    }*/
     List<GameObject> GetRandomUpgrades(int count)
     {
         List<GameObject> randomUpgrades = new List<GameObject>();
@@ -278,11 +406,56 @@ public class UpgradesManager : MonoBehaviour
 
             // Instantiate a powerup GameObject at the specified spawn point
             GameObject upgradeInstance = Instantiate(upgrades[i], spawnPoint.position, Quaternion.identity);
-
+            upgradeInstances.Add(upgradeInstance);
             // Set the instantiated powerup as a child of the powerup panel
             upgradeInstance.transform.SetParent(upgradePanel.transform);
 
             // Attach any additional scripts or logic for player interaction
+        }
+    }
+
+    void UpdateUpgradeText()
+    {
+        //THIS FUNCTION IS FOR GETTING THE STRING INFOS AND DISPLAYING THEM FOR THE PICKABLE UPGRADES
+        // Iterate through each upgrade GameObject
+        int index = 0; // Track the index of the upgrade slot
+        foreach (GameObject container in upgradesContainer)
+        {
+            // Access the TextMeshProUGUI components attached to the empty upgrade slots
+            TextMeshProUGUI name = container.transform.Find("Name").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI description = container.transform.Find("Description").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI stat = container.transform.Find("Stat").GetComponent<TextMeshProUGUI>();
+
+            // Make sure that the index is within the range of selectedUpgrades
+            if (index < selectedUpgrades.Count)
+            {
+                //WE GET THE UPGRADESTAT OF EACH UPGRADE FOUND IN THE SELECTEDUPGRADES LIST
+                UpgradeStats upgradeStats = selectedUpgrades[index].GetComponent<UpgradeStats>();
+
+                // Make sure that UpgradeStats component is not null
+                if (upgradeStats != null)
+                {
+                    // Get the strings from UpgradeStats
+                    string upgradeName = upgradeStats.upgradeName;
+                    string upgradeDescription = upgradeStats.upgradeDescription;
+                    string upgradeStat = "UpgradeAmount: " + upgradeStats.upgradeAmount.ToString();
+
+                    // Update the TextMeshProUGUI components with the strings
+                    name.text = upgradeName;
+                    description.text = upgradeDescription;
+                    stat.text = upgradeStat;
+                }
+                else
+                {
+                    Debug.LogWarning("UpgradeStats component is missing in the displayed upgrade GameObject.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Index out of range: selectedUpgrades list is smaller than emptyUpgradeSlots list.");
+            }
+
+            index++; // Increment the index for the next upgrade slot
         }
     }
 }
