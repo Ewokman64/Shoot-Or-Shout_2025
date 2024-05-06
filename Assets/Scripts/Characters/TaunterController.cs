@@ -98,9 +98,14 @@ public class TaunterController : MonoBehaviour
     {      
         if (hostile.Contains(other.tag))
         {
-            Destroy(gameObject);
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
+            gameManager.playerHealth--;
+            gameManager.playerHealthText.text = "Health: " + gameManager.playerHealth;
+            if (gameManager.playerHealth <= 0)
+            {
+                Destroy(gameObject);
+                gameManager.isSomeoneDead = true;
+                gameManager.GameOver();
+            }
         }
         Destroy(other.gameObject);
     }

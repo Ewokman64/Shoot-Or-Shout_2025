@@ -6,6 +6,8 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    public int playerHealth;
+    public TextMeshProUGUI playerHealthText;
     public List<GameObject> spawnedEnemies = new List<GameObject>();
 
     private SpawnManager spawnManager;
@@ -48,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        playerHealth = 3;
+        playerHealthText.text = "Health: " + playerHealth;
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         Time.timeScale = 0;
         isShooterChased = true;
@@ -70,6 +74,10 @@ public class GameManager : MonoBehaviour
     {
         UpdateEnemyList();
         scoreManager();
+        if (Input.GetKeyDown(KeyCode.Space) && hasGameStarted == false)
+        {
+            StartGame();
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePauseMenu();

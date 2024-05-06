@@ -141,11 +141,18 @@ public class ShooterController : MonoBehaviour
             ActivatePowerUp();
         }
         else if (hostile.Contains(other.tag))
-        {      
-            gameManager.isSomeoneDead = true;
-            gameManager.GameOver();
+        {
+            gameManager.playerHealth--;
+            gameManager.playerHealthText.text = "Health: " + gameManager.playerHealth;
+            if (gameManager.playerHealth <= 0)
+            {
+                Destroy(gameObject);
+                gameManager.isSomeoneDead = true;
+                gameManager.GameOver();
+            }
         }
-        
+        Destroy(other.gameObject);
+
     }
     public void ActivatePowerUp()
     {
