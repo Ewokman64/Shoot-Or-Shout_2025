@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TMPro;
-using UnityEditor.ShaderKeywordFilter;
+//using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -265,9 +265,6 @@ public class UpgradesManager : MonoBehaviour
                         }
                         upgradeWasPicked = true;
                     }
-
-                    Debug.LogWarning("No available slots for the upgrade.");
-                    // Need function to update the text (upgrade's level, actual stats, etc)
                 }
                 else
                 {
@@ -352,9 +349,6 @@ public class UpgradesManager : MonoBehaviour
                         }
                         upgradeWasPicked = true;
                     }
-
-                    Debug.LogWarning("No available slots for the upgrade.");
-                    // Need function to update the text (upgrade's level, actual stats, etc)
                 }
                 else
                 {

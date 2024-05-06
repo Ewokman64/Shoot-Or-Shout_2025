@@ -12,6 +12,7 @@ public class Horse : MonoBehaviour
     private GameManager gameManager;
     private SpawnEnemies waveManager;
     private NightKnight nightKnight;
+    public GameObject parentObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class Horse : MonoBehaviour
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
         nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
+        parentObject = transform.parent.gameObject;
     }
 
     // Update is called once per frame
@@ -46,12 +48,7 @@ public class Horse : MonoBehaviour
 
     public void EnrageHorse()
     {
-            // Detach all children from the parent
-            foreach (Transform child in transform)
-            {
-                child.parent = null;
                 speed = 5;
-            }
             //horseEnraged = true;
     }
     void OnTriggerEnter2D(Collider2D other)

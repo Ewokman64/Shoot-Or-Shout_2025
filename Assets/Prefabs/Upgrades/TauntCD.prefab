@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e34aeda8e16f62a43aaf4e24b732504d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a95aed4fcc480345a1cb0f2ac66f6f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Shout Cooldown
   upgradeDescription: Reduces the cooldown of shouting by 0.15 seconds
-  currentStatString: 'Stat changed by: 0,15'
+  currentStatString: '2 sec cooldown reduced by: 0,15'
   upgradeAmount: 0.15
-  originalStat: 0
-  currentStat: 0
+  currentStat: 0.15
   currentStatDescription: '2 sec cooldown reduced by:'
   LVL: 1
+  upgradeSlot: 0

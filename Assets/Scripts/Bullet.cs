@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         //LISTS TO COMPARE FROM MIGHT BE CLEANER
         int normalEnemies = LayerMask.NameToLayer("Enemies");
         int specialEnemies = LayerMask.NameToLayer("SpecialEnemies");
-        int bossEnemies = LayerMask.NameToLayer("BossEnemies");
+        int bossEnemies = LayerMask.NameToLayer("BossEnemies"); //this is for the minions the boss can spawn
 
         if (other.gameObject.CompareTag("Spitter"))
         {

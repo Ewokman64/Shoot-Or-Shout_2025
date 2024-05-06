@@ -16,7 +16,7 @@ public class LittleBrain : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter(Clone)").GetComponent<Transform>();
-
+        StartCoroutine(AutoDestroy());
     }
 
     void Update()
@@ -39,5 +39,12 @@ public class LittleBrain : MonoBehaviour
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
+    }
+
+    public IEnumerator AutoDestroy()
+    {
+        yield return new WaitForSeconds(5);
+
+        Destroy(gameObject);
     }
 }

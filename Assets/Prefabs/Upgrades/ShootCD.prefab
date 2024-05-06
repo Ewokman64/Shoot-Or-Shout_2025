@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9511b8bb4ec8c994d9bd96dfe7873ca2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6987a32d5d5eb5945a065a2995ba4402, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Shoot Cooldown
   upgradeDescription: Reduces the cooldown of shooting by 0.15 seconds
-  currentStatString: 
+  currentStatString: '1 sec cooldown reduced by: 0,15'
   upgradeAmount: 0.15
-  originalStat: 0
-  currentStat: 0
+  currentStat: 0.15
   currentStatDescription: '1 sec cooldown reduced by:'
   LVL: 1
+  upgradeSlot: 0

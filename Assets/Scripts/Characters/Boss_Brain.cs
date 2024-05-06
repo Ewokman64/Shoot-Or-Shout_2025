@@ -99,7 +99,7 @@ public class Boss_Brain : MonoBehaviour
             randomBrainPos = UnityEngine.Random.Range(0, spawnArray.Length);
             Instantiate(littleBrain, spawnArray[randomBrainPos].position, UnityEngine.Quaternion.identity);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(2f);
         }
     }
 
@@ -117,7 +117,7 @@ public class Boss_Brain : MonoBehaviour
             randomBrainPos = UnityEngine.Random.Range(0, spawnArray.Length);
             Instantiate(brainBullet, spawnArray[randomBrainPos].position, UnityEngine.Quaternion.identity);
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 

@@ -33,7 +33,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     void Start()
     {
         phaseActive = true;
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         foreach (GameObject cannon in cannons)
         {
             // Instantiate the object at the current spawn point's position and rotation
@@ -47,27 +47,11 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (healthBar.currentHealth <= 0)
-        {
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-            gameManager.bossDied = true;
-            Destroy(gameObject);
-            foreach (GameObject cannon in cannons)
-            {
-                // Instantiate the object at the current spawn point's position and rotation
-
-                cannon.SetActive(false);
-                //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
-            }
-        }
         if (lasersAndZombies == false)
         {
             Debug.Log("Laser and zombies is false!");
             foreach (GameObject cannon in cannons)
             {
-                Debug.Log("For each begun");
-                BrainCannon cannonScript = cannon.GetComponent<BrainCannon>();
-                // Instantiate the object at the current spawn point's position and rotation
                 cannon.SetActive(false);
                 //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
             }
@@ -94,6 +78,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
         //pain in the ass, use a single laser
         if (lasersAndZombies == true)
         {
+            //we spawn the cannons lasers
             foreach (GameObject cannon in cannons)
             {
                 // Instantiate the object at the current spawn point's position and rotation
@@ -103,13 +88,19 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
                 //Instantiate(cannon, cannonPoints.position, cannonPoints.rotation);
             }
             //lasersAndZombies = true;
-            foreach (Transform spawnPoints in zombieSpawnPoints)
+
+            while (lasersAndZombies == true)
             {
-                randomSpawnPoint = UnityEngine.Random.Range(0, zombieSpawnPoints.Length);
-                // Instantiate the object at the current spawn point's position and rotation
-                Instantiate(zombie, zombieSpawnPoints[randomSpawnPoint].position, spawnPoints.rotation);
+                //we start spawning the enemies too
+                foreach (Transform spawnPoints in zombieSpawnPoints)
+                {
+                    randomSpawnPoint = UnityEngine.Random.Range(0, zombieSpawnPoints.Length);
+                    // Instantiate the object at the current spawn point's position and rotation
+                    Instantiate(zombie, zombieSpawnPoints[randomSpawnPoint].position, spawnPoints.rotation);
+
+                    yield return new WaitForSeconds(1f);
+                }
             }
-            yield return new WaitForSeconds(1f);
         }
     }
     public IEnumerator EyeBombs()
@@ -181,6 +172,12 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
             Debug.Log("Boss hit");
             healthBar.currentHealth--;
             healthBar.UpdateHealthBar();
+            if (healthBar.currentHealth <= 0)
+            {
+                ClearMap();
+                Destroy(gameObject);
+                gameManager.BossDied();
+            }
         }
     }
 }

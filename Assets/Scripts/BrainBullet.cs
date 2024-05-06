@@ -6,7 +6,7 @@ public class BrainBullet : MonoBehaviour
     public List<GameObject> targets = new List<GameObject>();
     private GameObject shooter;
     private GameObject taunter;
-    private float speed = 10;
+    private float speed = 7;
 
     // Start is called before the first frame update
     void Start()

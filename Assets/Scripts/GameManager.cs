@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public GameObject demoOverScreen;
     public GameObject pauseMenu;
     public GameObject stallingText;
+    public GameObject youCanLeaveNowScreen;
 
     public GameObject[] enemies;
     public GameObject shooter;
@@ -43,7 +44,6 @@ public class GameManager : MonoBehaviour
     public bool isShooterChased;
     public bool isStallingActive;
     public bool hasGameStarted;
-    public bool bossDied;
     public bool gameIsPaused = false;
 
     void Start()
@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
         isShooterChased = true;
         isStallingActive = false;
         hasGameStarted = false;
-        bossDied = false;
         stallingTimer = 10;
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -71,10 +70,6 @@ public class GameManager : MonoBehaviour
     {
         UpdateEnemyList();
         scoreManager();
-        if (bossDied)
-        {
-            demoOverScreen.SetActive(true);
-        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             TogglePauseMenu();
@@ -263,6 +258,19 @@ public class GameManager : MonoBehaviour
             upgradeStats.currentStat = upgradeStats.upgradeAmount;
             upgradeStats.currentStatString = upgradeStats.currentStatDescription + " " + upgradeStats.currentStat.ToString();
         }
+    }
+
+    public void BossDied()
+    {
+            demoOverScreen.SetActive(true);
+            StartCoroutine(GoNow());
+    }
+
+    public IEnumerator GoNow()
+    {
+        yield return new WaitForSeconds(10);
+        demoOverScreen.SetActive(false);
+        youCanLeaveNowScreen.SetActive(true);
     }
 }
 
