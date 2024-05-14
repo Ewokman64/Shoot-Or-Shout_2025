@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 
 {
+    public void EnterHub()
+    {
+        SceneManager.LoadScene("Hub");//ints and such also work.
+    }
     public void PlayGame()
     {
         SceneManager.LoadScene("GamePlayScene");//ints and such also work.

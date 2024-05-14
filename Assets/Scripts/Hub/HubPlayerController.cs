@@ -5,6 +5,9 @@ using UnityEngine;
 public class HubPlayerController : MonoBehaviour
 {
     float speed = 5;
+    public GameObject shopButton;
+    public GameObject shopKeeper;
+    private SpriteRenderer spriteRenderer;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +37,23 @@ public class HubPlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    { 
+        if (other.CompareTag("Shop")){
+            shopButton.SetActive(true);
+            spriteRenderer = shopKeeper.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.yellow;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Shop"))
+        {
+            shopButton.SetActive(false);
+            spriteRenderer = shopKeeper.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.green;
         }
     }
 }

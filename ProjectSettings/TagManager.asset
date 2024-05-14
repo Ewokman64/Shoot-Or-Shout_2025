@@ -30,6 +30,7 @@ TagManager:
   - BrainCannon
   - Laser
   - SpitterSpawn
+  - Shop
   layers:
   - Default
   - TransparentFX
