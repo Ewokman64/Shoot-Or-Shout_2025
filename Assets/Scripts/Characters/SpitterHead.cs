@@ -11,6 +11,7 @@ public class SpitterHead : MonoBehaviour
     public Transform targetTaunter;
     public GameManager gameManager;
     public int speed = 1;
+    public float health = 1;
     // Start is called before the first frame update
     void Start()
     {

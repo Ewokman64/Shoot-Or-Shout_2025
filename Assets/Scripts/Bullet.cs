@@ -32,6 +32,13 @@ public class Bullet : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         //LISTS TO COMPARE FROM MIGHT BE CLEANER
+        //SUMMARY THAT NEEDS TO BE DONE
+        //check collision and reduce hp of *RunnerSkeleton, Spitter, EyeBomb, BigBoi, NightKnight, Rider, Shield, Horse, BossV1, BossV2
+        //if you hit any of these, reset the **stallingTimer**
+        //if the target dies **updateCurrency**
+        //reduce bullet pierce power on collision. if it reaches zero, destroy bullet. rename "bulletHealth" to piercePower
+
+        int enemies = LayerMask.NameToLayer("Enemies");
         int normalEnemies = LayerMask.NameToLayer("Enemies");
         int specialEnemies = LayerMask.NameToLayer("SpecialEnemies");
         int bossEnemies = LayerMask.NameToLayer("BossEnemies"); //this is for the minions the boss can spawn
@@ -48,6 +55,7 @@ public class Bullet : MonoBehaviour
         }
         if (other.gameObject.layer == normalEnemies || other.gameObject.layer == bossEnemies)
         {
+            
             Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();

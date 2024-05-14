@@ -6,7 +6,7 @@ using UnityEngine;
 public class EyeBomb : MonoBehaviour
 {
     public float speed = 10f;
-
+    public float health = 1;
     public bool shooterChosen;
     public bool taunterChosen;
     public bool coroutineStarted;

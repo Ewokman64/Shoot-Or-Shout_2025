@@ -6,6 +6,8 @@ public class ZombieControls : MonoBehaviour
 {    
     public float speed = 5;
 
+    public float health = 1;
+
     private Transform targetShooter;
 
     private GameManager gameManager;

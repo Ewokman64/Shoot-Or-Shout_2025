@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1724686168249955306}
   - component: {fileID: 4494247572708033392}
   - component: {fileID: 5508212474743306293}
+  - component: {fileID: 8754201285934654069}
   m_Layer: 7
   m_Name: BigBoi
   m_TagString: BigEnemy
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  health: 10
+  health: 5
   spriteRenderer: {fileID: 3740853189579054730}
 --- !u!61 &4494247572708033392
 BoxCollider2D:
@@ -174,3 +175,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &8754201285934654069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810393701880755627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
