@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5127510898541556760}
   - component: {fileID: 7127226360271903781}
   - component: {fileID: 5121863854320296302}
-  m_Layer: 11
+  - component: {fileID: -5217540749913552136}
+  m_Layer: 3
   m_Name: LittleBrain
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -191,3 +192,21 @@ PolygonCollider2D:
       - {x: 0.4172685, y: 0.137388}
       - {x: 0.32420325, y: 0.20356083}
   m_UseDelaunayMesh: 0
+--- !u!114 &-5217540749913552136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604141183970494082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: LittleBrain
+  speed: 4
+  health: 1
+  rateOfFire: 0
+  points: 1
+  currencyValue: 0

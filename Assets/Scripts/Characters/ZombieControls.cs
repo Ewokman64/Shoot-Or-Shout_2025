@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ZombieControls : MonoBehaviour
-{    
+{
+    EnemyStats enemyStats;
+
     public float speed = 5;
 
     public float health = 1;
@@ -17,7 +19,9 @@ public class ZombieControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        enemyStats = GetComponent<EnemyStats>();
+        
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
         if (shooterObject != null)
@@ -40,12 +44,12 @@ public class ZombieControls : MonoBehaviour
     }
     public void ShooterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
-        transform.Translate(Vector2.right* speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
     void OnTriggerEnter2D(Collider2D other)

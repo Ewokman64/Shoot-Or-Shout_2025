@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spitter : MonoBehaviour
 {
+    EnemyStats enemyStats;
     public GameObject acidBall;
     public float fireRate = 3;
     
@@ -16,6 +17,7 @@ public class Spitter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyStats = GetComponent<EnemyStats>();
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
         if (shooterObject != null)
         {
@@ -48,7 +50,7 @@ public class Spitter : MonoBehaviour
         while (true)
         {
             Instantiate(acidBall, transform.position, acidBall.transform.rotation);
-            yield return new WaitForSeconds(fireRate);
+            yield return new WaitForSeconds(enemyStats.rateOfFire);
         }      
     }
 }

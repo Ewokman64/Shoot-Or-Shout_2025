@@ -8,4 +8,6 @@ public class EnemyStats : MonoBehaviour
     public float speed;
     public float health;
     public float rateOfFire;
+    public int points;
+    public int currencyValue;
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SpitterHead : MonoBehaviour
 {
+    EnemyStats enemyStats;
+
     public GameObject acidBall;
     public Transform acidBallSpawn;
     public Transform targetShooter;
@@ -15,6 +17,7 @@ public class SpitterHead : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyStats = GetComponent<EnemyStats>();
         targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter(Clone)").GetComponent<Transform>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -22,7 +25,7 @@ public class SpitterHead : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * speed);
+        transform.Translate(Vector2.up * Time.deltaTime * enemyStats.speed);
         if (gameManager.isShooterChased == true && targetShooter != null)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -45,7 +48,7 @@ public class SpitterHead : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            speed *= -1;
+            enemyStats.speed *= -1;
         }
     }
 }

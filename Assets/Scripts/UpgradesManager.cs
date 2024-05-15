@@ -38,9 +38,10 @@ public class UpgradesManager : MonoBehaviour
     public List<Transform> equippedUpgradeSpawnPoints; // List of spawn points for displaying equipped powerups
     public List<string> equippedUpgradesNames;
     public List<GameObject> equippedUpgrades; //checking wether we have certain upgrades equipped or not
-    public List<GameObject> equippedUpgradesContainer; // List of UI slots where EQUIPPED upgrades will be displayed. looping through them to get an available one
+    public List<GameObject> equippedUpgradesContainer; // List of upgrade containers where EQUIPPED upgrades will be displayed. looping through them to get an available one
     bool isFreeSlotAvailable = true;
 
+    public TextMeshProUGUI noSlotText;
     // Start is called before the first frame update
     void Start()
     {
@@ -106,31 +107,34 @@ public class UpgradesManager : MonoBehaviour
     }
     public void ButtonPick()
     {
+
+        //**REWRITE SOMETIME
+        //Psudeo: if there is freeslot available and if upgrade isn't part of are list, equip upgrade. if it's part of it, LVLUP upgrade
+        //If there is no free slot available and upgrade isn't part of our list, says "no free slot left". if it's part of it, LVLUP upgrade
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (button1 != null)
             {
                 CheckEquipped();
-                if (isFreeSlotAvailable)
-                {
+                //if (isFreeSlotAvailable)
+                //{
                     // Simulate a button click
                     button1.onClick.Invoke();
                     waveManager.StartWaves();
-                    
+
+                    //getting the availability of each container, looping through them
                     for (int i = 0; i < equippedUpgradesContainer.Count; i++)
                     {
-                        //getting the availability of each
+                        
                         Availability availabilityScript = equippedUpgradesContainer[i].GetComponent<Availability>();
-                        //getting the upgrades in them as well? so I can check later?
-
 
                         //checking for the first one that has IsAvailable on true
-                        if (availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade1)) //and it doesn't contain a string name from the already equipped list
+
+                        //if there is freeslot available AND if upgrade isn't part of our list, equip upgrade
+                        if (availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade1)) 
                         {
                             Debug.Log("This is a new upgrade, equpping....");
                             // Add the upgrade to the list
-                            //ERROR: RIGHT NOW WE ADD THE SLOT THAT WE EQUIP TO INSTEAD OF THE PICKED POWERUP
-                            //CHECKING WORKS. IF UPGRADE IS ALREADY EQUIPPED HOWEVER, THE FIRST AVAILABLE TEXT IS REPLACED INSTEAD OF PROPER ONE
                             equippedUpgrades.Add(upgrade1);
                             // Get the Image components
                             Image equippedImage = equippedUpgradesContainer[i].GetComponent<Image>();
@@ -152,13 +156,13 @@ public class UpgradesManager : MonoBehaviour
                             // Exit the loop after finding the first available slot
                             return;
                         }
-                        //if it contains the string name from the already equipped list, then overwrite the stats
+                        //If there is no free slot available AND if upgrade IS part of our list, LVLUP the upgrade
                         else if (!availabilityScript.IsAvailable && equippedUpgrades.Contains(upgrade1))
                         {
                             //looks through all the upgrades we already have equipped
                             for (int j = 0; j < equippedUpgrades.Count; j++)
                             {
-                                //checks if upgrade1's name matches any of the assignedUpgrade(names) we have in this equipped list
+                                //checks if upgrade's name matches any of the assignedUpgrade(names) we have in this equipped list
                                 if (upgrade1.name == availabilityScript.assignedUpgrade)
                                 {
                                     Debug.Log("Upgrade is already in equipped");
@@ -179,13 +183,15 @@ public class UpgradesManager : MonoBehaviour
                                 }
                             }  
                         }
+                        else if (!availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade1))
+                        {
+                        noSlotText.text = "NO FREE SLOTS AVAILABLE FOR UNIQUE UPGRADE";
+                        StartCoroutine(SetTextBack());
+                        Debug.Log("No free slots available");
+                        }
                     }
                     upgradeWasPicked = true;
-                }
-                else
-                {
-                    Debug.LogWarning("No free slots are available");
-                }
+                //}
             }
             else
             {
@@ -198,8 +204,8 @@ public class UpgradesManager : MonoBehaviour
             if (button2 != null)
             {
                 CheckEquipped();
-                if (isFreeSlotAvailable)
-                {
+                //if (isFreeSlotAvailable)
+                //{
                     // Simulate a button click
                     button2.onClick.Invoke();
                     waveManager.StartWaves();
@@ -263,13 +269,15 @@ public class UpgradesManager : MonoBehaviour
                                 }
                             }
                         }
-                        upgradeWasPicked = true;
+                        else if (!availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade2))
+                        {
+                        noSlotText.text = "NO FREE SLOTS AVAILABLE FOR UNIQUE UPGRADE";
+                        StartCoroutine(SetTextBack());
+                        Debug.Log("No free slots available");
+                        }
+                    upgradeWasPicked = true;
                     }
-                }
-                else
-                {
-                    Debug.LogWarning("No free slots are available");
-                }
+                //}
             }
             else
             {
@@ -282,19 +290,20 @@ public class UpgradesManager : MonoBehaviour
             if (button3 != null)
             {
                 CheckEquipped();
-                if (isFreeSlotAvailable)
-                {
+                //if (isFreeSlotAvailable)
+                //{
                     // Simulate a button click
                     button3.onClick.Invoke();
                     waveManager.StartWaves();
 
                     for (int i = 0; i < equippedUpgradesContainer.Count; i++)
                     {
-                        //getting the availability of each
+                        //getting the availability of each container
                         Availability availabilityScript = equippedUpgradesContainer[i].GetComponent<Availability>();
 
 
                         //checking for the first one that has IsAvailable on true
+                        //if there is available space AND upgrade is not equipped
                         if (availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade3)) //and it doesn't contain a string name from the already equipped list
                         {
                             Debug.Log("This is a new upgrade, equpping....");
@@ -321,6 +330,7 @@ public class UpgradesManager : MonoBehaviour
                             return;
                         }
                         //if it contains the string name from the already equipped list, then overwrite the stats
+                        //if there is no available space AND upgrade IS equipped
                         else if (!availabilityScript.IsAvailable && equippedUpgrades.Contains(upgrade3))
                         {
                             //looks through all the upgrades we already have equipped
@@ -347,13 +357,15 @@ public class UpgradesManager : MonoBehaviour
                                 }
                             }
                         }
-                        upgradeWasPicked = true;
+                        else if (!availabilityScript.IsAvailable && !equippedUpgrades.Contains(upgrade3))
+                        {
+                        noSlotText.text = "NO FREE SLOTS AVAILABLE FOR UNIQUE UPGRADE";
+                        StartCoroutine(SetTextBack());
+                        Debug.Log("No free slots available");
+                        }
+                    upgradeWasPicked = true;
                     }
-                }
-                else
-                {
-                    Debug.LogWarning("No free slots are available");
-                }
+                //}
             }
             else
             {
@@ -452,6 +464,12 @@ public class UpgradesManager : MonoBehaviour
             index++; // Increment the index for the next upgrade slot
         }
     }
+
+    public IEnumerator SetTextBack()
+    {
+        yield return new WaitForSeconds(3);
+        noSlotText.text = "Upgrades equipped";
+    }
 }
 public static class ListExtensions
 {
@@ -478,3 +496,5 @@ public static class ListExtensions
         }
     }
 }
+
+

@@ -3,7 +3,11 @@ guid: 2fa15c82287888d4ca4ff4ac0ed42424
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - upgradesPanel: {instanceID: 0}
+  - bulletPrefab: {fileID: 5093899002677859947, guid: d310716e801c20449b49fb5cf86c9375,
+      type: 3}
+  - upgrade: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

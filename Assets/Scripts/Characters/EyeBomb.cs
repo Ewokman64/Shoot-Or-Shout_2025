@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class EyeBomb : MonoBehaviour
 {
-    public float speed = 10f;
-    public float health = 1;
+    EnemyStats enemyStats;
+    //public float speed = 10f;
+    //public float health = 1;
     public bool shooterChosen;
     public bool taunterChosen;
     public bool coroutineStarted;
@@ -14,6 +15,7 @@ public class EyeBomb : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyStats = GetComponent<EnemyStats>();
         shooterChosen = false;
         taunterChosen = false;
         coroutineStarted = false;
@@ -34,12 +36,12 @@ public class EyeBomb : MonoBehaviour
           }
         if (shooterChosen)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (taunterChosen)
         {
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }

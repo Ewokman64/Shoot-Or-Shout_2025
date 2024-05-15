@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BigBoi : MonoBehaviour
 {
-    public float speed = 3.5f;
-    public float health = 5;
+    EnemyStats enemyStats;
+    //public float speed = 3.5f;
+    //public float health = 5;
     private int specEnemyValue = 15;
 
     private Transform targetShooter;
@@ -17,6 +18,7 @@ public class BigBoi : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyStats = GetComponent<EnemyStats>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         defaultColor = spriteRenderer.material.color;
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
@@ -36,32 +38,30 @@ public class BigBoi : MonoBehaviour
             TaunterFollow();
         }
 
-        if (health <= 0)
+        /*if (health <= 0)
         {
-            gameManager.UpdateNormalCurrency(specEnemyValue);
+            gameManager.UpdateNormalCurrency(enemyStats.points);
             Destroy(gameObject);
-        }
+        }*/
     }
     public void ShooterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
             StartCoroutine(DamageColor());
-            health--;
         }
     }
-
     public IEnumerator DamageColor()
     {
         yield return null;

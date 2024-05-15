@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Boss_Brain_2ndPhase : MonoBehaviour
 {
+    EnemyStats enemyStats;
     //currentbugs: cannons stay for next attack. at rotation they don't shoot
     public HealthBar healthBar;
     private SpawnManager spawnManager;
@@ -34,6 +35,7 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     {
         phaseActive = true;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        enemyStats = GetComponent<EnemyStats>();
         foreach (GameObject cannon in cannons)
         {
             // Instantiate the object at the current spawn point's position and rotation
@@ -165,19 +167,17 @@ public class Boss_Brain_2ndPhase : MonoBehaviour
     }
     
 
-    private void OnTriggerEnter2D(Collider2D other)
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Boss hit");
-            healthBar.currentHealth--;
+            //healthBar.currentHealth--;
             healthBar.UpdateHealthBar();
-            if (healthBar.currentHealth <= 0)
+            if (enemyStats.health <= 0)
             {
                 ClearMap();
-                Destroy(gameObject);
                 gameManager.BossDied();
             }
         }
-    }
+    }*/
 }

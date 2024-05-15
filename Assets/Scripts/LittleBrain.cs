@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LittleBrain : MonoBehaviour
 {
-    public float speed = 7;
+    EnemyStats enemyStats;
+
+    //public float speed = 7;
 
     private Transform targetShooter;
     private Transform targetTaunter;
@@ -13,6 +15,7 @@ public class LittleBrain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemyStats = GetComponent<EnemyStats>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
         targetTaunter = GameObject.Find("Taunter(Clone)").GetComponent<Transform>();
@@ -32,12 +35,12 @@ public class LittleBrain : MonoBehaviour
     }
     public void ShooterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 

@@ -64,15 +64,16 @@ public class UpgradeList : MonoBehaviour
     {
         GetReferences();
         // Access the Bullet script without instantiating a visible GameObject
+
         Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
         if (bulletScript != null)
         {
             // Set the health using the public method in Bullet script
-            bulletScript.bulletHealth += bulletpierceAmount;
+            bulletScript.piercePower += bulletpierceAmount;
             upgradesPanel.SetActive(false);
             Time.timeScale = 1;
             upgradeSelected = true;
-            Debug.Log("Bullet Pierce: " + bulletpierceAmount);
+            Debug.Log("New Bullet Pierce: " + bulletScript.piercePower);
         }
     }
     public void PowerUpSpawnRate()

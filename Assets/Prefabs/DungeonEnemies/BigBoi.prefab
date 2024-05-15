@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4494247572708033392}
   - component: {fileID: 5508212474743306293}
   - component: {fileID: 8754201285934654069}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: BigBoi
   m_TagString: BigEnemy
   m_Icon: {fileID: 0}
@@ -100,8 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5565b468966f448b869ee001b3c23a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  health: 5
   spriteRenderer: {fileID: 3740853189579054730}
 --- !u!61 &4494247572708033392
 BoxCollider2D:
@@ -187,3 +185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: BigBoi
+  speed: 2
+  health: 5
+  rateOfFire: 0
+  points: 10
+  currencyValue: 0

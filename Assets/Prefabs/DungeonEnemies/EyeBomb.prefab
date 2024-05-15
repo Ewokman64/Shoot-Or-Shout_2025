@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 66648469727601601}
   - component: {fileID: 5346307391954096041}
   - component: {fileID: -8773449702901641684}
+  - component: {fileID: -1821403347970868804}
   m_Layer: 3
   m_Name: EyeBomb
   m_TagString: Enemy
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3cceae4ad9bcf44ad9cb3568900215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
   shooterChosen: 0
   taunterChosen: 0
   coroutineStarted: 0
@@ -165,3 +165,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
+--- !u!114 &-1821403347970868804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2664364914138761654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: EyeBomb
+  speed: 20
+  health: 1
+  rateOfFire: 0
+  points: 5
+  currencyValue: 0

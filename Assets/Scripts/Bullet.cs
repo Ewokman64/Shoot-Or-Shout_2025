@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    private int enemiesLayer;
+
     private float bulletSpeed = 30;
-    public float bulletHealth = 1;
-    public float maxHealth = 1;
+    public float piercePower = 1;
+    public float defaultPierce = 1;
     public int zombieValue = 3;
     public bool isZombieShot = false;
     private GameManager gameManager;
@@ -19,6 +21,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemiesLayer = LayerMask.NameToLayer("Enemies");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -30,90 +33,82 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.left * Time.deltaTime * bulletSpeed);
     }
     public void OnTriggerEnter2D(Collider2D other)
-    {
-        //LISTS TO COMPARE FROM MIGHT BE CLEANER
-        //SUMMARY THAT NEEDS TO BE DONE
-        //check collision and reduce hp of *RunnerSkeleton, Spitter, EyeBomb, BigBoi, NightKnight, Rider, Shield, Horse, BossV1, BossV2
-        //if you hit any of these, reset the **stallingTimer**
-        //if the target dies **updateCurrency**
-        //reduce bullet pierce power on collision. if it reaches zero, destroy bullet. rename "bulletHealth" to piercePower
-
-        int enemies = LayerMask.NameToLayer("Enemies");
-        int normalEnemies = LayerMask.NameToLayer("Enemies");
-        int specialEnemies = LayerMask.NameToLayer("SpecialEnemies");
-        int bossEnemies = LayerMask.NameToLayer("BossEnemies"); //this is for the minions the boss can spawn
-
-        if (other.gameObject.CompareTag("Spitter"))
+    {   
+        //**NEW CODE**
+        //**THIS SHOULD BE A SEPARATE COLLISION SCRIPT LATER TO USE IT FOR OTHER PROJECTILES
+        EnemyStats enemyStats;
+        
+        if (other.gameObject.layer == enemiesLayer)
         {
-            SpawnEnemies spawnfillerenemies;
-            spawnfillerenemies = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
-            spawnfillerenemies.OnEnemyDestroyed(other.gameObject);
-        }
-        if (other.gameObject.layer == normalEnemies || other.gameObject.layer == specialEnemies || other.gameObject.CompareTag("Shield"))
-        {
+            enemyStats = other.gameObject.GetComponent<EnemyStats>();
+            enemyStats.health--;
             gameManager.stallingTimer = 10;
-        }
-        if (other.gameObject.layer == normalEnemies || other.gameObject.layer == bossEnemies)
-        {
-            
-            Destroy(other.gameObject, 0.2f);
             isZombieShot = true;
             audioManager.PlayZombieDeath();
-            gameManager.UpdateNormalCurrency(zombieValue);
-            if (other.gameObject == null)
-            {
-                gameManager.UpdateNormalCurrency(zombieValue);
-            }
-        }
-        else if (other.gameObject.CompareTag("Shield"))
-        {
-            nightKnight = GameObject.FindGameObjectWithTag("NightKnight").GetComponent<NightKnight>();
-            nightKnight.shieldHealth--;
-            if (nightKnight.shieldHealth <= 0)
-            {
+            
+            if (enemyStats.health <= 0)
+            { 
                 Destroy(other.gameObject);
+                gameManager.UpdateNormalCurrency(enemyStats.points); 
             }
-        }
-        else if (other.gameObject.CompareTag("NightKnight"))
-        {
-            nightKnight = GameObject.FindWithTag("NightKnight").GetComponent<NightKnight>();
-            nightKnight.nightKnightHealth--;
-            if (nightKnight.nightKnightHealth <= 0)
+
+            if (enemyStats.name == "BossV1")
             {
-                Destroy(other.gameObject);
-                if (nightKnight.shieldEquipped)
+                HealthBar healthBar = other.gameObject.GetComponent<HealthBar>();
+                Boss_Brain bossScript = other.gameObject.GetComponent<Boss_Brain>();
+                healthBar.UpdateHealthBar();
+                if (enemyStats.health <= 0)
                 {
-                    GameObject shield = GameObject.FindGameObjectWithTag("Shield");
-                    Destroy(shield);
+                    bossScript.secondPhaseStarted = true;
+                    StartCoroutine(bossScript.BossSecondPhase());
                 }
             }
+
+            if (enemyStats.name == "BossV2")
+            {
+                HealthBar healthBar = other.gameObject.GetComponent<HealthBar>();
+                Boss_Brain_2ndPhase bossScript = other.gameObject.GetComponent<Boss_Brain_2ndPhase>();
+                healthBar.UpdateHealthBar();
+                if (enemyStats.health <= 0)
+                {
+                    bossScript.ClearMap();
+                    gameManager.BossDied();
+                }
+            }
+
+            if (enemyStats.name == "Spitter") //removes the spitter's spawnpoint from the occupied spawnpoint list
+            {
+                SpawnEnemies spawnfillerenemies;
+                spawnfillerenemies = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+                spawnfillerenemies.OnEnemyDestroyed(other.gameObject);
+            }
+
+            piercePower--;
+
+            if (piercePower <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
-        else if (other.gameObject.CompareTag("Horse"))
-        {
-            horse = GameObject.Find("Horse").GetComponent<Horse>();
-            horse.horseHealth--;
-        }
-        if (isZombieShot == true)
+
+        //**OLD CODE**
+
+        
+        /*if (isZombieShot == true)
         {
             Invoke(nameof(SetBoolBack), 1.0f);
-        }
-        if (bulletHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
-        bulletHealth--;
+        }*/
     }
     private void SetBoolBack()
     {
         isZombieShot = false;
     }
-    public void SetHealth(float newHealth)
+    public void SetDefaultPierce()
     {
-        // Additional logic (if needed)
-        bulletHealth = Mathf.Clamp(newHealth, 0f, maxHealth);
+        piercePower = defaultPierce;
     }
     public float GetHealth()
     {
-        return bulletHealth;
+        return piercePower;
     }
 }

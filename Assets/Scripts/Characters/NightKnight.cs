@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NightKnight : MonoBehaviour
@@ -15,7 +16,7 @@ public class NightKnight : MonoBehaviour
     public GameObject nightKnight;
     public float spearSpawnRate = 3.0f; // Default spawn rate
     public bool shieldEquipped = false;
-    
+    EnemyStats enemyStat;
 
     private GameManager gameManager;
     private SpawnEnemies waveManager;
@@ -24,8 +25,9 @@ public class NightKnight : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
-        
+        enemyStat = GetComponent<EnemyStats>();
         if (shooterObject != null)
         {
             targetShooter = shooterObject.GetComponent<Transform>();
@@ -48,12 +50,12 @@ public class NightKnight : MonoBehaviour
     }
     public void ShooterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStat.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStat.speed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
     public IEnumerator ThrowSpear()
@@ -62,7 +64,7 @@ public class NightKnight : MonoBehaviour
         while (true)
         {
             Instantiate(spear, transform.position, spear.transform.rotation);
-            yield return new WaitForSeconds(spearSpawnRate);
+            yield return new WaitForSeconds(enemyStat.rateOfFire);
         }
     }
 
@@ -81,23 +83,19 @@ public class NightKnight : MonoBehaviour
         newShield.transform.parent = nightKnight.transform;
         shieldEquipped = true;
 
-        speed = 5;
-        spearSpawnRate = 1.5f;
+        enemyStat.speed = 5;
+        enemyStat.rateOfFire = 1.5f;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {       
         if (other.gameObject.CompareTag("Bullet"))
         {
-            nightKnightHealth--;
-            Debug.Log("Night Knight's new health: " + nightKnightHealth);
-            if (nightKnightHealth <= 0)
+            if (enemyStat.health <= 0)
             {
-                Debug.Log("NightKnight's health reached 0! Here it is: " + nightKnightHealth);
                 waveManager.nightKnightDead = true;
-                
                 horse.GetComponentInChildren<Transform>().parent = null; // Detach child from parent
-                Destroy(gameObject);
+                Destroy(gameObject);  
                 if (!waveManager.horseDead)
                 {
                     Debug.Log("Horse isn't dead, ENRAGE HORSE");

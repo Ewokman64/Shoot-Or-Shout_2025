@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Boss_Brain : MonoBehaviour
 {
+    EnemyStats enemyStats;
+
     public HealthBar healthBar;
-    int speed = 2;
+    //int speed = 2;
     public bool brainIsAlive;
     //TENTACLE ATTACK//
     public Transform[] spawnArray;
@@ -28,33 +30,33 @@ public class Boss_Brain : MonoBehaviour
     void Start()
     {
         brainIsAlive = true;
-        
+        enemyStats = GetComponent<EnemyStats>();
         StartCoroutine(AttackPatternRotation());
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * speed);
-        if (healthBar.currentHealth <= 0 && !secondPhaseStarted)
+        transform.Translate(Vector2.up * Time.deltaTime * enemyStats.speed);
+        /*if (enemyStats.health <= 0 && !secondPhaseStarted)
         {
             StartCoroutine(BossSecondPhase());
             secondPhaseStarted = true;
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {        
         if (other.gameObject.CompareTag("Wall"))
         {
-            speed *= -1;
+            enemyStats.speed *= -1;
         }
-        else if (other.gameObject.CompareTag("Bullet"))
+        /*else if (other.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("Boss hit");
-            healthBar.currentHealth--;
+            enemyStats.health--;
             healthBar.UpdateHealthBar();
-        }
+        }*/
     }
         public IEnumerator TentacleAttack()
     {

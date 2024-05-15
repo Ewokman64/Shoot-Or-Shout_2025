@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5956329465139554695}
   - component: {fileID: -8888741174482768811}
   - component: {fileID: 2264479680904080619}
+  - component: {fileID: 6868310013784059186}
   m_Layer: 3
   m_Name: Zombie 2
   m_TagString: Enemy
@@ -125,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  health: 1
   bloodSplash: {fileID: 7607240569883822396}
 --- !u!61 &-8888741174482768811
 BoxCollider2D:
@@ -198,6 +200,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &6868310013784059186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3901229786317164310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: RunnerSkeleton
+  speed: 5
+  health: 1
+  rateOfFire: 0
+  points: 3
+  value: 0
 --- !u!1 &6635239279084002081
 GameObject:
   m_ObjectHideFlags: 0

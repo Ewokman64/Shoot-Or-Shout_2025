@@ -6,6 +6,7 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+
     public int playerHealth;
     public TextMeshProUGUI playerHealthText;
     public List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
     //INTS
     public int score;
     public int currentRecord;
+    public float scoreMultiplier;
     //bools
     public bool isSomeoneDead = false;
     public bool isTaunterChased;
@@ -67,7 +69,7 @@ public class GameManager : MonoBehaviour
         upgradeList.enabled = false;
         // Access the Bullet script without instantiating a visible GameObject
         Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
-        bulletScript.SetHealth(0f);
+        bulletScript.SetDefaultPierce();
     }
 
     void Update()

@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    EnemyStats enemyStats;
+
     public Slider slider; // Reference to the health slider UI element
 
     // Adjust the maximum health as needed
@@ -12,7 +14,7 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+        enemyStats = GetComponent<EnemyStats>();
 
         // Ensure the healthSlider is assigned in the Inspector or find it in the hierarchy
         if  (slider == null)
@@ -21,7 +23,7 @@ public class HealthBar : MonoBehaviour
         }
 
         // Set the maximum value of the health slider
-        slider.maxValue = maxHealth;
+        slider.maxValue = enemyStats.health;
         UpdateHealthBar();
     }
 
@@ -31,6 +33,6 @@ public class HealthBar : MonoBehaviour
         // Calculate the health percentage
 
         // Update the fill amount of the health slider
-        slider.value = currentHealth;
+        slider.value = enemyStats.health;
     }
 }

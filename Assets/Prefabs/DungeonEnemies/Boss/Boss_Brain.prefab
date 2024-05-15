@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 5485200627500997070}
   - component: {fileID: 3198963067378340736}
   - component: {fileID: 2691541196805304617}
-  - component: {fileID: 5582847000759540604}
+  - component: {fileID: -5944007872249147498}
   m_Layer: 7
   m_Name: Boss_Brain
   m_TagString: Boss
@@ -355,7 +355,7 @@ MonoBehaviour:
   slider: {fileID: 7780238451009642387}
   maxHealth: 50
   currentHealth: 0
---- !u!114 &5582847000759540604
+--- !u!114 &-5944007872249147498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -364,11 +364,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 9033239209019529460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29541d5070396474aa3e2ce1b0163a1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainDrops: []
-  materials: []
+  name: BossV1
+  speed: 2
+  health: 50
+  rateOfFire: 0
+  points: 1000
+  currencyValue: 0
 --- !u!1001 &2893986400373013402
 PrefabInstance:
   m_ObjectHideFlags: 0

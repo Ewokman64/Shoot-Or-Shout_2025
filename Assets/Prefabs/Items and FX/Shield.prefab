@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2988790983715262159}
   - component: {fileID: 2240089928877310592}
   - component: {fileID: 7999308547239607577}
-  m_Layer: 0
+  - component: {fileID: 861519871652682324}
+  m_Layer: 3
   m_Name: Shield
   m_TagString: Shield
   m_Icon: {fileID: 0}
@@ -148,3 +149,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
+--- !u!114 &861519871652682324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334304511801104714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Shield
+  speed: 0
+  health: 5
+  rateOfFire: 0
+  points: 0
+  currencyValue: 0

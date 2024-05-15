@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4524185549314687300}
   - component: {fileID: 2909890027790311808}
   - component: {fileID: 9118182344988515324}
-  m_Layer: 7
+  - component: {fileID: 8808154874536085299}
+  m_Layer: 3
   m_Name: Horse
   m_TagString: Horse
   m_Icon: {fileID: 0}
@@ -171,9 +172,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3afd273e976ad1c4a8d47186fcc3b5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  horseHealth: 15
   parentObject: {fileID: 0}
+--- !u!114 &8808154874536085299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244462841350029603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Horse
+  speed: 0
+  health: 15
+  rateOfFire: 0
+  points: 25
+  currencyValue: 0
 --- !u!1 &6007565604007801479
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +204,8 @@ GameObject:
   - component: {fileID: 2654081259556986997}
   - component: {fileID: 7081159642880313949}
   - component: {fileID: 3244854436990475302}
-  m_Layer: 7
+  - component: {fileID: 2599325680991593390}
+  m_Layer: 3
   m_Name: NightKnight
   m_TagString: NightKnight
   m_Icon: {fileID: 0}
@@ -354,3 +372,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41080007, y: 0.3911394}
   m_EdgeRadius: 0
+--- !u!114 &2599325680991593390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6007565604007801479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: NightKnight
+  speed: 1
+  health: 20
+  rateOfFire: 3
+  points: 30
+  currencyValue: 0
