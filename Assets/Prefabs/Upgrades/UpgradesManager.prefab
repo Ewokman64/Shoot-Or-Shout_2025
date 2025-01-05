@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7224894154451950633}
   - component: {fileID: 2576569697090941335}
   - component: {fileID: 5200778823973694015}
+  - component: {fileID: 6121944925445396756}
+  - component: {fileID: 2806230471124048288}
   m_Layer: 5
   m_Name: UpgradesManager
   m_TagString: Untagged
@@ -44,7 +46,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6252169261466242663}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 117e34d0a55493348b0379a70c777876, type: 3}
   m_Name: 
@@ -55,12 +57,38 @@ MonoBehaviour:
   - {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6, type: 3}
   - {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59, type: 3}
   - {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7, type: 3}
-  scoreThresholdIncrement: 100
+  upgradesContainer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  selectedUpgrades: []
+  upgradeInstances: []
   upgradeSpawnPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  upgrade1: {fileID: 0}
+  upgrade2: {fileID: 0}
+  upgrade3: {fileID: 0}
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  upgradeButtons: []
   upgradePanel: {fileID: 0}
+  upgradeWasPicked: 0
+  equippedUpgradeSpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  equippedUpgradesNames: []
+  equippedUpgrades: []
+  equippedUpgradesContainer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  noSlotText: {fileID: 0}
 --- !u!114 &5200778823973694015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,3 +104,44 @@ MonoBehaviour:
   upgradesPanel: {fileID: 0}
   bulletPrefab: {fileID: 5093899002677859947, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
+  upgradeSelected: 0
+  upgrade: {fileID: 0}
+--- !u!114 &6121944925445396756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252169261466242663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc219dcbba90e84b86e2ecf840e0266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 839877395022437811, guid: 0000000000000000d000000000000000, type: 0}
+  position: 0
+  direction: 0
+  tooltip: 
+--- !u!114 &2806230471124048288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252169261466242663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c31d08c5368184fbbb49721e2e353d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerupsInGame:
+  - {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb, type: 3}
+  - {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4, type: 3}
+  - {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6, type: 3}
+  - {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59, type: 3}
+  - {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7, type: 3}
+  powerupsChosen: []
+  powerupsContainer: []
+  upgradeButtons: []
+  powerupsEquipped: []
+  powerupPanel: {fileID: 0}

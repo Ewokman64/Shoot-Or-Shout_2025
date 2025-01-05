@@ -37,7 +37,7 @@ public class Boss_Brain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * enemyStats.speed);
+        transform.Translate(Vector2.up * Time.deltaTime * enemyStats.movementSpeed);
         /*if (enemyStats.health <= 0 && !secondPhaseStarted)
         {
             StartCoroutine(BossSecondPhase());
@@ -49,7 +49,7 @@ public class Boss_Brain : MonoBehaviour
     {        
         if (other.gameObject.CompareTag("Wall"))
         {
-            enemyStats.speed *= -1;
+            enemyStats.movementSpeed *= -1;
         }
         /*else if (other.gameObject.CompareTag("Bullet"))
         {

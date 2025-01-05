@@ -4862,6 +4862,7 @@ GameObject:
   - component: {fileID: 7328576050843015509}
   - component: {fileID: 41849638}
   - component: {fileID: 3077090399465190705}
+  - component: {fileID: 154748705748522628}
   m_Layer: 0
   m_Name: Taunter
   m_TagString: Taunter
@@ -5075,6 +5076,8 @@ MonoBehaviour:
   speed: 10
   tauntCoolDown: 0
   tauntCDRate: 2
+  shouterCDRenderer: {fileID: 0}
+  darkenAmount: 0.5
   shout: {fileID: 8300000, guid: 435db436444d5cc469212da857f1c7e0, type: 3}
   shoutEffect: {fileID: 7328576050151841156}
   animator: {fileID: 7328576050843015528}
@@ -5166,3 +5169,24 @@ MonoBehaviour:
   position: 0
   direction: 0
   tooltip: 
+--- !u!114 &154748705748522628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328576050843015508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd46a640e4078ac40847f4bb0dca0105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 8
+  baseSpeed: 8
+  maxSpeed: 14
+  accelerationRate: 7
+  dashSpeed: 12
+  dashDuration: 0.1
+  dashCooldown: 1
+  dashCDRate: 1.5
+  isDashing: 0

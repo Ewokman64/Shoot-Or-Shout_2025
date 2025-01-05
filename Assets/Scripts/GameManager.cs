@@ -63,8 +63,8 @@ public class GameManager : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
-        upgradeList = GameObject.Find("UpgradesManager").GetComponent<UpgradeList>();
-        upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+        upgradeList = GameObject.Find("PowerUpManager").GetComponent<UpgradeList>();
+        upgradesManager = GameObject.Find("PowerUpManager").GetComponent<UpgradesManager>();
         countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;
         // Access the Bullet script without instantiating a visible GameObject

@@ -5,13 +5,11 @@ using UnityEngine;
 public class TaunterController : MonoBehaviour
 {
     public List<string> hostile;
-    public float speed = 10;
-    private readonly float yRange = 5;
 
+    [Header("Shout Settings")]
     public float tauntCoolDown;
     public float tauntCDRate = 2;
-
-    public SpriteRenderer shouterCDRenderer;
+    public SpriteRenderer shouterCDRenderer; //<- This is for the Shout ICON on the bottom.
     public float darkenAmount = 0.5f; // Value between 0 and 1
     private Color originalColor;
 
@@ -40,28 +38,8 @@ public class TaunterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TaunterMovement();
         Taunt();
         TauntCoolDown();
-    }
-    void TaunterMovement()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(Vector3.down * Time.deltaTime * speed);
-        }
-        if (transform.position.y < -yRange)
-        {
-            transform.position = new Vector2(transform.position.x, -yRange);
-        }
-        if (transform.position.y > yRange)
-        {
-            transform.position = new Vector2(transform.position.x, yRange);
-        }
     }
     public void Taunt()
     {

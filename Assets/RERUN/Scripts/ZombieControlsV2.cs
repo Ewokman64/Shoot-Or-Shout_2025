@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieControls : MonoBehaviour
+public class ZombieControlsV2 : MonoBehaviour
 {
     EnemyStats enemyStats;
-
-    public float speed = 5;
-
-    public float health = 1;
 
     private Transform targetShooter;
 
@@ -44,12 +40,12 @@ public class ZombieControls : MonoBehaviour
     }
     public void ShooterFollow()
     {
-        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.movementSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
-        transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
+        transform.Translate(Vector2.right * enemyStats.movementSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
     void OnTriggerEnter2D(Collider2D other)

@@ -5,28 +5,27 @@ using UnityEngine;
 public class ShooterController : MonoBehaviour
 {
     public List<string> hostile;
+    
+    [Header("Bullet Settings")]
+    public GameObject bulletPrefab;
+    public GameObject powerUpLight;
     public Sprite singleShotSprite;
     public Sprite dualShotSprite;
+    private bool isPowerUpActive = false;
+    public float bulletCoolDown = 0;
+    public float bulletCDRate = 1;
     public SpriteRenderer shooterSpriteRenderer;
     public SpriteRenderer shooterCDRenderer;
     public float darkenAmount = 0.5f; // Value between 0 and 1
     private Color originalColor;
-    //Movement
-    public float speed = 10;
-    private float yRange = 5;
-    //Bullet and light
-    public GameObject bulletPrefab;
-    public GameObject powerUpLight;
-    private bool isPowerUpActive = false;
-    public float bulletCoolDown = 0;
-    public float bulletCDRate = 1;
 
     private AudioSource gunAudio;
     private GameManager gameManager;
     private SpawnManager spawnManager;
     private CountDown countDown;
 
-    //Anim, SFX & VFX
+
+    [Header("Anim,SFX,VFX")]
     private AudioManager audioManager;
     public AudioClip gunShot;
     public AudioClip powerUpSFX;
@@ -50,29 +49,9 @@ public class ShooterController : MonoBehaviour
 
     public void Update()
     {
-        ShooterMovement();
         Shoot();
         DualShoot();
         BulletCooldown();
-    }
-    void ShooterMovement()
-    {
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.Translate(Vector3.up * Time.deltaTime * speed);
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.Translate(Vector3.down * Time.deltaTime * speed);
-        }
-        if (transform.position.y < -yRange)
-        {
-            transform.position = new Vector2(transform.position.x, -yRange);
-        }
-        if (transform.position.y > yRange)
-        {
-            transform.position = new Vector2(transform.position.x, yRange);
-        }
     }
     void BulletSpawn()
     {

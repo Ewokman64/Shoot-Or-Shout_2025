@@ -25,7 +25,7 @@ public class SpitterHead : MonoBehaviour
     }
     private void Update()
     {
-        transform.Translate(Vector2.up * Time.deltaTime * enemyStats.speed);
+        transform.Translate(Vector2.up * Time.deltaTime * enemyStats.movementSpeed);
         if (gameManager.isShooterChased == true && targetShooter != null)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -48,7 +48,7 @@ public class SpitterHead : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            enemyStats.speed *= -1;
+            enemyStats.movementSpeed *= -1;
         }
     }
 }

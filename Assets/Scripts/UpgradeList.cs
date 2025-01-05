@@ -52,12 +52,12 @@ public class UpgradeList : MonoBehaviour
     public void MovementSpeed()
     {
         GetReferences();
-        shooterController.speed += movementIncAmount;
-        taunterController.speed += movementIncAmount;
+        //shooterController.speed += movementIncAmount;
+        //taunterController.speed += movementIncAmount;
         upgradesPanel.SetActive(false);
         Time.timeScale = 1;
         upgradeSelected = true;
-        Debug.Log("New speed: " + shooterController.speed);
+        //Debug.Log("New speed: " + shooterController.speed);
     }
 
     public void PiercingAmmo()

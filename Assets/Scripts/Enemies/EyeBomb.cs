@@ -36,12 +36,12 @@ public class EyeBomb : MonoBehaviour
           }
         if (shooterChosen)
         {
-            transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
+            transform.Translate(Vector2.right * enemyStats.movementSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (taunterChosen)
         {
-            transform.Translate(Vector2.right * enemyStats.speed * Time.deltaTime);
+            transform.Translate(Vector2.right * enemyStats.movementSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0, 180, 0);
         }
     }

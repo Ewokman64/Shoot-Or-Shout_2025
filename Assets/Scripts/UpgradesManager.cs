@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TMPro;
-//using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -496,5 +495,3 @@ public static class ListExtensions
         }
     }
 }
-
-

@@ -69,7 +69,8 @@ public class SpawnEnemies : MonoBehaviour
 
     private GameManager gameManager;
     private SpawnManager spawnManager;
-    private UpgradesManager upgradesManager;
+    //private UpgradesManager upgradesManager;
+    private PowerUpDisplay powerUpDisplay;
     private UpgradeList upgradeList;
 
     private bool enemyLimitReached = false;
@@ -97,8 +98,9 @@ public class SpawnEnemies : MonoBehaviour
         enemyLimit = 15;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
-        upgradeList = GameObject.Find("UpgradesManager").GetComponent<UpgradeList>();
+        //upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+        upgradeList = GameObject.Find("PowerUpManager").GetComponent<UpgradeList>();
+        powerUpDisplay = GameObject.Find("PowerUpManager").GetComponent<PowerUpDisplay>();
         nightKnightScript = miniBoss.GetComponent<NightKnight>();
         horseScript = miniBoss.GetComponentInChildren<Horse>();
     }
@@ -113,7 +115,7 @@ public class SpawnEnemies : MonoBehaviour
             Debug.Log("Score Threshold reached!");
             occupiedSpawnPoints.Clear();
             gameManager.ClearMap();
-            upgradesManager.OfferUpgrades();
+            powerUpDisplay.OfferPowerUps();
             currentWaveIndex++;
         }
     }
