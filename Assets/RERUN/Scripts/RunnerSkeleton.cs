@@ -2,41 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZombieControlsV2 : MonoBehaviour
+public class RunnerSkeleton : MonoBehaviour
 {
     EnemyStats enemyStats;
 
     private Transform targetShooter;
-
-    private GameManager gameManager;
+    private GameManager_V2 gameManagerScript;
 
     public ParticleSystem bloodSplash;
 
     // Start is called before the first frame update
     void Start()
     {
+        //We access this so we can access our stats
         enemyStats = GetComponent<EnemyStats>();
         
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //We access this so we can check which character is being chased
+        gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager_V2>();
 
+        //We find our Shooter and store it in this GameObject
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
+
+        //If the Shooter exists, get its Transform component, a.k.a. its position
         if (shooterObject != null)
         {
             targetShooter = shooterObject.GetComponent<Transform>();
         }
-        //targetShooter = GameObject.Find("Shooter(Clone)").GetComponent<Transform>();
-         //targetTaunter = GameObject.Find("Taunter(Clone)").GetComponent<Transform>();
     }
     void Update()
     {
-     if (gameManager.isShooterChased && targetShooter != null)
-     {
+        //If the isShooterChased bool is true and the target Shooter can be found in the scene, we run ShooterFollow.
+        if (gameManagerScript.isShooterChased && targetShooter != null)
+        {
             ShooterFollow();
-     }
-     else
-     {
+        }
+        else
+        {
             TaunterFollow();
-     }
+        }
     }
     public void ShooterFollow()
     {
