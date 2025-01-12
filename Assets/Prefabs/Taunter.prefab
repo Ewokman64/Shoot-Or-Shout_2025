@@ -5073,7 +5073,6 @@ MonoBehaviour:
   - BigEnemy
   - Horse
   - NightKnight
-  speed: 10
   tauntCoolDown: 0
   tauntCDRate: 2
   shouterCDRenderer: {fileID: 0}
@@ -5181,10 +5180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd46a640e4078ac40847f4bb0dca0105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 8
-  baseSpeed: 8
-  maxSpeed: 14
-  accelerationRate: 7
+  currentSpeed: 10
+  baseSpeed: 10
+  maxSpeed: 12
+  accelerationRate: 4
   dashSpeed: 12
   dashDuration: 0.1
   dashCooldown: 1

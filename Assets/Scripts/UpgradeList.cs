@@ -9,7 +9,7 @@ public class UpgradeList : MonoBehaviour
     private TaunterController taunterController;
     private SpawnManager spawnManager;
     public GameObject upgradesPanel;
-    private UpgradesManager upgradesManager;
+    private PowerupManager powerupManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public bool upgradeSelected = false;
     public GameObject upgrade; // Reference to the upgrade GameObject
@@ -28,7 +28,7 @@ public class UpgradeList : MonoBehaviour
         shooterController = GameObject.Find("Shooter(Clone)").GetComponent<ShooterController>();
         taunterController = GameObject.Find("Taunter(Clone)").GetComponent<TaunterController>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        upgradesManager= GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
+        powerupManager = GameObject.Find("PowerupManager").GetComponent<PowerupManager>();
     }
     public void ShootCoolDown()
     {

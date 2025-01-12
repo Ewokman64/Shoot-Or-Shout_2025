@@ -125,8 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafa0bc6ca048b04682baf1e3ff60a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  health: 1
   bloodSplash: {fileID: 7607240569801444777}
 --- !u!114 &-7552161552181463304
 MonoBehaviour:
@@ -141,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: RunnerSkeleton
-  speed: 5
+  movementSpeed: 5
   health: 1
   rateOfFire: 0
   points: 3

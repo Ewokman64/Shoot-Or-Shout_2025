@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class CharacterMovement : MonoBehaviour
     [Header("Movement Settings")]
     public float currentSpeed = 0;
     public float baseSpeed = 5;
-    public float maxSpeed = 10;
+    public float maxSpeed = 12;
     public float accelerationRate = 1.0f;
     private float yRange = 5;
 
@@ -30,19 +31,19 @@ public class CharacterMovement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            Accelerate();
+            //Accelerate();
 
             // Move the object using the current speed
             transform.Translate(Vector2.up * Time.deltaTime * currentSpeed);
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            Accelerate();
+            //Accelerate();
 
             // Move the object using the current speed
             transform.Translate(Vector2.down * Time.deltaTime * currentSpeed);
         }
-        if (Input.GetKeyUp(KeyCode.UpArrow) ||  Input.GetKeyUp(KeyCode.DownArrow))
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
         {
             currentSpeed = baseSpeed;
         }
@@ -55,14 +56,14 @@ public class CharacterMovement : MonoBehaviour
             transform.position = new Vector2(transform.position.x, yRange);
         }
     }
-    void Accelerate()
+    /*void Accelerate()
     {
         //Increases the current speed by the accelerationRate overtime
         currentSpeed = currentSpeed + accelerationRate * Time.deltaTime;
 
         //Clamp the speed to a max limit
         currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
-    }
+    }*/
 
     void Dash()
     {
@@ -85,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         //Max speed is set back so we don't accelerate too much
-        maxSpeed = 10;
+        maxSpeed = 12;
 
         //Setting the speed to default
         currentSpeed = baseSpeed;

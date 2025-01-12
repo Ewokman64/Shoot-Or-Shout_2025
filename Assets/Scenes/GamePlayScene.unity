@@ -9979,7 +9979,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 13, y: 6, z: 0}
@@ -31618,6 +31618,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2576569697090941335, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}
+      propertyPath: powerupPanel
+      value: 
+      objectReference: {fileID: 842409991}
+    - target: {fileID: 2576569697090941335, guid: 2b94996dcc7620f4eb4a5fab48303a59,
+        type: 3}
       propertyPath: upgradePanel
       value: 
       objectReference: {fileID: 842409991}
@@ -31691,65 +31696,10 @@ PrefabInstance:
       propertyPath: equippedUpgradeSpawnPoints.Array.data[2]
       value: 
       objectReference: {fileID: 1857156209}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupPanel
-      value: 
-      objectReference: {fileID: 842409991}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: containerImages.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: offeredContainer.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsContainer.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: containerImages.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: containerImages.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: containerImages.Array.data[2]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: offeredContainer.Array.data[0]
-      value: 
-      objectReference: {fileID: 1304858351}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: offeredContainer.Array.data[1]
-      value: 
-      objectReference: {fileID: 770349273}
-    - target: {fileID: 2806230471124048288, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: offeredContainer.Array.data[2]
-      value: 
-      objectReference: {fileID: 1003569267}
     - target: {fileID: 6252169261466242663, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}
       propertyPath: m_Name
-      value: PowerUpManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 6252169261466242663, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: PowerupManager
       objectReference: {fileID: 0}
     - target: {fileID: 7224894154451950633, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}

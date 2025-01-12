@@ -99,8 +99,8 @@ public class SpawnEnemies : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
-        upgradeList = GameObject.Find("PowerUpManager").GetComponent<UpgradeList>();
-        powerUpDisplay = GameObject.Find("PowerUpManager").GetComponent<PowerUpDisplay>();
+        upgradeList = GameObject.Find("PowerupManager").GetComponent<UpgradeList>();
+        powerUpDisplay = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
         nightKnightScript = miniBoss.GetComponent<NightKnight>();
         horseScript = miniBoss.GetComponentInChildren<Horse>();
     }

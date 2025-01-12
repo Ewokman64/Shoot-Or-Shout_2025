@@ -260,16 +260,16 @@ MonoBehaviour:
   - BigEnemy
   - NightKnight
   - Horse
-  singleShotSprite: {fileID: 21300000, guid: 952bd02b80d341346836a832e7636de1, type: 3}
-  dualShotSprite: {fileID: 21300000, guid: baadb4c372bc0c04f9b244320e97237c, type: 3}
-  shooterSpriteRenderer: {fileID: 0}
-  shooterCDRenderer: {fileID: 0}
-  darkenAmount: 0.5
   bulletPrefab: {fileID: 5093899002677859959, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
   powerUpLight: {fileID: 1620083645}
+  singleShotSprite: {fileID: 21300000, guid: 952bd02b80d341346836a832e7636de1, type: 3}
+  dualShotSprite: {fileID: 21300000, guid: baadb4c372bc0c04f9b244320e97237c, type: 3}
   bulletCoolDown: 0
   bulletCDRate: 0.5
+  shooterSpriteRenderer: {fileID: 0}
+  shooterCDRenderer: {fileID: 0}
+  darkenAmount: 0.5
   gunShot: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   powerUpSFX: {fileID: 8300000, guid: 35cdb93c71d0ff7409506bed205fa95f, type: 3}
   gunFlash1: {fileID: 6611541323212802183}
@@ -492,10 +492,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd46a640e4078ac40847f4bb0dca0105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpeed: 8
-  baseSpeed: 8
-  maxSpeed: 14
-  accelerationRate: 7
+  currentSpeed: 10
+  baseSpeed: 10
+  maxSpeed: 12
+  accelerationRate: 4
   dashSpeed: 12
   dashDuration: 0.1
   dashCooldown: 1

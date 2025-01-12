@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
-public class UpgradesManager : MonoBehaviour
+public class PowerupManager : MonoBehaviour
 {
     public List<GameObject> upgradePrefabs; // List of every upgrade in the game
 
@@ -28,7 +28,7 @@ public class UpgradesManager : MonoBehaviour
     public Button button3;
     
     public List<Button> upgradeButtons; //contains the button components we get from instantiated upgrades so we can access and call them via key presses
-    public GameObject upgradePanel; // Reference to the UI panel containing GameObject components
+    public GameObject powerupPanel; // Reference to the UI panel containing GameObject components
     SpawnEnemies waveManager; //We access the wavemanager to stop and restart wave spawning after an upgrade got picked
 
     public bool upgradeWasPicked = false;
@@ -98,10 +98,10 @@ public class UpgradesManager : MonoBehaviour
 
 
         // Set the powerup panel active
-        upgradePanel.SetActive(true);
+        powerupPanel.SetActive(true);
 
         // Display the powerups to the player using the UI panel
-        DisplayUpgrades(selectedUpgrades, upgradePanel);
+        DisplayUpgrades(selectedUpgrades, powerupPanel);
         UpdateUpgradeText();
     }
     public void ButtonPick()

@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
     private UpgradeList upgradeList;
-    private UpgradesManager upgradesManager;
+    private PowerupManager powerupManager;
     private CountDown countDown;
     private SpawnEnemies waveManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
@@ -63,8 +63,8 @@ public class GameManager : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
-        upgradeList = GameObject.Find("PowerUpManager").GetComponent<UpgradeList>();
-        upgradesManager = GameObject.Find("PowerUpManager").GetComponent<UpgradesManager>();
+        upgradeList = GameObject.Find("PowerupManager").GetComponent<UpgradeList>();
+        powerupManager = GameObject.Find("PowerupManager").GetComponent<PowerupManager>();
         countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;
         // Access the Bullet script without instantiating a visible GameObject
@@ -84,11 +84,11 @@ public class GameManager : MonoBehaviour
         {
             TogglePauseMenu();
         }
-        else if (upgradesManager.upgradePanel.activeSelf)
+        /*else if (powerupManager.powerupPanel.activeSelf)
         {
                 gameIsPaused = true;
                 Time.timeScale = 0;
-        }
+        }*/
         if (wallHealthBar.maxHealth < 0)
         {
             gameManager.GameOver();
@@ -260,7 +260,7 @@ public class GameManager : MonoBehaviour
     public void SetStatsBack()
     {
         Debug.Log("Stats are set back");
-        foreach(GameObject upgrade in upgradesManager.upgradePrefabs)
+        foreach(GameObject upgrade in powerupManager.upgradePrefabs)
         {
             UpgradeStats upgradeStats = upgrade.GetComponent<UpgradeStats>();
 
