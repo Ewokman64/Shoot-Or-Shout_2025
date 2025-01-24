@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,23 @@ using UnityEngine.UI;
 
 public class PowerUpDisplay : MonoBehaviour
 {
+    [Header("Powerup collection")]
     public List<GameObject> powerupsInGame; //This list contains every selectable, run only powerups that Shoot or Shout has.
 
-    public List<GameObject> powerupsChosen; //This list gonna contain the 3 powerups the shuffling function has chosen.
+    [Header("Randomly picked powerups")]
+    public List<GameObject> powerupsChosen; //This list gonna contain the 3 powerups the shuffling function has chosen and will be displayed
+    public List<GameObject> powerupInstances; //Creating a temporary list for the powerup instances. We need this so we can destroy them each time a display happens. Helps to avoid overlapping powerups.
 
-    public List<GameObject> offeredContainer; //Get the Image and Text components of this 3 empty
+    [Header("Containers")]
+    public List<Transform> powerupsContainer; //This is where we instantiate our powerups to
+    public List<GameObject> powerupsInventory; //This list gonna contain every powerup the player already equipped
 
-    public List<Button> upgradeButtons; //contains the button components we get from instantiated upgrades so we can access and call them via key presses
-    public List<GameObject> powerupsEquipped; //This list gonna contain every powerup the player successfully equips
-    public GameObject powerupPanel;
-
+    [Header("Other")]
+    public List<Button> powerupButtons; //Contains the button components of the 3 chosen powerup
+    public List<PowerupStats> powerupStats; //Need it to check whether a powerup was picked or not in ChoosePowerup.cs
+    public GameObject powerupPanel; //The UI panel that contains the visuals
     SpawnEnemies waveManager; //We access the wavemanager to stop and restart wave spawning after a powerup got picked
+
     void Start()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
@@ -28,15 +35,19 @@ public class PowerUpDisplay : MonoBehaviour
     public void OfferPowerUps()
     {
         waveManager.StopAllCoroutines(); //We stop all the waves from spawning
+
         DeletePowerupInstances(); //We delete the powerupinstances so they don't overlap
-        upgradeButtons.Clear(); //We can clear the buttons as well, possibly for overlapping
 
         GetRandomPowerUps();
+        
+        DisplayPowerUps(powerupsChosen, powerupPanel); //After we randomized the 3 powerups, we need to call the DisplayPowerUps
 
-        //After we randomized the 3 powerups, we need to call the DisplayPowerUps
-        DisplayPowerUps(powerupsChosen, powerupPanel);
+        GetButtons(); // We access the buttons so they can be invoked in ChoosePowerup.cs
 
         powerupPanel.SetActive(true);
+
+        Time.timeScale = 0;
+
         //I think I woN't use clickable buttons, only the keys 1-2-3
         //Maybe we can also add the option to delete powerups with other keys to free up space. Maybe Q-W-E-R-T? Or CTRL+1-2-3-4-5
         //Psuedo goes something like "if key1 is pressed, equip the first item on the list, and so on"
@@ -45,7 +56,7 @@ public class PowerUpDisplay : MonoBehaviour
     //In this function we delete the powerupinstances so they don't overlap eachother each time we call display.
     public void DeletePowerupInstances()
     {
-        foreach (GameObject obj in powerupsChosen)
+        foreach (GameObject obj in powerupInstances)
         {
             // Destroy each instantiated object
             Destroy(obj);
@@ -67,18 +78,33 @@ public class PowerUpDisplay : MonoBehaviour
 
 
     //This function instantiates the 3 chosen powerups and parents them to the powerup panel. 
-    //It requires: a list<GameObject> containing the chosen powerups, another list that contains the 3 empty slots gameobjects in the UI, and a GameObject (our UI) to function
+    //It requires: a list<GameObject> containing the chosen powerups, and a GameObject to function
     public void DisplayPowerUps(List<GameObject> chosenList, GameObject powerupPanel)
     {
+
         // Loop through each powerup and assign the position of each empty slot
-        for (int i = 0; i < Mathf.Min(chosenList.Count); i++)
+        for (int i = 0; i < Mathf.Min(chosenList.Count, powerupsContainer.Count); i++)
         {
-            // Get the empty slot position directly. Emptyslots represents the empty container that can take 3 visible powerups
-            Image placeholderImage = offeredContainer[i].GetComponent<Image>();
+            // Use the corresponding spawn point for each powerup
+            Transform spawnPoint = powerupsContainer[i];
 
-            Image powerupImage = powerupsChosen[i].GetComponent<Image>();
+            GameObject powerupInstance = Instantiate(chosenList[i], spawnPoint.position, Quaternion.identity);
 
-            placeholderImage.sprite = powerupImage.sprite;
+            powerupInstances.Add(powerupInstance);
+            // Set the instantiated powerup as a child of the powerup panel
+            powerupInstance.transform.SetParent(powerupPanel.transform);
+        }
+    }
+
+    public void GetButtons()
+    {
+        for (int i = 0; i < Mathf.Min(powerupsChosen.Count); i++)
+        {
+            Button powerupButton = powerupsContainer[i].GetComponent<Button>();
+            PowerupStats powerupStat = powerupsContainer[i].GetComponent<PowerupStats>();
+
+            powerupButtons.Add(powerupButton);
+            powerupStats.Add(powerupStat);
         }
     }
 }

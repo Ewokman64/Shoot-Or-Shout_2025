@@ -4,16 +4,18 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UpgradeStats : MonoBehaviour
+public class PowerupStats : MonoBehaviour
 {
-    public string upgradeName;
-    public string upgradeDescription;
+    public string powerupName;
+    public string powerupDescription;
     public string currentStatString;
-    public float upgradeAmount;
+    public float powerupAmount;
     public float currentStat;
     public string currentStatDescription;
     public int LVL = 1;
-    public int upgradeSlot;
+    public int powerupSlot;
+
+    public bool isEquipped;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,12 +31,12 @@ public class UpgradeStats : MonoBehaviour
     public void UpdateLVL()
     {
         LVL++; //LVL -> 2
-        currentStat = upgradeAmount * LVL; //example BulletPierceStat: 1 * 1 (LVL) = 1
+        currentStat = powerupAmount * LVL; //example BulletPierceStat: 1 * 1 (LVL) = 1
         currentStatString = currentStatDescription + " " + currentStat.ToString(); 
     }
 
     public void SetStartingStats()
     {
-        currentStat = upgradeAmount;
+        currentStat = powerupAmount;
     }
 }

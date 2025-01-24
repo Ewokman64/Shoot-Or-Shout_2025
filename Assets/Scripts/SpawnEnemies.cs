@@ -70,7 +70,7 @@ public class SpawnEnemies : MonoBehaviour
     private GameManager gameManager;
     private SpawnManager spawnManager;
     //private UpgradesManager upgradesManager;
-    private PowerUpDisplay powerUpDisplay;
+    public PowerUpDisplay powerUpDisplay;
     private UpgradeList upgradeList;
 
     private bool enemyLimitReached = false;

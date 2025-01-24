@@ -11,7 +11,7 @@ public class UpgradeList : MonoBehaviour
     public GameObject upgradesPanel;
     private PowerupManager powerupManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
-    public bool upgradeSelected = false;
+    //public bool upgradeSelected = false;
     public GameObject upgrade; // Reference to the upgrade GameObject
     float shootCDAmount = 0.15f;
     float tauntCDAmount = 0.15f;
@@ -34,29 +34,23 @@ public class UpgradeList : MonoBehaviour
     {
         GetReferences();
         shooterController.bulletCDRate -= shootCDAmount;
-        upgradesPanel.SetActive(false);
-        Time.timeScale = 1;
-        upgradeSelected = true;
+        //upgradeSelected = true;
         Debug.Log("New cooldown: " + shooterController.bulletCDRate);
     }
     public void TauntCoolDown()
     {
         GetReferences();
         taunterController.tauntCDRate -= tauntCDAmount;
-        upgradesPanel.SetActive(false);
-        Time.timeScale = 1;
-        upgradeSelected = true;
+        //upgradeSelected = true;
         Debug.Log("New cooldown: " + taunterController.tauntCDRate);
     }
 
     public void MovementSpeed()
     {
         GetReferences();
-        //shooterController.speed += movementIncAmount;
+        //shooterController.movementpeed += movementIncAmount;
         //taunterController.speed += movementIncAmount;
-        upgradesPanel.SetActive(false);
-        Time.timeScale = 1;
-        upgradeSelected = true;
+        //upgradeSelected = true;
         //Debug.Log("New speed: " + shooterController.speed);
     }
 
@@ -70,9 +64,7 @@ public class UpgradeList : MonoBehaviour
         {
             // Set the health using the public method in Bullet script
             bulletScript.piercePower += bulletpierceAmount;
-            upgradesPanel.SetActive(false);
-            Time.timeScale = 1;
-            upgradeSelected = true;
+            //upgradeSelected = true;
             Debug.Log("New Bullet Pierce: " + bulletScript.piercePower);
         }
     }
@@ -80,9 +72,7 @@ public class UpgradeList : MonoBehaviour
     {
         GetReferences();
         spawnManager.powerUp_spawnRate -= powerUpCDAmount;
-        upgradesPanel.SetActive(false);
-        Time.timeScale = 1;
-        upgradeSelected = true;
+        //upgradeSelected = true;
         Debug.Log("New cooldown: " + spawnManager.powerUp_spawnRate);
     }
 }

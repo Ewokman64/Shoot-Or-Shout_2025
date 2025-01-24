@@ -68,7 +68,7 @@ public class PowerupManager : MonoBehaviour
             Destroy(obj);
         }
     }
-    public void OfferUpgrades()
+    public void OfferPowerups()
     {
         
         waveManager.StopAllCoroutines();
