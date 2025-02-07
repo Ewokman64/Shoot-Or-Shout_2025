@@ -260,13 +260,13 @@ public class GameManager : MonoBehaviour
     public void SetStatsBack()
     {
         Debug.Log("Stats are set back");
-        foreach(GameObject upgrade in powerupManager.upgradePrefabs)
+        foreach(GameObject powerup in powerupManager.upgradePrefabs)
         {
-            UpgradeStats upgradeStats = upgrade.GetComponent<UpgradeStats>();
+            PowerupStats powerupStats = powerup.GetComponent<PowerupStats>();
 
-            upgradeStats.LVL = 1;
-            upgradeStats.currentStat = upgradeStats.upgradeAmount;
-            upgradeStats.currentStatString = upgradeStats.currentStatDescription + " " + upgradeStats.currentStat.ToString();
+            powerupStats.LVL = 1;
+            powerupStats.currentStat = powerupStats.powerupAmount;
+            powerupStats.currentStatString = powerupStats.currentStatDescription + " " + powerupStats.currentStat.ToString();
         }
     }
 

@@ -145,10 +145,10 @@ public class PowerupManager : MonoBehaviour
                             //accessing text of emptycontainer and string from upgrade
                             TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
                             //accessing the currentStat string
-                            UpgradeStats upgradeStats = upgrade1.GetComponent<UpgradeStats>();
-                            upgradeStats.SetStartingStats();
+                            PowerupStats powerupStats = upgrade1.GetComponent<PowerupStats>();
+                            powerupStats.SetStartingStats();
                             //setting the emptycontainer text to the currentStat
-                            emptyContainerText.text = upgradeStats.currentStatString;
+                            emptyContainerText.text = powerupStats.currentStatString;
 
                             availabilityScript.IsAvailable = false;
                             availabilityScript.assignedUpgrade = upgrade1.name;
@@ -166,14 +166,14 @@ public class PowerupManager : MonoBehaviour
                                 {
                                     Debug.Log("Upgrade is already in equipped");
                                     //accessing the currentStat string
-                                    UpgradeStats upgradeStats = upgrade1.GetComponent<UpgradeStats>();
-                                    upgradeStats.UpdateLVL();
+                                    PowerupStats powerupStats = upgrade1.GetComponent<PowerupStats>();
+                                    powerupStats.UpdateLVL();
                                     //SETTING THE TEXT OF SLOT
                                     //accessing text of emptycontainer and string from upgrade
                                     TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
 
                                     //setting the emptycontainer text to the currentStat
-                                    emptyContainerText.text = upgradeStats.currentStatString;
+                                    emptyContainerText.text = powerupStats.currentStatString;
 
                                     availabilityScript.IsAvailable = false;
 
@@ -231,10 +231,10 @@ public class PowerupManager : MonoBehaviour
                             //accessing text of emptycontainer and string from upgrade
                             TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
                             //accessing the currentStat string
-                            UpgradeStats upgradeStats = upgrade2.GetComponent<UpgradeStats>();
-                            upgradeStats.SetStartingStats();
+                            PowerupStats powerupStats = upgrade2.GetComponent<PowerupStats>();
+                            powerupStats.SetStartingStats();
                             //setting the emptycontainer text to the currentStat
-                            emptyContainerText.text = upgradeStats.currentStatString;
+                            emptyContainerText.text = powerupStats.currentStatString;
 
                             availabilityScript.IsAvailable = false;
 
@@ -252,14 +252,14 @@ public class PowerupManager : MonoBehaviour
                                 {
                                     Debug.Log("Upgrade is already in equipped");
                                     //accessing the currentStat string
-                                    UpgradeStats upgradeStats = upgrade2.GetComponent<UpgradeStats>();
-                                    upgradeStats.UpdateLVL();
+                                    PowerupStats powerupStats = upgrade2.GetComponent<PowerupStats>();
+                                    powerupStats.UpdateLVL();
                                     //SETTING THE TEXT OF SLOT
                                     //accessing text of emptycontainer and string from upgrade
                                     TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
 
                                     //setting the emptycontainer text to the currentStat
-                                    emptyContainerText.text = upgradeStats.currentStatString;
+                                    emptyContainerText.text = powerupStats.currentStatString;
 
                                     availabilityScript.IsAvailable = false;
 
@@ -318,10 +318,10 @@ public class PowerupManager : MonoBehaviour
                             //accessing text of emptycontainer and string from upgrade
                             TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
                             //accessing the currentStat string
-                            UpgradeStats upgradeStats = upgrade3.GetComponent<UpgradeStats>();
-                            upgradeStats.SetStartingStats();
+                            PowerupStats powerupStats = upgrade3.GetComponent<PowerupStats>();
+                            powerupStats.SetStartingStats();
                             //setting the emptycontainer text to the currentStat
-                            emptyContainerText.text = upgradeStats.currentStatString;
+                            emptyContainerText.text = powerupStats.currentStatString;
 
                             availabilityScript.IsAvailable = false;
 
@@ -340,14 +340,14 @@ public class PowerupManager : MonoBehaviour
                                 {
                                     Debug.Log("Upgrade is already in equipped");
                                     //accessing the currentStat string
-                                    UpgradeStats upgradeStats = upgrade3.GetComponent<UpgradeStats>();
-                                    upgradeStats.UpdateLVL();
+                                    PowerupStats powerupStats = upgrade3.GetComponent<PowerupStats>();
+                                    powerupStats.UpdateLVL();
                                     //SETTING THE TEXT OF SLOT
                                     //accessing text of emptycontainer and string from upgrade
                                     TextMeshProUGUI emptyContainerText = equippedUpgradesContainer[i].GetComponentInChildren<TextMeshProUGUI>();
 
                                     //setting the emptycontainer text to the currentStat
-                                    emptyContainerText.text = upgradeStats.currentStatString;
+                                    emptyContainerText.text = powerupStats.currentStatString;
 
                                     availabilityScript.IsAvailable = false;
 
@@ -435,15 +435,15 @@ public class PowerupManager : MonoBehaviour
             if (index < selectedUpgrades.Count)
             {
                 //WE GET THE UPGRADESTAT OF EACH UPGRADE FOUND IN THE SELECTEDUPGRADES LIST
-                UpgradeStats upgradeStats = selectedUpgrades[index].GetComponent<UpgradeStats>();
+                PowerupStats powerupStats = selectedUpgrades[index].GetComponent<PowerupStats>();
 
-                // Make sure that UpgradeStats component is not null
-                if (upgradeStats != null)
+                // Make sure that powerupStats component is not null
+                if (powerupStats != null)
                 {
-                    // Get the strings from UpgradeStats
-                    string upgradeName = upgradeStats.upgradeName;
-                    string upgradeDescription = upgradeStats.upgradeDescription;
-                    string upgradeStat = "UpgradeAmount: " + upgradeStats.upgradeAmount.ToString();
+                    // Get the strings from powerupStats
+                    string upgradeName = powerupStats.powerupName;
+                    string upgradeDescription = powerupStats.powerupDescription;
+                    string upgradeStat = "UpgradeAmount: " + powerupStats.powerupAmount.ToString();
 
                     // Update the TextMeshProUGUI components with the strings
                     name.text = upgradeName;
@@ -452,7 +452,7 @@ public class PowerupManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("UpgradeStats component is missing in the displayed upgrade GameObject.");
+                    Debug.LogWarning("powerupStats component is missing in the displayed upgrade GameObject.");
                 }
             }
             else
