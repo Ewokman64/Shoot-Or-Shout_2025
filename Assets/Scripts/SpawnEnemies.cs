@@ -71,7 +71,7 @@ public class SpawnEnemies : MonoBehaviour
     private SpawnManager spawnManager;
     //private UpgradesManager upgradesManager;
     public PowerUpDisplay powerUpDisplay;
-    private UpgradeList upgradeList;
+    private PowerupList upgradeList;
 
     private bool enemyLimitReached = false;
     public int enemyCount;
@@ -99,7 +99,7 @@ public class SpawnEnemies : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         //upgradesManager = GameObject.Find("UpgradesManager").GetComponent<UpgradesManager>();
-        upgradeList = GameObject.Find("PowerupManager").GetComponent<UpgradeList>();
+        upgradeList = GameObject.Find("PowerupManager").GetComponent<PowerupList>();
         powerUpDisplay = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
         nightKnightScript = miniBoss.GetComponent<NightKnight>();
         horseScript = miniBoss.GetComponentInChildren<Horse>();

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private SpawnManager spawnManager;
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
-    private UpgradeList upgradeList;
+    private PowerupList upgradeList;
     private PowerupManager powerupManager;
     private CountDown countDown;
     private SpawnEnemies waveManager;
@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
-        upgradeList = GameObject.Find("PowerupManager").GetComponent<UpgradeList>();
+        upgradeList = GameObject.Find("PowerupManager").GetComponent<PowerupList>();
         powerupManager = GameObject.Find("PowerupManager").GetComponent<PowerupManager>();
         countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;

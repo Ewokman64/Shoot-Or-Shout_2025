@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradeList : MonoBehaviour
+public class PowerupList : MonoBehaviour
 {
     private ShooterController shooterController;
     private TaunterController taunterController;
@@ -11,8 +11,8 @@ public class UpgradeList : MonoBehaviour
     public GameObject upgradesPanel;
     private PowerupManager powerupManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
-    //public bool upgradeSelected = false;
     public GameObject upgrade; // Reference to the upgrade GameObject
+
     float shootCDAmount = 0.15f;
     float tauntCDAmount = 0.15f;
     float movementIncAmount = 1;

@@ -13,7 +13,7 @@ public class ShooterController : MonoBehaviour
     public Sprite dualShotSprite;
     private bool isPowerUpActive = false;
     public float bulletCoolDown = 0;
-    public float bulletCDRate = 1;
+    public float bulletCDRate = 1.5f;
     public SpriteRenderer shooterSpriteRenderer;
     public SpriteRenderer shooterCDRenderer;
     public float darkenAmount = 0.5f; // Value between 0 and 1

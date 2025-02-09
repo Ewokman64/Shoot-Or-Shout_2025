@@ -9,21 +9,13 @@ public class PowerupStats : MonoBehaviour
     public string powerupName;
     public string powerupDescription;
 
-    public float originalStat; //The stat the player starts out with
-
-    public float currentStat; //The stat the player currently has
-
-    public float LVL1Stat;
-    public float LVL2Stat;
-    public float LVL3Stat;
-
-    public string currentLVL;
-
-    public string nextLVL;
+    public float currentStat; //The stat the player has during the run.
+    public string unit;
+    public string currentStatDesc;
 
     public bool isEquipped;
 
-
+    private float originalStat; //The stat the player starts out with. Need it so we can set it back at gamestart.
     // Start is called before the first frame update
     void Start()
     {

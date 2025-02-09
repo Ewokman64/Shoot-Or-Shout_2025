@@ -47,13 +47,9 @@ public class PowerUpDisplay : MonoBehaviour
 
 
         Time.timeScale = 0;
-
-        //I think I woN't use clickable buttons, only the keys 1-2-3
-        //Maybe we can also add the option to delete powerups with other keys to free up space. Maybe Q-W-E-R-T? Or CTRL+1-2-3-4-5
-        //Psuedo goes something like "if key1 is pressed, equip the first item on the list, and so on"
     }
 
-    //In this function we delete the powerupinstances so they don't overlap eachother each time we call display.
+    //In this function we delete the powerup instances so they don't overlap eachother each time we call display.
     public void DeletePowerupInstances()
     {
         foreach (GameObject obj in powerupInstances)
@@ -115,9 +111,8 @@ public class PowerUpDisplay : MonoBehaviour
 
             textComponents.nameText.text = powerupStats.powerupName;
             textComponents.descText.text = powerupStats.powerupDescription;
-            //textComponents.statText.text = powerupStats.currentStat.ToString();
-            textComponents.lvlText.text = "Change in stat: " + powerupStats.currentLVL +  " -> " + powerupStats.nextLVL;
-
+            textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + powerupStats.unit;
+            //textComponents.lvlText.text = "Stat at next level: " + powerupStats.statNext;
         }
     }
 }

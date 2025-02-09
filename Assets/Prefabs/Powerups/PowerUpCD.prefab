@@ -148,11 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Dualshot Haste
   powerupDescription: Reduce the spawn cooldown of the dual shot power.
-  originalStat: 0
-  currentStat: 1
-  LVL1Stat: 0
-  LVL2Stat: 0
-  LVL3Stat: 0
-  currentLVL: 0
-  nextLVL: 1
+  currentStat: 10
+  unit: Seconds
+  currentStatDesc: 'Current Cooldown: '
+  statNext: 0
   isEquipped: 0
+  coolDownAmount: 1
+  increaseAmount: 0

@@ -8,5 +8,4 @@ public class TextComponents : MonoBehaviour
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI descText;
     public TextMeshProUGUI statText;
-    public TextMeshProUGUI lvlText;
 }

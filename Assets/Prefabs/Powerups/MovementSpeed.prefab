@@ -148,11 +148,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Quick Feet
   powerupDescription: Your movement speed is increased.
-  originalStat: 0
-  currentStat: 1
-  LVL1Stat: 0
-  LVL2Stat: 0
-  LVL3Stat: 0
-  currentLVL: 0
-  nextLVL: 1
+  currentStat: 10
+  unit: Swamp-Toe/Hour
+  currentStatDesc: 'Current movement speed: '
+  statNext: 0
   isEquipped: 0
+  coolDownAmount: 0
+  increaseAmount: 1
