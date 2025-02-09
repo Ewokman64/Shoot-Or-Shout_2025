@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +24,10 @@ public class PowerUpDisplay : MonoBehaviour
     [Header("Other")]
     public List<Button> powerupButtons; //Contains the button components of the 3 chosen powerup
     public List<PowerupStats> powerupStats; //Need it to check whether a powerup was picked or not in ChoosePowerup.cs
-    public GameObject powerupPanel; //The UI panel that contains the visuals
-    SpawnEnemies waveManager; //We access the wavemanager to stop and restart wave spawning after a powerup got picked
 
+    public GameObject powerupPanel; //The UI panel that contains the visuals
+
+    SpawnEnemies waveManager; //We access the wavemanager to stop and restart wave spawning after a powerup got picked
     void Start()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
@@ -39,12 +40,11 @@ public class PowerUpDisplay : MonoBehaviour
         DeletePowerupInstances(); //We delete the powerupinstances so they don't overlap
 
         GetRandomPowerUps();
-        
         DisplayPowerUps(powerupsChosen, powerupPanel); //After we randomized the 3 powerups, we need to call the DisplayPowerUps
-
         GetButtons(); // We access the buttons so they can be invoked in ChoosePowerup.cs
-
+        SetPowerupText();
         powerupPanel.SetActive(true);
+
 
         Time.timeScale = 0;
 
@@ -81,12 +81,11 @@ public class PowerUpDisplay : MonoBehaviour
     //It requires: a list<GameObject> containing the chosen powerups, and a GameObject to function
     public void DisplayPowerUps(List<GameObject> chosenList, GameObject powerupPanel)
     {
-
         // Loop through each powerup and assign the position of each empty slot
         for (int i = 0; i < Mathf.Min(chosenList.Count, powerupsContainer.Count); i++)
         {
             // Use the corresponding spawn point for each powerup
-            Transform spawnPoint = powerupsContainer[i];
+            Transform spawnPoint = powerupsContainer[i].transform;
 
             GameObject powerupInstance = Instantiate(chosenList[i], spawnPoint.position, Quaternion.identity);
 
@@ -100,11 +99,26 @@ public class PowerUpDisplay : MonoBehaviour
     {
         for (int i = 0; i < Mathf.Min(powerupsChosen.Count); i++)
         {
-            Button powerupButton = powerupsContainer[i].GetComponent<Button>();
-            PowerupStats powerupStat = powerupsContainer[i].GetComponent<PowerupStats>();
+            Button powerupButton = powerupsChosen[i].GetComponent<Button>();
 
             powerupButtons.Add(powerupButton);
-            powerupStats.Add(powerupStat);
+        }
+    }
+
+    public void SetPowerupText()
+    {
+
+        for (int i = 0; i < 3; i++)
+        {
+            TextComponents textComponents = powerupsContainer[i].GetComponent<TextComponents>();
+            PowerupStats powerupStats = powerupsChosen[i].GetComponent<PowerupStats>();
+
+            textComponents.nameText.text = powerupStats.powerupName;
+            textComponents.descText.text = powerupStats.powerupDescription;
+            //textComponents.statText.text = powerupStats.currentStat.ToString();
+            textComponents.lvlText.text = "Change in stat: " + powerupStats.currentLVL +  " -> " + powerupStats.nextLVL;
+
         }
     }
 }
+

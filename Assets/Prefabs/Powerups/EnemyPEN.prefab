@@ -146,11 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a697260b6d54b85d9c83a90424bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Piercing Bullet
-  upgradeDescription: Bullets pierce through an extra enemy
-  currentStatString: 'Piercing capacity: 1'
-  upgradeAmount: 1
-  currentStat: 1
-  currentStatDescription: 'Piercing capacity:'
-  LVL: 1
-  upgradeSlot: 0
+  powerupName: Bullet Penetration
+  powerupDescription: Your bullets go through an additional enemy.
+  originalStat: 1
+  currentStat: 0
+  LVL1Stat: 2
+  LVL2Stat: 3
+  LVL3Stat: 4
+  currentLVL: 0
+  nextLVL: 1
+  isEquipped: 0

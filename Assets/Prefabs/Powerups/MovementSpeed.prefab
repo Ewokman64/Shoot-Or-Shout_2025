@@ -146,11 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a697260b6d54b85d9c83a90424bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Movement Speed
-  upgradeDescription: Increases movement speed by 1
-  currentStatString: 'Movement speed of 10 increased by: 1'
-  upgradeAmount: 1
+  powerupName: Quick Feet
+  powerupDescription: Your movement speed is increased.
+  originalStat: 0
   currentStat: 1
-  currentStatDescription: 'Movement speed of 10 increased by:'
-  LVL: 1
-  upgradeSlot: 0
+  LVL1Stat: 0
+  LVL2Stat: 0
+  LVL3Stat: 0
+  currentLVL: 0
+  nextLVL: 1
+  isEquipped: 0

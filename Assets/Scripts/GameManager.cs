@@ -151,7 +151,8 @@ public class GameManager : MonoBehaviour
         
         StartCoroutine(StartStallingPenalty());
         countDown.GetPlayerCD();
-        SetStatsBack();
+        
+        //SetStatsBack();
     }
     public void GameOver()
     {
@@ -169,7 +170,7 @@ public class GameManager : MonoBehaviour
         gmAudio.mute = true;
         ClearMap();
         ClearBosses();
-        SetStatsBack();
+        //SetStatsBack();
         spawnManager.StopAllCoroutines();
         waveManager.StopAllCoroutines();
         StopCoroutine(StartStallingPenalty());
@@ -257,7 +258,7 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void SetStatsBack()
+    /*public void SetStatsBack()
     {
         Debug.Log("Stats are set back");
         foreach(GameObject powerup in powerupManager.upgradePrefabs)
@@ -268,7 +269,7 @@ public class GameManager : MonoBehaviour
             powerupStats.currentStat = powerupStats.powerupAmount;
             powerupStats.currentStatString = powerupStats.currentStatDescription + " " + powerupStats.currentStat.ToString();
         }
-    }
+    }*/
 
     public void BossDied()
     {

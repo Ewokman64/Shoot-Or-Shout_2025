@@ -146,11 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a697260b6d54b85d9c83a90424bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeName: Shoot Cooldown
-  upgradeDescription: Reduces the cooldown of shooting by 0.15 seconds
-  currentStatString: '1 sec cooldown reduced by: 0,15'
-  upgradeAmount: 0.15
+  powerupName: Sausage fingers
+  powerupDescription: Reduce the cooldown of regualr shots
+  originalStat: 0
   currentStat: 0.15
-  currentStatDescription: '1 sec cooldown reduced by:'
-  LVL: 1
-  upgradeSlot: 0
+  LVL1Stat: 0
+  LVL2Stat: 0
+  LVL3Stat: 0
+  currentLVL: 0
+  nextLVL: 1
+  isEquipped: 0

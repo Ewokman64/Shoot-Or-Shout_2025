@@ -8,18 +8,26 @@ public class PowerupStats : MonoBehaviour
 {
     public string powerupName;
     public string powerupDescription;
-    public string currentStatString;
-    public float powerupAmount;
-    public float currentStat;
-    public string currentStatDescription;
-    public int LVL = 1;
-    public int powerupSlot;
+
+    public float originalStat; //The stat the player starts out with
+
+    public float currentStat; //The stat the player currently has
+
+    public float LVL1Stat;
+    public float LVL2Stat;
+    public float LVL3Stat;
+
+    public string currentLVL;
+
+    public string nextLVL;
 
     public bool isEquipped;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetStartingStats();      
     }
 
     // Update is called once per frame
@@ -28,15 +36,8 @@ public class PowerupStats : MonoBehaviour
         
     }
 
-    public void UpdateLVL()
-    {
-        LVL++; //LVL -> 2
-        currentStat = powerupAmount * LVL; //example BulletPierceStat: 1 * 1 (LVL) = 1
-        currentStatString = currentStatDescription + " " + currentStat.ToString(); 
-    }
-
     public void SetStartingStats()
     {
-        currentStat = powerupAmount;
+        currentStat = originalStat;
     }
 }

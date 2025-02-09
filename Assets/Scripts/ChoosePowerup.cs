@@ -17,7 +17,7 @@ public class ChoosePowerup : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         PickPowerup();
     }
@@ -63,7 +63,7 @@ public class ChoosePowerup : MonoBehaviour
             Time.timeScale = 1;
             waveManager.StartWaves();
         }
-    }
+    }*/
 
     void CanPowerUpSpawn()
     {

@@ -79,7 +79,7 @@ public class PowerupManager : MonoBehaviour
         //lastScoreThreshold = currentScoreThreshold;
 
         // Randomly select three unique powerups
-        selectedUpgrades = GetRandomUpgrades(3);
+        //selectedUpgrades = GetRandomUpgrades(3);
         upgrade1 = null;
         upgrade2 = null;
         upgrade3 = null;
@@ -101,12 +101,12 @@ public class PowerupManager : MonoBehaviour
         powerupPanel.SetActive(true);
 
         // Display the powerups to the player using the UI panel
-        DisplayUpgrades(selectedUpgrades, powerupPanel);
-        UpdateUpgradeText();
+        //DisplayUpgrades(selectedUpgrades, powerupPanel);
+        //UpdateUpgradeText();
     }
     public void ButtonPick()
     {
-
+        /*
         //**REWRITE SOMETIME
         //Psudeo: if there is freeslot available and if upgrade isn't part of are list, equip upgrade. if it's part of it, LVLUP upgrade
         //If there is no free slot available and upgrade isn't part of our list, says "no free slot left". if it's part of it, LVLUP upgrade
@@ -371,55 +371,56 @@ public class PowerupManager : MonoBehaviour
                 Debug.LogError("Button 1 not assigned to the script.");
             }
         }
-    }
-    List<GameObject> GetRandomUpgrades(int count)
-    {
-        List<GameObject> randomUpgrades = new List<GameObject>();
-
-        // Ensure there are enough powerup prefabs
-        if (upgradePrefabs.Count < count)
+    }*/
+        List<GameObject> GetRandomUpgrades(int count)
         {
-            Debug.LogWarning("Not enough powerup prefabs for the selected count.");
+            List<GameObject> randomUpgrades = new List<GameObject>();
+
+            // Ensure there are enough powerup prefabs
+            if (upgradePrefabs.Count < count)
+            {
+                Debug.LogWarning("Not enough powerup prefabs for the selected count.");
+                return randomUpgrades;
+            }
+
+            // Shuffle the powerup prefabs to get a random order
+            upgradePrefabs.Shuffle();
+
+            // Select the first 'count' powerups from the shuffled list
+            for (int i = 0; i < count; i++)
+            {
+                randomUpgrades.Add(upgradePrefabs[i]);
+            }
+
             return randomUpgrades;
         }
 
-        // Shuffle the powerup prefabs to get a random order
-        upgradePrefabs.Shuffle();
-
-        // Select the first 'count' powerups from the shuffled list
-        for (int i = 0; i < count; i++)
+        void DisplayUpgrades(List<GameObject> upgrades, GameObject upgradePanel)
         {
-            randomUpgrades.Add(upgradePrefabs[i]);
-        }
+            // Ensure there are enough spawn points
+            if (upgradeSpawnPoints.Count < upgrades.Count)
+            {
+                return;
+            }
 
-        return randomUpgrades;
-    }
+            // Loop through each powerup and instantiate it at a corresponding spawn point
+            for (int i = 0; i < Mathf.Min(upgrades.Count, upgradeSpawnPoints.Count); i++)
+            {
+                // Use the corresponding spawn point for each powerup
+                Transform spawnPoint = upgradeSpawnPoints[i];
 
-    void DisplayUpgrades(List<GameObject> upgrades, GameObject upgradePanel)
-    {
-        // Ensure there are enough spawn points
-        if (upgradeSpawnPoints.Count < upgrades.Count)
-        {
-            return;
-        }
+                // Instantiate a powerup GameObject at the specified spawn point
+                GameObject upgradeInstance = Instantiate(upgrades[i], spawnPoint.position, Quaternion.identity);
+                upgradeInstances.Add(upgradeInstance);
+                // Set the instantiated powerup as a child of the powerup panel
+                upgradeInstance.transform.SetParent(upgradePanel.transform);
 
-        // Loop through each powerup and instantiate it at a corresponding spawn point
-        for (int i = 0; i < Mathf.Min(upgrades.Count, upgradeSpawnPoints.Count); i++)
-        {
-            // Use the corresponding spawn point for each powerup
-            Transform spawnPoint = upgradeSpawnPoints[i];
-
-            // Instantiate a powerup GameObject at the specified spawn point
-            GameObject upgradeInstance = Instantiate(upgrades[i], spawnPoint.position, Quaternion.identity);
-            upgradeInstances.Add(upgradeInstance);
-            // Set the instantiated powerup as a child of the powerup panel
-            upgradeInstance.transform.SetParent(upgradePanel.transform);
-
-            // Attach any additional scripts or logic for player interaction
+                // Attach any additional scripts or logic for player interaction
+            }
         }
     }
 
-    void UpdateUpgradeText()
+    /*void UpdateUpgradeText()
     {
         //THIS FUNCTION IS FOR GETTING THE STRING INFOS AND DISPLAYING THEM FOR THE PICKABLE UPGRADES
         // Iterate through each upgrade GameObject
@@ -462,7 +463,7 @@ public class PowerupManager : MonoBehaviour
 
             index++; // Increment the index for the next upgrade slot
         }
-    }
+    }*/
 
     public IEnumerator SetTextBack()
     {

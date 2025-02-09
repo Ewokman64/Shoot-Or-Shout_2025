@@ -53,7 +53,6 @@ MonoBehaviour:
   upgradesPanel: {fileID: 0}
   bulletPrefab: {fileID: 5093899002677859947, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
-  upgradeSelected: 0
   upgrade: {fileID: 0}
 --- !u!114 &6121944925445396756
 MonoBehaviour:
@@ -102,5 +101,5 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   powerupButtons: []
-  upgradeStats: []
+  powerupStats: []
   powerupPanel: {fileID: 0}
