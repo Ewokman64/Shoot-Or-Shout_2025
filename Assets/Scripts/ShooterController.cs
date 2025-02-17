@@ -6,18 +6,20 @@ public class ShooterController : MonoBehaviour
 {
     public List<string> hostile;
     
-    [Header("Bullet Settings")]
+    [Header("Bullet Properties")]
     public GameObject bulletPrefab;
+    public float bulletCoolDown = 0;
+    public float bulletCDRate = 1.5f;
+    public SpriteRenderer shooterCDRenderer; //The little shoot coldown icon at the bottom
+    public float darkenAmount = 0.5f; // Value between 0 and 1
+    private Color originalColor;
+
+    [Header("Dual Shot Properties")]
     public GameObject powerUpLight;
     public Sprite singleShotSprite;
     public Sprite dualShotSprite;
     private bool isPowerUpActive = false;
-    public float bulletCoolDown = 0;
-    public float bulletCDRate = 1.5f;
     public SpriteRenderer shooterSpriteRenderer;
-    public SpriteRenderer shooterCDRenderer;
-    public float darkenAmount = 0.5f; // Value between 0 and 1
-    private Color originalColor;
 
     private AudioSource gunAudio;
     private GameManager gameManager;
@@ -41,7 +43,7 @@ public class ShooterController : MonoBehaviour
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         shooterSpriteRenderer = GameObject.Find("Shooter(Clone)").GetComponent<SpriteRenderer>();
-        shooterCDRenderer = GameObject.Find("ShootCDSprite").GetComponent<SpriteRenderer>();
+        shooterCDRenderer = GameObject.Find("ShootCDSprite").GetComponent<SpriteRenderer>(); 
         // Get the current color of the sprite
         originalColor = shooterCDRenderer.color;
 

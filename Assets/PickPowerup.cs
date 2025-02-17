@@ -5,6 +5,8 @@ using UnityEngine;
 public class PickPowerup : MonoBehaviour
 {
     private PowerUpDisplay powerUpDisplayRef;
+
+    GameObject powerupRef;
     // Start is called before the first frame update
     void Start()
     {

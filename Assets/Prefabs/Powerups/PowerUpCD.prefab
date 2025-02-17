@@ -151,7 +151,6 @@ MonoBehaviour:
   currentStat: 10
   unit: Seconds
   currentStatDesc: 'Current Cooldown: '
-  statNext: 0
+  improveAmount: 1
   isEquipped: 0
-  coolDownAmount: 1
-  increaseAmount: 0
+  originalStat: 10

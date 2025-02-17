@@ -151,7 +151,6 @@ MonoBehaviour:
   currentStat: 1
   unit: Enemy
   currentStatDesc: 'Current piercing power: '
-  statNext: 0
+  improveAmount: 1
   isEquipped: 0
-  coolDownAmount: 0
-  increaseAmount: 1
+  originalStat: 1

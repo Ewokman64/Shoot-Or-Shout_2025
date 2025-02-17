@@ -28,9 +28,11 @@ public class PowerUpDisplay : MonoBehaviour
     public GameObject powerupPanel; //The UI panel that contains the visuals
 
     SpawnEnemies waveManager; //We access the wavemanager to stop and restart wave spawning after a powerup got picked
+    GameManager gameManager;
     void Start()
     {
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     //Within this function we gonna clear the scene as much as possible, then run our DisplayPowerUp function + we add the corresponding 1-2-3 keys so we can choose too
     public void OfferPowerUps()
@@ -45,8 +47,7 @@ public class PowerUpDisplay : MonoBehaviour
         SetPowerupText();
         powerupPanel.SetActive(true);
 
-
-        Time.timeScale = 0;
+        gameManager.TogglePauseMenu();
     }
 
     //In this function we delete the powerup instances so they don't overlap eachother each time we call display.
@@ -112,7 +113,6 @@ public class PowerUpDisplay : MonoBehaviour
             textComponents.nameText.text = powerupStats.powerupName;
             textComponents.descText.text = powerupStats.powerupDescription;
             textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + powerupStats.unit;
-            //textComponents.lvlText.text = "Stat at next level: " + powerupStats.statNext;
         }
     }
 }

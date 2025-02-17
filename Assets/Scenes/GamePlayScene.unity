@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -30609,24 +30609,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969396052}
   m_CullTransparentMesh: 1
---- !u!1 &1973255319 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6252169261466242663, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-    type: 3}
-  m_PrefabInstance: {fileID: 3714608559932089221}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1973255324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1973255319}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f46cbb7e4f9edb44b1924e9576cc593, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2003607492 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2578344922253876934, guid: e35ab25d45dc387419e7ec88bb21b918,
@@ -31690,86 +31672,6 @@ PrefabInstance:
       objectReference: {fileID: 842409991}
     - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}
-      propertyPath: powerupSlotsPanel
-      value: 
-      objectReference: {fileID: 1083799723}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: emptySlots.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupSlots.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: emptySlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 770349273}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: emptySlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 1925929907}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: emptySlots.Array.data[2]
-      value: 
-      objectReference: {fileID: 1003569267}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupSlots.Array.data[0]
-      value: 
-      objectReference: {fileID: 770349273}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupSlots.Array.data[1]
-      value: 
-      objectReference: {fileID: 1925929907}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupSlots.Array.data[2]
-      value: 
-      objectReference: {fileID: 1003569267}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[0]
-      value: 
-      objectReference: {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[1]
-      value: 
-      objectReference: {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[2]
-      value: 
-      objectReference: {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[3]
-      value: 
-      objectReference: {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[4]
-      value: 
-      objectReference: {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
       propertyPath: powerupsContainer.Array.data[0]
       value: 
       objectReference: {fileID: 770349274}
@@ -31916,11 +31818,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6252169261466242663, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1973255324}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b94996dcc7620f4eb4a5fab48303a59, type: 3}
 --- !u!1001 &8008256741467807511
 PrefabInstance:

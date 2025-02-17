@@ -6,11 +6,11 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
-
     public int playerHealth;
     public TextMeshProUGUI playerHealthText;
     public List<GameObject> spawnedEnemies = new List<GameObject>();
 
+    [Header("References")]
     private SpawnManager spawnManager;
     public WallHealthBar wallHealthBar;
     public GameManager gameManager;
@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private PowerupManager powerupManager;
     private CountDown countDown;
     private SpawnEnemies waveManager;
+    PowerUpDisplay powerupDisplayRef;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public float stallingTimer;
     //UI
@@ -52,19 +53,24 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        // THIS PLAYER DATA CAN BE HANDLED ELSEWHERE
         playerHealth = 3;
         playerHealthText.text = "Health: " + playerHealth;
+        //
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
         Time.timeScale = 0;
         isShooterChased = true;
         isStallingActive = false;
         hasGameStarted = false;
         stallingTimer = 10;
+
+        
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         wallHealthBar = GameObject.Find("WallHealth").GetComponent<WallHealthBar>();
         upgradeList = GameObject.Find("PowerupManager").GetComponent<PowerupList>();
         powerupManager = GameObject.Find("PowerupManager").GetComponent<PowerupManager>();
+        powerupDisplayRef = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
         countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;
         // Access the Bullet script without instantiating a visible GameObject
@@ -84,11 +90,6 @@ public class GameManager : MonoBehaviour
         {
             TogglePauseMenu();
         }
-        /*else if (powerupManager.powerupPanel.activeSelf)
-        {
-                gameIsPaused = true;
-                Time.timeScale = 0;
-        }*/
         if (wallHealthBar.maxHealth < 0)
         {
             gameManager.GameOver();
@@ -138,8 +139,10 @@ public class GameManager : MonoBehaviour
         waveManager.StartWaves();
         spawnManager.StartSpawnManager();
         Time.timeScale = 1;
+
         isTaunterChased = false;
         isShooterChased = true;
+
         hasGameStarted = true;
         isSomeoneDead = false;
 
@@ -258,18 +261,16 @@ public class GameManager : MonoBehaviour
         
     }
 
-    /*public void SetStatsBack()
+    public void SetStatsBack()
     {
         Debug.Log("Stats are set back");
-        foreach(GameObject powerup in powerupManager.upgradePrefabs)
+        foreach(GameObject powerup in powerupDisplayRef.powerupsInGame)
         {
             PowerupStats powerupStats = powerup.GetComponent<PowerupStats>();
 
-            powerupStats.LVL = 1;
-            powerupStats.currentStat = powerupStats.powerupAmount;
-            powerupStats.currentStatString = powerupStats.currentStatDescription + " " + powerupStats.currentStat.ToString();
+            powerupStats.SetStartingStats();
         }
-    }*/
+    }
 
     public void BossDied()
     {

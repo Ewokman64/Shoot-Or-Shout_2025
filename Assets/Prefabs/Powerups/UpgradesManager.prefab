@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5200778823973694015}
   - component: {fileID: 6121944925445396756}
   - component: {fileID: 127948913057373798}
+  - component: {fileID: 3895356212815030355}
   m_Layer: 5
   m_Name: UpgradesManager
   m_TagString: Untagged
@@ -83,11 +84,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupsInGame:
-  - {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb, type: 3}
   - {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4, type: 3}
   - {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6, type: 3}
   - {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59, type: 3}
   - {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7, type: 3}
+  - {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb, type: 3}
   powerupsChosen: []
   powerupInstances: []
   powerupsContainer:
@@ -103,3 +104,15 @@ MonoBehaviour:
   powerupButtons: []
   powerupStats: []
   powerupPanel: {fileID: 0}
+--- !u!114 &3895356212815030355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6252169261466242663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f46cbb7e4f9edb44b1924e9576cc593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

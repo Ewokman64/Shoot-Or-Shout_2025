@@ -151,7 +151,6 @@ MonoBehaviour:
   currentStat: 10
   unit: Swamp-Toe/Hour
   currentStatDesc: 'Current movement speed: '
-  statNext: 0
+  improveAmount: 1
   isEquipped: 0
-  coolDownAmount: 0
-  increaseAmount: 1
+  originalStat: 10

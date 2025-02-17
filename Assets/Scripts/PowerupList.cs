@@ -10,6 +10,9 @@ public class PowerupList : MonoBehaviour
     private SpawnManager spawnManager;
     public GameObject upgradesPanel;
     private PowerupManager powerupManager;
+    private PowerUpDisplay powerupDisplayRef;
+    public PowerupStats powerupStats;
+    private GameManager gameManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
     public GameObject upgrade; // Reference to the upgrade GameObject
 
@@ -20,7 +23,7 @@ public class PowerupList : MonoBehaviour
     float powerUpCDAmount = 1;
     private void Update()
     {
-        
+
     }
     void GetReferences()
     {
@@ -29,29 +32,56 @@ public class PowerupList : MonoBehaviour
         taunterController = GameObject.Find("Taunter(Clone)").GetComponent<TaunterController>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
         powerupManager = GameObject.Find("PowerupManager").GetComponent<PowerupManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        powerupDisplayRef = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
+
+        /*foreach (GameObject powerup in powerupDisplayRef.powerupsInGame)
+        {
+            powerupStats = powerup.GetComponent<PowerupStats>();
+
+            Debug.Log("Powerup Stat received: " + powerup.name);
+        }*/
     }
     public void ShootCoolDown()
     {
         GetReferences();
-        shooterController.bulletCDRate -= shootCDAmount;
-        //upgradeSelected = true;
+
+        //shooterController.bulletCDRate -= shootCDAmount; //use improveAmount from stats
+        PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[0].GetComponent<PowerupStats>();
+
+        shooterController.bulletCDRate -= powerupStats.improveAmount;
         Debug.Log("New cooldown: " + shooterController.bulletCDRate);
+
+        ResumeGame();
     }
     public void TauntCoolDown()
     {
         GetReferences();
-        taunterController.tauntCDRate -= tauntCDAmount;
-        //upgradeSelected = true;
+        //taunterController.tauntCDRate -= tauntCDAmount;
+
+        PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[1].GetComponent<PowerupStats>();
+
+        taunterController.tauntCDRate -= powerupStats.improveAmount;
         Debug.Log("New cooldown: " + taunterController.tauntCDRate);
+
+        ResumeGame();
     }
 
     public void MovementSpeed()
     {
         GetReferences();
+        PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[2].GetComponent<PowerupStats>();
+
+        CharacterMovement charMovScript1 = GameObject.Find("Shooter(Clone)").GetComponent<CharacterMovement>();
+        CharacterMovement charMovScript2 = GameObject.Find("Taunter(Clone)").GetComponent<CharacterMovement>();
+        charMovScript1.currentSpeed += powerupStats.improveAmount;
+        charMovScript2.currentSpeed += powerupStats.improveAmount;
         //shooterController.movementpeed += movementIncAmount;
         //taunterController.speed += movementIncAmount;
-        //upgradeSelected = true;
-        //Debug.Log("New speed: " + shooterController.speed);
+        Debug.Log("New speed: " + charMovScript1.currentSpeed);
+        Debug.Log("New speed: " + charMovScript2.currentSpeed);
+        ResumeGame();
     }
 
     public void PiercingAmmo()
@@ -63,16 +93,32 @@ public class PowerupList : MonoBehaviour
         if (bulletScript != null)
         {
             // Set the health using the public method in Bullet script
-            bulletScript.piercePower += bulletpierceAmount;
-            //upgradeSelected = true;
+            //bulletScript.piercePower += bulletpierceAmount;
+
+            PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[3].GetComponent<PowerupStats>();
+
+            bulletScript.piercePower += powerupStats.improveAmount;
             Debug.Log("New Bullet Pierce: " + bulletScript.piercePower);
+            ResumeGame();
         }
     }
     public void PowerUpSpawnRate()
     {
         GetReferences();
-        spawnManager.powerUp_spawnRate -= powerUpCDAmount;
-        //upgradeSelected = true;
+        //spawnManager.powerUp_spawnRate -= powerUpCDAmount;
+
+        PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[4].GetComponent<PowerupStats>();
+
+        spawnManager.powerUp_spawnRate -= powerupStats.improveAmount;
         Debug.Log("New cooldown: " + spawnManager.powerUp_spawnRate);
+    }
+
+    public void ResumeGame()
+    {
+        //Hide Powerup panel
+        upgradesPanel.SetActive(false);
+        //Resume game
+        gameManager.TogglePauseMenu();
+        //Continue enemy spawning
     }
 }

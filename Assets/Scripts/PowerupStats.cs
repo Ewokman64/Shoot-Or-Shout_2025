@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PowerupStats : MonoBehaviour
 {
+
     public string powerupName;
     public string powerupDescription;
 
@@ -13,9 +14,11 @@ public class PowerupStats : MonoBehaviour
     public string unit;
     public string currentStatDesc;
 
+    public float improveAmount;
+
     public bool isEquipped;
 
-    private float originalStat; //The stat the player starts out with. Need it so we can set it back at gamestart.
+    public float originalStat; //The stat the player starts out with. Need it so we can set it back at gamestart.
     // Start is called before the first frame update
     void Start()
     {
