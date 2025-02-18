@@ -8,13 +8,13 @@ public class PowerupList : MonoBehaviour
     private ShooterController shooterController;
     private TaunterController taunterController;
     private SpawnManager spawnManager;
-    public GameObject upgradesPanel;
+    public GameObject powerupPanel;
     private PowerupManager powerupManager;
     private PowerUpDisplay powerupDisplayRef;
-    public PowerupStats powerupStats;
+    //public PowerupStats powerupStats;
     private GameManager gameManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
-    public GameObject upgrade; // Reference to the upgrade GameObject
+    //public GameObject upgrade; // Reference to the upgrade GameObject
 
     float shootCDAmount = 0.15f;
     float tauntCDAmount = 0.15f;
@@ -27,7 +27,6 @@ public class PowerupList : MonoBehaviour
     }
     void GetReferences()
     {
-        upgradesPanel = GameObject.Find("UpgradesPanel");
         shooterController = GameObject.Find("Shooter(Clone)").GetComponent<ShooterController>();
         taunterController = GameObject.Find("Taunter(Clone)").GetComponent<TaunterController>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
@@ -111,14 +110,20 @@ public class PowerupList : MonoBehaviour
 
         spawnManager.powerUp_spawnRate -= powerupStats.improveAmount;
         Debug.Log("New cooldown: " + spawnManager.powerUp_spawnRate);
+
+        ResumeGame();
     }
 
     public void ResumeGame()
     {
+        powerupPanel = GameObject.Find("PowerupPanel");
+        SpawnEnemies spawnEnemiesScript = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+        spawnEnemiesScript.StartWaves();
         //Hide Powerup panel
-        upgradesPanel.SetActive(false);
+        powerupPanel.SetActive(false);
         //Resume game
         gameManager.TogglePauseMenu();
         //Continue enemy spawning
+
     }
 }

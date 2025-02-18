@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class PickPowerup : MonoBehaviour
@@ -39,4 +40,6 @@ public class PickPowerup : MonoBehaviour
             }
         }
     }
+
+    //NEXT UP: Put powerup in inventory, check free spaces etc.
 }

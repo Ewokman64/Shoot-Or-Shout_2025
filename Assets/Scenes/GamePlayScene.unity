@@ -9967,7 +9967,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: 7, y: 6, z: 0}
@@ -11166,7 +11166,7 @@ GameObject:
   - component: {fileID: 842409994}
   - component: {fileID: 842409993}
   m_Layer: 5
-  m_Name: PowerUpPanel
+  m_Name: PowerupPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31710,6 +31710,16 @@ PrefabInstance:
       propertyPath: powerupsInventory.Array.data[4]
       value: 
       objectReference: {fileID: 1389970934}
+    - target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
+        type: 3}
+      propertyPath: pu_Panel
+      value: 
+      objectReference: {fileID: 842409991}
+    - target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
+        type: 3}
+      propertyPath: powerupPanel
+      value: 
+      objectReference: {fileID: 842409991}
     - target: {fileID: 6252169261466242663, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}
       propertyPath: m_Name

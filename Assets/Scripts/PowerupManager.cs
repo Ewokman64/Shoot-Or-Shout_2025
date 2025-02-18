@@ -50,7 +50,7 @@ public class PowerupManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ButtonPick();
+        //ButtonPick();
         
     }
     void CheckEquipped()
@@ -104,9 +104,9 @@ public class PowerupManager : MonoBehaviour
         //DisplayUpgrades(selectedUpgrades, powerupPanel);
         //UpdateUpgradeText();
     }
-    public void ButtonPick()
+    /*public void ButtonPick()
     {
-        /*
+        
         //**REWRITE SOMETIME
         //Psudeo: if there is freeslot available and if upgrade isn't part of are list, equip upgrade. if it's part of it, LVLUP upgrade
         //If there is no free slot available and upgrade isn't part of our list, says "no free slot left". if it's part of it, LVLUP upgrade
@@ -463,14 +463,13 @@ public class PowerupManager : MonoBehaviour
 
             index++; // Increment the index for the next upgrade slot
         }
-    }*/
+    }
 
     public IEnumerator SetTextBack()
     {
         yield return new WaitForSeconds(3);
         noSlotText.text = "Upgrades equipped";
-    }
-}
+    }*/
 public static class ListExtensions
 {
     // Fisher-Yates shuffle algorithm. A famous method for shuffling elements in a list

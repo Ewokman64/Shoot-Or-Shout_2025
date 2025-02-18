@@ -121,9 +121,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5200778823973694015, guid: 2b94996dcc7620f4eb4a5fab48303a59,
+      - m_Target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
           type: 3}
-        m_TargetAssemblyTypeName: UpgradeList, Assembly-CSharp
+        m_TargetAssemblyTypeName: PowerupList, Assembly-CSharp
         m_MethodName: PowerUpSpawnRate
         m_Mode: 1
         m_Arguments:
