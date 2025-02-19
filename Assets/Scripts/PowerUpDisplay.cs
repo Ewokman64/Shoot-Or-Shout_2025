@@ -19,7 +19,6 @@ public class PowerUpDisplay : MonoBehaviour
 
     [Header("Containers")]
     public List<Transform> powerupsContainer; //This is where we instantiate our powerups to
-    public List<GameObject> powerupsInventory; //This list gonna contain every powerup the player already equipped
 
     [Header("Other")]
     public List<Button> powerupButtons; //Contains the button components of the 3 chosen powerup
@@ -38,11 +37,12 @@ public class PowerUpDisplay : MonoBehaviour
     public void OfferPowerUps()
     {
         waveManager.StopAllCoroutines(); //We stop all the waves from spawning
-
         DeletePowerupInstances(); //We delete the powerupinstances so they don't overlap
 
         GetRandomPowerUps();
+
         DisplayPowerUps(powerupsChosen, powerupPanel); //After we randomized the 3 powerups, we need to call the DisplayPowerUps
+
         GetButtons(); // We access the buttons so they can be invoked in ChoosePowerup.cs
         SetPowerupText();
         powerupPanel.SetActive(true);
@@ -58,6 +58,8 @@ public class PowerUpDisplay : MonoBehaviour
             // Destroy each instantiated object
             Destroy(obj);
         }
+        powerupsChosen.Clear();
+        powerupButtons.Clear();
     }
 
     public void GetRandomPowerUps()

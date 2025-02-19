@@ -74,8 +74,8 @@ public class GameManager : MonoBehaviour
         countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;
         // Access the Bullet script without instantiating a visible GameObject
-        Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
-        bulletScript.SetDefaultPierce();
+        //Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
+        //bulletScript.SetDefaultPierce();
     }
 
     void Update()
@@ -155,7 +155,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartStallingPenalty());
         countDown.GetPlayerCD();
         
-        //SetStatsBack();
+        PowerupList powerupListRef = GameObject.Find("PowerupManager").GetComponent<PowerupList>();
+        powerupListRef.ResetStats();
     }
     public void GameOver()
     {

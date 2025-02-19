@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PowerupStats : MonoBehaviour
 {
-
     public string powerupName;
     public string powerupDescription;
 

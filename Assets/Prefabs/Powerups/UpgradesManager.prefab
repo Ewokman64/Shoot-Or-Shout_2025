@@ -79,12 +79,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  powerupsInventory:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   powerupButtons: []
   powerupStats: []
   powerupPanel: {fileID: 0}
@@ -100,6 +94,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f46cbb7e4f9edb44b1924e9576cc593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupInventorySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  powerupsEquipped: []
 --- !u!114 &3699286101728449307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,4 +115,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupPanel: {fileID: 0}
   bulletPrefab: {fileID: 5093899002677859947, guid: d310716e801c20449b49fb5cf86c9375,
+    type: 3}
+  shooterPrefab: {fileID: 2141849771266847276, guid: 0ce303e5389d34c42981be454076351b,
+    type: 3}
+  shouterPrefab: {fileID: 154748705748522628, guid: cb8abeb86fe3ada47a45e57711284091,
     type: 3}

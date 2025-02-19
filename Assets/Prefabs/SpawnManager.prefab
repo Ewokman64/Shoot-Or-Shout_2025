@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &446153856244813900
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1291330928217458110}
-  m_Layer: 0
-  m_Name: eyeSpawnPoint1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1291330928217458110
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 446153856244813900}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: 2.66, z: -0.047138214}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 721042276682653764}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &721042276682653762
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,8 +33,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1291330928217458110}
-  - {fileID: 5611236613431078024}
   - {fileID: 4802003366888403831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -83,14 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 6357146090160872977, guid: 0ce303e5389d34c42981be454076351b, type: 3}
   taunter: {fileID: 7328576050843015508, guid: cb8abeb86fe3ada47a45e57711284091, type: 3}
-  enemyCount: 0
-  enemyLimit: 0
-  enemyLimitReached: 0
   enemies: []
-  newWaveStarted: 0
-  nightKnightPrefab: {fileID: 6007565604007801479, guid: be47b4426bc753a4b89e98f7d6249351,
-    type: 3}
-  nightKnightSpawnPoint: {fileID: 0}
   powerUpPrefab: {fileID: 3176338829875991302, guid: bf4758665bc9b10449e3fcd74151784a,
     type: 3}
   powerUpSpawnPoints:
@@ -99,14 +59,6 @@ MonoBehaviour:
   powerUps: 0
   powerUp_startDelay: 10
   powerUp_spawnRate: 10
-  nightKnightDead: 0
-  horseDead: 0
-  brainBoss: {fileID: 9033239209019529460, guid: 7270a60ed8c745645b0e0e523ce89d97,
-    type: 3}
-  bossSpawnPoint: {fileID: 4802003366888403831}
-  bossStartDelay: 5
-  bossSpawned: 0
-  spawnFillerEnemies: {fileID: 0}
 --- !u!95 &721042276682653766
 Animator:
   serializedVersion: 5
@@ -196,37 +148,6 @@ MonoBehaviour:
   position: 0
   direction: 0
   tooltip: 
---- !u!1 &2390078059629609420
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5611236613431078024}
-  m_Layer: 0
-  m_Name: eyeSpawnPoint2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5611236613431078024
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2390078059629609420}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -2.36, z: -0.047138214}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 721042276682653764}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5479979688160526202
 GameObject:
   m_ObjectHideFlags: 0
