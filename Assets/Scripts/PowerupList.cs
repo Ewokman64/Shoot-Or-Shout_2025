@@ -9,7 +9,6 @@ public class PowerupList : MonoBehaviour
     private TaunterController taunterController;
     private SpawnManager spawnManager;
     public GameObject powerupPanel;
-    private PowerupManager powerupManager;
     private PowerUpDisplay powerupDisplayRef;
     private GameManager gameManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
@@ -24,13 +23,12 @@ public class PowerupList : MonoBehaviour
         shooterController = GameObject.Find("Shooter(Clone)").GetComponent<ShooterController>();
         taunterController = GameObject.Find("Taunter(Clone)").GetComponent<TaunterController>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
-        powerupManager = GameObject.Find("PowerupManager").GetComponent<PowerupManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         powerupDisplayRef = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
     }
     public void ShootCoolDown()
     {
-        //GetReferences();
+        GetReferences();
 
         PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[0].GetComponent<PowerupStats>();
         shooterController.bulletCDRate -= powerupStats.improveAmount;
@@ -40,7 +38,7 @@ public class PowerupList : MonoBehaviour
     }
     public void TauntCoolDown()
     {
-        //GetReferences();
+        GetReferences();
 
         PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[1].GetComponent<PowerupStats>();
         taunterController.tauntCDRate -= powerupStats.improveAmount;
@@ -51,7 +49,7 @@ public class PowerupList : MonoBehaviour
 
     public void MovementSpeed()
     {
-        //GetReferences();
+        GetReferences();
         PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[2].GetComponent<PowerupStats>();
         CharacterMovement charMovScript1 = GameObject.Find("Shooter(Clone)").GetComponent<CharacterMovement>();
         CharacterMovement charMovScript2 = GameObject.Find("Taunter(Clone)").GetComponent<CharacterMovement>();
@@ -65,7 +63,7 @@ public class PowerupList : MonoBehaviour
 
     public void PiercingAmmo()
     {
-        //GetReferences();
+        GetReferences();
         // Access the Bullet script without instantiating a visible GameObject
 
         Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
@@ -80,7 +78,7 @@ public class PowerupList : MonoBehaviour
     }
     public void PowerUpSpawnRate()
     {
-        //GetReferences();
+        GetReferences();
 
         PowerupStats powerupStats = powerupDisplayRef.powerupsInGame[4].GetComponent<PowerupStats>();
 
@@ -107,20 +105,25 @@ public class PowerupList : MonoBehaviour
     {
         GetReferences();
 
-        PowerupStats movementStat = powerupDisplayRef.powerupsInGame[0].GetComponent<PowerupStats>();
+        PowerupStats shooterStat = powerupDisplayRef.powerupsInGame[0].GetComponent<PowerupStats>();
+        shooterController.bulletCDRate = shooterStat.originalStat;
+        shooterStat.isEquipped = false;
+
+        PowerupStats shouterStat = powerupDisplayRef.powerupsInGame[1].GetComponent<PowerupStats>();
+        taunterController.tauntCDRate = shouterStat.originalStat;
+        shouterStat.isEquipped = false;
+
+        PowerupStats movementStat = powerupDisplayRef.powerupsInGame[2].GetComponent<PowerupStats>();
         shooterPrefab.currentSpeed = movementStat.originalStat;
         shouterPrefab.currentSpeed = movementStat.originalStat;
+        movementStat.isEquipped = false;
 
-        PowerupStats bullet_P_Stat = powerupDisplayRef.powerupsInGame[1].GetComponent<PowerupStats>();
+        PowerupStats bullet_P_Stat = powerupDisplayRef.powerupsInGame[3].GetComponent<PowerupStats>();
         bulletPrefab.piercePower = bullet_P_Stat.originalStat;
-
-        PowerupStats shooterStat = powerupDisplayRef.powerupsInGame[2].GetComponent<PowerupStats>();
-        shooterController.bulletCDRate = shooterStat.originalStat;
-
-        PowerupStats shouterStat = powerupDisplayRef.powerupsInGame[3].GetComponent<PowerupStats>();
-        taunterController.tauntCDRate = shouterStat.originalStat; 
+        bullet_P_Stat.isEquipped = false;
 
         PowerupStats dualShotStat = powerupDisplayRef.powerupsInGame[4].GetComponent<PowerupStats>();
         spawnManager.powerUp_spawnRate = dualShotStat.originalStat;
+        dualShotStat.isEquipped = false;
     }
 }   

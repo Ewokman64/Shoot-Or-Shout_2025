@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -75,12 +76,26 @@ public class PickPowerup : MonoBehaviour
 
                     emptySlotImage.sprite = chosenPU_Image.sprite;
 
+                    //Update inventory text
+                    PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
+                    Debug.Log("Reference found: " + statReference.name);
+
+                    TextMeshProUGUI emptySlotText = powerupInventorySlots[i].GetComponentInChildren<TextMeshProUGUI>();
+                    Debug.Log("EmptySlot text found: " + emptySlotText.name);
+
+                    emptySlotText.text = statReference.currentStatDesc + " " + statReference.currentStat + " " + statReference.unit;
+                    
                     return;
                 }
                 else if (availabilityScript.IsAvailable && powerupsEquipped.Contains(chosenPowerup))
                 {
                     //Upgrade current
                     Debug.Log("Powerup already equipped. Upgrading " + chosenPowerup.name);
+                    //Update inventory text
+                    PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
+                    TextMeshProUGUI emptySlotText = powerupInventorySlots[i].GetComponent<TextMeshProUGUI>();
+
+                    emptySlotText.text = statReference.currentStatDesc + " " + statReference.currentStat;
                     return;
                 }
             }

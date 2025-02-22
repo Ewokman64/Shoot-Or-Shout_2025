@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,7 +114,33 @@ public class PowerUpDisplay : MonoBehaviour
 
             textComponents.nameText.text = powerupStats.powerupName;
             textComponents.descText.text = powerupStats.powerupDescription;
-            textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + powerupStats.unit;
+            textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
+        }
+    }
+}
+
+public static class ListExtensions
+{
+    // Fisher-Yates shuffle algorithm. A famous method for shuffling elements in a list
+    //We declare a List containing generic items
+    public static void Shuffle<T>(this IList<T> list)
+    {
+        int upgrades = list.Count; // Get the number of elements in the list
+
+        //Iterate through the list in reverse order. Start a loop that continues as long as there are more than one element remaining to shuffle
+        while (upgrades > 1)
+        {
+            upgrades--; // Decrease the number of remaining elements
+
+            // Generate a random index between 0 and upgrades (inclusive)
+            int randomIndex = Random.Range(0, upgrades + 1);
+
+            // Swap the elements at positions k and n in the list
+            T value = list[randomIndex];
+            //replace the element at randomIndex with the element at upgrades
+            list[randomIndex] = list[upgrades];
+            //replace the element at upgrades with the stored value
+            list[upgrades] = value;
         }
     }
 }

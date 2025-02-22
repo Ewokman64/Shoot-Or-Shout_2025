@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: EyeBomb
-  speed: 20
+  movementSpeed: 15
   health: 1
   rateOfFire: 0
   points: 5

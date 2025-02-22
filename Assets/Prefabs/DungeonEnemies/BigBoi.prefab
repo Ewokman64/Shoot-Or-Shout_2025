@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: BigBoi
-  speed: 2
+  movementSpeed: 3
   health: 5
   rateOfFire: 0
   points: 10

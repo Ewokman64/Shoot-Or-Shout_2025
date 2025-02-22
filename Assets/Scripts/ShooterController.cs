@@ -95,6 +95,11 @@ public class ShooterController : MonoBehaviour
         }
     }
 
+    public void DashShot()
+    {
+        
+    }
+
     public void BulletCooldown()
     {
         if (bulletCoolDown > 0)
