@@ -270,6 +270,8 @@ MonoBehaviour:
   singleShotSprite: {fileID: 21300000, guid: 952bd02b80d341346836a832e7636de1, type: 3}
   dualShotSprite: {fileID: 21300000, guid: baadb4c372bc0c04f9b244320e97237c, type: 3}
   shooterSpriteRenderer: {fileID: 0}
+  poweredBullet: {fileID: 5093899002677859959, guid: 0bf6bb392d99f9e42b51310bc8e38af2,
+    type: 3}
   gunShot: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   powerUpSFX: {fileID: 8300000, guid: 35cdb93c71d0ff7409506bed205fa95f, type: 3}
   gunFlash1: {fileID: 6611541323212802183}
@@ -333,6 +335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 8
+  dashCoolDown: 0
+  dashCDRate: 2
+  isDashPowerOn: 0
 --- !u!82 &6357146090160872976
 AudioSource:
   m_ObjectHideFlags: 0

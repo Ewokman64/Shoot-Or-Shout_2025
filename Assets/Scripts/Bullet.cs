@@ -9,8 +9,9 @@ public class Bullet : MonoBehaviour
 
     private float bulletSpeed = 30;
     public float piercePower = 1;
+    public float damage;
     public float defaultPierce = 1;
-    public int zombieValue = 3;
+    //public int zombieValue = 3;
     public bool isZombieShot = false;
     private GameManager gameManager;
     private AudioManager audioManager;
@@ -37,15 +38,24 @@ public class Bullet : MonoBehaviour
         //**NEW CODE**
         //**THIS SHOULD BE A SEPARATE COLLISION SCRIPT LATER TO USE IT FOR OTHER PROJECTILES
         EnemyStats enemyStats;
-        
+
         if (other.gameObject.layer == enemiesLayer)
         {
             enemyStats = other.gameObject.GetComponent<EnemyStats>();
-            enemyStats.health--;
+            //enemyStats.health--;
+
+            DealDamage(other.gameObject);
             gameManager.stallingTimer = 10;
             isZombieShot = true;
             audioManager.PlayZombieDeath();
-            
+
+            piercePower--;
+
+            if (piercePower <= 0)
+            {
+                Destroy(gameObject);
+            }
+
             if (enemyStats.health <= 0)
             { 
                 Destroy(other.gameObject);
@@ -76,32 +86,20 @@ public class Bullet : MonoBehaviour
                 }
             }
 
+
+            //Look into this, no clue how it works
             if (enemyStats.name == "Spitter") //removes the spitter's spawnpoint from the occupied spawnpoint list
             {
                 SpawnEnemies spawnfillerenemies;
                 spawnfillerenemies = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
                 spawnfillerenemies.OnEnemyDestroyed(other.gameObject);
             }
-
-            piercePower--;
-
-            if (piercePower <= 0)
-            {
-                Destroy(gameObject);
-            }
         }
-
-        //**OLD CODE**
-
-        
-        /*if (isZombieShot == true)
-        {
-            Invoke(nameof(SetBoolBack), 1.0f);
-        }*/
     }
-    private void SetBoolBack()
+    public void DealDamage(GameObject enemy)
     {
-        isZombieShot = false;
+        EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
+        enemyStats.health -= damage;
     }
     public void SetDefaultPierce()
     {

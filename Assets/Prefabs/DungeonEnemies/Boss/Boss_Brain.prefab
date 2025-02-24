@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4306974088413063623}
   - component: {fileID: 5907769654651137824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TentacleSpawnPoint (3)
   m_TagString: TentacleSpawnP
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -59,7 +59,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3333893554074474879}
   - component: {fileID: 8303336778429037208}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TentacleSpawnPoint (4)
   m_TagString: TentacleSpawnP
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2361152362562940659}
   - component: {fileID: 7315185522424658778}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TentacleSpawnPoint (5)
   m_TagString: TentacleSpawnP
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 3198963067378340736}
   - component: {fileID: 2691541196805304617}
   - component: {fileID: -5944007872249147498}
-  m_Layer: 7
+  m_Layer: 3
   m_Name: Boss_Brain
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: BossV1
-  speed: 2
+  movementSpeed: 0
   health: 50
   rateOfFire: 0
   points: 1000
@@ -381,10 +381,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2953343461605199131}
     m_Modifications:
+    - target: {fileID: 661591745509346892, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1123780731085458665, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1548582893133356866, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2094941736611435356, guid: 6fb4ee334c149334bbfd1f4a27a43546,
         type: 3}
       propertyPath: m_Name
       value: BossUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094941736611435356, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2384939856435291679, guid: 6fb4ee334c149334bbfd1f4a27a43546,
         type: 3}
@@ -486,6 +506,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3336872136244805694, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3849765787779186916, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258104265140277416, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4398392232272391577, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4779991390714398477, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5294106374387034337, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5372498187858016393, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507189314231495906, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5643912723523717759, guid: 6fb4ee334c149334bbfd1f4a27a43546,
         type: 3}
       propertyPath: m_RenderMode
@@ -500,6 +560,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8091933287369445491, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8577547060105146589, guid: 6fb4ee334c149334bbfd1f4a27a43546,
+        type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

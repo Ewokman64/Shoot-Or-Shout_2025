@@ -17,6 +17,7 @@ public class CharacterMovement : MonoBehaviour
 
     [Header("Dash Power Settings")]
     public bool isDashPowerOn;
+    
 
     private void Update()
     {

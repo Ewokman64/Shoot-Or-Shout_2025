@@ -2271,7 +2271,8 @@ MonoBehaviour:
   zombieDeath: {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
   shoot: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   shout: {fileID: 8300000, guid: 435db436444d5cc469212da857f1c7e0, type: 3}
-  reload: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
+  dashShot: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
+  dashShotReload: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
   AudioSource: {fileID: 382273587}
 --- !u!82 &382273587
 AudioSource:
@@ -10152,7 +10153,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   - first: {x: -1, y: 6, z: 0}

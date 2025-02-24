@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: RunnerSkeleton
   movementSpeed: 7
-  health: 1
+  health: 2
   rateOfFire: 0
   points: 3
   currencyValue: 0

@@ -21,6 +21,10 @@ public class ShooterController : MonoBehaviour
     private bool isPowerUpActive = false;
     public SpriteRenderer shooterSpriteRenderer;
 
+    [Header("Dash Shot Properties")]
+    public GameObject poweredBullet;
+    private CharacterMovement shooter_Mov_Ref;
+
     private AudioSource gunAudio;
     private GameManager gameManager;
     private SpawnManager spawnManager;
@@ -47,6 +51,7 @@ public class ShooterController : MonoBehaviour
         // Get the current color of the sprite
         originalColor = shooterCDRenderer.color;
 
+        shooter_Mov_Ref = GetComponent<CharacterMovement>();
     }
 
     public void Update()
@@ -54,6 +59,7 @@ public class ShooterController : MonoBehaviour
         Shoot();
         DualShoot();
         BulletCooldown();
+        DashShot();
     }
     void BulletSpawn()
     {
@@ -69,7 +75,7 @@ public class ShooterController : MonoBehaviour
     }
     public void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0 && !isPowerUpActive)
+        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0 && !isPowerUpActive && !shooter_Mov_Ref.isDashPowerOn)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
@@ -82,7 +88,7 @@ public class ShooterController : MonoBehaviour
     }
     public void DualShoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && !gameManager.isSomeoneDead && Time.timeScale != 0)
+        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && !gameManager.isSomeoneDead && Time.timeScale != 0 && !shooter_Mov_Ref.isDashPowerOn)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
@@ -97,7 +103,19 @@ public class ShooterController : MonoBehaviour
 
     public void DashShot()
     {
-        
+      if (Input.GetKeyDown(KeyCode.W) && shooter_Mov_Ref.isDashPowerOn)
+      {
+            Vector3 bulletPos1 = GameObject.FindGameObjectWithTag("BulletSpawnPoint").transform.position;
+            Instantiate(poweredBullet, bulletPos1, poweredBullet.transform.rotation);
+
+            shooter_Mov_Ref.isDashPowerOn = false;
+
+            gameManager.isShooterChased = true;
+            gameManager.isTaunterChased = false;
+            audioManager.PlayDashShot();
+            gunFlash1.Play();
+            StartCoroutine(audioManager.PlayDashShotReload());
+        }   
     }
 
     public void BulletCooldown()

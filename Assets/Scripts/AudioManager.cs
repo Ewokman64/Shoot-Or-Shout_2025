@@ -7,7 +7,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip zombieDeath;
     public AudioClip shoot;
     public AudioClip shout;
-    public AudioClip reload;
+    public AudioClip dashShot;
+    public AudioClip dashShotReload;
     public AudioSource AudioSource;
 
     public void PlayZombieDeath()
@@ -24,8 +25,14 @@ public class AudioManager : MonoBehaviour
         AudioSource.PlayOneShot(shout, 1.0f);
     }
 
-    public void PlayReload()
+    public IEnumerator PlayDashShotReload()
     {
-        AudioSource.PlayOneShot(reload, 1.0f);
+        yield return new WaitForSeconds(0.5f);
+        AudioSource.PlayOneShot(dashShotReload, 1.0f);
+    }
+
+    public void PlayDashShot()
+    {
+        AudioSource.PlayOneShot(dashShot, 1.0f);
     }
 }

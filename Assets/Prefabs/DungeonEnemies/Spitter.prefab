@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Spitter
-  speed: 0
+  movementSpeed: 0
   health: 1
   rateOfFire: 3
   points: 5

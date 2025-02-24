@@ -99,6 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be344db428192564b8fc799268a34811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  piercePower: 1
+  damage: 1
+  defaultPierce: 1
   zombieValue: 3
   isZombieShot: 0
 --- !u!61 &5093899002677859946
