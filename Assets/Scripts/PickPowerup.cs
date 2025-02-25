@@ -60,12 +60,12 @@ public class PickPowerup : MonoBehaviour
         }
         else
         {
-            //First, loop through the slots and look for an available one
+            //First, loop through the slots and look for an empty one
             for (int i = 0; i < powerupInventorySlots.Count; i++)
             {
                 Availability availabilityScript = powerupInventorySlots[i].GetComponent<Availability>();
 
-                if (availabilityScript.IsAvailable && powerupStatsRef.isEquipped == false)
+                if (!powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && powerupStatsRef.isEquipped == false
                 {
                     powerupsEquipped.Add(chosenPowerup);
                     availabilityScript.IsAvailable = false;
@@ -87,7 +87,7 @@ public class PickPowerup : MonoBehaviour
                     
                     return;
                 }
-                else if (availabilityScript.IsAvailable && powerupsEquipped.Contains(chosenPowerup))
+                else if (powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && 
                 {
                     //Upgrade current
                     Debug.Log("Powerup already equipped. Upgrading " + chosenPowerup.name);

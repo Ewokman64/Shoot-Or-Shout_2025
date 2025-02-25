@@ -94,5 +94,6 @@ public class DashBullet : MonoBehaviour
     public void ExplodeOnImpact()
     {
         Instantiate(explosionPrefab, explosionPos, gameObject.transform.rotation);
+        audioManager.PlayShotExplosion();
     }
 }

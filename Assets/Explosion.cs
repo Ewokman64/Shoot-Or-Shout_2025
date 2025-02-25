@@ -27,7 +27,7 @@ public class Explosion : MonoBehaviour
             Destroy(other.gameObject);
 
             //Should be: for everyenemy it hits, add xy points
-            gameManagerRef.UpdateNormalCurrency(20);
+            //gameManagerRef.UpdateNormalCurrency(20);
         }
         
     }

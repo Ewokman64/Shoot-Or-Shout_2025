@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    AudioManager audioManager;
     //Contains the movement mechanics of Shooter and Shouter
 
     [Header("Movement Settings")]
@@ -17,8 +18,13 @@ public class CharacterMovement : MonoBehaviour
 
     [Header("Dash Power Settings")]
     public bool isDashPowerOn;
-    
+    public GameObject upperDashEffect;
+    public GameObject lowerDashEffect;
 
+    private void Start()
+    {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
     private void Update()
     {
         Movement();
@@ -34,6 +40,7 @@ public class CharacterMovement : MonoBehaviour
                 transform.Translate(Vector2.up * Time.deltaTime * currentSpeed * 10);
                 dashCoolDown = dashCDRate;
                 isDashPowerOn = true;
+                StartCoroutine(PlayDashEffect(lowerDashEffect));
             }
 
             // Move the object using the current speed
@@ -47,6 +54,7 @@ public class CharacterMovement : MonoBehaviour
                 transform.Translate(Vector2.down * Time.deltaTime * currentSpeed * 10);
                 dashCoolDown = dashCDRate;
                 isDashPowerOn = true;
+                StartCoroutine(PlayDashEffect(upperDashEffect));
             }
             // Move the object using the current speed
             transform.Translate(Vector2.down * Time.deltaTime * currentSpeed);
@@ -72,4 +80,11 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
+    public IEnumerator PlayDashEffect(GameObject dashEffect)
+    {
+        dashEffect.SetActive(true);
+        audioManager.PlayDashSound();
+        yield return new WaitForSeconds(0.15f);
+        dashEffect.SetActive(false);
+    }
 }
