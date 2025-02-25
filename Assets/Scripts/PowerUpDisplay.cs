@@ -11,7 +11,8 @@ using UnityEngine.UI;
 public class PowerUpDisplay : MonoBehaviour
 {
     [Header("Powerup collection")]
-    public List<GameObject> powerupsInGame; //This list contains every selectable, run only powerups that Shoot or Shout has.
+    public List<GameObject> powerupsInGame; //This list contains every selectable, run only powerups that Shoot or Shout has. USED FOR SHUFFLE
+    public List<GameObject> powerupCollection; //This is all our powerups. NOT GETTING SHUFFLED.
 
     [Header("Randomly picked powerups")]
     public List<GameObject> powerupsChosen; //This list gonna contain the 3 powerups the shuffling function has chosen and will be displayed

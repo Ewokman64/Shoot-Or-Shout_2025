@@ -148,9 +148,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupName: Bullet Pierce
   powerupDescription: Your bullets go through an additional enemy.
-  currentStat: 1
-  unit: Enemy
+  currentStat: 3
+  unit: Enemies
   currentStatDesc: 'Current piercing power: '
   improveAmount: 1
-  isEquipped: 0
+  isEquipped: 1
   originalStat: 1

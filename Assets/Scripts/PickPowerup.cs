@@ -80,25 +80,49 @@ public class PickPowerup : MonoBehaviour
                     PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
                     Debug.Log("Reference found: " + statReference.name);
 
-                    TextMeshProUGUI emptySlotText = powerupInventorySlots[i].GetComponentInChildren<TextMeshProUGUI>();
-                    Debug.Log("EmptySlot text found: " + emptySlotText.name);
+                    TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
+                    PowerupStats powerupStats = chosenPowerup.GetComponent<PowerupStats>();
 
-                    emptySlotText.text = statReference.currentStatDesc + " " + statReference.currentStat + " " + statReference.unit;
-                    
+                    textComponents.nameText.text = powerupStats.powerupName;
+                    textComponents.descText.text = powerupStats.powerupDescription;
+                    textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
+
                     return;
                 }
                 else if (powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && 
                 {
                     //Upgrade current
-                    Debug.Log("Powerup already equipped. Upgrading " + chosenPowerup.name);
+                    Debug.Log("Powerup already equipped. Upgrading:" + " " + chosenPowerup.name);
                     //Update inventory text
                     PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
-                    TextMeshProUGUI emptySlotText = powerupInventorySlots[i].GetComponent<TextMeshProUGUI>();
 
-                    emptySlotText.text = statReference.currentStatDesc + " " + statReference.currentStat;
+                    Debug.Log("Chosen reference: " + statReference.name);
+
+                    TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
+                    PowerupStats powerupStats = chosenPowerup.GetComponent<PowerupStats>();
+
+                    textComponents.nameText.text = powerupStats.powerupName;
+                    textComponents.descText.text = powerupStats.powerupDescription;
+                    textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
+
                     return;
                 }
             }
         }
+        
     }
+
+    /*public void SetPowerupText()
+    {
+
+        for (int i = 0; i < 5; i++)
+        {
+            TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
+            PowerupStats powerupStats = powerupsEquipped[i].GetComponent<PowerupStats>();
+
+            textComponents.nameText.text = powerupStats.powerupName;
+            textComponents.descText.text = powerupStats.powerupDescription;
+            textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
+        }
+    }*/
 }
