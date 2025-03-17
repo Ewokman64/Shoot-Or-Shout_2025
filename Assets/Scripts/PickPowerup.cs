@@ -53,6 +53,7 @@ public class PickPowerup : MonoBehaviour
 
     public void FindEmptySlot(GameObject chosenPowerup)
     {
+
         if (powerupsEquipped.Count >= powerupInventorySlots.Count)
         {
             Debug.Log("Inventory is full!");
@@ -64,8 +65,25 @@ public class PickPowerup : MonoBehaviour
             for (int i = 0; i < powerupInventorySlots.Count; i++)
             {
                 Availability availabilityScript = powerupInventorySlots[i].GetComponent<Availability>();
+                if (powerupsEquipped.Contains(chosenPowerup))
+                {
+                    //Upgrade current
+                    Debug.Log("Powerup already equipped. Upgrading:" + " " + chosenPowerup.name);
+                    //Update inventory text
+                    PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
 
-                if (!powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && powerupStatsRef.isEquipped == false
+                    Debug.Log("Chosen reference: " + statReference.name);
+
+                    TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
+                    PowerupStats powerupStats = chosenPowerup.GetComponent<PowerupStats>();
+
+                    textComponents.nameText.text = powerupStats.powerupName;
+                    textComponents.descText.text = powerupStats.powerupDescription;
+                    textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
+
+                    return;
+                }
+                else if (!powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && powerupStatsRef.isEquipped == false
                 {
                     powerupsEquipped.Add(chosenPowerup);
                     availabilityScript.IsAvailable = false;
@@ -89,40 +107,24 @@ public class PickPowerup : MonoBehaviour
 
                     return;
                 }
-                else if (powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && 
-                {
-                    //Upgrade current
-                    Debug.Log("Powerup already equipped. Upgrading:" + " " + chosenPowerup.name);
-                    //Update inventory text
-                    PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
-
-                    Debug.Log("Chosen reference: " + statReference.name);
-
-                    TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
-                    PowerupStats powerupStats = chosenPowerup.GetComponent<PowerupStats>();
-
-                    textComponents.nameText.text = powerupStats.powerupName;
-                    textComponents.descText.text = powerupStats.powerupDescription;
-                    textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
-
-                    return;
-                }
+                
             }
         }
         
     }
 
-    /*public void SetPowerupText()
+    public void SetPowerupText(GameObject equippable_PU)
     {
+        //NEED TO SET IT FOR INVENTORY TOO
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < powerupsEquipped.Count; i++)
         {
-            TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
-            PowerupStats powerupStats = powerupsEquipped[i].GetComponent<PowerupStats>();
+            TextComponents textComponents = powerupsEquipped[i].GetComponent<TextComponents>();
+            PowerupStats powerupStats = equippable_PU.GetComponent<PowerupStats>();
 
             textComponents.nameText.text = powerupStats.powerupName;
             textComponents.descText.text = powerupStats.powerupDescription;
             textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
         }
-    }*/
+    }
 }

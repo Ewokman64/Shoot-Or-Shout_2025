@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1322617535364568950}
   - component: {fileID: 1924137495389556338}
   m_Layer: 5
-  m_Name: MovementSpeed
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bba0763ea61aff34d8c0db4a9083a4a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15fe0c72ec307584b8d9b1f43021b5a9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -124,7 +124,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
           type: 3}
         m_TargetAssemblyTypeName: PowerupList, Assembly-CSharp
-        m_MethodName: MovementSpeed
+        m_MethodName: Shield
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -146,11 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a697260b6d54b85d9c83a90424bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupName: Quick Feet
-  powerupDescription: Your movement speed is increased.
+  powerupName: Holy Barrier
+  powerupDescription: Blocks oncoming projectiles.
   currentStat: 10
-  unit: Swamp-Toe/Hour
-  currentStatDesc: 'Current movement speed: '
+  unit: 
+  currentStatDesc: 
   improveAmount: 1
-  isEquipped: 0
+  isEquipped: 1
   originalStat: 10

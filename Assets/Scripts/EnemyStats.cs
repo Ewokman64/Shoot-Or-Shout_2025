@@ -6,8 +6,14 @@ public class EnemyStats : MonoBehaviour
 {
     public string name; //we can check the name for collision?
     public float movementSpeed;
+    public float defaultMovSpeed;
     public float health;
     public float rateOfFire;
     public int points;
     public int currencyValue;
+
+    private void Start()
+    {
+        movementSpeed = defaultMovSpeed;
+    }
 }

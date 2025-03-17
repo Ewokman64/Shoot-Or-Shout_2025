@@ -68,11 +68,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupsInGame:
-  - {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4, type: 3}
-  - {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6, type: 3}
   - {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59, type: 3}
   - {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7, type: 3}
+  - {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4, type: 3}
   - {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb, type: 3}
+  - {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6, type: 3}
+  powerupCollection:
+  - {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59, type: 3}
+  - {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7, type: 3}
+  - {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4, type: 3}
+  - {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb, type: 3}
+  - {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6, type: 3}
   powerupsChosen: []
   powerupInstances: []
   powerupsContainer:
@@ -116,7 +122,9 @@ MonoBehaviour:
   powerupPanel: {fileID: 0}
   bulletPrefab: {fileID: 5093899002677859947, guid: d310716e801c20449b49fb5cf86c9375,
     type: 3}
+  useShieldRef: {fileID: 0}
   shooterPrefab: {fileID: 2141849771266847276, guid: 0ce303e5389d34c42981be454076351b,
     type: 3}
   shouterPrefab: {fileID: 154748705748522628, guid: cb8abeb86fe3ada47a45e57711284091,
     type: 3}
+  useShieldReference: {fileID: 0}

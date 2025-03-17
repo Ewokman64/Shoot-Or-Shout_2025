@@ -11,6 +11,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip dashShot;
     public AudioClip dashShotReload;
     public AudioClip d_shot_Explosion;
+
+    public AudioClip dashShout;
     public AudioSource AudioSource;
 
     public void PlayZombieDeath()
@@ -45,5 +47,10 @@ public class AudioManager : MonoBehaviour
     public void PlayShotExplosion()
     {
         AudioSource.PlayOneShot(d_shot_Explosion, 1.0f);
+    }
+
+    public void PlayDashShout()
+    {
+        AudioSource.PlayOneShot(dashShout, 1.0f);
     }
 }

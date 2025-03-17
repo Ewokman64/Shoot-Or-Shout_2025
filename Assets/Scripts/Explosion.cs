@@ -18,7 +18,7 @@ public class Explosion : MonoBehaviour
 
         StartCoroutine(DestroyExplosion(this.gameObject));
     }
-    public void OnTriggerEnter2D(Collider2D other)
+    public void OnTriggerStay2D(Collider2D other)
     {
         EnemyStats enemyStats;
         if (other.gameObject.layer == enemiesLayer)
@@ -27,7 +27,7 @@ public class Explosion : MonoBehaviour
             Destroy(other.gameObject);
 
             //Should be: for everyenemy it hits, add xy points
-            //gameManagerRef.UpdateNormalCurrency(20);
+            gameManagerRef.UpdateNormalCurrency(enemyStats.points);
         }
         
     }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2500147239736207606
+--- !u!1 &2940015904212952122
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5578726843524364197}
-  - component: {fileID: 3386736802492790424}
-  - component: {fileID: 275495553125713126}
-  - component: {fileID: 1342989006856827053}
-  - component: {fileID: -8398179821111917347}
+  - component: {fileID: 1203392205431592748}
+  - component: {fileID: 4901832671791140394}
+  - component: {fileID: 691279719138001210}
+  - component: {fileID: 4805251834839731113}
+  - component: {fileID: -555068483964207645}
   m_Layer: 5
-  m_Name: PowerUpCD
+  m_Name: TimeSlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &5578726843524364197
+--- !u!224 &1203392205431592748
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2500147239736207606}
+  m_GameObject: {fileID: 2940015904212952122}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 87}
   m_LocalScale: {x: 0.00878, y: 0.00878, z: 0.00878}
@@ -39,21 +39,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0128231095, y: 0.24282892}
   m_SizeDelta: {x: 343.38782, y: 344.5254}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3386736802492790424
+--- !u!222 &4901832671791140394
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2500147239736207606}
+  m_GameObject: {fileID: 2940015904212952122}
   m_CullTransparentMesh: 1
---- !u!114 &275495553125713126
+--- !u!114 &691279719138001210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2500147239736207606}
+  m_GameObject: {fileID: 2940015904212952122}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 08369693f60f91a428bd0a874d83b489, type: 3}
+  m_Sprite: {fileID: 21300000, guid: afb52a3c089be034ebe49c4c0bf4ea05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -77,13 +77,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1342989006856827053
+--- !u!114 &4805251834839731113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2500147239736207606}
+  m_GameObject: {fileID: 2940015904212952122}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -117,14 +117,14 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 0
-  m_TargetGraphic: {fileID: 275495553125713126}
+  m_TargetGraphic: {fileID: 691279719138001210}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
           type: 3}
         m_TargetAssemblyTypeName: PowerupList, Assembly-CSharp
-        m_MethodName: PowerUpSpawnRate
+        m_MethodName: TauntCoolDown
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -134,23 +134,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-8398179821111917347
+--- !u!114 &-555068483964207645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2500147239736207606}
+  m_GameObject: {fileID: 2940015904212952122}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8980a697260b6d54b85d9c83a90424bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupName: Dualshot Haste
-  powerupDescription: Reduce the spawn cooldown of the dual shot power.
-  currentStat: 10
+  powerupName: Soar throat candy
+  powerupDescription: Reduce the cooldown of regular shouts
+  currentStat: 2
   unit: Seconds
-  currentStatDesc: 'Current Cooldown: '
-  improveAmount: 1
+  currentStatDesc: 'Current Cooldown:'
+  improveAmount: 0.15
   isEquipped: 0
-  originalStat: 10
+  originalStat: 2

@@ -186,7 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Horse
-  speed: 0
+  movementSpeed: 0
+  defaultMovSpeed: 0
   health: 15
   rateOfFire: 0
   points: 25
@@ -385,7 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: NightKnight
-  speed: 1
+  movementSpeed: 3
+  defaultMovSpeed: 3
   health: 20
   rateOfFire: 3
   points: 30

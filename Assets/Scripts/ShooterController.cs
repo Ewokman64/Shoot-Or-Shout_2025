@@ -24,6 +24,7 @@ public class ShooterController : MonoBehaviour
     [Header("Dash Shot Properties")]
     public GameObject poweredBullet;
     private CharacterMovement shooter_Mov_Ref;
+    private CharacterMovement shouter_Mov_Ref;
 
     private AudioSource gunAudio;
     private GameManager gameManager;
@@ -52,6 +53,7 @@ public class ShooterController : MonoBehaviour
         originalColor = shooterCDRenderer.color;
 
         shooter_Mov_Ref = GetComponent<CharacterMovement>();
+        shouter_Mov_Ref = GameObject.Find("Taunter(Clone)").GetComponent<CharacterMovement>();
     }
 
     public void Update()
@@ -109,6 +111,7 @@ public class ShooterController : MonoBehaviour
             Instantiate(poweredBullet, bulletPos1, poweredBullet.transform.rotation);
 
             shooter_Mov_Ref.isDashPowerOn = false;
+            shouter_Mov_Ref.isDashPowerOn = false;
 
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;

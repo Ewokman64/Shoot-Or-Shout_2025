@@ -12,8 +12,11 @@ public class PowerupList : MonoBehaviour
     private PowerUpDisplay powerupDisplayRef;
     private GameManager gameManager;
     public Bullet bulletPrefab; // Reference to the Bullet script attached to a prefab
+    public UseShield useShieldRef; //Here I can turn the boolean on
     public CharacterMovement shooterPrefab; // Reference to the Bullet script attached to a prefab
     public CharacterMovement shouterPrefab; // Reference to the Bullet script attached to a prefab
+
+    public UseShield useShieldReference;
     private void Start()
     {
 
@@ -26,15 +29,18 @@ public class PowerupList : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         powerupDisplayRef = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
     }
-    public void ShootCoolDown()
+    public void Shield()
     {
         GetReferences();
 
-        PowerupStats powerupStats = powerupDisplayRef.powerupCollection[0].GetComponent<PowerupStats>();
-        shooterController.bulletCDRate -= powerupStats.improveAmount;
-        Debug.Log("New cooldown: " + shooterController.bulletCDRate);
+        UseShield shooterShield = GameObject.Find("Shooter(Clone)").GetComponent<UseShield>();
+        UseShield taunterShield = GameObject.Find("Taunter(Clone)").GetComponent<UseShield>();
 
-        powerupStats.currentStat = shooterController.bulletCDRate;
+        
+        //PowerupStats powerupStats = powerupDisplayRef.powerupCollection[0].GetComponent<PowerupStats>();
+
+        shooterShield.hasShield = true;
+        taunterShield.hasShield = true;
 
         ResumeGame();
     }
@@ -129,12 +135,10 @@ public class PowerupList : MonoBehaviour
 
         shouterStat.currentStat = shouterStat.originalStat;
 
-        PowerupStats movementStat = powerupDisplayRef.powerupCollection[2].GetComponent<PowerupStats>();
-        shooterPrefab.currentSpeed = movementStat.originalStat;
-        shouterPrefab.currentSpeed = movementStat.originalStat;
-        movementStat.isEquipped = false;
-
-        movementStat.currentStat = movementStat.originalStat;
+        UseShield shooterShield = GameObject.Find("Shooter(Clone)").GetComponent<UseShield>();
+        UseShield taunterShield = GameObject.Find("Taunter(Clone)").GetComponent<UseShield>();
+        shooterShield.hasShield = false;
+        taunterShield.hasShield = false;
 
         PowerupStats bullet_P_Stat = powerupDisplayRef.powerupCollection[3].GetComponent<PowerupStats>();
         bulletPrefab.piercePower = bullet_P_Stat.originalStat;

@@ -45,6 +45,8 @@ public class PowerUpDisplay : MonoBehaviour
         DisplayPowerUps(powerupsChosen, powerupPanel); //After we randomized the 3 powerups, we need to call the DisplayPowerUps
 
         GetButtons(); // We access the buttons so they can be invoked in ChoosePowerup.cs
+
+        //THIS ONLY SETS THE TEXT OF 3. I NEED TO SET THE ONES IN THE INVENTORY TOO
         SetPowerupText();
         powerupPanel.SetActive(true);
 
@@ -107,7 +109,7 @@ public class PowerUpDisplay : MonoBehaviour
 
     public void SetPowerupText()
     {
-
+        PickPowerup pickPowerupScript = GetComponent<PickPowerup>();
         for (int i = 0; i < 3; i++)
         {
             TextComponents textComponents = powerupsContainer[i].GetComponent<TextComponents>();
@@ -117,6 +119,8 @@ public class PowerUpDisplay : MonoBehaviour
             textComponents.descText.text = powerupStats.powerupDescription;
             textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
         }
+
+
     }
 }
 

@@ -76,7 +76,7 @@ public class SpawnEnemies : MonoBehaviour
     private bool enemyLimitReached = false;
     public int enemyCount;
     public int enemyLimit;
-    public List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies;
     //declaring a Wave variable that checks for the current index we have
     public Wave currentWave;
 

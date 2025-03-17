@@ -125,8 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafa0bc6ca048b04682baf1e3ff60a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  health: 1
   bloodSplash: {fileID: 7607240569883822396}
 --- !u!61 &-8888741174482768811
 BoxCollider2D:
@@ -213,11 +211,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: RunnerSkeleton
-  speed: 5
+  movementSpeed: 7
+  defaultMovSpeed: 7
   health: 1
   rateOfFire: 0
   points: 3
-  value: 0
+  currencyValue: 0
 --- !u!1 &6635239279084002081
 GameObject:
   m_ObjectHideFlags: 0

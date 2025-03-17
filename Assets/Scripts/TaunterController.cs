@@ -13,6 +13,14 @@ public class TaunterController : MonoBehaviour
     public float darkenAmount = 0.5f; // Value between 0 and 1
     private Color originalColor;
 
+    [Header("Dash Shout Properties")]
+    public GameObject poweredShout;
+    private CharacterMovement shouter_Mov_Ref;
+    private CharacterMovement shooter_Mov_Ref;
+
+    private Color enemyColor;
+    private Color enemyFrozenColor;
+
     private AudioSource shoutAudio;
     private GameManager gameManager;
     private AudioManager audioManager;
@@ -22,6 +30,8 @@ public class TaunterController : MonoBehaviour
     public AudioClip shout;
     public ParticleSystem shoutEffect;
     public Animator animator;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +43,9 @@ public class TaunterController : MonoBehaviour
         shouterCDRenderer = GameObject.Find("ShoutCDSprite").GetComponent<SpriteRenderer>();
         // Get the current color of the sprite
         originalColor = shouterCDRenderer.color;
+
+        shouter_Mov_Ref = GetComponent<CharacterMovement>();
+        shooter_Mov_Ref = GameObject.Find("Shooter(Clone)").GetComponent<CharacterMovement>();
     }
 
     // Update is called once per frame
@@ -40,10 +53,11 @@ public class TaunterController : MonoBehaviour
     {
         Taunt();
         TauntCoolDown();
+        DashShout();
     }
     public void Taunt()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0)
+        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0 && !shouter_Mov_Ref.isDashPowerOn)
         {
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;
@@ -53,7 +67,21 @@ public class TaunterController : MonoBehaviour
             animator.SetTrigger("Taunt");
         }        
     }
+    public void DashShout()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && shouter_Mov_Ref.isDashPowerOn)
+        {
+            shouter_Mov_Ref.isDashPowerOn = false;
+            shooter_Mov_Ref.isDashPowerOn= false;
 
+            gameManager.isShooterChased = false;
+            gameManager.isTaunterChased = true;
+
+            audioManager.PlayDashShout();
+            StartCoroutine(ShoutVFX());
+            StartCoroutine(FreezeEnemies());
+        }
+    }
     public void TauntCoolDown()
     {
         if (tauntCoolDown > 0)
@@ -86,5 +114,46 @@ public class TaunterController : MonoBehaviour
             }
         }
         Destroy(other.gameObject);
+    }
+
+    public IEnumerator ShoutVFX()
+    {
+        poweredShout.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        poweredShout.SetActive(false);
+    }
+
+    public IEnumerator FreezeEnemies()
+    {
+        //Access the spawnmanager's list called Enemies
+        SpawnEnemies spawnEnemiesRef = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+
+        foreach (GameObject enemies in spawnEnemiesRef.enemies)
+        {
+            EnemyStats enemyStats = enemies.GetComponent<EnemyStats>();
+
+            SpriteRenderer enemySpriteRenderer = GetComponent<SpriteRenderer>();
+
+            Debug.Log(enemies.name);
+
+            enemyColor = enemySpriteRenderer.color;
+
+            enemyFrozenColor = enemySpriteRenderer.color;
+
+            enemyStats.movementSpeed = 0;           
+        }
+
+        yield return new WaitForSeconds(3);
+
+        foreach (GameObject enemies in spawnEnemiesRef.enemies)
+        {
+            EnemyStats enemyStats = enemies.GetComponent<EnemyStats>();
+
+            Debug.Log(enemies.name);
+
+            enemyStats.movementSpeed = enemyStats.defaultMovSpeed;
+        }        
     }
 }

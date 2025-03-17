@@ -1821,6 +1821,7 @@ MonoBehaviour:
   dashShot: {fileID: 8300000, guid: d3247579c549643a5b3a95f9224eaf3c, type: 3}
   dashShotReload: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
   d_shot_Explosion: {fileID: 8300000, guid: 9f99fdc45c82f184c9f53303df57dd10, type: 3}
+  dashShout: {fileID: 8300000, guid: 8c0fc23e03d1f1142b4e73ffbd074406, type: 3}
   AudioSource: {fileID: 382273587}
 --- !u!82 &382273587
 AudioSource:
@@ -10142,7 +10143,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3
+      m_AnimationSpeed: 3.0000002
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -19617,7 +19618,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2093162660}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: GameMenu
         m_Mode: 1
@@ -33400,71 +33401,6 @@ PrefabInstance:
       objectReference: {fileID: 842409991}
     - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}
-      propertyPath: powerupCollection.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[0]
-      value: 
-      objectReference: {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[1]
-      value: 
-      objectReference: {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[2]
-      value: 
-      objectReference: {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[3]
-      value: 
-      objectReference: {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupsInGame.Array.data[4]
-      value: 
-      objectReference: {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupCollection.Array.data[0]
-      value: 
-      objectReference: {fileID: 4051860516687624255, guid: 297bea9861fee2244a713bf09d937a59,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupCollection.Array.data[1]
-      value: 
-      objectReference: {fileID: 2940015904212952122, guid: 975b70b94b9468c4490fabef148801b7,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupCollection.Array.data[2]
-      value: 
-      objectReference: {fileID: 5382120141035284890, guid: 4657ca8802073da41a939ea717f2b1f4,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupCollection.Array.data[3]
-      value: 
-      objectReference: {fileID: 1659374582285062357, guid: 7ee304c98e29ac84b993e45e7a3070fb,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
-      propertyPath: powerupCollection.Array.data[4]
-      value: 
-      objectReference: {fileID: 2500147239736207606, guid: 3d05a88d7907e904a9f862b068a31ba6,
-        type: 3}
-    - target: {fileID: 127948913057373798, guid: 2b94996dcc7620f4eb4a5fab48303a59,
-        type: 3}
       propertyPath: powerupsContainer.Array.data[0]
       value: 
       objectReference: {fileID: 770349274}
@@ -33483,6 +33419,11 @@ PrefabInstance:
       propertyPath: powerupPanel
       value: 
       objectReference: {fileID: 842409991}
+    - target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
+        type: 3}
+      propertyPath: useShieldRef
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3895356212815030355, guid: 2b94996dcc7620f4eb4a5fab48303a59,
         type: 3}
       propertyPath: powerupInventorySlots.Array.data[0]

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public GameObject stallingText;
     public GameObject youCanLeaveNowScreen;
 
-    public GameObject[] enemies;
+    //public GameObject[] enemies;
     public GameObject shooter;
     public GameObject taunter;
     //Audio
@@ -71,14 +71,11 @@ public class GameManager : MonoBehaviour
         powerupDisplayRef = GameObject.Find("PowerupManager").GetComponent<PowerUpDisplay>();
         countDown = GetComponent<CountDown>();
         upgradeList.enabled = false;
-        // Access the Bullet script without instantiating a visible GameObject
-        //Bullet bulletScript = bulletPrefab.GetComponent<Bullet>();
-        //bulletScript.SetDefaultPierce();
     }
 
     void Update()
     {
-        UpdateEnemyList();
+        //UpdateEnemyList();
         scoreManager();
         if (Input.GetKeyDown(KeyCode.Space) && hasGameStarted == false)
         {
@@ -114,11 +111,11 @@ public class GameManager : MonoBehaviour
             gameIsPaused = false;
         }
     }
-    public void AddEnemyToList(GameObject enemy)
+    /*public void AddEnemyToList(GameObject enemy)
     {
         spawnedEnemies.Add(enemy);
-    }
-    public void UpdateEnemyList()
+    }*/
+    /*public void UpdateEnemyList()
     {
         for (int i = 0; i < spawnedEnemies.Count; i++)
         {
@@ -129,7 +126,7 @@ public class GameManager : MonoBehaviour
                 spawnedEnemies.RemoveAt(i);
             }
         }
-    }
+    }*/
     public void StartGame()
     {
         //"previousEasyScore" key is getting loaded" 
