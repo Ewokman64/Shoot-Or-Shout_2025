@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5093899002677859946}
   - component: {fileID: -1196609090189673867}
   - component: {fileID: 8497840069780206888}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DashBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -243,3 +243,4 @@ MonoBehaviour:
   damage: 2
   explosionPrefab: {fileID: 9004348093427022191, guid: 609808a0bbbf86e45834a3933aa63edd,
     type: 3}
+  explosionInstance: {fileID: 0}

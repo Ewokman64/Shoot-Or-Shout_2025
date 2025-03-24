@@ -9,6 +9,12 @@ public class UseShield : MonoBehaviour
     public GameObject shield;
     public bool hasShield = false;
 
+    AudioManager audioManager;
+
+    private void Start()
+    {
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
+    }
     public void Update()
     {
         Shield();
@@ -18,6 +24,7 @@ public class UseShield : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && hasShield)
         {
             shield.SetActive(true);
+            audioManager.PlayShieldOn();
 
             StartCoroutine(ShieldOff());
         }
@@ -28,5 +35,6 @@ public class UseShield : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         shield.SetActive(false);
+        audioManager.PlayShieldOff();
     }
 }

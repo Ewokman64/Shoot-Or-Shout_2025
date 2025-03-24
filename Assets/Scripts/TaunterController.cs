@@ -31,7 +31,8 @@ public class TaunterController : MonoBehaviour
     public ParticleSystem shoutEffect;
     public Animator animator;
 
-    
+    public SpriteRenderer spriteRenderer;
+    private Color defaultColor;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,8 @@ public class TaunterController : MonoBehaviour
 
         shouter_Mov_Ref = GetComponent<CharacterMovement>();
         shooter_Mov_Ref = GameObject.Find("Shooter(Clone)").GetComponent<CharacterMovement>();
+
+        defaultColor = spriteRenderer.material.color;
     }
 
     // Update is called once per frame
@@ -104,14 +107,22 @@ public class TaunterController : MonoBehaviour
     {      
         if (hostile.Contains(other.tag))
         {
-            gameManager.playerHealth--;
-            gameManager.playerHealthText.text = "Health: " + gameManager.playerHealth;
-            if (gameManager.playerHealth <= 0)
+            UseShield useShieldRef = GetComponent<UseShield>();
+            if (useShieldRef.shield.activeSelf == false)
             {
-                Destroy(gameObject);
-                gameManager.isSomeoneDead = true;
-                gameManager.GameOver();
-            }
+                gameManager.playerHealth--;
+                gameManager.playerHealthText.text = "Health: " + gameManager.playerHealth;
+
+                StartCoroutine(DamageColor());
+                audioManager.PlayDamaged();
+
+                if (gameManager.playerHealth <= 0)
+                {
+                    Destroy(gameObject);
+                    gameManager.isSomeoneDead = true;
+                    gameManager.GameOver();
+                }
+            }           
         }
         Destroy(other.gameObject);
     }
@@ -155,5 +166,13 @@ public class TaunterController : MonoBehaviour
 
             enemyStats.movementSpeed = enemyStats.defaultMovSpeed;
         }        
+    }
+
+    public IEnumerator DamageColor()
+    {
+        yield return null;
+        spriteRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.3f);
+        spriteRenderer.material.color = defaultColor;
     }
 }

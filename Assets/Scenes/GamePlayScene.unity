@@ -1814,6 +1814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb07f7e07c7d104698d14b14db578bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioSource: {fileID: 382273587}
   zombieDeath: {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
   shoot: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
   shout: {fileID: 8300000, guid: 435db436444d5cc469212da857f1c7e0, type: 3}
@@ -1822,7 +1823,9 @@ MonoBehaviour:
   dashShotReload: {fileID: 8300000, guid: e7632c6401c09437e83de45d33c5858e, type: 3}
   d_shot_Explosion: {fileID: 8300000, guid: 9f99fdc45c82f184c9f53303df57dd10, type: 3}
   dashShout: {fileID: 8300000, guid: 8c0fc23e03d1f1142b4e73ffbd074406, type: 3}
-  AudioSource: {fileID: 382273587}
+  shieldOn: {fileID: 8300000, guid: 40adc1e2bddb27c43b6d1f5be04a4821, type: 3}
+  shieldOff: {fileID: 8300000, guid: 40b1f2fea08b5114a875e956de639162, type: 3}
+  damaged: {fileID: 8300000, guid: ae5ff814a51ee444c9101ec439857713, type: 3}
 --- !u!82 &382273587
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10143,7 +10146,7 @@ Tilemap:
       - {fileID: -1779050228178523621, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -1317297346428476909, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
       - {fileID: -8420273695100134226, guid: 44c6abcf86da08443958151923bc2c5d, type: 3}
-      m_AnimationSpeed: 3.0000002
+      m_AnimationSpeed: 3
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:

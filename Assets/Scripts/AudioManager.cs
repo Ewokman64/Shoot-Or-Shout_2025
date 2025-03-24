@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    public AudioSource AudioSource;
+
     public AudioClip zombieDeath;
+
     public AudioClip shoot;
     public AudioClip shout;
+
     public AudioClip dashSound;
     public AudioClip dashShot;
     public AudioClip dashShotReload;
     public AudioClip d_shot_Explosion;
 
     public AudioClip dashShout;
-    public AudioSource AudioSource;
 
+    public AudioClip shieldOn;
+    public AudioClip shieldOff;
+
+    public AudioClip damaged;
     public void PlayZombieDeath()
     {
         AudioSource.PlayOneShot(zombieDeath, 0.3f);
@@ -52,5 +59,20 @@ public class AudioManager : MonoBehaviour
     public void PlayDashShout()
     {
         AudioSource.PlayOneShot(dashShout, 1.0f);
+    }
+
+    public void PlayShieldOn()
+    {
+        AudioSource.PlayOneShot(shieldOn, 1.5f);
+    }
+
+    public void PlayShieldOff()
+    {
+        AudioSource.PlayOneShot(shieldOff, 1.0f);
+    }
+
+    public void PlayDamaged()
+    {
+        AudioSource.PlayOneShot(damaged, 1.0f);
     }
 }

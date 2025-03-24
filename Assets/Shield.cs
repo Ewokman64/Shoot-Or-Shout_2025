@@ -9,6 +9,6 @@ public class Shield : MonoBehaviour
     // Start is called before the first frame update
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject);
+            Destroy(other.gameObject);
     }
 }

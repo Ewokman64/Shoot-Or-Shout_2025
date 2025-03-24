@@ -5,8 +5,6 @@ using UnityEngine;
 public class BigBoi : MonoBehaviour
 {
     EnemyStats enemyStats;
-    //public float speed = 3.5f;
-    //public float health = 5;
     private int specEnemyValue = 15;
 
     private Transform targetShooter;
@@ -37,12 +35,6 @@ public class BigBoi : MonoBehaviour
         {
             TaunterFollow();
         }
-
-        /*if (health <= 0)
-        {
-            gameManager.UpdateNormalCurrency(enemyStats.points);
-            Destroy(gameObject);
-        }*/
     }
     public void ShooterFollow()
     {
@@ -58,7 +50,6 @@ public class BigBoi : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
-            //Destroy(other.gameObject);
             StartCoroutine(DamageColor());
         }
     }
