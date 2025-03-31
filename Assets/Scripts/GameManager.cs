@@ -111,22 +111,6 @@ public class GameManager : MonoBehaviour
             gameIsPaused = false;
         }
     }
-    /*public void AddEnemyToList(GameObject enemy)
-    {
-        spawnedEnemies.Add(enemy);
-    }*/
-    /*public void UpdateEnemyList()
-    {
-        for (int i = 0; i < spawnedEnemies.Count; i++)
-        {
-            // Check if the enemy GameObject is null (destroyed)
-            if (spawnedEnemies[i] == null)
-            {
-                // Optionally, you can remove the destroyed enemy from the list
-                spawnedEnemies.RemoveAt(i);
-            }
-        }
-    }*/
     public void StartGame()
     {
         //"previousEasyScore" key is getting loaded" 

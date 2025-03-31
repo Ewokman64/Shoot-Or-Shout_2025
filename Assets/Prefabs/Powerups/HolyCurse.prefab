@@ -124,7 +124,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
           type: 3}
         m_TargetAssemblyTypeName: PowerupList, Assembly-CSharp
-        m_MethodName: ShootCoolDown
+        m_MethodName: MovementSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -152,5 +152,5 @@ MonoBehaviour:
   unit: Seconds
   currentStatDesc: 'Current Cooldown:'
   improveAmount: 0.15
-  isEquipped: 0
+  isEquipped: 1
   originalStat: 1.5

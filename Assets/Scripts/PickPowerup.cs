@@ -64,15 +64,13 @@ public class PickPowerup : MonoBehaviour
             //First, loop through the slots and look for an empty one
             for (int i = 0; i < powerupInventorySlots.Count; i++)
             {
+
                 Availability availabilityScript = powerupInventorySlots[i].GetComponent<Availability>();
+
                 if (powerupsEquipped.Contains(chosenPowerup))
                 {
-                    //Upgrade current
-                    Debug.Log("Powerup already equipped. Upgrading:" + " " + chosenPowerup.name);
                     //Update inventory text
                     PowerupStats statReference = chosenPowerup.GetComponent<PowerupStats>();
-
-                    Debug.Log("Chosen reference: " + statReference.name);
 
                     TextComponents textComponents = powerupInventorySlots[i].GetComponent<TextComponents>();
                     PowerupStats powerupStats = chosenPowerup.GetComponent<PowerupStats>();
@@ -83,12 +81,15 @@ public class PickPowerup : MonoBehaviour
 
                     return;
                 }
-                else if (!powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable) //availabilityScript.IsAvailable && powerupStatsRef.isEquipped == false
+                else if (!powerupsEquipped.Contains(chosenPowerup) && availabilityScript.IsAvailable)
                 {
                     powerupsEquipped.Add(chosenPowerup);
+
                     availabilityScript.IsAvailable = false;
+
                     powerupStatsRef.isEquipped = true;
-                    //Also assign image
+
+                    //Assign image
                     Image emptySlotImage = powerupInventorySlots[i].GetComponent<Image>();
                     Image chosenPU_Image = chosenPowerup.GetComponent<Image>();
 
@@ -106,11 +107,9 @@ public class PickPowerup : MonoBehaviour
                     textComponents.statText.text = powerupStats.currentStatDesc + " " + powerupStats.currentStat + " " + powerupStats.unit;
 
                     return;
-                }
-                
+                }                
             }
         }
-        
     }
 
     public void SetPowerupText(GameObject equippable_PU)

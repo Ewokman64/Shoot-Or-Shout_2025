@@ -37,7 +37,7 @@ public class CharacterMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && dashCoolDown <= 0)
             {
                 // Move the object using the current speed
-                transform.Translate(Vector2.up * Time.deltaTime * currentSpeed * 10);
+                transform.Translate(Vector2.up * Time.deltaTime * currentSpeed * 50);
                 dashCoolDown = dashCDRate;
                 isDashPowerOn = true;
                 StartCoroutine(PlayDashEffect(lowerDashEffect));
@@ -51,7 +51,7 @@ public class CharacterMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space) && dashCoolDown <= 0)
             {
                 // Move the object using the current speed
-                transform.Translate(Vector2.down * Time.deltaTime * currentSpeed * 10);
+                transform.Translate(Vector2.down * Time.deltaTime * currentSpeed * 50);
                 dashCoolDown = dashCDRate;
                 isDashPowerOn = true;
                 StartCoroutine(PlayDashEffect(upperDashEffect));
@@ -59,6 +59,7 @@ public class CharacterMovement : MonoBehaviour
             // Move the object using the current speed
             transform.Translate(Vector2.down * Time.deltaTime * currentSpeed);
         }
+
         if (transform.position.y < -yRange)
         {
             transform.position = new Vector2(transform.position.x, -yRange);
