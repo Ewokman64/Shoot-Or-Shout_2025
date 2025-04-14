@@ -44,15 +44,18 @@ public class PowerupList : MonoBehaviour
 
         ResumeGame();
     }
-    public void TauntCoolDown()
+    public void TimeSlow()
     {
         GetReferences();
 
         PowerupStats powerupStats = powerupDisplayRef.powerupCollection[1].GetComponent<PowerupStats>();
-        taunterController.tauntCDRate -= powerupStats.improveAmount;
+
+        taunterController.isDashShoutUnlocked = true;
+
+        /*taunterController.tauntCDRate -= powerupStats.improveAmount;
         Debug.Log("New cooldown: " + taunterController.tauntCDRate);
 
-        powerupStats.currentStat = taunterController.tauntCDRate;
+        powerupStats.currentStat = taunterController.tauntCDRate;*/
 
         ResumeGame();
     }
@@ -92,16 +95,15 @@ public class PowerupList : MonoBehaviour
             ResumeGame();
         }
     }
-    public void PowerUpSpawnRate()
+    public void DashShotPowerup()
     {
         GetReferences();
 
         PowerupStats powerupStats = powerupDisplayRef.powerupCollection[4].GetComponent<PowerupStats>();
 
-        spawnManager.powerUp_spawnRate -= powerupStats.improveAmount;
-        Debug.Log("New cooldown: " + spawnManager.powerUp_spawnRate);
+        shooterController.isDashUnlocked = true;
 
-        powerupStats.currentStat = spawnManager.powerUp_spawnRate;
+        //powerupStats.currentStat = spawnManager.powerUp_spawnRate;
 
         ResumeGame();
     }

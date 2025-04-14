@@ -124,7 +124,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
           type: 3}
         m_TargetAssemblyTypeName: PowerupList, Assembly-CSharp
-        m_MethodName: TauntCoolDown
+        m_MethodName: TimeSlow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -147,10 +147,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupName: Soar throat candy
-  powerupDescription: Reduce the cooldown of regular shouts
+  powerupDescription: Unlocks the dash shout ability. Dash + shout causes the slow
+    of enemies.
   currentStat: 2
   unit: Seconds
-  currentStatDesc: 'Current Cooldown:'
-  improveAmount: 0.15
+  currentStatDesc: Slow duration
+  improveAmount: 1
   isEquipped: 0
   originalStat: 2

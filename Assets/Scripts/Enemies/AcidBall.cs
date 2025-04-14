@@ -5,7 +5,7 @@ using UnityEngine;
 public class AcidBall : MonoBehaviour
 {
 
-    private float acidBallSpeed = 10;
+    public float acidBallSpeed = 10;
     private GameManager gameManager;
     public bool isShooterTargeted = true;
     public bool isTaunterTargeted;

@@ -25,6 +25,8 @@ public class ShooterController : MonoBehaviour
     public GameObject poweredBullet;
     private CharacterMovement shooter_Mov_Ref;
     private CharacterMovement shouter_Mov_Ref;
+    public bool isDashUnlocked = false;
+
 
     private AudioSource gunAudio;
     private GameManager gameManager;
@@ -82,7 +84,7 @@ public class ShooterController : MonoBehaviour
     }
     public void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0 && !isPowerUpActive && !shooter_Mov_Ref.isDashPowerOn)
+        if (Input.GetKeyDown(KeyCode.W) && bulletCoolDown <= 0 && Time.timeScale != 0 && !isPowerUpActive)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
@@ -95,7 +97,7 @@ public class ShooterController : MonoBehaviour
     }
     public void DualShoot()
     {
-        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && !gameManager.isSomeoneDead && Time.timeScale != 0 && !shooter_Mov_Ref.isDashPowerOn)
+        if (Input.GetKeyDown(KeyCode.W) && isPowerUpActive == true && Time.timeScale != 0)
         {
             gameManager.isShooterChased = true;
             gameManager.isTaunterChased = false;
@@ -110,7 +112,7 @@ public class ShooterController : MonoBehaviour
 
     public void DashShot()
     {
-      if (Input.GetKeyDown(KeyCode.W) && shooter_Mov_Ref.isDashPowerOn)
+      if (Input.GetKeyDown(KeyCode.W) && isDashUnlocked && shooter_Mov_Ref.isDashPowerOn)
       {
             Vector3 bulletPos1 = GameObject.FindGameObjectWithTag("BulletSpawnPoint").transform.position;
             Instantiate(poweredBullet, bulletPos1, poweredBullet.transform.rotation);

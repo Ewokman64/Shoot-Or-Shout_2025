@@ -17,9 +17,10 @@ public class TaunterController : MonoBehaviour
     public GameObject poweredShout;
     private CharacterMovement shouter_Mov_Ref;
     private CharacterMovement shooter_Mov_Ref;
-
     private Color enemyColor;
     private Color enemyFrozenColor;
+    public bool isDashShoutUnlocked = false;
+
 
     private AudioSource shoutAudio;
     private GameManager gameManager;
@@ -60,7 +61,7 @@ public class TaunterController : MonoBehaviour
     }
     public void Taunt()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && !gameManager.isSomeoneDead && Time.timeScale != 0 && !shouter_Mov_Ref.isDashPowerOn)
+        if (Input.GetKeyDown(KeyCode.Q) && tauntCoolDown <= 0 && Time.timeScale != 0)
         {
             gameManager.isShooterChased = false;
             gameManager.isTaunterChased = true;
@@ -72,7 +73,7 @@ public class TaunterController : MonoBehaviour
     }
     public void DashShout()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && shouter_Mov_Ref.isDashPowerOn)
+        if (Input.GetKeyDown(KeyCode.Q) && shouter_Mov_Ref.isDashPowerOn && isDashShoutUnlocked)
         {
             shouter_Mov_Ref.isDashPowerOn = false;
             shooter_Mov_Ref.isDashPowerOn= false;
@@ -82,7 +83,7 @@ public class TaunterController : MonoBehaviour
 
             audioManager.PlayDashShout();
             StartCoroutine(ShoutVFX());
-            StartCoroutine(FreezeEnemies());
+            StartCoroutine(SlowEnemies());
         }
     }
     public void TauntCoolDown()
@@ -136,7 +137,7 @@ public class TaunterController : MonoBehaviour
         poweredShout.SetActive(false);
     }
 
-    public IEnumerator FreezeEnemies()
+    public IEnumerator SlowEnemies()
     {
         //Access the spawnmanager's list called Enemies
         SpawnEnemies spawnEnemiesRef = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
@@ -153,7 +154,7 @@ public class TaunterController : MonoBehaviour
 
             enemyFrozenColor = enemySpriteRenderer.color;
 
-            enemyStats.movementSpeed = 0;           
+            enemyStats.movementSpeed *= 0.5f;           
         }
 
         yield return new WaitForSeconds(3);

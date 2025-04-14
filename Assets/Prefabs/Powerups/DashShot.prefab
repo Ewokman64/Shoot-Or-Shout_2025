@@ -124,7 +124,7 @@ MonoBehaviour:
       - m_Target: {fileID: 3699286101728449307, guid: 2b94996dcc7620f4eb4a5fab48303a59,
           type: 3}
         m_TargetAssemblyTypeName: PowerupList, Assembly-CSharp
-        m_MethodName: PowerUpSpawnRate
+        m_MethodName: DashShotPowerup
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -146,11 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8980a697260b6d54b85d9c83a90424bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupName: Dualshot Haste
-  powerupDescription: Reduce the spawn cooldown of the dual shot power.
-  currentStat: 10
+  powerupName: Dash Shot
+  powerupDescription: Unlocks the dash shot ability. Dash shots spawn an explosive
+    bullet.
+  currentStat: 0
   unit: Seconds
-  currentStatDesc: 'Current Cooldown: '
+  currentStatDesc: Dash shot cooldown
   improveAmount: 1
-  isEquipped: 0
-  originalStat: 10
+  isEquipped: 1
+  originalStat: 0

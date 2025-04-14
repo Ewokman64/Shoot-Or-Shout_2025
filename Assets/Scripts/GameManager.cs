@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
     public bool hasGameStarted;
     public bool gameIsPaused = false;
 
+    public GameObject[] projectiles; //adding them in a list so they can be slowed by the Shouter
+
     void Start()
     {
         // THIS PLAYER DATA CAN BE HANDLED ELSEWHERE
@@ -110,6 +112,8 @@ public class GameManager : MonoBehaviour
         {
             gameIsPaused = false;
         }
+
+        projectiles = GameObject.FindGameObjectsWithTag("Projectile");
     }
     public void StartGame()
     {
