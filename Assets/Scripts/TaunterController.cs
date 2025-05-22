@@ -141,11 +141,11 @@ public class TaunterController : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        gameManager.isTimeSlowed = true;
+        gameManager.isSlowActive = true;
 
         yield return new WaitForSeconds(3);
 
-        gameManager.isTimeSlowed = false;
+        gameManager.isSlowActive = false;
     }
 
     public IEnumerator DamageColor()

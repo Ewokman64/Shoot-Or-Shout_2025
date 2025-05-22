@@ -5,51 +5,24 @@ using UnityEngine;
 public class Spitter : MonoBehaviour
 {
     EnemyStats enemyStats;
-    public GameObject acidBall;
-    public float fireRate = 3;
-    
+
     public Transform targetShooter;
     public Transform targetTaunter;
 
     private GameManager gameManager;
 
-
     // Start is called before the first frame update
     void Start()
     {
         enemyStats = GetComponent<EnemyStats>();
-        GameObject shooterObject = GameObject.Find("Shooter(Clone)");
-        if (shooterObject != null)
-        {
-            targetShooter = shooterObject.GetComponent<Transform>();
-        }
-        GameObject taunterObject = GameObject.Find("Taunter(Clone)");
-        if (taunterObject != null)
-        {
-            targetTaunter = taunterObject.GetComponent<Transform>();
-        }
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        StartCoroutine("ShootAcidBall");
+        StartCoroutine("ShootProjectile");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (gameManager.isShooterChased == true && targetShooter != null)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        }
-    }
-    public IEnumerator ShootAcidBall()
+    public IEnumerator ShootProjectile()
     {
         yield return new WaitForSeconds(1);
         while (true)
         {
-            Instantiate(acidBall, transform.position, acidBall.transform.rotation);
+            Instantiate(enemyStats.projectile, transform.position, enemyStats.projectile.transform.rotation);
             yield return new WaitForSeconds(enemyStats.rateOfFire);
         }      
     }

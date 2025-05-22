@@ -8,15 +8,20 @@ public class EnemyStats : MonoBehaviour
     
     public float currentSpeed;
     public float regularSpeed;
-    public float timeSlowSpeed;
+    public float slowSpeed;
+
+    public string movementType;
 
     public float health;
     public float rateOfFire;
     public int points;
     public int currencyValue;
 
+    public GameObject projectile;
+
     private void Start()
     {
-        //movementSpeed = defaultMovSpeed;
+        currentSpeed = regularSpeed;
+        slowSpeed = regularSpeed * 0.5f;
     }
 }

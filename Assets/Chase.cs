@@ -26,9 +26,16 @@ public class Chase : MonoBehaviour
     }
     void Update()
     {
+        CheckSlow();
 
-        CheckTimeSlow();
+        if (enemyStats.movementType == "Regular")
+        {
+            ChooseTarget();
+        }
+    }
 
+    void ChooseTarget()
+    {
         if (gameManager.isShooterChased && targetShooter != null)
         {
             ShooterFollow();
@@ -49,13 +56,13 @@ public class Chase : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
 
-    private void CheckTimeSlow()
+    private void CheckSlow()
     {
-        if (gameManager.isTimeSlowed)
+        if (gameManager.isSlowActive)
         {
-            enemyStats.currentSpeed = enemyStats.timeSlowSpeed;
+            enemyStats.currentSpeed = enemyStats.slowSpeed;
         }
-        else
+        else if (!gameManager.isSlowActive)
         {
             enemyStats.currentSpeed = enemyStats.regularSpeed;
         }

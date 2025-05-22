@@ -17,34 +17,7 @@ public class BigBoi : MonoBehaviour
     void Start()
     {
         enemyStats = GetComponent<EnemyStats>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        defaultColor = spriteRenderer.material.color;
-        GameObject shooterObject = GameObject.Find("Shooter(Clone)");
-        if (shooterObject != null)
-        {
-            targetShooter = shooterObject.GetComponent<Transform>();
-        }
-    }
-    void Update()
-    {
-        if (gameManager.isShooterChased && targetShooter != null)
-        {
-            ShooterFollow();
-        }
-        else
-        {
-            TaunterFollow();
-        }
-    }
-    public void ShooterFollow()
-    {
-        //transform.Translate(Vector2.right * enemyStats.movementSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-    public void TaunterFollow()
-    {
-        //transform.Translate(Vector2.right * enemyStats.movementSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 180, 0);
+        defaultColor = spriteRenderer.material.color;      
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -53,6 +26,8 @@ public class BigBoi : MonoBehaviour
             StartCoroutine(DamageColor());
         }
     }
+
+    //Could be implemented to all instead***
     public IEnumerator DamageColor()
     {
         yield return null;

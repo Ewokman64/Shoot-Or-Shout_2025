@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 6907046877650920973}
   - component: {fileID: 1096283740000957832}
   - component: {fileID: 5047532880108375147}
+  - component: {fileID: 3359611615082047412}
+  - component: {fileID: -89596298104713053}
   - component: {fileID: -7388729426323323096}
   - component: {fileID: -7552161552181463304}
   - component: {fileID: 2327511893746483549}
-  - component: {fileID: 3359611615082047412}
-  - component: {fileID: -89596298104713053}
   m_Layer: 3
   m_Name: Zombie 1
   m_TagString: Enemy
@@ -114,51 +114,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-7388729426323323096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441980076655290751}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fafa0bc6ca048b04682baf1e3ff60a57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodSplash: {fileID: 7607240569801444777}
---- !u!114 &-7552161552181463304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441980076655290751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: RunnerSkeleton
-  movementSpeed: 7
-  defaultMovSpeed: 7
-  timeSlowSpeed: 0
-  health: 1
-  rateOfFire: 0
-  points: 3
-  currencyValue: 0
---- !u!114 &2327511893746483549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8441980076655290751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &3359611615082047412
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -231,6 +186,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
+--- !u!114 &-7388729426323323096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441980076655290751}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fafa0bc6ca048b04682baf1e3ff60a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7552161552181463304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441980076655290751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e888c0b439603418cbffca552558c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: RunnerSkeleton
+  currentSpeed: 0
+  regularSpeed: 7
+  slowSpeed: 0
+  movementType: Regular
+  health: 1
+  rateOfFire: 0
+  points: 3
+  currencyValue: 0
+  projectile: {fileID: 0}
+--- !u!114 &2327511893746483549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441980076655290751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8859536704706504479
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,12 +418,6 @@ PrefabInstance:
 --- !u!4 &7607240569801444776 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7607240569983165680, guid: b7b26de889dc3a348ae4c5874469e1fa,
-    type: 3}
-  m_PrefabInstance: {fileID: 490596696}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7607240569801444777 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 7607240569983165681, guid: b7b26de889dc3a348ae4c5874469e1fa,
     type: 3}
   m_PrefabInstance: {fileID: 490596696}
   m_PrefabAsset: {fileID: 0}

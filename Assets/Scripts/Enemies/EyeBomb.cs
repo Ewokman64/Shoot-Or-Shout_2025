@@ -6,11 +6,11 @@ using UnityEngine;
 public class EyeBomb : MonoBehaviour
 {
     EnemyStats enemyStats;
-    //public float speed = 10f;
-    //public float health = 1;
+
     public bool shooterChosen;
     public bool taunterChosen;
     public bool coroutineStarted;
+
     private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
@@ -50,8 +50,7 @@ public class EyeBomb : MonoBehaviour
         coroutineStarted = true;
         taunterChosen = false;
         yield return new WaitForSeconds(2);
-        shooterChosen = true;
-        Debug.Log("Shooter is followed!");  
+        shooterChosen = true; 
     }
     public IEnumerator TaunterFollow()
     {
@@ -59,6 +58,5 @@ public class EyeBomb : MonoBehaviour
         shooterChosen = false;
         yield return new WaitForSeconds(2);
         taunterChosen = true;
-        Debug.Log("Taunter is followed!");
     }
 }

@@ -15,7 +15,7 @@ public class NightKnight : MonoBehaviour
     public GameObject nightKnight;
     public float spearSpawnRate = 3.0f; // Default spawn rate
     public bool shieldEquipped = false;
-    EnemyStats enemyStat;
+    EnemyStats enemyStats;
 
     private GameManager gameManager;
     private SpawnEnemies waveManager;
@@ -26,11 +26,11 @@ public class NightKnight : MonoBehaviour
         waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
 
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
-        enemyStat = GetComponent<EnemyStats>();
-        if (shooterObject != null)
+        enemyStats = GetComponent<EnemyStats>();
+        /*if (shooterObject != null)
         {
             targetShooter = shooterObject.GetComponent<Transform>();
-        }
+        }*/
         horse = GameObject.Find("Horse").GetComponent<Horse>();
         StartCoroutine(ThrowSpear());
     }
@@ -38,32 +38,32 @@ public class NightKnight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.isShooterChased && targetShooter != null)
+        /*if (gameManager.isShooterChased && targetShooter != null)
         {
             ShooterFollow();
         }
         else
         {
             TaunterFollow();
-        }
+        }*/
     }
     public void ShooterFollow()
     {
         //transform.Translate(Vector2.right * enemyStat.movementSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        //transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
         //transform.Translate(Vector2.right * enemyStat.movementSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 180, 0);
+        //transform.rotation = Quaternion.Euler(0, 180, 0);
     }
     public IEnumerator ThrowSpear()
     {
         yield return new WaitForSeconds(1);
         while (true)
         {
-            Instantiate(spear, transform.position, spear.transform.rotation);
-            yield return new WaitForSeconds(enemyStat.rateOfFire);
+            Instantiate(enemyStats.projectile, transform.position, enemyStats.projectile.transform.rotation);
+            yield return new WaitForSeconds(enemyStats.rateOfFire);
         }
     }
 
@@ -83,14 +83,14 @@ public class NightKnight : MonoBehaviour
         shieldEquipped = true;
 
         //enemyStat.movementSpeed = 5;
-        enemyStat.rateOfFire = 1.5f;
+        enemyStats.rateOfFire = 1.5f;
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {       
         if (other.gameObject.CompareTag("Bullet"))
         {
-            if (enemyStat.health <= 0)
+            if (enemyStats.health <= 0)
             {
                 waveManager.nightKnightDead = true;
                 horse.GetComponentInChildren<Transform>().parent = null; // Detach child from parent

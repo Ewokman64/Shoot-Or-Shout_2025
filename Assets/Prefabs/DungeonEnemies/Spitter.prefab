@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8330609989926597690}
   - component: {fileID: 5089979057319534807}
   - component: {fileID: 5088919126490558134}
+  - component: {fileID: -3278966288840683490}
   m_Layer: 3
   m_Name: Spitter
   m_TagString: Spitter
@@ -134,9 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd994efdd5bdd84383123e87942ebc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acidBall: {fileID: 3092580114481637230, guid: a8daa9f2dabd8d445a1920557d68178f,
-    type: 3}
-  fireRate: 3
   targetShooter: {fileID: 0}
   targetTaunter: {fileID: 0}
 --- !u!61 &1210151822614159614
@@ -237,11 +235,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Spitter
-  movementSpeed: 0
+  currentSpeed: 0
+  regularSpeed: 0
+  slowSpeed: 0
+  movementType: Regular
   health: 1
   rateOfFire: 3
   points: 5
   currencyValue: 0
+  projectile: {fileID: 3092580114481637230, guid: a8daa9f2dabd8d445a1920557d68178f,
+    type: 3}
+--- !u!114 &-3278966288840683490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8358766021508027797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &567675521
 PrefabInstance:
   m_ObjectHideFlags: 0

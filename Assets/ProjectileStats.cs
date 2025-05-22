@@ -6,5 +6,10 @@ public class ProjectileStats : MonoBehaviour
 {
     public float currentSpeed;
     public float regularSpeed;
-    public float timeSlowSpeed;
+    public float slowSpeed;
+
+    private void Start()
+    {
+        slowSpeed = regularSpeed * 0.5f;
+    }
 }

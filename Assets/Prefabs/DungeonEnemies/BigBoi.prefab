@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2679579853093914607}
   - component: {fileID: 3740853189579054730}
-  - component: {fileID: 1724686168249955306}
   - component: {fileID: 4494247572708033392}
   - component: {fileID: 5508212474743306293}
+  - component: {fileID: 1724686168249955306}
   - component: {fileID: 8754201285934654069}
+  - component: {fileID: 2515981475030957005}
   m_Layer: 3
   m_Name: BigBoi
   m_TagString: BigEnemy
@@ -88,19 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1724686168249955306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3810393701880755627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab5565b468966f448b869ee001b3c23a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 3740853189579054730}
 --- !u!61 &4494247572708033392
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +161,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1724686168249955306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810393701880755627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5565b468966f448b869ee001b3c23a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3740853189579054730}
 --- !u!114 &8754201285934654069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,9 +187,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: BigBoi
-  movementSpeed: 3
-  defaultMovSpeed: 3
+  currentSpeed: 0
+  regularSpeed: 2
+  slowSpeed: 0
+  movementType: Regular
   health: 5
   rateOfFire: 0
   points: 10
   currencyValue: 0
+  projectile: {fileID: 0}
+--- !u!114 &2515981475030957005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3810393701880755627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

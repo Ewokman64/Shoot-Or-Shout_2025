@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckTimeSlow();
+        CheckSlow();
 
         Move();
     }
@@ -57,11 +57,11 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void CheckTimeSlow()
+    private void CheckSlow()
     {
-        if (gameManager.isTimeSlowed)
+        if (gameManager.isSlowActive)
         {
-            projectileStats.currentSpeed = projectileStats.timeSlowSpeed;
+            projectileStats.currentSpeed = projectileStats.slowSpeed;
         }
         else
         {

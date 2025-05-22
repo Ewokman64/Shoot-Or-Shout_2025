@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3758399615804132932}
   - component: {fileID: 2838152664454181256}
-  - component: {fileID: 66648469727601601}
   - component: {fileID: 5346307391954096041}
   - component: {fileID: -8773449702901641684}
+  - component: {fileID: 66648469727601601}
   - component: {fileID: -1821403347970868804}
+  - component: {fileID: 664221680711614962}
   m_Layer: 3
   m_Name: EyeBomb
   m_TagString: Enemy
@@ -88,21 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &66648469727601601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2664364914138761654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3cceae4ad9bcf44ad9cb3568900215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shooterChosen: 0
-  taunterChosen: 0
-  coroutineStarted: 0
 --- !u!58 &5346307391954096041
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -165,6 +151,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
+--- !u!114 &66648469727601601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2664364914138761654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3cceae4ad9bcf44ad9cb3568900215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shooterChosen: 0
+  taunterChosen: 0
+  coroutineStarted: 0
 --- !u!114 &-1821403347970868804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,9 +179,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: EyeBomb
-  movementSpeed: 15
-  defaultMovSpeed: 15
+  currentSpeed: 0
+  regularSpeed: 15
+  slowSpeed: 0
+  movementType: 
   health: 1
   rateOfFire: 0
   points: 5
   currencyValue: 0
+  projectile: {fileID: 0}
+--- !u!114 &664221680711614962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2664364914138761654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] projectiles; //adding them in a list so they can be slowed by the Shouter
 
-    public bool isTimeSlowed = false;
+    public bool isSlowActive = false;
 
     void Start()
     {

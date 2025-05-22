@@ -186,12 +186,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: Horse
-  movementSpeed: 0
-  defaultMovSpeed: 0
+  currentSpeed: 0
+  regularSpeed: 0
+  slowSpeed: 0
+  movementType: 
   health: 15
   rateOfFire: 0
   points: 25
   currencyValue: 0
+  projectile: {fileID: 0}
 --- !u!1 &6007565604007801479
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,9 +206,10 @@ GameObject:
   - component: {fileID: 8525509450475418570}
   - component: {fileID: 8941372878274076561}
   - component: {fileID: 2654081259556986997}
-  - component: {fileID: 7081159642880313949}
   - component: {fileID: 3244854436990475302}
+  - component: {fileID: 7081159642880313949}
   - component: {fileID: 2599325680991593390}
+  - component: {fileID: -8635003407459627546}
   m_Layer: 3
   m_Name: NightKnight
   m_TagString: NightKnight
@@ -308,26 +312,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
---- !u!114 &7081159642880313949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6007565604007801479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c776c13db0ef094484c382135355006, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  nightKnightHealth: 20
-  spear: {fileID: 1529532939484370753, guid: 111a8b82d2bfe6c41a36131ebd5d5aac, type: 3}
-  shield: {fileID: 7334304511801104714, guid: f42344870263512459b8cebad1221736, type: 3}
-  shieldHealth: 10
-  nightKnight: {fileID: 6007565604007801479}
-  spearSpawnRate: 3
-  shieldEquipped: 0
 --- !u!61 &3244854436990475302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -373,6 +357,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41080007, y: 0.3911394}
   m_EdgeRadius: 0
+--- !u!114 &7081159642880313949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6007565604007801479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c776c13db0ef094484c382135355006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  nightKnightHealth: 20
+  spear: {fileID: 1529532939484370753, guid: 111a8b82d2bfe6c41a36131ebd5d5aac, type: 3}
+  shield: {fileID: 7334304511801104714, guid: f42344870263512459b8cebad1221736, type: 3}
+  shieldHealth: 10
+  nightKnight: {fileID: 6007565604007801479}
+  spearSpawnRate: 3
+  shieldEquipped: 0
 --- !u!114 &2599325680991593390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,9 +390,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: NightKnight
-  movementSpeed: 3
-  defaultMovSpeed: 3
+  currentSpeed: 0
+  regularSpeed: 5
+  slowSpeed: 0
+  movementType: Regular
   health: 20
   rateOfFire: 3
   points: 30
   currencyValue: 0
+  projectile: {fileID: 1529532939484370753, guid: 111a8b82d2bfe6c41a36131ebd5d5aac,
+    type: 3}
+--- !u!114 &-8635003407459627546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6007565604007801479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -5165,10 +5165,10 @@ GameObject:
   - component: {fileID: 7328576050843015529}
   - component: {fileID: 7328576050843015528}
   - component: {fileID: 7328576050843015511}
-  - component: {fileID: 7328576050843015510}
   - component: {fileID: 7328576050843015509}
   - component: {fileID: 41849638}
   - component: {fileID: 3077090399465190705}
+  - component: {fileID: 7328576050843015510}
   - component: {fileID: 154748705748522628}
   - component: {fileID: 3547125058424682306}
   m_Layer: 0
@@ -5367,33 +5367,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7328576050843015510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7328576050843015508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf337988439e60542ad81dac162cb60e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hostile:
-  - Enemy
-  - Projectile
-  - BigEnemy
-  - Horse
-  - NightKnight
-  tauntCoolDown: 0
-  tauntCDRate: 2
-  shouterCDRenderer: {fileID: 0}
-  darkenAmount: 0.5
-  poweredShout: {fileID: 1354605759861697817}
-  shout: {fileID: 8300000, guid: 435db436444d5cc469212da857f1c7e0, type: 3}
-  shoutEffect: {fileID: 7328576050151841156}
-  animator: {fileID: 7328576050843015528}
-  spriteRenderer: {fileID: 7328576050843015529}
 --- !u!61 &7328576050843015509
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5482,6 +5455,34 @@ MonoBehaviour:
   position: 0
   direction: 0
   tooltip: 
+--- !u!114 &7328576050843015510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7328576050843015508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf337988439e60542ad81dac162cb60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hostile:
+  - Enemy
+  - Projectile
+  - BigEnemy
+  - Horse
+  - NightKnight
+  tauntCoolDown: 0
+  tauntCDRate: 2
+  shouterCDRenderer: {fileID: 0}
+  darkenAmount: 0.5
+  poweredShout: {fileID: 1354605759861697817}
+  isDashShoutUnlocked: 0
+  shout: {fileID: 8300000, guid: 435db436444d5cc469212da857f1c7e0, type: 3}
+  shoutEffect: {fileID: 7328576050151841156}
+  animator: {fileID: 7328576050843015528}
+  spriteRenderer: {fileID: 7328576050843015529}
 --- !u!114 &154748705748522628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5514,6 +5515,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shield: {fileID: 6750565612265501199}
   hasShield: 0
+  shieldUI_Renderer: {fileID: 0}
+  darkenAmount: 0.5
 --- !u!1 &8937596787975197007
 GameObject:
   m_ObjectHideFlags: 0
