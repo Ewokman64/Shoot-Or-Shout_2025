@@ -139,34 +139,13 @@ public class TaunterController : MonoBehaviour
 
     public IEnumerator SlowEnemies()
     {
-        //Access the spawnmanager's list called Enemies
-        SpawnEnemies spawnEnemiesRef = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        foreach (GameObject enemies in spawnEnemiesRef.enemies)
-        {
-            EnemyStats enemyStats = enemies.GetComponent<EnemyStats>();
-
-            SpriteRenderer enemySpriteRenderer = GetComponent<SpriteRenderer>();
-
-            Debug.Log(enemies.name);
-
-            enemyColor = enemySpriteRenderer.color;
-
-            enemyFrozenColor = enemySpriteRenderer.color;
-
-            enemyStats.movementSpeed *= 0.5f;           
-        }
+        gameManager.isTimeSlowed = true;
 
         yield return new WaitForSeconds(3);
 
-        foreach (GameObject enemies in spawnEnemiesRef.enemies)
-        {
-            EnemyStats enemyStats = enemies.GetComponent<EnemyStats>();
-
-            Debug.Log(enemies.name);
-
-            enemyStats.movementSpeed = enemyStats.defaultMovSpeed;
-        }        
+        gameManager.isTimeSlowed = false;
     }
 
     public IEnumerator DamageColor()

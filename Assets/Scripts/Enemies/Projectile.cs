@@ -1,10 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spear : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
-    private float spearSpeed = 15;
     private GameManager gameManager;
     public bool isShooterTargeted = true;
     public bool isTaunterTargeted;
@@ -17,36 +16,56 @@ public class Spear : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         projectileStats = GetComponent<ProjectileStats>();
 
-        if (gameManager.isShooterChased == true)
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-        if (gameManager.isTaunterChased == true)
-        {
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
+        projectileStats.currentSpeed = projectileStats.regularSpeed;
+
+        ChooseTarget();
     }
 
     // Update is called once per frame
     void Update()
     {
+        CheckTimeSlow();
+
+        Move();
+    }
+
+    private void ChooseTarget()
+    {
         if (gameManager.isShooterChased == true)
         {
             isShooterTargeted = true;
             isTaunterTargeted = false;
+            GetComponent<SpriteRenderer>().flipX = false;
         }
         if (gameManager.isTaunterChased == true)
         {
             isTaunterTargeted = true;
             isShooterTargeted = false;
+            GetComponent<SpriteRenderer>().flipX = true;
         }
+    }
+
+    private void Move()
+    {
         if (GetComponent<SpriteRenderer>().flipX == true)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * spearSpeed);
+            transform.Translate(Vector3.left * Time.deltaTime * projectileStats.currentSpeed);
         }
         if (GetComponent<SpriteRenderer>().flipX == false)
         {
-            transform.Translate(Vector3.right * Time.deltaTime * spearSpeed);
+            transform.Translate(Vector3.right * Time.deltaTime * projectileStats.currentSpeed);
+        }
+    }
+
+    private void CheckTimeSlow()
+    {
+        if (gameManager.isTimeSlowed)
+        {
+            projectileStats.currentSpeed = projectileStats.timeSlowSpeed;
+        }
+        else
+        {
+            projectileStats.currentSpeed = projectileStats.regularSpeed;
         }
     }
 }

@@ -49,12 +49,12 @@ public class NightKnight : MonoBehaviour
     }
     public void ShooterFollow()
     {
-        transform.Translate(Vector2.right * enemyStat.movementSpeed * Time.deltaTime);
+        //transform.Translate(Vector2.right * enemyStat.movementSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 0, 0);
     }
     public void TaunterFollow()
     {
-        transform.Translate(Vector2.right * enemyStat.movementSpeed * Time.deltaTime);
+        //transform.Translate(Vector2.right * enemyStat.movementSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(0, 180, 0);
     }
     public IEnumerator ThrowSpear()
@@ -82,7 +82,7 @@ public class NightKnight : MonoBehaviour
         newShield.transform.parent = nightKnight.transform;
         shieldEquipped = true;
 
-        enemyStat.movementSpeed = 5;
+        //enemyStat.movementSpeed = 5;
         enemyStat.rateOfFire = 1.5f;
     }
 

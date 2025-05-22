@@ -5,8 +5,11 @@ using UnityEngine;
 public class EnemyStats : MonoBehaviour
 {
     public string name; //we can check the name for collision?
-    public float movementSpeed;
-    public float defaultMovSpeed;
+    
+    public float currentSpeed;
+    public float regularSpeed;
+    public float timeSlowSpeed;
+
     public float health;
     public float rateOfFire;
     public int points;
@@ -14,6 +17,6 @@ public class EnemyStats : MonoBehaviour
 
     private void Start()
     {
-        movementSpeed = defaultMovSpeed;
+        //movementSpeed = defaultMovSpeed;
     }
 }

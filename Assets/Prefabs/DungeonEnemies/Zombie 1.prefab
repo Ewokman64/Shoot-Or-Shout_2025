@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5047532880108375147}
   - component: {fileID: -7388729426323323096}
   - component: {fileID: -7552161552181463304}
+  - component: {fileID: 2327511893746483549}
   - component: {fileID: 3359611615082047412}
   - component: {fileID: -89596298104713053}
   m_Layer: 3
@@ -120,7 +121,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8441980076655290751}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fafa0bc6ca048b04682baf1e3ff60a57, type: 3}
   m_Name: 
@@ -141,10 +142,23 @@ MonoBehaviour:
   name: RunnerSkeleton
   movementSpeed: 7
   defaultMovSpeed: 7
+  timeSlowSpeed: 0
   health: 1
   rateOfFire: 0
   points: 3
   currencyValue: 0
+--- !u!114 &2327511893746483549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441980076655290751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b07fce2153e43c43a2f6926904e59fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &3359611615082047412
 BoxCollider2D:
   m_ObjectHideFlags: 0

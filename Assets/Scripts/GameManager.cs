@@ -52,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] projectiles; //adding them in a list so they can be slowed by the Shouter
 
+    public bool isTimeSlowed = false;
+
     void Start()
     {
         // THIS PLAYER DATA CAN BE HANDLED ELSEWHERE

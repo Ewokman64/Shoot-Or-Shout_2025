@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7681664061468573692}
   - component: {fileID: 7044617982771905130}
-  - component: {fileID: 2948956400227561240}
   - component: {fileID: 1944578273838307879}
   - component: {fileID: -7544560454494978318}
+  - component: {fileID: 2649551795716049877}
+  - component: {fileID: -4117352751180028611}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Projectile
@@ -87,20 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2948956400227561240
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529532939484370753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 192c1b94dacee624abda64f31f067fd3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isShooterTargeted: 1
-  isTaunterTargeted: 0
 --- !u!61 &1944578273838307879
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,3 +160,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 6
+--- !u!114 &2649551795716049877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529532939484370753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1762c2cea6c25c43bf9f7a82445b1c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 0
+  regularSpeed: 15
+  timeSlowSpeed: 7.5
+--- !u!114 &-4117352751180028611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529532939484370753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f28fefdce5938f468ab0fecb01925d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShooterTargeted: 1
+  isTaunterTargeted: 0

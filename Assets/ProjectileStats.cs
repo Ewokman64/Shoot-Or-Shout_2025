@@ -4,16 +4,7 @@ using UnityEngine;
 
 public class ProjectileStats : MonoBehaviour
 {
-    public float speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float currentSpeed;
+    public float regularSpeed;
+    public float timeSlowSpeed;
 }

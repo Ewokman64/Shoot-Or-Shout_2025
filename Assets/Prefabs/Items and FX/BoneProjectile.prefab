@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4577808750980780014}
   - component: {fileID: -6409295960486374433}
   - component: {fileID: -1642047081176526309}
+  - component: {fileID: 1813576063826002088}
   m_Layer: 6
   m_Name: BoneProjectile
   m_TagString: Projectile
@@ -164,6 +165,21 @@ PolygonCollider2D:
       - {x: 0.3429933, y: 0.2809814}
       - {x: 0.38208824, y: 0.37081146}
   m_UseDelaunayMesh: 0
+--- !u!114 &1813576063826002088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3092580114481637230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1762c2cea6c25c43bf9f7a82445b1c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSpeed: 0
+  regularSpeed: 10
+  timeSlowSpeed: 5
 --- !u!1 &5841883041350095828
 GameObject:
   m_ObjectHideFlags: 0
