@@ -39,10 +39,16 @@ public class Bullet : MonoBehaviour
         //**THIS SHOULD BE A SEPARATE COLLISION SCRIPT LATER TO USE IT FOR OTHER PROJECTILES
         EnemyStats enemyStats;
 
+        if (other.gameObject.CompareTag("EnemyArmor"))
+        {
+            EnemyArmor enemyArmor = other.gameObject.GetComponent<EnemyArmor>();
+            enemyArmor.armorHealth--;
+            Destroy(gameObject);
+            return;
+        }
         if (other.gameObject.layer == enemiesLayer)
         {
             enemyStats = other.gameObject.GetComponent<EnemyStats>();
-            //enemyStats.health--;
 
             DealDamage(other.gameObject);
             gameManager.stallingTimer = 10;
@@ -61,32 +67,6 @@ public class Bullet : MonoBehaviour
                 Destroy(other.gameObject);
                 gameManager.UpdateNormalCurrency(enemyStats.points); 
             }
-
-            if (enemyStats.name == "BossV1")
-            {
-                HealthBar healthBar = other.gameObject.GetComponent<HealthBar>();
-                Boss_Brain bossScript = other.gameObject.GetComponent<Boss_Brain>();
-                healthBar.UpdateHealthBar();
-                if (enemyStats.health <= 0)
-                {
-                    bossScript.secondPhaseStarted = true;
-                    StartCoroutine(bossScript.BossSecondPhase());
-                }
-            }
-
-            if (enemyStats.name == "BossV2")
-            {
-                HealthBar healthBar = other.gameObject.GetComponent<HealthBar>();
-                Boss_Brain_2ndPhase bossScript = other.gameObject.GetComponent<Boss_Brain_2ndPhase>();
-                healthBar.UpdateHealthBar();
-                if (enemyStats.health <= 0)
-                {
-                    bossScript.ClearMap();
-                    gameManager.BossDied();
-                }
-            }
-
-
             //Look into this, no clue how it works
             if (enemyStats.name == "Spitter") //removes the spitter's spawnpoint from the occupied spawnpoint list
             {

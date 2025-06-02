@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chase : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
     EnemyStats enemyStats;
 
     private Transform targetShooter;
 
     private GameManager gameManager;
+
+    public SpriteRenderer spriteRenderer;
+    private Color defaultColor;
+
+    bool isDamageOverTimeActive = false;
+    bool damageOverTimeChecked;
 
     void Start()
     {
@@ -17,6 +23,9 @@ public class Chase : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         GameObject shooterObject = GameObject.Find("Shooter(Clone)");
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        defaultColor = spriteRenderer.color;
 
         //Making sure shooter exists, then finding it's position
         if (shooterObject != null)
@@ -61,10 +70,31 @@ public class Chase : MonoBehaviour
         if (gameManager.isSlowActive)
         {
             enemyStats.currentSpeed = enemyStats.slowSpeed;
+
+            spriteRenderer.material.color = Color.cyan;
         }
         else if (!gameManager.isSlowActive)
         {
             enemyStats.currentSpeed = enemyStats.regularSpeed;
+            spriteRenderer.material.color = defaultColor;
         }
+    }
+
+    public void StartDamageOverTime()
+    {
+        if (isDamageOverTimeActive && !damageOverTimeChecked)
+        {
+            StartCoroutine(TakeDamageOverTime(enemyStats.health));
+            damageOverTimeChecked = true;
+        }
+    } 
+
+    public IEnumerator TakeDamageOverTime(float health)
+    {
+        while (isDamageOverTimeActive)
+        {
+            health--;
+        }
+        yield return new WaitForSeconds(0.5f);
     }
 }

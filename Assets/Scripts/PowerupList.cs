@@ -36,9 +36,6 @@ public class PowerupList : MonoBehaviour
         UseShield shooterShield = GameObject.Find("Shooter(Clone)").GetComponent<UseShield>();
         UseShield taunterShield = GameObject.Find("Taunter(Clone)").GetComponent<UseShield>();
 
-        
-        //PowerupStats powerupStats = powerupDisplayRef.powerupCollection[0].GetComponent<PowerupStats>();
-
         shooterShield.hasShield = true;
         taunterShield.hasShield = true;
 
@@ -51,11 +48,6 @@ public class PowerupList : MonoBehaviour
         PowerupStats powerupStats = powerupDisplayRef.powerupCollection[1].GetComponent<PowerupStats>();
 
         taunterController.isDashShoutUnlocked = true;
-
-        /*taunterController.tauntCDRate -= powerupStats.improveAmount;
-        Debug.Log("New cooldown: " + taunterController.tauntCDRate);
-
-        powerupStats.currentStat = taunterController.tauntCDRate;*/
 
         ResumeGame();
     }

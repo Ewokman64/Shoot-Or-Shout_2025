@@ -9,16 +9,16 @@ public class TaunterController : MonoBehaviour
     [Header("Shout Settings")]
     public float tauntCoolDown;
     public float tauntCDRate = 2;
+
     public SpriteRenderer shouterCDRenderer; //<- This is for the Shout ICON on the bottom.
-    public float darkenAmount = 0.5f; // Value between 0 and 1
-    private Color originalColor;
+    public float darkenAmount = 0.5f; // Value between 0 and 1. Used to darken the ICON whenever shout is used
+    private Color originalColor; //Original color of the icon so we can set it back
 
     [Header("Dash Shout Properties")]
     public GameObject poweredShout;
+
     private CharacterMovement shouter_Mov_Ref;
     private CharacterMovement shooter_Mov_Ref;
-    private Color enemyColor;
-    private Color enemyFrozenColor;
     public bool isDashShoutUnlocked = false;
 
 
@@ -26,6 +26,7 @@ public class TaunterController : MonoBehaviour
     private GameManager gameManager;
     private AudioManager audioManager;
     private CountDown countDown;
+    private SpawnEnemies waveManager;
 
     //Anims, VFX & SFX
     public AudioClip shout;
@@ -43,6 +44,8 @@ public class TaunterController : MonoBehaviour
         countDown = gameManager.GetComponent<CountDown>();
         audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
         shouterCDRenderer = GameObject.Find("ShoutCDSprite").GetComponent<SpriteRenderer>();
+        waveManager = GameObject.Find("WaveManager").GetComponent<SpawnEnemies>();
+
         // Get the current color of the sprite
         originalColor = shouterCDRenderer.color;
 
@@ -58,6 +61,7 @@ public class TaunterController : MonoBehaviour
         Taunt();
         TauntCoolDown();
         DashShout();
+        HolyFire();
     }
     public void Taunt()
     {
@@ -82,6 +86,7 @@ public class TaunterController : MonoBehaviour
             gameManager.isTaunterChased = true;
 
             audioManager.PlayDashShout();
+
             StartCoroutine(ShoutVFX());
             StartCoroutine(SlowEnemies());
         }
@@ -101,6 +106,30 @@ public class TaunterController : MonoBehaviour
         {
             tauntCoolDown = 0;
             shouterCDRenderer.color = originalColor;
+        }
+    }
+
+    public void HolyFire()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            //Find every enemy and deal dmage over time to them based on health
+            foreach (GameObject enemy in waveManager.enemies)
+            {
+                EnemyStats enemyStats = enemy.GetComponent<EnemyStats>();
+
+                StartCoroutine(DamageOverTime(enemyStats.health));
+            }
+        }
+    }
+
+    public IEnumerator DamageOverTime(float enemyHealth)
+    {
+        bool holyFireActive = true;
+        while (holyFireActive == true)
+        {
+            enemyHealth--;
+            yield return new WaitForSeconds(1);
         }
     }
 
@@ -126,9 +155,9 @@ public class TaunterController : MonoBehaviour
             }           
         }
         Destroy(other.gameObject);
-    }
+    } //For taking tamade, managing health
 
-    public IEnumerator ShoutVFX()
+    public IEnumerator ShoutVFX() //Setting the shout VFX to true for 0.2 seconds
     {
         poweredShout.SetActive(true);
 
@@ -146,13 +175,13 @@ public class TaunterController : MonoBehaviour
         yield return new WaitForSeconds(3);
 
         gameManager.isSlowActive = false;
-    }
+    } //A.K.A. Dash Shout
 
     public IEnumerator DamageColor()
     {
-        yield return null;
+        //yield return null;
         spriteRenderer.material.color = Color.red;
         yield return new WaitForSeconds(0.3f);
         spriteRenderer.material.color = defaultColor;
-    }
+    } //Colors the character to red when taking damage. Couold be moved into a collective script instead in the future.
 }

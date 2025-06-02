@@ -38,7 +38,6 @@ public class DashBullet : MonoBehaviour
 
             DealDamage(other.gameObject);
             gameManagerRef.stallingTimer = 10;
-            //isZombieShot = true;
             audioManager.PlayZombieDeath();
 
             //LET'S INSTANTIATE AN EXPLOSION PREFAB INSTEAD
@@ -50,31 +49,6 @@ public class DashBullet : MonoBehaviour
                 Destroy(other.gameObject);
                 gameManagerRef.UpdateNormalCurrency(enemyStats.points);
             }
-
-            if (enemyStats.name == "BossV1")
-            {
-                HealthBar healthBar = other.gameObject.GetComponent<HealthBar>();
-                Boss_Brain bossScript = other.gameObject.GetComponent<Boss_Brain>();
-                healthBar.UpdateHealthBar();
-                if (enemyStats.health <= 0)
-                {
-                    bossScript.secondPhaseStarted = true;
-                    StartCoroutine(bossScript.BossSecondPhase());
-                }
-            }
-
-            if (enemyStats.name == "BossV2")
-            {
-                HealthBar healthBar = other.gameObject.GetComponent<HealthBar>();
-                Boss_Brain_2ndPhase bossScript = other.gameObject.GetComponent<Boss_Brain_2ndPhase>();
-                healthBar.UpdateHealthBar();
-                if (enemyStats.health <= 0)
-                {
-                    bossScript.ClearMap();
-                    gameManagerRef.BossDied();
-                }
-            }
-
 
             //Look into this, no clue how it works
             if (enemyStats.name == "Spitter") //removes the spitter's spawnpoint from the occupied spawnpoint list

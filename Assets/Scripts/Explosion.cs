@@ -5,9 +5,12 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     private int enemiesLayer;
+    private float explosionDamage;
     public bool didSpawn = false;
     public GameObject explosionInstance;
     private GameManager gameManagerRef;
+    EnemyArmor enemyArmor;
+    EnemyStats enemyStats;
     private void Start()
     {
         gameManagerRef = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -20,18 +23,28 @@ public class Explosion : MonoBehaviour
     }
     public void OnTriggerStay2D(Collider2D other)
     {
-        EnemyStats enemyStats;
-        if (other.gameObject.layer == enemiesLayer)
+        //EnemyArmor enemyArmor;
+        if (other.gameObject.CompareTag("enemyArmor"))
+        {
+            enemyArmor = other.gameObject.GetComponent<EnemyArmor>();
+            enemyArmor.armorHealth -= explosionDamage; //With upgrades, maybe we can make it insta destroyed
+
+            if (enemyArmor.armorHealth <= 0)
+            {
+                Destroy(other.gameObject);
+            }
+        }
+        else if (other.gameObject.layer == enemiesLayer)
         {
             enemyStats = other.gameObject.GetComponent<EnemyStats>();
-            Destroy(other.gameObject);
+            enemyStats.health -= explosionDamage;
 
-            //Should be: for everyenemy it hits, add xy points
-            gameManagerRef.UpdateNormalCurrency(enemyStats.points);
+            if (enemyStats.health <= 0)
+            {
+                Destroy(other.gameObject);
+            }
         }
-        
     }
-
     public IEnumerator DestroyExplosion(GameObject instance)
     {
         yield return new WaitForSeconds(0.2f);

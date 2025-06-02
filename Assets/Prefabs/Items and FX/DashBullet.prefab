@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a2e59cc1418a540b37a17005fa0f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
   explosionPrefab: {fileID: 9004348093427022191, guid: 609808a0bbbf86e45834a3933aa63edd,
     type: 3}
   explosionInstance: {fileID: 0}
